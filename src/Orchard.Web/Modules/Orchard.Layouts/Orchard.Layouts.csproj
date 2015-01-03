@@ -78,8 +78,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.html" />
+    <Content Include="Images\azure.png" />
+    <Content Include="Images\illustration.jpg" />
+    <Content Include="Images\logo.svg" />
     <Content Include="Placement.info" />
     <Content Include="Scripts\contentpart-layouts-settings.js" />
+    <Content Include="Scripts\DemoConfig.js" />
+    <Content Include="Scripts\DemoData.js" />
     <Content Include="Scripts\designer.grid.js" />
     <Content Include="Scripts\designer.host.js" />
     <Content Include="Scripts\designer.toolbar.js" />
@@ -88,9 +94,55 @@
     <Content Include="Scripts\element-browser.js" />
     <Content Include="Scripts\jquery.browser.js" />
     <Content Include="Scripts\jquery.deserialize.js" />
+    <Content Include="Scripts\LayoutEditor.js" />
+    <Content Include="Scripts\LayoutEditor.min.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Canvas.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Child.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Column.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Content.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Grid.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Popup.js" />
+    <Content Include="Scripts\LayoutEditor\Directives\Row.js" />
+    <Content Include="Scripts\LayoutEditor\Module.js" />
+    <Content Include="Scripts\LayoutEditor\Services\ElementConfigurator.js" />
+    <Content Include="Scripts\Lib\angular-resource.js" />
+    <Content Include="Scripts\Lib\angular-sanitize.js" />
+    <Content Include="Scripts\Lib\angular-sortable-view.js" />
+    <Content Include="Scripts\Lib\angular.js" />
+    <Content Include="Scripts\Lib\bootstrap.js" />
+    <Content Include="Scripts\Lib\bootstrap.min.js" />
+    <Content Include="Scripts\Lib\jquery-2.1.1.js" />
+    <Content Include="Scripts\Lib\jquery-ui.js" />
+    <Content Include="Scripts\Lib\jquery-ui.min.js" />
+    <Content Include="Scripts\Lib\underscore.js" />
+    <Content Include="Scripts\Models.js" />
+    <Content Include="Scripts\Models.min.js" />
+    <Content Include="Scripts\Models\Canvas.js" />
+    <Content Include="Scripts\Models\Column.js" />
+    <Content Include="Scripts\Models\Container.js" />
+    <Content Include="Scripts\Models\Content.js" />
+    <Content Include="Scripts\Models\Element.js" />
+    <Content Include="Scripts\Models\Grid.js" />
+    <Content Include="Scripts\Models\Helpers.js" />
+    <Content Include="Scripts\Models\Row.js" />
     <Content Include="Scripts\serializer.js" />
     <Content Include="Scripts\dialog.js" />
     <Content Include="Scripts\designer.canvas.js" />
+    <Content Include="Data\Canvas.json" />
+    <Content Include="Data\ContentTypes.json" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Styles\Lib\bootstrap-theme.css" />
+    <Content Include="Styles\Lib\bootstrap-theme.min.css" />
+    <Content Include="Styles\Lib\bootstrap.css" />
+    <Content Include="Styles\Lib\bootstrap.min.css" />
+    <Content Include="Styles\Lib\font-awesome.css" />
+    <Content Include="Styles\Lib\font-awesome.min.css" />
+    <Content Include="Styles\Lib\fontawesome-webfont.svg" />
+    <Content Include="Styles\Lib\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\Lib\jquery-ui.css" />
+    <Content Include="Styles\Lib\jquery-ui.min.css" />
+    <Content Include="Styles\Lib\jquery-ui.structure.css" />
+    <Content Include="Styles\Lib\jquery-ui.structure.min.css" />
     <Content Include="Styles\menu.layouts-admin.css" />
     <Content Include="Styles\menu.elements.png" />
     <Content Include="Styles\parts-layout-edit.css" />
@@ -109,6 +161,13 @@
     <Content Include="Styles\layout-designer.css" />
     <Content Include="Styles\split-arrow-down.png" />
     <Content Include="Styles\split-arrow-up.png" />
+    <Content Include="Styles\Styles.css" />
+    <Content Include="Templates\orc-layout-canvas.html" />
+    <Content Include="Templates\orc-layout-column.html" />
+    <Content Include="Templates\orc-layout-content.html" />
+    <Content Include="Templates\orc-layout-grid.html" />
+    <Content Include="Templates\orc-layout-row.html" />
+    <Content Include="TODO.txt" />
     <Content Include="Views\BlueprintAdmin\Edit.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -180,6 +239,15 @@
     <Content Include="Views\EditorTemplates\Elements.Image.cshtml" />
     <Content Include="Views\Element-Media-Image.cshtml" />
     <Content Include="Views\Element-Media-Image.Design.cshtml" />
+    <Content Include="Styles\Lib\fontawesome-webfont.eot" />
+    <Content Include="Styles\Lib\fontawesome-webfont.ttf" />
+    <Content Include="Styles\Lib\fontawesome-webfont.woff" />
+    <Content Include="Styles\Lib\FontAwesome.otf" />
+    <Content Include="Styles\Lib\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\Lib\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\Lib\glyphicons-halflings-regular.woff" />
+    <Content Include="Styles\Styles.css.map" />
+    <Content Include="Styles\Styles.less" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -402,6 +470,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Element-Snippets-Shape.Design.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\LayoutEditor.js.bundle" />
+    <Content Include="Scripts\LayoutEditor.min.js.map" />
+    <Content Include="Scripts\Models.js.bundle" />
+    <Content Include="Scripts\Models.min.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

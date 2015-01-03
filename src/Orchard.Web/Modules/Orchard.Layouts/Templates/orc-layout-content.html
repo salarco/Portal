@@ -1,0 +1,27 @@
+﻿<div class="layout-element layout-content" ng-class="getClasses()" ng-mouseenter="setIsActive()" ng-mouseleave="clearIsActive()" ng-click="setIsFocused($event)">
+    <ul class="layout-panel layout-panel-main">
+        <li class="layout-panel-item layout-panel-label">{{element.contentType}}</li>
+        <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit {{element.contentType}} properties">
+            <i class="fa fa-edit"></i>
+            <ul class="layout-popup layout-popup-edit" orc-layout-popup>
+                <li class="layout-popup-item layout-popup-input">
+                    <label>ID:</label>
+                    <input type="text" ng-model="element.id" />
+                </li>
+                <li class="layout-popup-item layout-popup-input">
+                    <label>CSS classes:</label>
+                    <input type="text" ng-model="element.cssClasses" />
+                </li>
+                <li class="layout-popup-item layout-popup-input">
+                    <label>CSS styles:</label>
+                    <input type="text" ng-model="element.cssStyles" />
+                </li>
+            </ul>
+        </li>
+        <li class="layout-panel-item layout-panel-action" title="Delete {{element.contentType}}" ng-click="delete($event)"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move {{element.contentType}} up" ng-click="moveUp($event)" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move {{element.contentType}} down" ng-click="moveDown($event)" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
+    </ul>
+    <div class="layout-content-markup" ng-bind-html="element.html">
+    </div>
+</div>
