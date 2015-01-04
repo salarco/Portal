@@ -93,8 +93,12 @@
     <Content Include="Scripts\element-browser.js" />
     <Content Include="Scripts\jquery.browser.js" />
     <Content Include="Scripts\jquery.deserialize.js" />
-    <Content Include="Scripts\LayoutEditor.js" />
-    <Content Include="Scripts\LayoutEditor.min.js" />
+    <Content Include="Scripts\LayoutEditor.js">
+      <DependentUpon>LayoutEditor.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Scripts\LayoutEditor.min.js">
+      <DependentUpon>LayoutEditor.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\LayoutEditor\Directives\Canvas.js" />
     <Content Include="Scripts\LayoutEditor\Directives\Child.js" />
     <Content Include="Scripts\LayoutEditor\Directives\Column.js" />
@@ -112,8 +116,12 @@
     <Content Include="Scripts\Lib\bootstrap.js" />
     <Content Include="Scripts\Lib\bootstrap.min.js" />
     <Content Include="Scripts\Lib\underscore.js" />
-    <Content Include="Scripts\Models.js" />
-    <Content Include="Scripts\Models.min.js" />
+    <Content Include="Scripts\Models.js">
+      <DependentUpon>Models.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Models.min.js">
+      <DependentUpon>Models.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Models\Canvas.js" />
     <Content Include="Scripts\Models\Column.js" />
     <Content Include="Scripts\Models\Container.js" />
@@ -129,6 +137,12 @@
     <Content Include="Data\ContentTypes.json" />
     <Content Include="Images\Web.config">
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\LayoutEditor.min.js.map">
+      <DependentUpon>LayoutEditor.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Models.min.js.map">
+      <DependentUpon>Models.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\_references.js" />
     <Content Include="Styles\Lib\bootstrap-theme.css" />
@@ -465,9 +479,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\LayoutEditor.js.bundle" />
-    <Content Include="Scripts\LayoutEditor.min.js.map" />
     <Content Include="Scripts\Models.js.bundle" />
-    <Content Include="Scripts\Models.min.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
