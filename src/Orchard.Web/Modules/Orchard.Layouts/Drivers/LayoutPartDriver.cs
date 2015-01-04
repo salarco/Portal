@@ -61,7 +61,8 @@ namespace Orchard.Layouts.Drivers {
                     State = part.LayoutState,
                     TemplateId = part.TemplateId,
                     Content = part,
-                    SessionKey = part.SessionKey
+                    SessionKey = part.SessionKey,
+                    Templates = _layoutManager.GetTemplates().Where(x => x.Id != part.Id).ToArray()
                 };
 
                 if (updater != null) {

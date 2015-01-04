@@ -273,11 +273,11 @@
         init();
     };
 
-    $(function () {
-        var layoudEditor = $(".layout-editor");
-        var canvas = new Canvas(layoudEditor);
+    //$(function () {
+    //    var layoudEditor = $(".layout-editor");
+    //    var canvas = new Canvas(layoudEditor);
 
-        layoudEditor.data("layout-editor", canvas);
-        window.layoutEditor = canvas;
-    });
+    //    layoudEditor.data("layout-editor", canvas);
+    //    window.layoutEditor = canvas;
+    //});
 })(jQuery);

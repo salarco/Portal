@@ -86,7 +86,6 @@
     <Content Include="Scripts\contentpart-layouts-settings.js" />
     <Content Include="Scripts\DemoConfig.js" />
     <Content Include="Scripts\DemoData.js" />
-    <Content Include="Scripts\designer.grid.js" />
     <Content Include="Scripts\designer.host.js" />
     <Content Include="Scripts\designer.toolbar.js" />
     <Content Include="Scripts\element-editor.js" />
@@ -191,7 +190,6 @@
     <Content Include="Views\Element-Media-MediaItem.cshtml" />
     <Content Include="Views\Element-Snippets-Snippet.cshtml" />
     <Content Include="Views\Layout-Dialog.cshtml" />
-    <Content Include="Views\Layout\Edit.cshtml" />
     <Content Include="Views\Layout-Designer.cshtml" />
     <Content Include="Views\Layout-Designer-Wrapper.cshtml" />
     <Content Include="Views\DialogTemplate.cshtml" />
@@ -426,7 +424,6 @@
     <Compile Include="Shapes\ElementShapes.cs" />
     <Compile Include="Framework\Elements\IRow.cs" />
     <Compile Include="Elements\MediaItem.cs" />
-    <Compile Include="ViewModels\LayoutEditorViewModel.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\LayoutPart.cs" />
     <Compile Include="Framework\Elements\CategoryDescriptor.cs" />

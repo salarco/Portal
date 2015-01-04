@@ -3,7 +3,6 @@
     var LayoutEditorHost = function (element) {
         var self = this;
         this.element = element;
-        this.frame = new window.Orchard.Frame(element.find(".layout-designer-host"));
 
         this.monitorForm = function() {
             var layoutDesigner = this.element;
@@ -14,49 +13,6 @@
                 serializeTrash();
             });
         };
-
-        this.monitorLayout = function() {
-            this.frame.element.on("load", function () {
-                var canvas = self.frame.getWindow().layoutEditor;
-
-                if (!canvas)
-                    return; // This happens if the iframe didn't load the expected page (i.e. because of a runtime error).
-
-                canvas.element.on("elementupdated", function (e, data) {
-                    self.autoHeight();
-                });
-
-                canvas.element.on("elementremoved", function (e, data) {
-                    self.autoHeight();
-                });
-
-                self.autoHeight();
-            });
-
-            setInterval(function() {
-                self.autoHeight();
-            }, 1000);
-        };
-
-        this.autoHeight = function() {
-            self.frame.autoHeight();
-        };
-
-        this.recover = function() {
-            var isModelStateValid = self.element.data("modelstate-valid");
-            if (isModelStateValid)
-                return;
-
-            var form = self.element.closest("form");
-            var stateFieldName = self.element.data("state-field-name");
-            var stateField = form.find("input[name=\"" + stateFieldName + "\"]");
-            var url = self.element.data("frame-url");
-
-            self.frame.load(url, {
-                state: stateField.val(),
-                __RequestVerificationToken: self.element.data("anti-forgery-token")
-            }, "post");
-        }
 
         var serializeLayout = function () {
             var form = self.element.closest("form");
@@ -97,9 +53,7 @@
     $(function () {
         $(".layout-designer").each(function() {
             var host = new LayoutEditorHost($(this));
-            host.recover();
             host.monitorForm();
-            host.monitorLayout();
         });
     });
 })(jQuery);

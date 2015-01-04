@@ -1,4 +1,6 @@
-﻿using Orchard.ContentManagement;
+﻿using System.Collections.Generic;
+using Orchard.ContentManagement;
+using Orchard.Layouts.Models;
 
 namespace Orchard.Layouts.ViewModels {
     public class LayoutPartViewModel {
@@ -7,5 +9,6 @@ namespace Orchard.Layouts.ViewModels {
         public string Trash { get; set; }
         public int? TemplateId { get; set; }
         public string SessionKey { get; set; }
+        public IList<LayoutPart> Templates { get; set; }
     }
 }
