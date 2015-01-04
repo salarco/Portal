@@ -1,0 +1,9 @@
+﻿.layout-editor-wrapper .layout-canvas {
+  /*min-height: 300px;*/
+  background-color: #f0f0f0;
+  font-size: 14px;
+}
+.layout-editor-wrapper .layout-canvas > .layout-container-children-placeholder {
+  min-height: 300px;
+}
+/*# sourceMappingURL=Canvas.css.map */

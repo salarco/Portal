@@ -1,0 +1,14 @@
+﻿.layout-editor-wrapper .layout-container {
+  padding: 12px;
+}
+.layout-editor-wrapper .layout-container > .layout-child-wrapper:not([data-orc-forcontainer="true"]) + .layout-child-wrapper:not([data-orc-forcontainer="true"]) {
+  margin-top: 12px;
+}
+.layout-editor-wrapper .layout-container.layout-element-active,
+.layout-editor-wrapper .layout-container.layout-element-selected {
+  padding: 10px;
+}
+.layout-editor-wrapper .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+  padding: 11px;
+}
+/*# sourceMappingURL=Container.css.map */

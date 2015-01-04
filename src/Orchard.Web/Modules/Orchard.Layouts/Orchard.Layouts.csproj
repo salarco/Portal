@@ -144,10 +144,52 @@
     </Content>
     <None Include="Scripts\_references.js" />
     <Content Include="Styles\LayoutEditor.css">
-      <DependentUpon>LayoutEditor.less</DependentUpon>
+      <DependentUpon>LayoutEditor.css.bundle</DependentUpon>
     </Content>
     <Content Include="Styles\LayoutEditor.min.css">
       <DependentUpon>LayoutEditor.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Canvas.css">
+      <DependentUpon>Canvas.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Canvas.min.css">
+      <DependentUpon>Canvas.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Column.css">
+      <DependentUpon>Column.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Column.min.css">
+      <DependentUpon>Column.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Container.css">
+      <DependentUpon>Container.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Container.min.css">
+      <DependentUpon>Container.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Content.css">
+      <DependentUpon>Content.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Content.min.css">
+      <DependentUpon>Content.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Element.css">
+      <DependentUpon>Element.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Element.min.css">
+      <DependentUpon>Element.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Popup.css">
+      <DependentUpon>Popup.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Popup.min.css">
+      <DependentUpon>Popup.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Row.css">
+      <DependentUpon>Row.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Row.min.css">
+      <DependentUpon>Row.css</DependentUpon>
     </Content>
     <Content Include="Styles\Lib\Bootstrap\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
@@ -249,7 +291,6 @@
     <Content Include="Styles\Lib\fontawesome-webfont.ttf" />
     <Content Include="Styles\Lib\fontawesome-webfont.woff" />
     <Content Include="Styles\Lib\FontAwesome.otf" />
-    <Content Include="Styles\LayoutEditor.less" />
     <Content Include="Templates\Web.config" />
     <Content Include="Styles\Lib\Bootstrap\bootstrap.less" />
     <Content Include="Styles\Lib\Bootstrap\grid.less" />
@@ -279,9 +320,36 @@
     <Content Include="Styles\Lib\Bootstrap\bootstrap.css.map">
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Styles\LayoutEditor.css.map">
-      <DependentUpon>LayoutEditor.css</DependentUpon>
+    <Content Include="Styles\LayoutEditor\Element.less" />
+    <Content Include="Styles\LayoutEditor\Container.less" />
+    <Content Include="Styles\LayoutEditor\Variables.less" />
+    <Content Include="Styles\LayoutEditor\Container.css.map">
+      <DependentUpon>Container.css</DependentUpon>
     </Content>
+    <Content Include="Styles\LayoutEditor\Element.css.map">
+      <DependentUpon>Element.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Canvas.less" />
+    <Content Include="Styles\LayoutEditor\Canvas.css.map">
+      <DependentUpon>Canvas.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Content.less" />
+    <Content Include="Styles\LayoutEditor\Content.css.map">
+      <DependentUpon>Content.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Popup.less" />
+    <Content Include="Styles\LayoutEditor\Popup.css.map">
+      <DependentUpon>Popup.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Row.less" />
+    <Content Include="Styles\LayoutEditor\Column.less" />
+    <Content Include="Styles\LayoutEditor\Column.css.map">
+      <DependentUpon>Column.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Row.css.map">
+      <DependentUpon>Row.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor.css.bundle" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

@@ -1,0 +1,26 @@
+﻿@import "Variables.less";
+
+.layout-editor-wrapper {
+    .layout-content {
+        padding: @content-padding;
+
+        .layout-content-markup {
+            > *:first-child {
+                margin-top: 0;
+            }
+
+            > *:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &.layout-element-active, &.layout-element-selected
+        {
+            padding: @content-padding - 2px;
+        }
+    }
+
+    .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+            padding: @content-padding - 1px;
+    }
+}

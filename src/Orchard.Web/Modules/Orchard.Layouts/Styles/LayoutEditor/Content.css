@@ -1,0 +1,17 @@
+﻿.layout-editor-wrapper .layout-content {
+  padding: 2px;
+}
+.layout-editor-wrapper .layout-content .layout-content-markup > *:first-child {
+  margin-top: 0;
+}
+.layout-editor-wrapper .layout-content .layout-content-markup > *:last-child {
+  margin-bottom: 0;
+}
+.layout-editor-wrapper .layout-content.layout-element-active,
+.layout-editor-wrapper .layout-content.layout-element-selected {
+  padding: 0px;
+}
+.layout-editor-wrapper .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+  padding: 1px;
+}
+/*# sourceMappingURL=Content.css.map */

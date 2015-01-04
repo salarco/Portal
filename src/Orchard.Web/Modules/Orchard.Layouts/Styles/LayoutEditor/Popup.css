@@ -1,0 +1,35 @@
+﻿.layout-editor-wrapper .layout-popup {
+  display: none;
+  position: absolute;
+  margin: 0;
+  -moz-box-shadow: 3px 3px 11px 0 rgba(50, 50, 50, 0.5);
+  -webkit-box-shadow: 3px 3px 11px 0 rgba(50, 50, 50, 0.5);
+  box-shadow: 3px 3px 11px 0 rgba(50, 50, 50, 0.5);
+  border: 1px solid #808080;
+  padding: 2px 0;
+  background-color: #f7f7f7;
+  list-style: none;
+  z-index: 20;
+  color: #696969;
+  text-align: left;
+  cursor: default;
+  white-space: nowrap;
+  line-height: normal;
+}
+.layout-editor-wrapper .layout-popup > .layout-popup-item {
+  padding: 4px 6px;
+}
+.layout-editor-wrapper .layout-popup > .layout-popup-label {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #696969;
+}
+.layout-editor-wrapper .layout-popup > .layout-popup-action:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+.layout-editor-wrapper .layout-popup > .layout-popup-input > label {
+  display: block;
+  font-size: 0.9em;
+}
+/*# sourceMappingURL=Popup.css.map */
