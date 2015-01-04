@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutRow", function ($compile, elementConfigurator) {
+    .directive("orcLayoutRow", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -12,7 +12,7 @@
                     e.stopPropagation();
                 };
             },
-            templateUrl: "Templates/orc-layout-row.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-row.html",
             replace: true,
         };
     });

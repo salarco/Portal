@@ -11,6 +11,7 @@
     <!--The order of the <file> elements determines the order of the files in the bundle.-->
     <files>
         <file>/Scripts/LayoutEditor/Module.js</file>
+        <file>/Scripts/LayoutEditor/Services/BaseUrl.js</file>
         <file>/Scripts/LayoutEditor/Services/ElementConfigurator.js</file>
         <file>/Scripts/LayoutEditor/Directives/Canvas.js</file>
         <file>/Scripts/LayoutEditor/Directives/Child.js</file>

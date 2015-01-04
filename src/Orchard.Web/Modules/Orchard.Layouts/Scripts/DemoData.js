@@ -35,7 +35,7 @@
                                     "cssClasses": null,
                                     "cssStyles": null,
                                     "contentType": "Image",
-                                    "html": "<img class='img-responsive' src='Images/illustration.jpg' />"
+                                    "html": "<img class='img-responsive' src='/OrchardLocal/Modules/Orchard.Layouts/Images/illustration.jpg' />"
                                 }
                             ]
                         },
@@ -64,7 +64,7 @@
                                     "cssClasses": null,
                                     "cssStyles": null,
                                     "contentType": "Vector Image",
-                                    "html": "<img class='img-responsive' src='images/logo.svg' style='width: 400px;' />"
+                                    "html": "<img class='img-responsive' src='/OrchardLocal/Modules/Orchard.Layouts/Images/logo.svg' style='width: 400px;' />"
                                 },
                                 {
                                     "type": "Content",

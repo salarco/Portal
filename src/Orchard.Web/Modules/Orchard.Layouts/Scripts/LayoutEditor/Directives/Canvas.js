@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, elementConfigurator) {
+    .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: {},
@@ -12,7 +12,7 @@
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
             },
-            templateUrl: "Templates/orc-layout-canvas.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,
             link: function (scope, element) {
                 // Unfocus and unselect everything on click outside of canvas.

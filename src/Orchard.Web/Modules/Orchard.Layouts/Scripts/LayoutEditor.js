@@ -1,5 +1,15 @@
 ﻿///#source 1 1 /Scripts/LayoutEditor/Module.js
 angular.module("LayoutEditor", ["ngSanitize", "ngResource"]);
+///#source 1 1 /Scripts/LayoutEditor/Services/BaseUrl.js
+angular
+    .module("LayoutEditor")
+    .factory("baseUrl", function () {
+        return {
+            get: function () {
+                return $("[data-base-url]").data("base-url");
+            }
+        }
+    });
 ///#source 1 1 /Scripts/LayoutEditor/Services/ElementConfigurator.js
 angular
     .module("LayoutEditor")
@@ -58,7 +68,7 @@ angular
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Canvas.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, elementConfigurator) {
+    .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: {},
@@ -70,7 +80,7 @@ angular
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
             },
-            templateUrl: "Templates/orc-layout-canvas.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,
             link: function (scope, element) {
                 // Unfocus and unselect everything on click outside of canvas.
@@ -101,7 +111,7 @@ angular
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Column.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutColumn", function ($compile, elementConfigurator) {
+    .directive("orcLayoutColumn", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -121,28 +131,28 @@ angular
                     e.stopPropagation();
                 };
             },
-            templateUrl: "Templates/orc-layout-column.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-column.html",
             replace: true,
         };
     });
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Content.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutContent", function (elementConfigurator) {
+    .directive("orcLayoutContent", function (elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: { element: "=" },
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
             },
-            templateUrl: "Templates/orc-layout-content.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
             replace: true,
         };
     });
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Grid.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutGrid", function ($compile, elementConfigurator) {
+    .directive("orcLayoutGrid", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -150,7 +160,7 @@ angular
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
             },
-            templateUrl: "Templates/orc-layout-grid.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
             replace: true,
         };
     });
@@ -187,7 +197,7 @@ angular
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Row.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutRow", function ($compile, elementConfigurator) {
+    .directive("orcLayoutRow", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -199,7 +209,7 @@ angular
                     e.stopPropagation();
                 };
             },
-            templateUrl: "Templates/orc-layout-row.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-row.html",
             replace: true,
         };
     });

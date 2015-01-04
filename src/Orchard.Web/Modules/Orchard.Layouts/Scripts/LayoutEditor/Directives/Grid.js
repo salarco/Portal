@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutGrid", function ($compile, elementConfigurator) {
+    .directive("orcLayoutGrid", function ($compile, elementConfigurator, baseUrl) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -8,7 +8,7 @@
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
             },
-            templateUrl: "Templates/orc-layout-grid.html",
+            templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
             replace: true,
         };
     });
