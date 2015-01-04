@@ -3,9 +3,9 @@ using System.Web.Mvc;
 using Orchard.Layouts.Helpers;
 
 namespace Orchard.Layouts.Framework.Elements {
-    public class StateDictionary : Dictionary<string, string> {
-        public StateDictionary() { }
-        public StateDictionary(IDictionary<string, string> dictionary) : base(dictionary) { }
+    public class ElementDataDictionary : Dictionary<string, string> {
+        public ElementDataDictionary() { }
+        public ElementDataDictionary(IDictionary<string, string> dictionary) : base(dictionary) { }
 
         public T TryGetModel<T>(string key) where T : class {
             var binder = new DefaultModelBinder();

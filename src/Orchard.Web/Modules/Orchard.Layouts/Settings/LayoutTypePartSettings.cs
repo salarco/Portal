@@ -7,6 +7,6 @@ namespace Orchard.Layouts.Settings {
 
         public bool IsTemplate { get; set; }
 
-        public string DefaultLayoutState { get; set; }
+        public string DefaultLayoutData { get; set; }
     }
 }

@@ -12,8 +12,8 @@ namespace Orchard.Layouts.Elements {
         }
 
         public int? MediaId {
-            get { return State.Get("MediaId").ToInt32(); }
-            set { State["MediaId"] = value.ToString(); }
+            get { return Data.Get("MediaId").ToInt32(); }
+            set { Data["MediaId"] = value.ToString(); }
         }
     }
 }

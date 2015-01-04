@@ -15,8 +15,8 @@ namespace Orchard.Layouts.Elements {
         }
 
         public string QueryLayoutId {
-            get { return State.Get("QueryLayoutId"); }
-            set { State["QueryLayoutId"] = value; }
+            get { return Data.Get("QueryLayoutId"); }
+            set { Data["QueryLayoutId"] = value; }
         }
 
         public int? QueryId {
@@ -32,28 +32,28 @@ namespace Orchard.Layouts.Elements {
         }
 
         public int ItemsToDisplay {
-            get { return State.Get("ItemsToDisplay").ToInt32().GetValueOrDefault(); }
-            set { State["ItemsToDisplay"] = value.ToString(CultureInfo.InvariantCulture); }
+            get { return Data.Get("ItemsToDisplay").ToInt32().GetValueOrDefault(); }
+            set { Data["ItemsToDisplay"] = value.ToString(CultureInfo.InvariantCulture); }
         }
 
         public int Skip {
-            get { return State.Get("Skip").ToInt32().GetValueOrDefault(); }
-            set { State["Skip"] = value.ToString(CultureInfo.InvariantCulture); }
+            get { return Data.Get("Skip").ToInt32().GetValueOrDefault(); }
+            set { Data["Skip"] = value.ToString(CultureInfo.InvariantCulture); }
         }
 
         public int MaxItems {
-            get { return State.Get("MaxItems").ToInt32().GetValueOrDefault(); }
-            set { State["MaxItems"] = value.ToString(CultureInfo.InvariantCulture); }
+            get { return Data.Get("MaxItems").ToInt32().GetValueOrDefault(); }
+            set { Data["MaxItems"] = value.ToString(CultureInfo.InvariantCulture); }
         }
 
         public string PagerSuffix {
-            get { return State.Get("PagerSuffix"); }
-            set { State["PagerSuffix"] = value; }
+            get { return Data.Get("PagerSuffix"); }
+            set { Data["PagerSuffix"] = value; }
         }
 
         public bool DisplayPager {
-            get { return State.Get("DisplayPager").ToBoolean().GetValueOrDefault(); }
-            set { State["DisplayPager"] = value.ToString(CultureInfo.InvariantCulture); }
+            get { return Data.Get("DisplayPager").ToBoolean().GetValueOrDefault(); }
+            set { Data["DisplayPager"] = value.ToString(CultureInfo.InvariantCulture); }
         }
     }
 }

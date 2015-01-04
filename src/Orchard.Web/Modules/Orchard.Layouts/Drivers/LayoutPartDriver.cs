@@ -58,7 +58,7 @@ namespace Orchard.Layouts.Drivers {
         protected override DriverResult Editor(LayoutPart part, IUpdateModel updater, dynamic shapeHelper) {
             return ContentShape("Parts_Layout_Edit", () => {
                 var viewModel = new LayoutPartViewModel {
-                    State = part.LayoutState,
+                    Data = part.LayoutData,
                     TemplateId = part.TemplateId,
                     Content = part,
                     SessionKey = part.SessionKey,
@@ -68,7 +68,7 @@ namespace Orchard.Layouts.Drivers {
                 if (updater != null) {
                     updater.TryUpdateModel(viewModel, Prefix, null, new[] { "Part", "Templates" });
                     var describeContext = new DescribeElementsContext { Content = part };
-                    var elementInstances = _serializer.Deserialize(viewModel.State, describeContext).ToArray();
+                    var elementInstances = _serializer.Deserialize(viewModel.Data, describeContext).ToArray();
                     var removedElementInstances = _serializer.Deserialize(viewModel.Trash, describeContext).ToArray();
                     var context = new LayoutSavingContext {
                         Content = part,
@@ -80,7 +80,7 @@ namespace Orchard.Layouts.Drivers {
                     _elementManager.Saving(context);
                     _elementManager.Removing(context);
 
-                    part.LayoutState = _serializer.Serialize(elementInstances);
+                    part.LayoutData = _serializer.Serialize(elementInstances);
                     part.TemplateId = viewModel.TemplateId;
                     part.SessionKey = viewModel.SessionKey;
                 }
@@ -92,7 +92,7 @@ namespace Orchard.Layouts.Drivers {
         protected override void Exporting(LayoutPart part, ExportContentContext context) {
             _layoutManager.Exporting(new ExportLayoutContext { Layout = part });
 
-            context.Element(part.PartDefinition.Name).SetElementValue("LayoutState", part.LayoutState);
+            context.Element(part.PartDefinition.Name).SetElementValue("LayoutData", part.LayoutData);
 
             if (part.TemplateId != null) {
                 var template = part.ContentItem.ContentManager.Get(part.TemplateId.Value);
@@ -105,7 +105,7 @@ namespace Orchard.Layouts.Drivers {
         }
 
         protected override void Importing(LayoutPart part, ImportContentContext context) {
-            part.LayoutState = context.Data.Element(part.PartDefinition.Name).El("LayoutState");
+            part.LayoutData = context.Data.Element(part.PartDefinition.Name).El("LayoutData");
             _layoutManager.Importing(new ImportLayoutContext {
                 Layout = part,
                 Session = new ImportContentContextWrapper(context)

@@ -45,11 +45,11 @@ namespace Orchard.Layouts.Drivers {
             if (image == null)
                 return;
 
-            context.ExportableState["Image"] = _contentManager.GetItemMetadata(image).Identity.ToString();
+            context.ExportableData["Image"] = _contentManager.GetItemMetadata(image).Identity.ToString();
         }
 
         protected override void OnImporting(Image element, ImportElementContext context) {
-            var imageIdentity = context.ExportableState.Get("Image");
+            var imageIdentity = context.ExportableData.Get("Image");
             var image = !String.IsNullOrWhiteSpace(imageIdentity) ? context.Session.GetItemFromSession(imageIdentity) : default(ContentManagement.ContentItem);
 
             element.MediaId = image != null ? image.Id : default(int?);

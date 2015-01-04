@@ -12,8 +12,8 @@ namespace Orchard.Layouts.Elements {
         }
         
         public string Content {
-            get { return State.Get("Content"); }
-            set { State["Content"] = value; }
+            get { return Data.Get("Content"); }
+            set { Data["Content"] = value; }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Orchard.Layouts.Helpers {
 
         public static IDictionary<string, object> GetCommonElementAttributes(dynamic shape) {
             var element = (IElement)shape.Element;
-            var settings = element.State ?? new StateDictionary();
+            var settings = element.Data ?? new ElementDataDictionary();
             var commonSettings = settings.GetModel<CommonElementSettings>();
             var id = commonSettings.Id;
             var cssClass = commonSettings.CssClass;

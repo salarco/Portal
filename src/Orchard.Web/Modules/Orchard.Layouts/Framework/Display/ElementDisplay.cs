@@ -35,7 +35,7 @@ namespace Orchard.Layouts.Framework.Display {
 
             element.Descriptor.CreatingDisplay(createShapeContext);
 
-            var elementShapeArguments = CreateArguments(element, content, element.State);
+            var elementShapeArguments = CreateArguments(element, content, element.Data);
             var elementShape = (dynamic)_shapeFactory.Create("Element", elementShapeArguments, () => new ZoneHolding(() => _shapeFactory.Create("ElementZone")));
             var typeName = element.GetType().Name;
             var category = element.Category.ToSafeName();
@@ -88,7 +88,7 @@ namespace Orchard.Layouts.Framework.Display {
             return layoutRoot;
         }
 
-        private static INamedEnumerable<object> CreateArguments(IElement element, IContent content, StateDictionary elementState) {
+        private static INamedEnumerable<object> CreateArguments(IElement element, IContent content, ElementDataDictionary elementData) {
             var children = new List<dynamic>();
             var dictionary = new Dictionary<string, object> {
                 {"Element", element},
@@ -96,8 +96,8 @@ namespace Orchard.Layouts.Framework.Display {
                 {"ContentItem", content != null ? content.ContentItem : default(ContentItem)}
             };
 
-            if (elementState != null) {
-                foreach (var entry in elementState) {
+            if (elementData != null) {
+                foreach (var entry in elementData) {
                     dictionary[MakeValidName(entry.Key)] = entry.Value;
                 }
             }

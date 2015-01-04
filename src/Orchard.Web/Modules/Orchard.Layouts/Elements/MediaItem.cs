@@ -15,13 +15,13 @@ namespace Orchard.Layouts.Elements {
         }
 
         public IEnumerable<int> MediaItemIds {
-            get { return Deserialize(State.Get("MediaItemIds")); }
-            set { State["MediaItemIds"] = Serialize(value); }
+            get { return Deserialize(Data.Get("MediaItemIds")); }
+            set { Data["MediaItemIds"] = Serialize(value); }
         }
 
         public string DisplayType {
-            get { return State.Get("DisplayType"); }
-            set { State["DisplayType"] = value; }
+            get { return Data.Get("DisplayType"); }
+            set { Data["DisplayType"] = value; }
         }
 
         public static string Serialize(IEnumerable<int> values) {

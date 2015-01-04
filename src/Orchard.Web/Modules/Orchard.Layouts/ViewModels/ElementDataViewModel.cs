@@ -1,6 +1,6 @@
 ﻿namespace Orchard.Layouts.ViewModels {
-    public class ElementStateViewModel {
+    public class ElementDataViewModel {
         public string TypeName { get; set; }
-        public string ElementState { get; set; }
+        public string ElementData { get; set; }
     }
 }

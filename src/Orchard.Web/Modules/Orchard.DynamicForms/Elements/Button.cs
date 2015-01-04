@@ -7,8 +7,8 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string Text {
-            get { return State.Get("ButtonText", "Submit"); }
-            set { State["ButtonText"] = value; }
+            get { return Data.Get("ButtonText", "Submit"); }
+            set { Data["ButtonText"] = value; }
         }
     }
 }

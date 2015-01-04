@@ -73,11 +73,11 @@ namespace Orchard.Layouts.Providers {
             var contentField = contentItem.GetContentField(typeName);
 
             if ((contentItem.Id == 0 || context.DisplayType == "Design") && context.Updater != null) {
-                // The content item hasn't been stored yet, so bind form values with the content field to represent actual state.
+                // The content item hasn't been stored yet, so bind form values with the content field to represent actual Data.
                 var controller = (Controller)context.Updater;
                 var oldValueProvider = controller.ValueProvider;
 
-                controller.ValueProvider = context.Element.State.ToValueProvider(_cultureAccessor.Value.CurrentCulture);
+                controller.ValueProvider = context.Element.Data.ToValueProvider(_cultureAccessor.Value.CurrentCulture);
                 _contentFieldDisplay.Value.UpdateEditor(contentItem, contentField, context.Updater);
                 _transactionManager.Value.Cancel();
                 controller.ValueProvider = oldValueProvider;

@@ -29,7 +29,7 @@ namespace Orchard.Layouts.Drivers {
                 var controller = (Controller)context.Updater;
                 var oldValueProvider = controller.ValueProvider;
 
-                controller.ValueProvider = context.Element.State.ToValueProvider(_cultureAccessor.CurrentCulture);
+                controller.ValueProvider = context.Element.Data.ToValueProvider(_cultureAccessor.CurrentCulture);
                 _contentPartDisplay.UpdateEditor(contentPart, context.Updater);
                 _transactionManager.Cancel();
                 controller.ValueProvider = oldValueProvider;

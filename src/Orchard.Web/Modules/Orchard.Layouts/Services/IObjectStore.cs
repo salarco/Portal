@@ -3,7 +3,7 @@ using Orchard.Layouts.Models;
 
 namespace Orchard.Layouts.Services {
     /// <summary>
-    /// A simple object store to store temporary data into. It is used to transfer layout element state between the canvas and the element editor.
+    /// A simple object store to store temporary data into. It is used to transfer layout element Data between the canvas and the element editor.
     /// </summary>
     public interface IObjectStore : IDependency {
         ObjectStoreEntry GetEntry(string key);

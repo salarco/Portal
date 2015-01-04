@@ -3,7 +3,7 @@
 @using Orchard.Layouts.Settings
 @{
     var element = (Taxonomy)Model.Element;
-    var commonSettings = element.State.GetModel<CommonElementSettings>();
+    var commonSettings = element.Data.GetModel<CommonElementSettings>();
     var attributes = (IDictionary<string, object>)TagBuilderExtensions.GetCommonElementAttributes(Model);
     var name = String.IsNullOrWhiteSpace(element.Name) ? "SelectList1" : element.Name;
     var options = (IEnumerable<SelectListItem>)Model.TermOptions;

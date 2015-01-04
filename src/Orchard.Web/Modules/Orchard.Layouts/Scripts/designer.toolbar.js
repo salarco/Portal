@@ -12,7 +12,7 @@
         }
 
         var initLayoutStateViewer = function () {
-            self.element.on("click", ".edit-layout-state a", function (e) {
+            self.element.on("click", ".edit-layout-Data a", function (e) {
                 e.preventDefault();
                 self.element.trigger("viewlayoutstate");
             });

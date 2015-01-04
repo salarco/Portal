@@ -8,53 +8,53 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string Name {
-            get { return State.Get("FormName", "Untitled"); }
-            set { State["FormName"] = value; }
+            get { return Data.Get("FormName", "Untitled"); }
+            set { Data["FormName"] = value; }
         }
 
         public bool? EnableClientValidation {
-            get { return State.Get("EnableClientValidation").ToBoolean(); }
-            set { State["EnableClientValidation"] = value.ToString(); }
+            get { return Data.Get("EnableClientValidation").ToBoolean(); }
+            set { Data["EnableClientValidation"] = value.ToString(); }
         }
 
         public string Action {
-            get { return State.Get("FormAction"); }
-            set { State["FormAction"] = value; }
+            get { return Data.Get("FormAction"); }
+            set { Data["FormAction"] = value; }
         }
 
         public string Method {
-            get { return State.Get("FormMethod"); }
-            set { State["FormMethod"] = value; }
+            get { return Data.Get("FormMethod"); }
+            set { Data["FormMethod"] = value; }
         }
 
         public bool? StoreSubmission {
-            get { return State.Get("StoreSubmission").ToBoolean(); }
-            set { State["StoreSubmission"] = value != null ? value.Value.ToString() : null; }
+            get { return Data.Get("StoreSubmission").ToBoolean(); }
+            set { Data["StoreSubmission"] = value != null ? value.Value.ToString() : null; }
         }
 
         public bool? CreateContent {
-            get { return State.Get("CreateContent").ToBoolean(); }
-            set { State["CreateContent"] = value != null ? value.Value.ToString() : null; }
+            get { return Data.Get("CreateContent").ToBoolean(); }
+            set { Data["CreateContent"] = value != null ? value.Value.ToString() : null; }
         }
 
         public string ContentType {
-            get { return State.Get("CreateContentType"); }
-            set { State["CreateContentType"] = value; }
+            get { return Data.Get("CreateContentType"); }
+            set { Data["CreateContentType"] = value; }
         }
 
         public string Publication {
-            get { return State.Get("Publication"); }
-            set { State["Publication"] = value; }
+            get { return Data.Get("Publication"); }
+            set { Data["Publication"] = value; }
         }
 
         public string Notification {
-            get { return State.Get("Notification"); }
-            set { State["Notification"] = value; }
+            get { return Data.Get("Notification"); }
+            set { Data["Notification"] = value; }
         }
 
         public string RedirectUrl {
-            get { return State.Get("RedirectUrl"); }
-            set { State["RedirectUrl"] = value; }
+            get { return Data.Get("RedirectUrl"); }
+            set { Data["RedirectUrl"] = value; }
         }
     }
 }

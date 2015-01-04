@@ -16,13 +16,13 @@ namespace Orchard.Layouts.Framework.Serialization {
             _elementFactory = elementFactory;
         }
 
-        public IEnumerable<IElement> Deserialize(string state, DescribeElementsContext describeContext) {
+        public IEnumerable<IElement> Deserialize(string data, DescribeElementsContext describeContext) {
             var emptyList = Enumerable.Empty<IElement>();
 
-            if (String.IsNullOrWhiteSpace(state))
+            if (String.IsNullOrWhiteSpace(data))
                 return emptyList;
 
-            var token = JToken.Parse(state);
+            var token = JToken.Parse(data);
             var nodes = (JArray)token["elements"];
             var elements = nodes != null 
                 ? nodes.Select((x, i) => ParseNode(node: x, parent: null, index: i, describeContext: describeContext)).Where(x => x != null).ToArray() 
@@ -43,8 +43,8 @@ namespace Orchard.Layouts.Framework.Serialization {
             var container = element as IContainer;
             var dto = new {
                 typeName = element.Descriptor.TypeName,
-                state = element.State.Serialize(),
-                exportableState = element.ExportableState.Serialize(),
+                data = element.Data.Serialize(),
+                exportableData = element.ExportableData.Serialize(),
                 index = index,
                 elements = container != null ? container.Elements.Select(Serialize).ToList() : new List<object>(),
                 isTemplated = element.IsTemplated
@@ -58,8 +58,8 @@ namespace Orchard.Layouts.Framework.Serialization {
             if (String.IsNullOrWhiteSpace(elementTypeName))
                 return null;
 
-            var elementState = ElementStateHelper.Deserialize((string)node["state"]);
-            var elementExportableState = ElementStateHelper.Deserialize((string)node["exportableState"]);
+            var elementData = ElementDataHelper.Deserialize((string)node["Data"]);
+            var exportableData = ElementDataHelper.Deserialize((string)node["exportableData"]);
             var childNodes = node["elements"];
             var elementDescriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, elementTypeName);
 
@@ -70,8 +70,8 @@ namespace Orchard.Layouts.Framework.Serialization {
                 new ActivateElementArgs {
                     Container = parent, 
                     Index = index, 
-                    State = elementState,
-                    ExportableState = elementExportableState
+                    Data = elementData,
+                    ExportableData = exportableData
                 });
             var container = element as IContainer;
 

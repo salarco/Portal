@@ -19,11 +19,11 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public virtual string Name {
-            get { return State.Get("InputName"); }
+            get { return Data.Get("InputName"); }
         }
 
         public string Value {
-            get { return State.Get("Value"); }
+            get { return Data.Get("Value"); }
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace Orchard.DynamicForms.Elements {
         public string PostedValue { get; set; }
 
         public string FormBindingContentType {
-            get { return State.Get("FormBindingContentType"); }
-            set { State["FormBindingContentType"] = value; }
+            get { return Data.Get("FormBindingContentType"); }
+            set { Data["FormBindingContentType"] = value; }
         }
 
         public Form Form {

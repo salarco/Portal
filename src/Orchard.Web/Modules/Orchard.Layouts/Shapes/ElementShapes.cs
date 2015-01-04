@@ -47,7 +47,7 @@ namespace Orchard.Layouts.Shapes {
                     context.Shape.ElementJson = JsonConvert.SerializeObject(new {
                         typeName = descriptor.TypeName,
                         displayText = descriptor.DisplayText.Text,
-                        state = element.State.Serialize(),
+                        data = element.Data.Serialize(),
                         index = element.Index,
                         isTemplated = element.IsTemplated
                     });
@@ -55,7 +55,7 @@ namespace Orchard.Layouts.Shapes {
 
                 // Tokenize common settings
                 var content = (ContentItem)context.Shape.ContentItem;
-                var settings = element.State ?? new StateDictionary();
+                var settings = element.Data ?? new ElementDataDictionary();
                 var commonSettings = settings.GetModel<CommonElementSettings>();
                 var id = commonSettings.Id;
                 var cssClass = commonSettings.CssClass;

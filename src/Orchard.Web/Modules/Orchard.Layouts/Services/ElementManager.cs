@@ -160,7 +160,7 @@ namespace Orchard.Layouts.Services {
                     Element = element
                 };
                 driver.Exporting(exportElementContext);
-                element.ExportableState = new StateDictionary(exportElementContext.ExportableState);
+                element.ExportableData = new ElementDataDictionary(exportElementContext.ExportableData);
             });
         }
 
@@ -169,7 +169,7 @@ namespace Orchard.Layouts.Services {
                 var importElementContext = new ImportElementContext {
                     Layout = context.Layout,
                     Element = element,
-                    ExportableState = element.ExportableState,
+                    ExportableData = element.ExportableData,
                     Session = context.Session
                 };
                 driver.Importing(importElementContext);

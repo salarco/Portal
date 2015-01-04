@@ -42,7 +42,7 @@ namespace Orchard.Layouts.Services {
 
         public IEnumerable<IElement> LoadElements(ILayoutAspect layout) {
             var describeContext = new DescribeElementsContext { Content = layout };
-            return _serializer.Deserialize(layout.LayoutState, describeContext);
+            return _serializer.Deserialize(layout.LayoutData, describeContext);
         }
 
         public void Exporting(ExportLayoutContext context) {
@@ -50,7 +50,7 @@ namespace Orchard.Layouts.Services {
             var elements = elementTree.Flatten().ToArray();
 
             _elementManager.Exporting(elements, context);
-            context.Layout.LayoutState = _serializer.Serialize(elementTree);
+            context.Layout.LayoutData = _serializer.Serialize(elementTree);
         }
 
         public void Importing(ImportLayoutContext context) {
@@ -58,11 +58,11 @@ namespace Orchard.Layouts.Services {
             var elements = elementTree.Flatten().ToArray();
 
             _elementManager.Importing(elements, context);
-            context.Layout.LayoutState = _serializer.Serialize(elementTree);
+            context.Layout.LayoutData = _serializer.Serialize(elementTree);
         }
 
-        public dynamic RenderLayout(string state, string displayType = null, IContent content = null) {
-            var elements = _serializer.Deserialize(state, new DescribeElementsContext { Content = content });
+        public dynamic RenderLayout(string data, string displayType = null, IContent content = null) {
+            var elements = _serializer.Deserialize(data, new DescribeElementsContext { Content = content });
             var layoutRoot = _elementDisplay.DisplayElements(elements, content, displayType);
             return layoutRoot;
         }

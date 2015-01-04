@@ -57,7 +57,7 @@ namespace Orchard.Layouts.Handlers {
                 var isPublished = layout.ContentItem.VersionRecord.Published;
                 var draft = isPublished ? _contentManager.Get<LayoutPart>(layout.Id, VersionOptions.DraftRequired) : layout;
                 
-                draft.LayoutState = _layoutManager.ApplyTemplate(layout, part);
+                draft.LayoutData = _layoutManager.ApplyTemplate(layout, part);
 
                 if (isPublished) {
                     // We don't have to recurse here, since invoking Publish on a Layout will cause this handler to execute again.

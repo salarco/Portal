@@ -12,13 +12,13 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string Text {
-            get { return State.Get("LabelText"); }
-            set { State["LabelText"] = value; }
+            get { return Data.Get("LabelText"); }
+            set { Data["LabelText"] = value; }
         }
 
         public string For {
-            get { return State.Get("LabelFor"); }
-            set { State["LabelFor"] = value; }
+            get { return Data.Get("LabelFor"); }
+            set { Data["LabelFor"] = value; }
         }
     }
 }

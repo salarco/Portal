@@ -39,7 +39,7 @@ namespace Orchard.Layouts.Providers {
         }
 
         private void Editor(ElementEditorContext context) {
-            var viewModel = context.Element.State.GetModel<CommonElementSettings>();
+            var viewModel = context.Element.Data.GetModel<CommonElementSettings>();
             var commonSettingsEditor = context.ShapeFactory.EditorTemplate(
                 TemplateName: "ElementSettings.Common",
                 Model: viewModel,
@@ -50,7 +50,7 @@ namespace Orchard.Layouts.Providers {
 
             if (context.Updater != null) {
                 context.Updater.TryUpdateModel(viewModel, context.Prefix.AppendPrefix("CommonElementSettings"), null, null);
-                context.Element.State = context.Element.State.Combine(new StateDictionary {
+                context.Element.Data = context.Element.Data.Combine(new ElementDataDictionary {
                     {"CommonElementSettings.Id", viewModel.Id},
                     {"CommonElementSettings.CssClass", viewModel.CssClass},
                     {"CommonElementSettings.InlineStyle", viewModel.InlineStyle}

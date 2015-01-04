@@ -65,7 +65,7 @@ namespace Orchard.DynamicForms.Services {
         }
 
         public Form FindForm(LayoutPart layoutPart, string formName = null) {
-            var elements = _serializer.Deserialize(layoutPart.LayoutState, new DescribeElementsContext { Content = layoutPart });
+            var elements = _serializer.Deserialize(layoutPart.LayoutData, new DescribeElementsContext { Content = layoutPart });
             var forms = elements.Flatten().Where(x => x is Form).Cast<Form>();
             return String.IsNullOrWhiteSpace(formName) ? forms.FirstOrDefault() : forms.FirstOrDefault(x => x.Name == formName);
         }
@@ -255,7 +255,7 @@ namespace Orchard.DynamicForms.Services {
                 ReadElementValues(element, context);
 
                 var value = context.Output[element.Name];
-                var bindingSettings = element.State.GetModel<FormBindingSettings>(null);
+                var bindingSettings = element.Data.GetModel<FormBindingSettings>(null);
 
                 if (bindingSettings != null) {
                     foreach (var partBindingSettings in bindingSettings.Parts) {

@@ -335,7 +335,7 @@
     <Compile Include="Elements\ContentItem.cs" />
     <Compile Include="Elements\Html.cs" />
     <Compile Include="Elements\Markdown.cs" />
-    <Compile Include="Framework\Elements\StateDictionary.cs" />
+    <Compile Include="Framework\Elements\ElementDataDictionary.cs" />
     <Compile Include="Settings\CommonElementSettings.cs" />
     <Compile Include="Helpers\ContentFieldNameHelper.cs" />
     <Compile Include="Helpers\MetaDataExtensions.cs" />
@@ -391,7 +391,7 @@
     <Compile Include="Framework\Elements\LayoutSavingContext.cs" />
     <Compile Include="Helpers\ElementInstanceHelper.cs" />
     <Compile Include="Framework\Drivers\EditorResult.cs" />
-    <Compile Include="ViewModels\ElementStateViewModel.cs" />
+    <Compile Include="ViewModels\ElementDataViewModel.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Drivers\RowDriver.cs" />
     <Compile Include="Drivers\TextDriver.cs" />
@@ -408,7 +408,7 @@
     <Compile Include="Framework\Drivers\IElementDriver.cs" />
     <Compile Include="Framework\Harvesters\IElementHarvester.cs" />
     <Compile Include="Framework\Serialization\ILayoutSerializer.cs" />
-    <Compile Include="Helpers\ElementStateHelper.cs" />
+    <Compile Include="Helpers\ElementDataHelper.cs" />
     <Compile Include="Models\ElementInstance.cs" />
     <Compile Include="Framework\Display\ElementDisplayContext.cs" />
     <Compile Include="Framework\Elements\IColumn.cs" />

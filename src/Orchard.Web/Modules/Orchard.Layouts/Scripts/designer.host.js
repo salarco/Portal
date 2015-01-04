@@ -23,7 +23,7 @@
             var selectedTemplateId = templatePicker.val();
 
             templateField.val(selectedTemplateId);
-            serialize("state-field-name", ".canvas");
+            serialize("Data-field-name", ".canvas");
         };
 
         var serializeTrash = function () {

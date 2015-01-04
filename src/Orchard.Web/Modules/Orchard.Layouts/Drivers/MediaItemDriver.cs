@@ -55,11 +55,11 @@ namespace Orchard.Layouts.Drivers {
                 return;
 
             var identities = contentItems.Select(x => _contentManager.GetItemMetadata(x).Identity.ToString()).ToArray();
-            context.ExportableState["ContentItems"] = String.Join(",", identities);
+            context.ExportableData["ContentItems"] = String.Join(",", identities);
         }
 
         protected override void OnImporting(MediaItem element, ImportElementContext context) {
-            var contentItemIdentities = context.ExportableState.Get("ContentItems");
+            var contentItemIdentities = context.ExportableData.Get("ContentItems");
 
             if (String.IsNullOrWhiteSpace(contentItemIdentities))
                 return;

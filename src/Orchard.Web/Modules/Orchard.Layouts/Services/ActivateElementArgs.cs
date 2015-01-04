@@ -5,7 +5,7 @@ namespace Orchard.Layouts.Services {
         public static readonly ActivateElementArgs Empty = new ActivateElementArgs();
         public IContainer Container { get; set; }
         public int Index { get; set; }
-        public StateDictionary State { get; set; }
-        public StateDictionary ExportableState { get; set; }
+        public ElementDataDictionary Data { get; set; }
+        public ElementDataDictionary ExportableData { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Orchard.Layouts.ViewModels {
         public EditorResult EditorResult { get; set; }
         public string TypeName { get; set; }
         public LocalizedString DisplayText { get; set; }
-        public string ElementState { get; set; }
+        public string ElementData { get; set; }
         public IList<string> Tabs { get; set; }
         public CreateElementBlueprintViewModel Blueprint { get; set; }
         public IElement BaseElement { get; set; }

@@ -5,8 +5,8 @@ namespace Orchard.Layouts.Framework.Elements {
     public abstract class Element : IElement {
         protected Element() {
             T = NullLocalizer.Instance;
-            State = new StateDictionary();
-            ExportableState = new StateDictionary();
+            Data = new ElementDataDictionary();
+            ExportableData = new ElementDataDictionary();
         }
 
         public IContainer Container { get; set; }
@@ -28,9 +28,9 @@ namespace Orchard.Layouts.Framework.Elements {
         }
         public abstract string Category { get; }
         public Localizer T { get; set; }
-        public StateDictionary ExportableState { get; set; }
+        public ElementDataDictionary ExportableData { get; set; }
         public ElementDescriptor Descriptor { get; set; }
-        public StateDictionary State { get; set; }
+        public ElementDataDictionary Data { get; set; }
         public bool IsTemplated { get; set; }
         public int Index { get; set; }
     }

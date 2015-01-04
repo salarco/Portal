@@ -25,22 +25,22 @@ namespace Orchard.Layouts.Controllers {
         }
 
         [HttpPost]
-        public ShapeResult ApplyTemplate(int? templateId = null, string layoutState = null, int? layoutId = null, string contentType = null) {
+        public ShapeResult ApplyTemplate(int? templateId = null, string layoutData = null, int? layoutId = null, string contentType = null) {
             var layoutPart = layoutId != null ? _layoutManager.GetLayout(layoutId.Value) ?? _contentManager.New<LayoutPart>(contentType) : _contentManager.New<LayoutPart>(contentType);
 
-            if (!String.IsNullOrWhiteSpace(layoutState)) {
-                layoutState = ApplyTemplateInternal(templateId, layoutState, layoutId, contentType);
+            if (!String.IsNullOrWhiteSpace(layoutData)) {
+                layoutData = ApplyTemplateInternal(templateId, layoutData, layoutId, contentType);
             }
 
-            var layoutShape = _layoutManager.RenderLayout(state: layoutState, displayType: "Design", content: layoutPart);
+            var layoutShape = _layoutManager.RenderLayout(data: layoutData, displayType: "Design", content: layoutPart);
             return new ShapeResult(this, layoutShape);
         }
 
-        private string ApplyTemplateInternal(int? templateId, string layoutState, int? layoutId = null, string contentType = null) {
+        private string ApplyTemplateInternal(int? templateId, string layoutData, int? layoutId = null, string contentType = null) {
             var template = templateId != null ? _layoutManager.GetLayout(templateId.Value) : null;
             var templateElements = template != null ? _layoutManager.LoadElements(template) : default(IEnumerable<IElement>);
             var describeContext = CreateDescribeElementsContext(layoutId, contentType);
-            var elementInstances = _serializer.Deserialize(layoutState, describeContext);
+            var elementInstances = _serializer.Deserialize(layoutData, describeContext);
 
             if (templateElements == null)
                 return _layoutManager.DetachTemplate(elementInstances);

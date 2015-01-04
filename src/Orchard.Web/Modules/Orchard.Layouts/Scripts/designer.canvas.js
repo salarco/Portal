@@ -37,7 +37,7 @@
                         elements: [
                             {
                                 typeName: data.element.typeName,
-                                state: data.element.state ? decodeURIComponent(data.element.state) : null
+                                data: data.element.data ? decodeURIComponent(data.element.data) : null
                             }
                         ]
                     }
@@ -49,17 +49,17 @@
             });
         };
 
-        this.refreshElement = function (elementUI, elementState) {
+        this.refreshElement = function (elementUI, elementData) {
             // Serialize the element UI into an object graph.
             var graph = {};
-            var state = elementState ? decodeURIComponent(elementState) : null;
-            var stateFormValues = state ? $.deserialize(state) : null;
+            var data = elementData ? decodeURIComponent(elementData) : null;
+            var stateFormValues = data ? $.deserialize(data) : null;
             var formData = $.extend({}, stateFormValues);
             window.Orchard.Layouts.Serializer.serialize(graph, elementUI);
 
-            if (state) {
-                // Update the element with the new state.
-                graph.elements[0].state = state;
+            if (data) {
+                // Update the element with the new Data.
+                graph.elements[0].state = data;
             }
 
             // Special case for columns - we need to refresh the row, as changes to the column will have an effect to its silbings.
@@ -127,17 +127,17 @@
             self.applyTemplate(templateId);
         });
 
-        this.toolbar.element.on("viewlayoutstate", function (e) {
+        this.toolbar.element.on("viewlayoutdata", function (e) {
             var graph = self.serialize({}, self.canvas);
-            var layoutState = JSON.stringify(graph, null, 3);
+            var layoutData = JSON.stringify(graph, null, 3);
             var w = window.parent || window;
             var dialog = new w.Orchard.Layouts.Dialog(".dialog-template");
 
             dialog.show();
             dialog.setHtml($(
-                "<textarea class=\"text large\" rows=\"35\">" + layoutState + "</textarea>" + 
+                "<textarea class=\"text large\" rows=\"35\">" + layoutData + "</textarea>" + 
                 "<div class=\"dialog-settings\">" +
-                "    <div class=\"title\">Layout State</div>" +
+                "    <div class=\"title\">Layout Data</div>" +
                 "    <div class=\"buttons\">" +
                 "        <a href=\"#\" class=\"button update\" data-command=\"update\">Update</a>" +
                 "        <a href=\"#\" class=\"button cancel\">Cancel</a>" +
@@ -147,9 +147,9 @@
 
             dialog.element.on("command", function (e, data) {
                 if (data.command == "update") {
-                    var updatedLayoutState = dialog.view.find("textarea").val();
+                    var updatedLayoutData = dialog.view.find("textarea").val();
                     var target = self.canvas.find(".x-root > .x-holder");
-                    var updatedGraph = JSON.parse(updatedLayoutState);
+                    var updatedGraph = JSON.parse(updatedLayoutData);
                     self.renderGraph(target, updatedGraph, self.settings.domOperations.replace);
                     dialog.close();
                 }
@@ -160,21 +160,20 @@
             var sender = $(e.sender);
             var elementUI = sender.closest(".x-element");
             var elementData = elementUI.data("element");
-            var elementState = elementData.state;
+            var data = elementData.data;
             var w = window.parent || window;
             var dialog = new w.Orchard.Layouts.Dialog(".dialog-template");
 
             dialog.show();
             dialog.load(self.settings.endpoints.edit, {
                 typeName: elementData.typeName,
-                elementState: elementState,
+                elementData: data,
                 __RequestVerificationToken: self.settings.antiForgeryToken
             }, "post");
 
-            dialog.element.on("command", function (e, data) {
-                if (data.command == "save") {
-                    var state = data.element.state;
-                    self.refreshElement(elementUI, state);
+            dialog.element.on("command", function (e, args) {
+                if (args.command == "save") {
+                    self.refreshElement(elementUI, args.element.data);
                     dialog.close();
                 }
             });

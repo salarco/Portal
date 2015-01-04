@@ -29,9 +29,9 @@ namespace Orchard.Layouts.Settings {
                 model.Flavor = partModel.FlavorDefault;
             }
 
-            if (String.IsNullOrWhiteSpace(model.DefaultLayoutState)) {
-                var defaultState = _serializer.Serialize(_layoutManager.CreateDefaultLayout());
-                model.DefaultLayoutState = defaultState;
+            if (String.IsNullOrWhiteSpace(model.DefaultLayoutData)) {
+                var defaultData = _serializer.Serialize(_layoutManager.CreateDefaultLayout());
+                model.DefaultLayoutData = defaultData;
             }
 
             yield return DefinitionTemplate(model);
@@ -45,7 +45,7 @@ namespace Orchard.Layouts.Settings {
             updateModel.TryUpdateModel(model, "LayoutTypePartSettings", null, null);
             builder.WithSetting("LayoutTypePartSettings.Flavor", !String.IsNullOrWhiteSpace(model.Flavor) ? model.Flavor : null);
             builder.WithSetting("LayoutTypePartSettings.IsTemplate", model.IsTemplate.ToString());
-            builder.WithSetting("LayoutTypePartSettings.DefaultLayoutState", model.DefaultLayoutState);
+            builder.WithSetting("LayoutTypePartSettings.DefaultLayoutData", model.DefaultLayoutData);
             yield return DefinitionTemplate(model);
         }
 

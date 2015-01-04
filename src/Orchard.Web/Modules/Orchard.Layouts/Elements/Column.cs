@@ -23,13 +23,13 @@ namespace Orchard.Layouts.Elements {
         }
 
         public int? ColumnSpan {
-            get { return State.Get("ColumnSpan").ToInt32() ?? 0; }
-            set { State["ColumnSpan"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
+            get { return Data.Get("ColumnSpan").ToInt32() ?? 0; }
+            set { Data["ColumnSpan"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
         }
 
         public int? ColumnOffset {
-            get { return State.Get("ColumnOffset").ToInt32() ?? 0; }
-            set { State["ColumnOffset"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
+            get { return Data.Get("ColumnOffset").ToInt32() ?? 0; }
+            set { Data["ColumnOffset"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
         }
 
         public int CurrentSpanSize {

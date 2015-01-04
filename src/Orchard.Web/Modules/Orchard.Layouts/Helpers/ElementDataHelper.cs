@@ -8,19 +8,19 @@ using System.Web.Mvc;
 using Orchard.Layouts.Framework.Elements;
 
 namespace Orchard.Layouts.Helpers {
-    public static class ElementStateHelper {
-        private static readonly string[] _elementStateBlackList = { "ElementState", "__RequestVerificationToken" };
+    public static class ElementDataHelper {
+        private static readonly string[] _elementDataBlackList = { "ElementData", "__RequestVerificationToken" };
 
-        public static string Get(this StateDictionary state, string key, string defaultValue = null) {
-            return state != null ? state.ContainsKey(key) ? state[key] : defaultValue : defaultValue;
+        public static string Get(this ElementDataDictionary data, string key, string defaultValue = null) {
+            return data != null ? data.ContainsKey(key) ? data[key] : defaultValue : defaultValue;
         }
 
-        public static string Serialize(this StateDictionary state) {
-            return state == null ? "" : String.Join("&", state.Select(x => String.Format("{0}={1}", x.Key, HttpUtility.UrlEncode(x.Value))));
+        public static string Serialize(this ElementDataDictionary data) {
+            return data == null ? "" : String.Join("&", data.Select(x => String.Format("{0}={1}", x.Key, HttpUtility.UrlEncode(x.Value))));
         }
 
-        public static StateDictionary Combine(this StateDictionary target, StateDictionary input, bool removeNonExistingItems = false) {
-            var combined = new StateDictionary(target);
+        public static ElementDataDictionary Combine(this ElementDataDictionary target, ElementDataDictionary input, bool removeNonExistingItems = false) {
+            var combined = new ElementDataDictionary(target);
 
             foreach (var item in input) {
                 combined[item.Key] = item.Value;
@@ -40,33 +40,33 @@ namespace Orchard.Layouts.Helpers {
             return collection.ToDictionary().Serialize();
         }
 
-        public static StateDictionary Deserialize(string state) {
-            var dictionary = new StateDictionary();
-            if (String.IsNullOrWhiteSpace(state))
+        public static ElementDataDictionary Deserialize(string data) {
+            var dictionary = new ElementDataDictionary();
+            if (String.IsNullOrWhiteSpace(data))
                 return dictionary;
 
-            var items = state.Split(new[] { '&' });
+            var items = data.Split(new[] { '&' });
 
             foreach (var item in items) {
                 var pair = item.Split(new[] { '=' });
                 var key = pair[0];
                 var value = HttpUtility.UrlDecode(pair[1]);
 
-                if (!dictionary.ContainsKey(key) && !_elementStateBlackList.Contains(key))
+                if (!dictionary.ContainsKey(key) && !_elementDataBlackList.Contains(key))
                     dictionary.Add(key, value);
             }
 
             return dictionary;
         }
 
-        public static StateDictionary ToDictionary(this NameValueCollection nameValues) {
+        public static ElementDataDictionary ToDictionary(this NameValueCollection nameValues) {
             var copy = new NameValueCollection(nameValues);
 
-            foreach (var key in _elementStateBlackList) {
+            foreach (var key in _elementDataBlackList) {
                 copy.Remove(key);
             }
 
-            var dictionary = new StateDictionary();
+            var dictionary = new ElementDataDictionary();
 
             foreach (string key in copy) {
                 dictionary[key] = String.Join(",", copy.GetValues(key).Select(HttpUtility.UrlEncode));
@@ -78,7 +78,7 @@ namespace Orchard.Layouts.Helpers {
         public static IDictionary<string, object> ToTokenDictionary(this NameValueCollection nameValues) {
             var copy = new NameValueCollection(nameValues);
 
-            foreach (var key in _elementStateBlackList) {
+            foreach (var key in _elementDataBlackList) {
                 copy.Remove(key);
 
             }
@@ -92,7 +92,7 @@ namespace Orchard.Layouts.Helpers {
             return dictionary;
         }
 
-        public static NameValueCollection ToNameValueCollection(this StateDictionary dictionary) {
+        public static NameValueCollection ToNameValueCollection(this ElementDataDictionary dictionary) {
             var collection = new NameValueCollection();
 
             foreach (var entry in dictionary) {
@@ -106,7 +106,7 @@ namespace Orchard.Layouts.Helpers {
             return collection;
         }
 
-        public static IValueProvider ToValueProvider(this StateDictionary dictionary, CultureInfo culture) {
+        public static IValueProvider ToValueProvider(this ElementDataDictionary dictionary, CultureInfo culture) {
             return new NameValueCollectionValueProvider(dictionary.ToNameValueCollection(), culture);
         }
     }
