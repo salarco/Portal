@@ -1,6 +1,7 @@
 ﻿angular
     .module("LayoutEditor")
     .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
+
         return {
             restrict: "E",
             scope: {},

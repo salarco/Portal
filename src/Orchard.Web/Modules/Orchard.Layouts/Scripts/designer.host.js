@@ -32,6 +32,10 @@
 
                 self.autoHeight();
             });
+
+            setInterval(function() {
+                self.autoHeight();
+            }, 1000);
         };
 
         this.autoHeight = function() {

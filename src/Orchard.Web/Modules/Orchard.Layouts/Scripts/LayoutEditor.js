@@ -69,6 +69,7 @@ angular
 angular
     .module("LayoutEditor")
     .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
+
         return {
             restrict: "E",
             scope: {},
@@ -93,7 +94,6 @@ angular
             }
         };
     });
-
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Child.js
 angular
     .module("LayoutEditor")
