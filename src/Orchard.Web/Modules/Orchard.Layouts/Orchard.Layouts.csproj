@@ -421,13 +421,13 @@
     <Compile Include="Framework\Elements\ElementDescriptor.cs" />
     <Compile Include="Framework\Drivers\IElementDriver.cs" />
     <Compile Include="Framework\Harvesters\IElementHarvester.cs" />
-    <Compile Include="Framework\Serialization\ILayoutSerializer.cs" />
+    <Compile Include="Services\ILayoutSerializer.cs" />
     <Compile Include="Helpers\ElementDataHelper.cs" />
     <Compile Include="Models\ElementInstance.cs" />
     <Compile Include="Framework\Display\ElementDisplayContext.cs" />
     <Compile Include="Framework\Elements\IColumn.cs" />
     <Compile Include="Elements\Column.cs" />
-    <Compile Include="Framework\Serialization\LayoutSerializer.cs" />
+    <Compile Include="Services\LayoutSerializer.cs" />
     <Compile Include="Providers\SnippetElementHarvester.cs" />
     <Compile Include="Providers\TypedElementHarvester.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />

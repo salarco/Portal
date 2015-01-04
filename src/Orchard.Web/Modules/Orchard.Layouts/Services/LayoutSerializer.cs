@@ -4,9 +4,8 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Orchard.Layouts.Framework.Elements;
 using Orchard.Layouts.Helpers;
-using Orchard.Layouts.Services;
 
-namespace Orchard.Layouts.Framework.Serialization {
+namespace Orchard.Layouts.Services {
     public class LayoutSerializer : ILayoutSerializer {
         private readonly IElementManager _elementManager;
         private readonly IElementFactory _elementFactory;

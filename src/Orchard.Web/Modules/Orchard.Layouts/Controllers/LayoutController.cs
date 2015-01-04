@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Orchard.ContentManagement;
 using Orchard.Layouts.Framework.Elements;
-using Orchard.Layouts.Framework.Serialization;
 using Orchard.Layouts.Models;
 using Orchard.Layouts.Services;
 using Orchard.Mvc;
