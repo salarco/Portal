@@ -5,7 +5,6 @@
     Style.Require("jQueryUI_Orchard");
     Style.Include("Lib/font-awesome.css", "Lib/font-awesome.min.css");
     Style.Include("Lib/Bootstrap/bootstrap.css", "Lib/Bootstrap/bootstrap.min.css");
-    Style.Include("Styles.css");
     Script.Require("jQueryUI_Draggable");
     Script.Require("jQueryUI_Droppable");
     Script.Require("jQueryUI_Sortable");
@@ -26,6 +25,7 @@
     Script.Include("serializer.js");
 
     <!-- The actual layout editor. -->
+    Style.Include("LayoutEditor.css", "LayoutEditor.min.css");
     Script.Include("Models.js");
     Script.Include("LayoutEditor.js");
 

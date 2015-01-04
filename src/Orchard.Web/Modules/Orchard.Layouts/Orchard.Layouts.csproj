@@ -143,6 +143,12 @@
       <DependentUpon>Models.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\_references.js" />
+    <Content Include="Styles\LayoutEditor.css">
+      <DependentUpon>LayoutEditor.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor.min.css">
+      <DependentUpon>LayoutEditor.css</DependentUpon>
+    </Content>
     <Content Include="Styles\Lib\Bootstrap\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
@@ -167,7 +173,6 @@
     <Content Include="Styles\layout-designer.css" />
     <Content Include="Styles\split-arrow-down.png" />
     <Content Include="Styles\split-arrow-up.png" />
-    <Content Include="Styles\Styles.css" />
     <Content Include="Templates\orc-layout-canvas.html" />
     <Content Include="Templates\orc-layout-column.html" />
     <Content Include="Templates\orc-layout-content.html" />
@@ -244,8 +249,7 @@
     <Content Include="Styles\Lib\fontawesome-webfont.ttf" />
     <Content Include="Styles\Lib\fontawesome-webfont.woff" />
     <Content Include="Styles\Lib\FontAwesome.otf" />
-    <Content Include="Styles\Styles.css.map" />
-    <Content Include="Styles\Styles.less" />
+    <Content Include="Styles\LayoutEditor.less" />
     <Content Include="Templates\Web.config" />
     <Content Include="Styles\Lib\Bootstrap\bootstrap.less" />
     <Content Include="Styles\Lib\Bootstrap\grid.less" />
@@ -274,6 +278,9 @@
     <Content Include="Styles\Lib\Bootstrap\variables.less" />
     <Content Include="Styles\Lib\Bootstrap\bootstrap.css.map">
       <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor.css.map">
+      <DependentUpon>LayoutEditor.css</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
