@@ -58,7 +58,8 @@ namespace Orchard.Layouts.Framework.Serialization {
             if (String.IsNullOrWhiteSpace(elementTypeName))
                 return null;
 
-            var elementData = ElementDataHelper.Deserialize((string)node["Data"]);
+            var data = (string) node["data"] ?? (string) node["state"]; // Falling back to "state" node for backwards compatibility.
+            var elementData = ElementDataHelper.Deserialize(data);
             var exportableData = ElementDataHelper.Deserialize((string)node["exportableData"]);
             var childNodes = node["elements"];
             var elementDescriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, elementTypeName);
