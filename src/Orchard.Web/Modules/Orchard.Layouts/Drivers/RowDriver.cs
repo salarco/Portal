@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design.Serialization;
-using System.Linq;
+﻿using System.Linq;
 using Orchard.Layouts.Elements;
 using Orchard.Layouts.Framework.Display;
 using Orchard.Layouts.Framework.Drivers;
@@ -24,7 +23,7 @@ namespace Orchard.Layouts.Drivers {
             if (!element.Columns.Any()) {
                 // Add a default column.
                 var column = _elementManager.ActivateElement<Column>();
-                column.ColumnSpan = Grid.GridSize;
+                column.Width = Grid.GridSize;
                 element.Elements.Add(column);
             }
         }
@@ -32,16 +31,16 @@ namespace Orchard.Layouts.Drivers {
         private static void EnsureSpanValues(Row element) {
             // Process each column, setting a span value if none is set.
             foreach (var column in element.Columns) {
-                var span = column.ColumnSpan;
+                var span = column.Width;
 
                 if (span == null) {
                     // Get the last column.
                     var lastColumn = element.Columns.LastOrDefault(x => x != column);
-                    var lastColumnSpan = lastColumn != null ? lastColumn.ColumnSpan ?? Grid.GridSize : Grid.GridSize;
+                    var lastColumnSpan = lastColumn != null ? lastColumn.Width ?? Grid.GridSize : Grid.GridSize;
 
                     if (lastColumn != null) {
-                        lastColumn.ColumnSpan = lastColumnSpan / 2;
-                        column.ColumnSpan = lastColumnSpan / 2;
+                        lastColumn.Width = lastColumnSpan / 2;
+                        column.Width = lastColumnSpan / 2;
                     }
                 }
             }
@@ -63,21 +62,21 @@ namespace Orchard.Layouts.Drivers {
             if (sibling == null)
                 return;
 
-            var totalSpanSize = element.CurrentSpanSize;
+            var totalSpanSize = element.Size;
 
             if (totalSpanSize > Grid.GridSize) {
                 // Decrease the sibling's span.
                 var overflow = totalSpanSize - Grid.GridSize;
-                var allowedSiblingShrink = sibling.ColumnSpan - overflow >= 1 ? overflow : sibling.ColumnSpan > 1 ? sibling.ColumnSpan - 1 : 0;
-                var selfShrink = sibling.ColumnSpan - overflow <= 0 ? overflow - sibling.ColumnSpan : 0;
+                var allowedSiblingShrink = sibling.Width - overflow >= 1 ? overflow : sibling.Width > 1 ? sibling.Width - 1 : 0;
+                var selfShrink = sibling.Width - overflow <= 0 ? overflow - sibling.Width : 0;
 
-                sibling.ColumnSpan -= allowedSiblingShrink;
-                column.ColumnSpan -= selfShrink;
+                sibling.Width -= allowedSiblingShrink;
+                column.Width -= selfShrink;
             }
             else {
                 // Increase the sibling's span
                 var space = Grid.GridSize - totalSpanSize;
-                sibling.ColumnSpan += space;
+                sibling.Width += space;
             }
         }
     }

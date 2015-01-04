@@ -22,18 +22,18 @@ namespace Orchard.Layouts.Elements {
             get { return true; }
         }
 
-        public int? ColumnSpan {
-            get { return Data.Get("ColumnSpan").ToInt32() ?? 0; }
-            set { Data["ColumnSpan"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
+        public int? Width {
+            get { return  Data.Get("Width").ToInt32() ?? Data.Get("ColumnSpan").ToInt32() ?? 0; } // Falling back on "ColumnSpan" for backward compatibility.
+            set { Data["Width"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
         }
 
-        public int? ColumnOffset {
-            get { return Data.Get("ColumnOffset").ToInt32() ?? 0; }
-            set { Data["ColumnOffset"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
+        public int? Offset {
+            get { return Data.Get("Offset").ToInt32() ?? Data.Get("ColumnOffset").ToInt32() ?? 0; } // Falling back on "ColumnOffset" for backward compatibility.
+            set { Data["Offset"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
         }
 
-        public int CurrentSpanSize {
-            get { return ColumnSpan.GetValueOrDefault() + ColumnOffset.GetValueOrDefault(); }
+        public int Size {
+            get { return Width.GetValueOrDefault() + Offset.GetValueOrDefault(); }
         }
     }
 }

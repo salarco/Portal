@@ -22,8 +22,8 @@ namespace Orchard.Layouts.Elements {
             get { return Elements.Cast<Column>(); }
         }
 
-        public int CurrentSpanSize {
-            get { return Columns.Sum(x => x.CurrentSpanSize); }
+        public int Size {
+            get { return Columns.Sum(x => x.Size); }
         }
     }
 }

@@ -28,25 +28,20 @@
     Style.Include("LayoutEditor.css", "LayoutEditor.min.css");
     Script.Include("Models.js");
     Script.Include("LayoutEditor.js");
+    Script.Include("LayoutDesignerHost.js");
 
-    <!-- Demo config and data. In a real application these will be provided by server. -->
+    <!-- Demo config. In a real application these will be provided by server. -->
     Script.Include("DemoConfig.js");
-    Script.Include("DemoData.js");
 
     using (Script.Foot()) {
         <script>
-            // Create a model from demo config and data.
-            var canvasModel1 = LayoutEditor.Canvas.from(demoConfig, demoData);
+            (function() {
+                // Create a model from demo config and data.
+                var canvasModelData = @Html.Raw(Model.Data);
+                var canvasConfig = demoConfig;
 
-            $(function () {
-                $("#saveBtn").click(function () {
-                    var canvasData = canvasModel1.toObject();
-                    var canvasDataJson = JSON.stringify(canvasData, null, '\t');
-                    // TODO: Do whatever to post the model JSON to server here.
-                    console.log(canvasData);
-                    console.log(canvasDataJson);
-                });
-            });
+                window.layoutDesignerCanvas = LayoutEditor.Canvas.from(canvasConfig, canvasModelData);
+            })(jQuery);
         </script>
     }
 }
@@ -54,7 +49,6 @@
     var contentId = Model.Content != null ? Model.Content.Id : default(int?);
     var contentType = Model.Content != null ? Model.Content.ContentItem.ContentType : default(string);
 }
-@Display.TokenHint()
 <div class="layout-designer"
      data-modelstate-valid="@ViewData.ModelState.IsValid.ToString().ToLower()"
      data-base-url="@Url.Content("~/Modules/Orchard.Layouts")"
@@ -69,10 +63,9 @@
      data-anti-forgery-token="@Html.AntiForgeryTokenValueOrchard()"
      data-session-key="@Model.SessionKey">
 
-    @Html.HiddenFor(m => m.TemplateId)
+    @Html.HiddenFor(m => m.TemplateId, new { @class = "template-id-field" })
     @Html.HiddenFor(m => m.SessionKey)
     @Html.HiddenFor(m => m.Data, new { @class = "layout-data-field" })
-    @Html.HiddenFor(m => m.Trash, new { @class = "layout-trash-field" })
     <fieldset>
         <label>@T("Layout")</label>
         <div class="group canvas-toolbar">
@@ -93,7 +86,7 @@
             </div>
         </div>
         <!-- Note the model attribute, initializes the canvas bound to a given model. -->
-        <orc-layout-canvas model="canvasModel1" ng-app="LayoutEditor" />
+        <orc-layout-canvas model="window.layoutDesignerCanvas" ng-app="LayoutEditor" />
         <div class="trash"></div>
         @Display.DialogTemplate(Name: "Layout")
     </fieldset>

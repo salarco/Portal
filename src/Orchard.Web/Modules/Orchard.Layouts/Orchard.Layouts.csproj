@@ -86,7 +86,7 @@
     <Content Include="Scripts\contentpart-layouts-settings.js" />
     <Content Include="Scripts\DemoConfig.js" />
     <Content Include="Scripts\DemoData.js" />
-    <Content Include="Scripts\designer.host.js" />
+    <Content Include="Scripts\LayoutDesignerHost.js" />
     <Content Include="Scripts\designer.toolbar.js" />
     <Content Include="Scripts\element-editor.js" />
     <Content Include="Scripts\frame.js" />
@@ -421,7 +421,9 @@
     <Compile Include="Models\ElementSessionState.cs" />
     <Compile Include="Services\ICurrentControllerAccessor.cs" />
     <Compile Include="Services\IElementEventHandler.cs" />
+    <Compile Include="Services\ILayoutModelMapper.cs" />
     <Compile Include="Services\IObjectStore.cs" />
+    <Compile Include="Services\LayoutModelMapper.cs" />
     <Compile Include="Services\ObjectStore.cs" />
     <Compile Include="Signals.cs" />
     <Compile Include="Tokens\ElementTokens.cs" />
