@@ -27,7 +27,7 @@ namespace Orchard.Layouts.Drivers {
                 var columnDescriptor = _elementManager.GetElementDescriptorByType<Column>(describeContext);
                 var column = _elementManager.ActivateElement<Column>(columnDescriptor, new ActivateElementArgs { Container = row });
 
-                column.ColumnSpan = 12;
+                column.Width = 12;
                 row.Elements.Add(column);
             }
         }

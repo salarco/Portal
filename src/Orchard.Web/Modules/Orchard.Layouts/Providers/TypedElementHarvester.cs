@@ -50,11 +50,12 @@ namespace Orchard.Layouts.Providers {
 
             if (context.Updater != null) {
                 context.Updater.TryUpdateModel(viewModel, context.Prefix.AppendPrefix("CommonElementSettings"), null, null);
-                context.Element.Data = context.Element.Data.Combine(new ElementDataDictionary {
-                    {"CommonElementSettings.Id", viewModel.Id},
-                    {"CommonElementSettings.CssClass", viewModel.CssClass},
-                    {"CommonElementSettings.InlineStyle", viewModel.InlineStyle}
-                });
+                new CommonElementSettings {
+                    Id = viewModel.Id,
+                    CssClass = viewModel.CssClass,
+                    InlineStyle = viewModel.InlineStyle
+                }
+                .Store(context.Element.Data);
             }
         }
     }

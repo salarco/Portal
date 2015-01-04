@@ -19,6 +19,7 @@ namespace Orchard.Layouts.Drivers {
         private readonly ILayoutManager _layoutManager;
         private readonly Lazy<IContentPartDisplay> _contentPartDisplay;
         private readonly IShapeDisplay _shapeDisplay;
+        private readonly ILayoutModelMapper _mapper;
 
         public LayoutPartDriver(
             ILayoutSerializer serializer, 
@@ -26,7 +27,8 @@ namespace Orchard.Layouts.Drivers {
             IElementManager elementManager, 
             ILayoutManager layoutManager,
             Lazy<IContentPartDisplay> contentPartDisplay, 
-            IShapeDisplay shapeDisplay) {
+            IShapeDisplay shapeDisplay, 
+            ILayoutModelMapper mapper) {
 
             _serializer = serializer;
             _elementDisplay = elementDisplay;
@@ -34,6 +36,7 @@ namespace Orchard.Layouts.Drivers {
             _layoutManager = layoutManager;
             _contentPartDisplay = contentPartDisplay;
             _shapeDisplay = shapeDisplay;
+            _mapper = mapper;
         }
 
         protected override DriverResult Display(LayoutPart part, string displayType, dynamic shapeHelper) {
@@ -57,7 +60,7 @@ namespace Orchard.Layouts.Drivers {
         protected override DriverResult Editor(LayoutPart part, IUpdateModel updater, dynamic shapeHelper) {
             return ContentShape("Parts_Layout_Edit", () => {
                 var viewModel = new LayoutPartViewModel {
-                    Data = part.LayoutData,
+                    Data = _mapper.ToEditorModel(part.LayoutData, new DescribeElementsContext { Content = part}),
                     TemplateId = part.TemplateId,
                     Content = part,
                     SessionKey = part.SessionKey,
@@ -67,7 +70,7 @@ namespace Orchard.Layouts.Drivers {
                 if (updater != null) {
                     updater.TryUpdateModel(viewModel, Prefix, null, new[] { "Part", "Templates" });
                     var describeContext = new DescribeElementsContext { Content = part };
-                    var elementInstances = _serializer.Deserialize(viewModel.Data, describeContext).ToArray();
+                    var elementInstances = _mapper.ToLayoutModel(viewModel.Data, describeContext).ToArray();
                     var removedElementInstances = _serializer.Deserialize(viewModel.Trash, describeContext).ToArray();
                     var context = new LayoutSavingContext {
                         Content = part,
