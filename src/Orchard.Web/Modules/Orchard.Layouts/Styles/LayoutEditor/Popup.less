@@ -19,22 +19,29 @@
         white-space: nowrap;
         line-height: normal;
 
-        > .layout-popup-item {
+        .layout-popup-flex {
+            display: flex;
+            .layout-popup-column + .layout-popup-column {
+                margin-left: 2px;
+            }
+        }
+
+        .layout-popup-item {
             padding: 4px 6px;
         }
 
-        > .layout-popup-label {
+        .layout-popup-label {
             font-size: 0.9em;
             font-weight: bold;
             color: @gray-text;
         }
 
-        > .layout-popup-action:hover {
+        .layout-popup-action:hover {
             background-color: @gray-bg;
             cursor: pointer;
         }
 
-        > .layout-popup-input {
+        .layout-popup-input {
             > label {
                 display: block;
                 font-size: 0.9em;

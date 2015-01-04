@@ -62,6 +62,13 @@ angular
                 $scope.invokeAddOperation = function (operation, e) {
                     operation.invoke();
                 };
+
+                $scope.invokeAddContentElement = function (contentType, e) {
+                    // SIPKE: This is where you invoke the create dialog for the given contentType!
+                    // contentType.label == "Paragraph"
+                    // contentType.id == "Orchard.Layouts.Elements.Paragraph"
+                    console.log(contentType);
+                };
             }
         }
     });

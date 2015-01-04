@@ -184,19 +184,25 @@
   white-space: nowrap;
   line-height: normal;
 }
-.layout-editor-wrapper .layout-popup > .layout-popup-item {
+.layout-editor-wrapper .layout-popup .layout-popup-flex {
+  display: flex;
+}
+.layout-editor-wrapper .layout-popup .layout-popup-flex .layout-popup-column + .layout-popup-column {
+  margin-left: 2px;
+}
+.layout-editor-wrapper .layout-popup .layout-popup-item {
   padding: 4px 6px;
 }
-.layout-editor-wrapper .layout-popup > .layout-popup-label {
+.layout-editor-wrapper .layout-popup .layout-popup-label {
   font-size: 0.9em;
   font-weight: bold;
   color: #696969;
 }
-.layout-editor-wrapper .layout-popup > .layout-popup-action:hover {
+.layout-editor-wrapper .layout-popup .layout-popup-action:hover {
   background-color: #f0f0f0;
   cursor: pointer;
 }
-.layout-editor-wrapper .layout-popup > .layout-popup-input > label {
+.layout-editor-wrapper .layout-popup .layout-popup-input > label {
   display: block;
   font-size: 0.9em;
 }
