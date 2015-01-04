@@ -13,6 +13,6 @@
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-row.html",
-            replace: true,
+            replace: true
         };
     });

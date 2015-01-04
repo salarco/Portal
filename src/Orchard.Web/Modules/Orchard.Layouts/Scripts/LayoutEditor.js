@@ -132,7 +132,7 @@ angular
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-column.html",
-            replace: true,
+            replace: true
         };
     });
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Content.js
@@ -146,7 +146,7 @@ angular
                 elementConfigurator.addElementFunctions($scope, $element);
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
-            replace: true,
+            replace: true
         };
     });
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Grid.js
@@ -161,7 +161,7 @@ angular
                 elementConfigurator.addContainerFunctions($scope, $element);
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
-            replace: true,
+            replace: true
         };
     });
 ///#source 1 1 /Scripts/LayoutEditor/Directives/Popup.js
@@ -210,6 +210,6 @@ angular
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-row.html",
-            replace: true,
+            replace: true
         };
     });

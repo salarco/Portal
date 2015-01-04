@@ -8,6 +8,6 @@
                 elementConfigurator.addElementFunctions($scope, $element);
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
-            replace: true,
+            replace: true
         };
     });

@@ -9,6 +9,6 @@
                 elementConfigurator.addContainerFunctions($scope, $element);
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
-            replace: true,
+            replace: true
         };
     });

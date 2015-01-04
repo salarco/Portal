@@ -21,6 +21,6 @@
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-column.html",
-            replace: true,
+            replace: true
         };
     });
