@@ -113,8 +113,6 @@
     <Content Include="Scripts\Lib\angular-sanitize.js" />
     <Content Include="Scripts\Lib\angular-sortable-view.js" />
     <Content Include="Scripts\Lib\angular.js" />
-    <Content Include="Scripts\Lib\bootstrap.js" />
-    <Content Include="Scripts\Lib\bootstrap.min.js" />
     <Content Include="Scripts\Lib\underscore.js" />
     <Content Include="Scripts\Models.js">
       <DependentUpon>Models.js.bundle</DependentUpon>
@@ -145,18 +143,15 @@
       <DependentUpon>Models.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\_references.js" />
-    <Content Include="Styles\Lib\bootstrap-theme.css" />
-    <Content Include="Styles\Lib\bootstrap-theme.min.css" />
-    <Content Include="Styles\Lib\bootstrap.css" />
-    <Content Include="Styles\Lib\bootstrap.min.css" />
+    <Content Include="Styles\Lib\Bootstrap\bootstrap.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\Lib\Bootstrap\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Styles\Lib\font-awesome.css" />
     <Content Include="Styles\Lib\font-awesome.min.css" />
     <Content Include="Styles\Lib\fontawesome-webfont.svg" />
-    <Content Include="Styles\Lib\glyphicons-halflings-regular.svg" />
-    <Content Include="Styles\Lib\jquery-ui.css" />
-    <Content Include="Styles\Lib\jquery-ui.min.css" />
-    <Content Include="Styles\Lib\jquery-ui.structure.css" />
-    <Content Include="Styles\Lib\jquery-ui.structure.min.css" />
     <Content Include="Styles\menu.layouts-admin.css" />
     <Content Include="Styles\menu.elements.png" />
     <Content Include="Styles\parts-layout-edit.css" />
@@ -249,12 +244,37 @@
     <Content Include="Styles\Lib\fontawesome-webfont.ttf" />
     <Content Include="Styles\Lib\fontawesome-webfont.woff" />
     <Content Include="Styles\Lib\FontAwesome.otf" />
-    <Content Include="Styles\Lib\glyphicons-halflings-regular.eot" />
-    <Content Include="Styles\Lib\glyphicons-halflings-regular.ttf" />
-    <Content Include="Styles\Lib\glyphicons-halflings-regular.woff" />
     <Content Include="Styles\Styles.css.map" />
     <Content Include="Styles\Styles.less" />
     <Content Include="Templates\Web.config" />
+    <Content Include="Styles\Lib\Bootstrap\bootstrap.less" />
+    <Content Include="Styles\Lib\Bootstrap\grid.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\background-variant.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\border-radius.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\center-block.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\clearfix.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\gradients.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\grid-framework.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\grid.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\hide-text.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\image.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\labels.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\opacity.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\reset-filter.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\resize.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\size.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\tab-focus.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\text-overflow.less" />
+    <Content Include="Styles\Lib\Bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Styles\Lib\Bootstrap\scaffolding.less" />
+    <Content Include="Styles\Lib\Bootstrap\utilities.less" />
+    <Content Include="Styles\Lib\Bootstrap\variables.less" />
+    <Content Include="Styles\Lib\Bootstrap\bootstrap.css.map">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
