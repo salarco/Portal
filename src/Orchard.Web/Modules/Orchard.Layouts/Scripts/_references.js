@@ -3,7 +3,6 @@
 /// <reference path="democonfig.js" />
 /// <reference path="demodata.js" />
 /// <reference path="designer.canvas.js" />
-/// <reference path="designer.grid.js" />
 /// <reference path="designer.host.js" />
 /// <reference path="designer.toolbar.js" />
 /// <reference path="dialog.js" />
