@@ -147,34 +147,34 @@ Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>").Text;
                             "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
                             "\"elements\": [{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"state\": \"ColumnSpan=12\"," +
+                                "\"data\": \"ColumnSpan=12\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"state\": \"Content=" + Encode(text) + "\"" +
+                                    "\"data\": \"Content=" + Encode(text) + "\"" +
                                 "}]" +
                             "}]" +
                         "},{" +
                             "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
                             "\"elements\": [{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"state\": \"ColumnSpan=4\"," +
+                                "\"data\": \"ColumnSpan=4\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"state\": \"Content=" + Encode(asideFirstText) + "\"" +
+                                    "\"data\": \"Content=" + Encode(asideFirstText) + "\"" +
                                 "}]" +
                             "},{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"state\": \"ColumnSpan=4\"," +
+                                "\"data\": \"ColumnSpan=4\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"state\": \"Content=" + Encode(asideSecondText) + "\"" +
+                                    "\"data\": \"Content=" + Encode(asideSecondText) + "\"" +
                                 "}]" +
                             "},{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"state\": \"ColumnSpan=4\"," +
+                                "\"data\": \"ColumnSpan=4\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"state\": \"Content=" + Encode(asideThirdText) + "\"" +
+                                    "\"data\": \"Content=" + Encode(asideThirdText) + "\"" +
                                 "}]" +
                             "}]" +
                         "}]" +
@@ -186,7 +186,7 @@ Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>").Text;
                         "{\"elements\": [" +
                             "{" +
                               "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                              "\"state\": \"Content=" + Encode(Text) + "\"" +
+                              "\"data\": \"Content=" + Encode(Text) + "\"" +
                             "}" +
                           "]}";
                 }
@@ -202,7 +202,7 @@ Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>").Text;
             // Check if we have a LayoutPart attached of type "LayoutPart". If Layouts is disabled, then the type would be "ContentPart".
             // This happens when the user executed the Core recipe, which does not enable the Layouts feature.
             if (layoutPart != null && layoutPart.GetType().Name == "LayoutPart")
-                layoutPart.LayoutState = layout;
+                layoutPart.LayoutData = layout;
 
             if (Publish) {
                 _contentManager.Publish(page);
