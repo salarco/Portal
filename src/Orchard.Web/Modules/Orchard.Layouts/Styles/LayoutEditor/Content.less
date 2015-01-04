@@ -14,13 +14,13 @@
             }
         }
 
-        &.layout-element-active, &.layout-element-selected
+        &.layout-element-active, &.layout-element-focused
         {
             padding: @content-padding - 2px;
         }
     }
 
-    .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+    .layout-element-focused > .layout-child-wrapper > .layout-content:not(.layout-element-active) {
             padding: @content-padding - 1px;
     }
 }

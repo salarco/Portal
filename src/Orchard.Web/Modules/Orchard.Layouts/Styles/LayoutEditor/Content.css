@@ -8,10 +8,10 @@
   margin-bottom: 0;
 }
 .layout-editor-wrapper .layout-content.layout-element-active,
-.layout-editor-wrapper .layout-content.layout-element-selected {
+.layout-editor-wrapper .layout-content.layout-element-focused {
   padding: 0px;
 }
-.layout-editor-wrapper .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+.layout-editor-wrapper .layout-element-focused > .layout-child-wrapper > .layout-content:not(.layout-element-active) {
   padding: 1px;
 }
 /*# sourceMappingURL=Content.css.map */

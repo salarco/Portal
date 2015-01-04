@@ -9,13 +9,13 @@
             margin-top: @content-spacing;
         }
 
-        &.layout-element-active, &.layout-element-selected 
+        &.layout-element-active, &.layout-element-focused
         {
             padding: @container-padding - 2px;
         }
     }
 
-    .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+    .layout-element-focused > .layout-child-wrapper > .layout-container:not(.layout-element-active) {
             padding: @container-padding - 1px;
     }
 }
