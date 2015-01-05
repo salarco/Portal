@@ -86,9 +86,6 @@
 .layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled:hover {
   background-color: #648721;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
-  border: 1px dashed rgba(128, 128, 128, 0.6);
-}
 .layout-editor-wrapper .layout-element-selected {
   background-color: rgba(100, 135, 33, 0.08);
 }

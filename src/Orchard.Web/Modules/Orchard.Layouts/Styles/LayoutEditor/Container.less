@@ -13,9 +13,20 @@
         {
             padding: @container-padding - 2px;
         }
+
+        &.layout-element-focused > .layout-element-wrapper > .layout-children {
+            > .layout-element:not(.layout-element-active) {
+                border: 1px dashed fade(@gray-border, 60%);
+            }
+
+            > .layout-element + .layout-element:not(.layout-element-active) {
+                border-top: 0;
+                padding-top: @container-padding;
+            }
+        }
     }
 
     .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-container:not(.layout-element-active) {
-            padding: @container-padding - 1px;
+        padding: @container-padding - 1px;
     }
 }

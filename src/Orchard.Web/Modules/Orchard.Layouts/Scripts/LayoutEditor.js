@@ -17,9 +17,8 @@ angular
         return {
 
             addElementFunctions: function ($scope, $element) {
-                $($element.find(".layout-panel")).click(function (e) {
+                $element.find(".layout-panel").click(function (e) {
                     e.stopPropagation();
-                    console.log("Stopping");
                 });
             },
 

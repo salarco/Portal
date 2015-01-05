@@ -11,5 +11,17 @@
                 bottom: 0;
             }
         }
+
+        &.layout-element-focused > .layout-element-wrapper > .layout-children {
+            > .layout-element:not(.layout-element-active) {
+                border: 1px dashed fade(@gray-border, 60%) !important;
+                padding: @container-padding - 1px !important;
+            }
+
+            > .layout-element + .layout-element:not(.layout-element-active) {
+                border-left: 0 !important;
+                padding-left: @container-padding !important;
+            }
+        }
     }
 }
