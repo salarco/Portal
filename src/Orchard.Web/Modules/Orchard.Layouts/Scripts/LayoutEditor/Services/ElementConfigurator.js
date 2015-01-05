@@ -16,8 +16,8 @@
                         var container = $scope.element;
                         var newElement = LayoutEditor.Content.from({
                             contentType: args.element.typeName,
-                            contentTypeLabel: args.element.contentTypeLabel,
-                            contentTypeClass: args.element.contentTypeClass,
+                            contentTypeLabel: args.element.typeLabel,
+                            contentTypeClass: args.element.typeClass,
                             data: decodeURIComponent(args.element.data),
                             html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
                         });

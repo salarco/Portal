@@ -219,7 +219,7 @@ var LayoutEditor;
         this.activeElement = null;
         this.focusedElement = null;
         this.setCanvas(this);
-
+        
         this.toObject = function () {
             var result = this.elementToObject();
             result.children = this.childrenToObject();
