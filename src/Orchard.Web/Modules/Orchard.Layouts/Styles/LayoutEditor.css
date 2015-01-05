@@ -58,7 +58,7 @@
   padding: 2px;
 }
 .layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup > *:first-child {
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 .layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup > *:last-child {
   margin-bottom: 0;

@@ -159,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\Sites.config" />
+    <Content Include="Modules\Orchard.Layouts\Scripts\LayoutEditor.js.bundle" />
+    <Content Include="Modules\Orchard.Layouts\Scripts\Models.js.bundle" />
+    <Content Include="Modules\Orchard.Layouts\Styles\LayoutEditor.css.bundle" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

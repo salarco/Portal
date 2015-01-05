@@ -10,13 +10,13 @@
     </settings>
     <!--The order of the <file> elements determines the order of the files in the bundle.-->
     <files>
-        <file>/Scripts/Models/Helpers.js</file>
-        <file>/Scripts/Models/Element.js</file>
-        <file>/Scripts/Models/Container.js</file>
-        <file>/Scripts/Models/Canvas.js</file>
-        <file>/Scripts/Models/Grid.js</file>
-        <file>/Scripts/Models/Row.js</file>
-        <file>/Scripts/Models/Column.js</file>
-        <file>/Scripts/Models/Content.js</file>
+        <file>Models/Helpers.js</file>
+        <file>Models/Element.js</file>
+        <file>Models/Container.js</file>
+        <file>Models/Canvas.js</file>
+        <file>Models/Grid.js</file>
+        <file>Models/Row.js</file>
+        <file>Models/Column.js</file>
+        <file>Models/Content.js</file>
     </files>
 </bundle>

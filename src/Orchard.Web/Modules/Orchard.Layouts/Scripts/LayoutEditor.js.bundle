@@ -10,15 +10,15 @@
     </settings>
     <!--The order of the <file> elements determines the order of the files in the bundle.-->
     <files>
-        <file>/Scripts/LayoutEditor/Module.js</file>
-        <file>/Scripts/LayoutEditor/Services/BaseUrl.js</file>
-        <file>/Scripts/LayoutEditor/Services/ElementConfigurator.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Canvas.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Child.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Column.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Content.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Grid.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Popup.js</file>
-        <file>/Scripts/LayoutEditor/Directives/Row.js</file>
+        <file>LayoutEditor/Module.js</file>
+        <file>LayoutEditor/Services/BaseUrl.js</file>
+        <file>LayoutEditor/Services/ElementConfigurator.js</file>
+        <file>LayoutEditor/Directives/Canvas.js</file>
+        <file>LayoutEditor/Directives/Child.js</file>
+        <file>LayoutEditor/Directives/Column.js</file>
+        <file>LayoutEditor/Directives/Content.js</file>
+        <file>LayoutEditor/Directives/Grid.js</file>
+        <file>LayoutEditor/Directives/Popup.js</file>
+        <file>LayoutEditor/Directives/Row.js</file>
     </files>
 </bundle>

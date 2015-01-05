@@ -12,12 +12,12 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/Styles/LayoutEditor/Canvas.css</file>
-    <file>/Styles/LayoutEditor/Column.css</file>
-    <file>/Styles/LayoutEditor/Container.css</file>
-    <file>/Styles/LayoutEditor/Content.css</file>
-    <file>/Styles/LayoutEditor/Element.css</file>
-    <file>/Styles/LayoutEditor/Popup.css</file>
-    <file>/Styles/LayoutEditor/Row.css</file>
+    <file>LayoutEditor/Canvas.css</file>
+    <file>LayoutEditor/Column.css</file>
+    <file>LayoutEditor/Container.css</file>
+    <file>LayoutEditor/Content.css</file>
+    <file>LayoutEditor/Element.css</file>
+    <file>LayoutEditor/Popup.css</file>
+    <file>LayoutEditor/Row.css</file>
   </files>
 </bundle>

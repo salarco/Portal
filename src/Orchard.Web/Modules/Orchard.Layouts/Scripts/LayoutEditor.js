@@ -1,6 +1,6 @@
-﻿///#source 1 1 /Scripts/LayoutEditor/Module.js
+﻿///#source 1 1 LayoutEditor/Module.js
 angular.module("LayoutEditor", ["ngSanitize", "ngResource", "ui.sortable"]);
-///#source 1 1 /Scripts/LayoutEditor/Services/BaseUrl.js
+///#source 1 1 LayoutEditor/Services/BaseUrl.js
 angular
     .module("LayoutEditor")
     .factory("baseUrl", function () {
@@ -10,7 +10,7 @@ angular
             }
         }
     });
-///#source 1 1 /Scripts/LayoutEditor/Services/ElementConfigurator.js
+///#source 1 1 LayoutEditor/Services/ElementConfigurator.js
 angular
     .module("LayoutEditor")
     .factory("elementConfigurator", function () {
@@ -99,7 +99,7 @@ angular
             }
         }
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Canvas.js
+///#source 1 1 LayoutEditor/Directives/Canvas.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
@@ -137,7 +137,7 @@ angular
             }
         };
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Child.js
+///#source 1 1 LayoutEditor/Directives/Child.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutChild", function ($compile) {
@@ -151,7 +151,7 @@ angular
             }
         };
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Column.js
+///#source 1 1 LayoutEditor/Directives/Column.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutColumn", function ($compile, elementConfigurator, baseUrl) {
@@ -179,7 +179,7 @@ angular
             replace: true
         };
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Content.js
+///#source 1 1 LayoutEditor/Directives/Content.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutContent", function (elementConfigurator, baseUrl) {
@@ -200,7 +200,7 @@ angular
             replace: true
         };
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Grid.js
+///#source 1 1 LayoutEditor/Directives/Grid.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutGrid", function ($compile, elementConfigurator, baseUrl) {
@@ -216,7 +216,7 @@ angular
             replace: true
         };
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Popup.js
+///#source 1 1 LayoutEditor/Directives/Popup.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutPopup", function ($compile) {
@@ -246,7 +246,7 @@ angular
             }
         };
     });
-///#source 1 1 /Scripts/LayoutEditor/Directives/Row.js
+///#source 1 1 LayoutEditor/Directives/Row.js
 angular
     .module("LayoutEditor")
     .directive("orcLayoutRow", function ($compile, elementConfigurator, baseUrl) {

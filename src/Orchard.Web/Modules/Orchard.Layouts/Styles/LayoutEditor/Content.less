@@ -7,7 +7,7 @@
         > .layout-element-wrapper {
             .layout-content-markup {
                 > *:first-child {
-                    margin-top: 0;
+                    margin-top: 0 !important; // Important because site.css of the admin theme styles heading margins with a very high specificity.
                 }
 
                 > *:last-child {
