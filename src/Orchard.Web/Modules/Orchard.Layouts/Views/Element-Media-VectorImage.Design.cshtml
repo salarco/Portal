@@ -25,7 +25,4 @@
         tagBuilder.Attributes["height"] = element.Height.ToString();
     }
 }
-<div class="element-component">
-    <div>@T("Vector Image")</div>
-    @Html.Raw(tagBuilder.ToString(TagRenderMode.SelfClosing))
-</div>
+@Html.Raw(tagBuilder.ToString(TagRenderMode.SelfClosing))

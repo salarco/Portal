@@ -345,6 +345,13 @@
       <DependentUpon>Row.css</DependentUpon>
     </Content>
     <Content Include="Styles\LayoutEditor.css.bundle" />
+    <Content Include="Views\Element-Content-Html.Design.cshtml" />
+    <Content Include="Views\Element-Content-ContentItem.Design.cshtml" />
+    <Content Include="Views\Element-Content-Markdown.Design.cshtml" />
+    <Content Include="Views\Element-Content-Paragraph.Design.cshtml" />
+    <Content Include="Views\Element-Content-Text.Design.cshtml" />
+    <Content Include="Views\Element-ContentField.Design.cshtml" />
+    <Content Include="Views\Element-Media-MediaItem.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

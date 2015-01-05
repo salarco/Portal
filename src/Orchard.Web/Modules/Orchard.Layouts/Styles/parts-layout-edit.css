@@ -1,7 +1,16 @@
-﻿.layout-designer .layout-designer-host {
+﻿.layout-editor-wrapper img
+{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.layout-designer .layout-designer-host
+{
     border: 1px dotted #bdbcbc;
 }
 
-textarea.large {
+textarea.large
+{
     width: 99%;
 }

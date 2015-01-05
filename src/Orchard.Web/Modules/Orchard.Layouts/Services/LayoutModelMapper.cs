@@ -172,7 +172,7 @@ namespace Orchard.Layouts.Services {
                 id = common.Id,
                 cssClasses = common.CssClass,
                 cssStyles = common.InlineStyle,
-                html = _shapeDisplay.Display(_elementDisplay.DisplayElement(element, content: describeContext.Content))
+                html = _shapeDisplay.Display(_elementDisplay.DisplayElement(element, content: describeContext.Content, displayType: "Design"))
             };
         }
     }
