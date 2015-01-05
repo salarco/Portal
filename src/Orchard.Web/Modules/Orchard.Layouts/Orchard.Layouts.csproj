@@ -111,8 +111,8 @@
     <Content Include="Scripts\LayoutEditor\Services\ElementConfigurator.js" />
     <Content Include="Scripts\Lib\angular-resource.js" />
     <Content Include="Scripts\Lib\angular-sanitize.js" />
-    <Content Include="Scripts\Lib\angular-sortable-view.js" />
     <Content Include="Scripts\Lib\angular.js" />
+    <Content Include="Scripts\Lib\sortable.js" />
     <Content Include="Scripts\Lib\underscore.js" />
     <Content Include="Scripts\Models.js">
       <DependentUpon>Models.js.bundle</DependentUpon>

@@ -1,1 +1,1 @@
-﻿angular.module("LayoutEditor", ["ngSanitize", "ngResource"]);
+﻿angular.module("LayoutEditor", ["ngSanitize", "ngResource", "ui.sortable"]);

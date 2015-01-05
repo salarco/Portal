@@ -1,5 +1,5 @@
 ﻿///#source 1 1 /Scripts/LayoutEditor/Module.js
-angular.module("LayoutEditor", ["ngSanitize", "ngResource"]);
+angular.module("LayoutEditor", ["ngSanitize", "ngResource", "ui.sortable"]);
 ///#source 1 1 /Scripts/LayoutEditor/Services/BaseUrl.js
 angular
     .module("LayoutEditor")
@@ -68,6 +68,12 @@ angular
                     // contentType.label == "Paragraph"
                     // contentType.id == "Orchard.Layouts.Elements.Paragraph"
                     console.log(contentType);
+                };
+
+                $scope.sortableOptions = {
+                    cursor: "move",
+                    delay: 150,
+                    distance: 5
                 };
             }
         }

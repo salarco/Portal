@@ -49,9 +49,11 @@
     <!--<div class="layout-container-children-placeholder" ng-if="element.children.length === 0">
         This column is empty. Click the 'Add' icon to add elements to the column.
     </div>-->
-    <div class="layout-column-resize-bar layout-column-resize-bar-left"></div>
-    <div class="layout-column-resize-bar layout-column-resize-bar-right"></div>
-    <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
-        <orc-layout-child element="child" />
+    <!--<div class="layout-column-resize-bar layout-column-resize-bar-left"></div>
+    <div class="layout-column-resize-bar layout-column-resize-bar-right"></div>-->
+    <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
+        <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
+            <orc-layout-child element="child" />
+        </div>
     </div>
 </div>
