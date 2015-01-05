@@ -3,7 +3,7 @@
   background-color: #f0f0f0;
   font-size: 14px;
 }
-.layout-editor-wrapper .layout-canvas > .layout-container-children-placeholder {
+.layout-editor-wrapper .layout-canvas > .layout-element-wrapper > .layout-container-children-placeholder {
   min-height: 300px;
 }
 /*# sourceMappingURL=Canvas.css.map */

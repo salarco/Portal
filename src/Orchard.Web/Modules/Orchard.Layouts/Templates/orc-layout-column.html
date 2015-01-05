@@ -1,4 +1,4 @@
-﻿<div class="layout-element layout-container layout-column col-xs-{{element.width}} col-xs-offset-{{element.offset}}" ng-class="getClasses()" ng-mouseenter="setIsActive()" ng-mouseleave="clearIsActive()" ng-click="setIsFocused($event)">
+﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">Column ({{element.width}})</li>
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit column properties">
@@ -52,7 +52,7 @@
     <!--<div class="layout-column-resize-bar layout-column-resize-bar-left"></div>
     <div class="layout-column-resize-bar layout-column-resize-bar-right"></div>-->
     <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-        <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
+        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="setIsActive(child)" ng-mouseleave="clearIsActive(child)" ng-click="setIsFocused(child, $event)">
             <orc-layout-child element="child" />
         </div>
     </div>

@@ -13,55 +13,57 @@
             margin-left: 0;
         }
 
-        > .layout-container-children-placeholder {
-            font-size: @font-size - 1;
-            font-style: italic;
-            opacity: 0.8;
-        }
-
-        > .layout-panel {
-            display: none; // Shown only in active or focused states.
-            position: absolute;
-            margin: 0;
-            z-index: 20;
-            height: 25px;
-            padding: 0 6px;
-            list-style: none;
-            white-space: nowrap;
-            line-height: 25px;
-            vertical-align: middle;
-
-            > .layout-panel-item {
-                display: inline-block;
-                height: 25px;
-                padding: 1px 6px 0;
-            }
-
-            > .layout-panel-label {
+        > .layout-element-wrapper {
+            > .layout-container-children-placeholder {
                 font-size: @font-size - 1;
+                font-style: italic;
+                opacity: 0.8;
             }
 
-            > .layout-panel-action {
-                display: none; // Shown only in focused state.
+            > .layout-panel {
+                display: none; // Shown only in active or focused states.
+                position: absolute;
+                margin: 0;
+                z-index: 20;
+                height: 25px;
+                padding: 0 6px;
+                list-style: none;
+                white-space: nowrap;
+                line-height: 25px;
+                vertical-align: middle;
+
+                > .layout-panel-item {
+                    display: inline-block;
+                    height: 25px;
+                    padding: 1px 6px 0;
+                }
+
+                > .layout-panel-label {
+                    font-size: @font-size - 1;
+                }
+
+                > .layout-panel-action {
+                    display: none; // Shown only in focused state.
+                    width: 28px;
+                    cursor: pointer;
+                    text-align: center;
+                }
+            }
+
+            > .layout-panel-main {
+                top: -27px;
+                left: -2px;
+            }
+
+            > .layout-panel-add {
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 width: 28px;
-                cursor: pointer;
+                padding: 0;
                 text-align: center;
             }
-        }
-
-        > .layout-panel-main {
-            top: -27px;
-            left: -2px;
-        }
-
-        > .layout-panel-add {
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 28px;
-            padding: 0;
-            text-align: center;
         }
     }
 
@@ -75,7 +77,7 @@
 
         border-color: @active-highlight;
 
-        > .layout-panel-main {
+        > .layout-element-wrapper > .layout-panel-main {
             display: block; // To reveal.
             z-index: 30;
             background-color: @active-highlight;
@@ -88,7 +90,7 @@
 
         border-color: @focused-highlight;
 
-        > .layout-panel {
+        > .layout-element-wrapper > .layout-panel {
             display: block; // To reveal.
             background-color: @focused-highlight;
             color: @focused-text;
@@ -111,7 +113,7 @@
         }
     }
 
-    .layout-element-focused > .layout-child-wrapper > .layout-element:not(.layout-element-active) {
+    .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
         border: 1px dashed fade(@gray-border, 60%);
     }
 

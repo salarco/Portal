@@ -5,7 +5,7 @@
         padding: @container-padding;
         
         // All adjacent child wrappers which wrap a non-container element need some space between.
-        > .layout-child-wrapper:not([data-orc-forcontainer="true"]) + .layout-child-wrapper:not([data-orc-forcontainer="true"]) {
+        > layout-element-wrapper > .layout-children > .layout-element:not(.layout-container) + .layout-element:not(.layout-container) {
             margin-top: @content-spacing;
         }
 
@@ -15,7 +15,7 @@
         }
     }
 
-    .layout-element-focused > .layout-child-wrapper > .layout-container:not(.layout-element-active) {
+    .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-container:not(.layout-element-active) {
             padding: @container-padding - 1px;
     }
 }

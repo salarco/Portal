@@ -7,6 +7,7 @@
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "y";
                 $scope.split = function (e) {
                     $scope.element.split();
                     e.stopPropagation();

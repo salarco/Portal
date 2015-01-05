@@ -4,13 +4,15 @@
     .layout-content {
         padding: @content-padding;
 
-        .layout-content-markup {
-            > *:first-child {
-                margin-top: 0;
-            }
+        > .layout-element-wrapper {
+            .layout-content-markup {
+                > *:first-child {
+                    margin-top: 0;
+                }
 
-            > *:last-child {
-                margin-bottom: 0;
+                > *:last-child {
+                    margin-bottom: 0;
+                }
             }
         }
 
@@ -20,7 +22,7 @@
         }
     }
 
-    .layout-element-focused > .layout-child-wrapper > .layout-content:not(.layout-element-active) {
+    .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-content:not(.layout-element-active) {
             padding: @content-padding - 1px;
     }
 }

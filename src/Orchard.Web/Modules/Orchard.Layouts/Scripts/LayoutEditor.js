@@ -15,34 +15,8 @@ angular
     .module("LayoutEditor")
     .factory("elementConfigurator", function () {
         return {
+
             addElementFunctions: function ($scope, $element) {
-                $scope.setIsActive = function () {
-                    $scope.element.setIsActive(true);
-                };
-
-                $scope.clearIsActive = function () {
-                    $scope.element.setIsActive(false);
-                };
-
-                $scope.setIsFocused = function (e) {
-                    $scope.element.setIsFocused();
-                    e.stopPropagation();
-                };
-
-                $scope.getClasses = function () {
-                    if (!$scope.element)
-                        return null;
-
-                    var result = [];
-                    if ($scope.element.getIsActive())
-                        result.push("layout-element-active");
-                    if ($scope.element.getIsFocused())
-                        result.push("layout-element-focused");
-                    if ($scope.element.getIsSelected())
-                        result.push("layout-element-selected");
-                    return result;
-                };
-
                 $scope.delete = function (e) {
                     $scope.element.delete();
                     e.stopPropagation();
@@ -58,6 +32,7 @@ angular
                     e.stopPropagation();
                 }
             },
+
             addContainerFunctions: function ($scope, $element) {
                 $scope.invokeAddOperation = function (operation, e) {
                     operation.invoke();
@@ -75,6 +50,45 @@ angular
                     delay: 150,
                     distance: 5
                 };
+
+                $scope.setIsActive = function (child) {
+                    child.setIsActive(true);
+                };
+
+                $scope.clearIsActive = function (child) {
+                    child.setIsActive(false);
+                };
+
+                $scope.setIsFocused = function (child, e) {
+                    child.setIsFocused();
+                    e.stopPropagation();
+                };
+
+                $scope.getClasses = function (child) {
+                    var result = ["layout-element"];
+
+                    if (!!child.children)
+                        result.push("layout-container");
+
+                    result.push("layout-" + child.type.toLowerCase());
+
+                    // TODO: Move these to either the Column directive or the Column model class.
+                    if (child.type == "Row")
+                        result.push("row");
+                    if (child.type == "Column") {
+                        result.push("col-xs-" + child.width);
+                        result.push("col-xs-offset-" + child.offset);
+                    }
+
+                    if (child.getIsActive())
+                        result.push("layout-element-active");
+                    if (child.getIsFocused())
+                        result.push("layout-element-focused");
+                    if (child.getIsSelected())
+                        result.push("layout-element-selected");
+
+                    return result;
+                };
             }
         }
     });
@@ -82,7 +96,6 @@ angular
 angular
     .module("LayoutEditor")
     .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
-
         return {
             restrict: "E",
             scope: {},
@@ -93,6 +106,7 @@ angular
                     $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "y";
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,
@@ -131,6 +145,7 @@ angular
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "y";
                 $scope.split = function (e) {
                     $scope.element.split();
                     e.stopPropagation();
@@ -176,6 +191,7 @@ angular
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "y";
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
             replace: true
@@ -221,6 +237,8 @@ angular
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "x";
+                $scope.sortableOptions["ui-floating"] = true;
                 $scope.addColumn = function (e) {
                     $scope.element.addColumn();
                     e.stopPropagation();

@@ -1,4 +1,4 @@
-﻿<div class="layout-element layout-container layout-grid" ng-class="getClasses()" ng-mouseenter="setIsActive()" ng-mouseleave="clearIsActive()" ng-click="setIsFocused($event)">
+﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">Grid</li>
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit grid properties">
@@ -35,7 +35,7 @@
         This grid is empty. Click the 'Add' icon to add rows to the grid.
     </div>-->
     <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-        <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
+        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="setIsActive(child)" ng-mouseleave="clearIsActive(child)" ng-click="setIsFocused(child, $event)">
             <orc-layout-child element="child" />
         </div>
     </div>

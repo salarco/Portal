@@ -1,7 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
     .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
-
         return {
             restrict: "E",
             scope: {},
@@ -12,6 +11,7 @@
                     $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "y";
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,

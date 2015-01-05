@@ -8,12 +8,12 @@
 .layout-editor-wrapper .layout-element:not(.layout-column) {
   margin-left: 0;
 }
-.layout-editor-wrapper .layout-element > .layout-container-children-placeholder {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-container-children-placeholder {
   font-size: 13px;
   font-style: italic;
   opacity: 0.8;
 }
-.layout-editor-wrapper .layout-element > .layout-panel {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-panel {
   display: none;
   position: absolute;
   margin: 0;
@@ -25,25 +25,25 @@
   line-height: 25px;
   vertical-align: middle;
 }
-.layout-editor-wrapper .layout-element > .layout-panel > .layout-panel-item {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-panel > .layout-panel-item {
   display: inline-block;
   height: 25px;
   padding: 1px 6px 0;
 }
-.layout-editor-wrapper .layout-element > .layout-panel > .layout-panel-label {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-panel > .layout-panel-label {
   font-size: 13px;
 }
-.layout-editor-wrapper .layout-element > .layout-panel > .layout-panel-action {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-panel > .layout-panel-action {
   display: none;
   width: 28px;
   cursor: pointer;
   text-align: center;
 }
-.layout-editor-wrapper .layout-element > .layout-panel-main {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-panel-main {
   top: -27px;
   left: -2px;
 }
-.layout-editor-wrapper .layout-element > .layout-panel-add {
+.layout-editor-wrapper .layout-element > .layout-element-wrapper > .layout-panel-add {
   margin: 0 auto;
   left: 0;
   right: 0;
@@ -60,7 +60,7 @@
 .layout-editor-wrapper .layout-element-active {
   border-color: rgba(104, 104, 104, 0.1);
 }
-.layout-editor-wrapper .layout-element-active > .layout-panel-main {
+.layout-editor-wrapper .layout-element-active > .layout-element-wrapper > .layout-panel-main {
   display: block;
   z-index: 30;
   background-color: rgba(104, 104, 104, 0.1);
@@ -68,25 +68,25 @@
 .layout-editor-wrapper .layout-element-focused {
   border-color: #648721;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-panel {
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel {
   display: block;
   background-color: #648721;
   color: #fefefe;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-panel > .layout-panel-action {
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action {
   display: inline-block;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-panel > .layout-panel-action:hover {
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action:hover {
   background-color: #82b02b;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-panel > .layout-panel-action.disabled {
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled {
   cursor: default;
   color: rgba(254, 254, 254, 0.4);
 }
-.layout-editor-wrapper .layout-element-focused > .layout-panel > .layout-panel-action.disabled:hover {
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled:hover {
   background-color: #648721;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-child-wrapper > .layout-element:not(.layout-element-active) {
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
   border: 1px dashed rgba(128, 128, 128, 0.6);
 }
 .layout-editor-wrapper .layout-element-selected {

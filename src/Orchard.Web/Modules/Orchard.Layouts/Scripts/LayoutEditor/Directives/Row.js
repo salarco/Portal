@@ -7,6 +7,8 @@
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
+                $scope.sortableOptions["axis"] = "x";
+                $scope.sortableOptions["ui-floating"] = true;
                 $scope.addColumn = function (e) {
                     $scope.element.addColumn();
                     e.stopPropagation();

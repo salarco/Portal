@@ -1,44 +1,46 @@
 ﻿<div class="layout-editor-wrapper">
-    <div class="layout-element layout-container layout-canvas" ng-class="getClasses()" ng-mouseenter="setIsActive()" ng-mouseleave="clearIsActive()" ng-click="setIsFocused($event)">
-        <ul class="layout-panel layout-panel-main">
-            <li class="layout-panel-item layout-panel-label">Canvas</li>
-            <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit canvas properties">
-                <i class="fa fa-edit"></i>
-                <ul class="layout-popup layout-popup-edit" orc-layout-popup>
-                    <li class="layout-popup-item layout-popup-input">
-                        <label>ID:</label>
-                        <input type="text" ng-model="element.id" />
-                    </li>
-                    <li class="layout-popup-item layout-popup-input">
-                        <label>CSS classes:</label>
-                        <input type="text" ng-model="element.cssClasses" />
-                    </li>
-                    <li class="layout-popup-item layout-popup-input">
-                        <label>CSS styles:</label>
-                        <input type="text" ng-model="element.cssStyles" />
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="layout-panel layout-panel-add">
-            <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to canvas">
-                <i class="fa fa-plus"></i>
-                <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
-                    <div class="layout-popup-flex">
-                        <div class="layout-popup-column" ng-repeat="category in element.canvas.config.categories">
-                            <li class="layout-popup-item layout-popup-label">{{::category.name}}</li>
-                            <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType, $event)">{{::contentType.label}}</li>
+    <div class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="setIsActive(element)" ng-mouseleave="clearIsActive(element)" ng-click="setIsFocused(element, $event)">
+        <div class="layout-element-wrapper">
+            <ul class="layout-panel layout-panel-main">
+                <li class="layout-panel-item layout-panel-label">Canvas</li>
+                <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit canvas properties">
+                    <i class="fa fa-edit"></i>
+                    <ul class="layout-popup layout-popup-edit" orc-layout-popup>
+                        <li class="layout-popup-item layout-popup-input">
+                            <label>ID:</label>
+                            <input type="text" ng-model="element.id" />
+                        </li>
+                        <li class="layout-popup-item layout-popup-input">
+                            <label>CSS classes:</label>
+                            <input type="text" ng-model="element.cssClasses" />
+                        </li>
+                        <li class="layout-popup-item layout-popup-input">
+                            <label>CSS styles:</label>
+                            <input type="text" ng-model="element.cssStyles" />
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="layout-panel layout-panel-add">
+                <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to canvas">
+                    <i class="fa fa-plus"></i>
+                    <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
+                        <div class="layout-popup-flex">
+                            <div class="layout-popup-column" ng-repeat="category in element.canvas.config.categories">
+                                <li class="layout-popup-item layout-popup-label">{{::category.name}}</li>
+                                <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType, $event)">{{::contentType.label}}</li>
+                            </div>
                         </div>
-                    </div>
-                </ul>
-            </li>
-        </ul>
-        <div class="layout-container-children-placeholder" ng-if="element.children.length === 0">
-            This layout canvas is empty. Click the 'Add' icon to add elements to the layout.
-        </div>
-        <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-            <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
-                <orc-layout-child element="child" />
+                    </ul>
+                </li>
+            </ul>
+            <div class="layout-container-children-placeholder" ng-if="element.children.length === 0">
+                This layout canvas is empty. Click the 'Add' icon to add elements to the layout.
+            </div>
+            <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
+                <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="setIsActive(child)" ng-mouseleave="clearIsActive(child)" ng-click="setIsFocused(child, $event)">
+                    <orc-layout-child element="child" />
+                </div>
             </div>
         </div>
     </div>
