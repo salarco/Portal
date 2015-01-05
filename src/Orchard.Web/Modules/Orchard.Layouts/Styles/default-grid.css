@@ -233,6 +233,12 @@
     width: 91.66%;
 }
 
+.layout-content-image, .layout-content-vector {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 /* Bootstrap compatible spans */
 .span-1 { width: 8.33%; }
 .span-2 { width: 16.66%; }

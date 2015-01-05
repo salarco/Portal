@@ -169,7 +169,7 @@ namespace Orchard.Layouts.Services {
                 type = "Content",
                 contentType = element.Type,
                 contentTypeLabel = element.DisplayText.Text,
-                contentTypeClass = element.DisplayText.Text.HtmlClassify(),
+                contentTypeClass = String.Format("layout-content-{0}", element.DisplayText.Text.HtmlClassify()),
                 data = data,
                 id = common.Id,
                 cssClasses = common.CssClass,

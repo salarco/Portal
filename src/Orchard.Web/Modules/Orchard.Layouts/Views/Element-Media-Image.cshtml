@@ -14,5 +14,7 @@
     else {
         tagBuilder.Attributes["alt"] = T("Image not found").Text;
     }
+    
+    tagBuilder.AddCssClass("layout-content-image");
 }
 @Html.Raw(tagBuilder.ToString(TagRenderMode.SelfClosing))

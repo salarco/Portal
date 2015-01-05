@@ -11,8 +11,8 @@
 .layout-editor-wrapper .layout-content.layout-element-focused {
   padding: 0px;
 }
-.layout-editor-wrapper .layout-content.layout-content-image > img,
-.layout-editor-wrapper .layout-content.layout-content-vector-image > img {
+.layout-editor-wrapper .layout-content.layout-content-image > .layout-element-wrapper > .layout-content-markup > img,
+.layout-editor-wrapper .layout-content.layout-content-vector-image > .layout-element-wrapper > .layout-content-markup > img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -20,4 +20,3 @@
 .layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-content:not(.layout-element-active) {
   padding: 1px;
 }
-/*# sourceMappingURL=Content.css.map */
