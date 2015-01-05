@@ -33,7 +33,7 @@
                             data: decodeURIComponent(args.element.data),
                             html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
                         });
-                        container.children.push(newElement);
+                        container.addChild(newElement);
                         $scope.$apply();
                     });
                 };
