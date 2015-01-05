@@ -212,7 +212,6 @@
     <Content Include="Styles\remove.png" />
     <Content Include="Styles\dialog.css" />
     <Content Include="Styles\admin-dialog.css" />
-    <Content Include="Styles\layout-designer.css" />
     <Content Include="Styles\split-arrow-down.png" />
     <Content Include="Styles\split-arrow-up.png" />
     <Content Include="Templates\orc-layout-canvas.html" />
