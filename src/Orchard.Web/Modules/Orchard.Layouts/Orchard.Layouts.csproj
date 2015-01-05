@@ -232,12 +232,8 @@
     <Content Include="Views\EditorTemplates\Parts.Layout.cshtml" />
     <Content Include="Views\Element.Design.cshtml" />
     <Content Include="Views\Element.cshtml" />
-    <Content Include="Views\Element.DesignWrapper.cshtml" />
-    <Content Include="Views\Element-Layout-Row.Design.cshtml" />
     <Content Include="Views\Element\Edit.cshtml" />
-    <Content Include="Views\Element-Layout-Column.Design.cshtml" />
     <Content Include="Views\LayoutRoot.cshtml" />
-    <Content Include="Views\Element-Layout-Grid.Design.cshtml" />
     <Content Include="Views\Parts.Layout.cshtml" />
     <Content Include="Views\Element-Layout-Grid.cshtml" />
     <Content Include="Views\Element-Layout-Row.cshtml" />

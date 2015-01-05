@@ -12,6 +12,15 @@
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
+                $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
+                $scope.$root.editElement = function(elementType, elementData) {
+                    var host = $scope.$root.layoutDesignerHost;
+                    return host.editElement(elementType, elementData);
+                };
+                $scope.$root.addElement = function (elementType, elementLabel) {
+                    var host = $scope.$root.layoutDesignerHost;
+                    return host.addElement(elementType, elementLabel);
+                };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,

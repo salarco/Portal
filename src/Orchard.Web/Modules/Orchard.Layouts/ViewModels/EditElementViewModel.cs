@@ -13,6 +13,7 @@ namespace Orchard.Layouts.ViewModels {
         public string TypeName { get; set; }
         public LocalizedString DisplayText { get; set; }
         public string ElementData { get; set; }
+        public string ElementHtml { get; set; }
         public ILayoutAspect Layout { get; set; }
         public IList<string> Tabs { get; set; }
         public bool Submitted { get; set; }

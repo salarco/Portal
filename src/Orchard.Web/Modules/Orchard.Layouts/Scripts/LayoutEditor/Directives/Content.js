@@ -7,8 +7,11 @@
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 $scope.edit = function (e) {
-                    // SIPKE: This is where you invoke the edit dialog for the content element!
-                    console.log("Edit " + $scope.element.contentType);
+                    $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
+                        $scope.element.data = decodeURIComponent(args.element.data);
+                        $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));
+                        $scope.$apply();
+                    });
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",

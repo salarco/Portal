@@ -36,22 +36,6 @@ namespace Orchard.Layouts.Shapes {
         public void Discover(ShapeTableBuilder builder) {
             builder.Describe("Element").OnDisplaying(context => {
                 var element = (IElement)context.Shape.Element;
-                if (context.ShapeMetadata.DisplayType == "Design") {
-                    var descriptor = element.Descriptor;
-
-                    if (!(element is IContainer)) {
-                        context.ShapeMetadata.Wrappers.Add("Element_DesignWrapper");
-                    }
-
-                    // Inject client side json.
-                    context.Shape.ElementJson = JsonConvert.SerializeObject(new {
-                        typeName = descriptor.TypeName,
-                        displayText = descriptor.DisplayText.Text,
-                        data = element.Data.Serialize(),
-                        index = element.Index,
-                        isTemplated = element.IsTemplated
-                    });
-                }
 
                 // Tokenize common settings
                 var content = (ContentItem)context.Shape.ContentItem;

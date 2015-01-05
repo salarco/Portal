@@ -26,10 +26,16 @@
                 };
 
                 $scope.invokeAddContentElement = function (contentType, e) {
-                    // SIPKE: This is where you invoke the create dialog for the given contentType!
-                    // contentType.label == "Paragraph"
-                    // contentType.id == "Orchard.Layouts.Elements.Paragraph"
-                    console.log(contentType);
+                    $scope.$root.addElement(contentType.id).then(function (args) {
+                        var container = $scope.element;
+                        var newElement = LayoutEditor.Content.from({
+                            contentType: args.element.typeName,
+                            data: decodeURIComponent(args.element.data),
+                            html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
+                        });
+                        container.children.push(newElement);
+                        $scope.$apply();
+                    });
                 };
 
                 $scope.sortableOptions = {

@@ -39,10 +39,16 @@ angular
                 };
 
                 $scope.invokeAddContentElement = function (contentType, e) {
-                    // SIPKE: This is where you invoke the create dialog for the given contentType!
-                    // contentType.label == "Paragraph"
-                    // contentType.id == "Orchard.Layouts.Elements.Paragraph"
-                    console.log(contentType);
+                    $scope.$root.addElement(contentType.id).then(function (args) {
+                        var container = $scope.element;
+                        var newElement = LayoutEditor.Content.from({
+                            contentType: args.element.typeName,
+                            data: decodeURIComponent(args.element.data),
+                            html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
+                        });
+                        container.children.push(newElement);
+                        $scope.$apply();
+                    });
                 };
 
                 $scope.sortableOptions = {
@@ -107,6 +113,15 @@ angular
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
+                $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
+                $scope.$root.editElement = function(elementType, elementData) {
+                    var host = $scope.$root.layoutDesignerHost;
+                    return host.editElement(elementType, elementData);
+                };
+                $scope.$root.addElement = function (elementType, elementLabel) {
+                    var host = $scope.$root.layoutDesignerHost;
+                    return host.addElement(elementType, elementLabel);
+                };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,
@@ -173,8 +188,11 @@ angular
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
                 $scope.edit = function (e) {
-                    // SIPKE: This is where you invoke the edit dialog for the content element!
-                    console.log("Edit " + $scope.element.contentType);
+                    $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
+                        $scope.element.data = decodeURIComponent(args.element.data);
+                        $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));
+                        $scope.$apply();
+                    });
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",

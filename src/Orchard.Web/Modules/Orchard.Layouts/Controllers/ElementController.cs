@@ -25,6 +25,7 @@ namespace Orchard.Layouts.Controllers {
         private readonly ICultureAccessor _cultureAccessor;
         private readonly IContentManager _contentManager;
         private readonly IObjectStore _objectStore;
+        private readonly IShapeDisplay _shapeDisplay;
 
         public ElementController(
             IElementDisplay elementDisplay,
@@ -33,7 +34,9 @@ namespace Orchard.Layouts.Controllers {
             IShapeFactory shapeFactory,
             ITransactionManager transactionManager,
             ICultureAccessor cultureAccessor,
-            IContentManager contentManager, IObjectStore objectStore) {
+            IContentManager contentManager, 
+            IObjectStore objectStore, 
+            IShapeDisplay shapeDisplay) {
 
             _elementDisplay = elementDisplay;
             _layoutSerializer = layoutSerializer;
@@ -43,6 +46,7 @@ namespace Orchard.Layouts.Controllers {
             _cultureAccessor = cultureAccessor;
             _contentManager = contentManager;
             _objectStore = objectStore;
+            _shapeDisplay = shapeDisplay;
         }
 
         [Admin]
@@ -145,6 +149,17 @@ namespace Orchard.Layouts.Controllers {
             return RedirectToAction("Edit", new {session = session});
         }
 
+        public RedirectToRouteResult Add(string session, string typeName, int? contentId = null, string contentType = null) {
+            var state = new ElementSessionState {
+                TypeName = typeName,
+                ContentId = contentId,
+                ContentType = contentType
+            };
+
+            _objectStore.Set(session, state);
+            return RedirectToAction("Edit", new { session = session });
+        }
+
         [Admin]
         public ViewResult Edit(string session) {
             var sessionState = _objectStore.Get<ElementSessionState>(session);
@@ -199,6 +214,7 @@ namespace Orchard.Layouts.Controllers {
                 _transactionManager.Cancel();
             }
             else {
+                viewModel.ElementHtml = _shapeDisplay.Display(_elementDisplay.DisplayElement(element, describeContext.Content, displayType: "Design"));
                 viewModel.Submitted = true;
             }
             return View("Edit", viewModel);

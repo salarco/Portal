@@ -7,8 +7,8 @@
     Layout.LocalNavigation.Add(New.ElementEditor_LocalNav(Tabs: Model.Tabs));
 
     var command = (string)ViewBag.Command;
-    var titleFormat = (string) ViewBag.TitleFormat;
-    
+    var titleFormat = (string)ViewBag.TitleFormat;
+
 }
 @Html.ValidationSummary()
 @using (Html.BeginFormAntiForgeryPost(Url.Action("Update", "Element", new { session = Model.SessionKey, area = "Orchard.Layouts" }))) {
@@ -18,13 +18,13 @@
         var id = String.Format("element-{0}", tab.ToLowerInvariant());
         <div id="@id" class="tab-view">
             @foreach (var editor in Model.EditorResult.Editors) {
-                var position = ShapePosition.Parse((String) editor.Metadata.Position);
+                var position = ShapePosition.Parse((String)editor.Metadata.Position);
                 if (position.Name == tab) {
                     @Display(editor)
                 }
             }
         </div>
-     }
+    }
 }
 @if (Model.Submitted == true) {
     using (Script.Foot()) {
@@ -34,7 +34,8 @@
                     command: "@command",
                     element: {
                         typeName: "@Model.TypeName",
-                        state: "@Url.Encode(Model.ElementData)"
+                        data: "@Url.Encode(Model.ElementData)",
+                        html: "@Url.Encode(Model.ElementHtml)"
                     }
                 });
             });
