@@ -9,6 +9,7 @@ using Orchard.Layouts.Framework.Display;
 using Orchard.Layouts.Framework.Elements;
 using Orchard.Layouts.Helpers;
 using Orchard.Layouts.Settings;
+using Orchard.Utility.Extensions;
 
 namespace Orchard.Layouts.Services {
     public class LayoutModelMapper : ILayoutModelMapper {
@@ -167,7 +168,8 @@ namespace Orchard.Layouts.Services {
             return new {
                 type = "Content",
                 contentType = element.Type,
-                label = element.DisplayText.Text,
+                contentTypeLabel = element.DisplayText.Text,
+                contentTypeClass = element.DisplayText.Text.HtmlClassify(),
                 data = data,
                 id = common.Id,
                 cssClasses = common.CssClass,

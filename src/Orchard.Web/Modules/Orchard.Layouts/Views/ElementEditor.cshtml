@@ -1,4 +1,5 @@
 ﻿@using Orchard.Layouts.Models
+@using Orchard.Utility.Extensions
 @model Orchard.Layouts.ViewModels.EditElementViewModel
 @{
     Style.Include("element-editor.css");
@@ -34,7 +35,8 @@
                     command: "@command",
                     element: {
                         typeName: "@Model.TypeName",
-                        label: "@Model.DisplayText.Text",
+                        typeLabel: "@Model.DisplayText.Text",
+                        typeClass: "@Model.DisplayText.Text.HtmlClassify()",
                         data: "@Url.Encode(Model.ElementData)",
                         html: "@Url.Encode(Model.ElementHtml)"
                     }
