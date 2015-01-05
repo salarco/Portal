@@ -147,7 +147,7 @@ Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>").Text;
                             "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
                             "\"elements\": [{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"ColumnSpan=12\"," +
+                                "\"data\": \"Width=12\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
                                     "\"data\": \"Content=" + Encode(text) + "\"" +
@@ -157,21 +157,21 @@ Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>").Text;
                             "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
                             "\"elements\": [{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"ColumnSpan=4\"," +
+                                "\"data\": \"Width=4\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
                                     "\"data\": \"Content=" + Encode(asideFirstText) + "\"" +
                                 "}]" +
                             "},{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"ColumnSpan=4\"," +
+                                "\"data\": \"Width=4\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
                                     "\"data\": \"Content=" + Encode(asideSecondText) + "\"" +
                                 "}]" +
                             "},{" +
                                 "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"ColumnSpan=4\"," +
+                                "\"data\": \"Width=4\"," +
                                 "\"elements\": [{" +
                                     "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
                                     "\"data\": \"Content=" + Encode(asideThirdText) + "\"" +
