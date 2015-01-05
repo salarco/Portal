@@ -260,6 +260,11 @@
 .offset-11 { margin-left: 91.66%; }
 .offset-12 { margin-left: 100%; }
 
+.orchard-layouts-root img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
 
 /* RESPONSIVENESS */
 
