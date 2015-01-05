@@ -223,8 +223,6 @@ var LayoutEditor;
         this.toObject = function () {
             var result = this.elementToObject();
             result.children = this.childrenToObject();
-            //console.log(result);
-            //console.log(JSON.stringify(result, null, '\t'));
             return result;
         };
     };
