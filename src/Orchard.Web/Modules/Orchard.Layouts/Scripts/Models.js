@@ -444,10 +444,11 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Content = function (data, id, cssClasses, cssStyles, contentType, html) {
+    LayoutEditor.Content = function (data, id, cssClasses, cssStyles, contentType, label, html) {
         LayoutEditor.Element.call(this, "Content", data, id, cssClasses, cssStyles);
 
         this.contentType = contentType;
+        this.label = label;
         this.html = html;
 
         this.toObject = function () {
@@ -465,7 +466,7 @@ var LayoutEditor;
     };
 
     LayoutEditor.Content.from = function (value) {
-        return new LayoutEditor.Content(value.data, value.id, value.cssClasses, value.cssStyles, value.contentType, value.html);
+        return new LayoutEditor.Content(value.data, value.id, value.cssClasses, value.cssStyles, value.contentType, value.label, value.html);
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

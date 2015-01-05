@@ -167,6 +167,7 @@ namespace Orchard.Layouts.Services {
             return new {
                 type = "Content",
                 contentType = element.Type,
+                label = element.DisplayText.Text,
                 data = data,
                 id = common.Id,
                 cssClasses = common.CssClass,
