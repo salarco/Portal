@@ -26,8 +26,8 @@
                 <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
                     <div class="layout-popup-flex">
                         <div class="layout-popup-column" ng-repeat="category in element.canvas.config.categories">
-                            <li class="layout-popup-item layout-popup-label">{{category.name}}</li>
-                            <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType, $event)">{{contentType.label}}</li>
+                            <li class="layout-popup-item layout-popup-label">{{::category.name}}</li>
+                            <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType, $event)">{{::contentType.label}}</li>
                         </div>
                     </div>
                 </ul>
@@ -36,7 +36,7 @@
         <div class="layout-container-children-placeholder" ng-if="element.children.length === 0">
             This layout canvas is empty. Click the 'Add' icon to add elements to the layout.
         </div>
-        <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{child.isContainer}}">
+        <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
             <orc-layout-child element="child" />
         </div>
     </div>

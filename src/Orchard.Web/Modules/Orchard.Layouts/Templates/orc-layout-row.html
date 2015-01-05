@@ -28,7 +28,7 @@
     <!--<div class="layout-container-children-placeholder" ng-if="element.children.length === 0">
         This row is empty. Click the 'Add' icon to add columns to the row.
     </div>-->
-    <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{child.isContainer}}">
+    <div class="layout-child-wrapper" ng-repeat="child in element.children" data-orc-forcontainer="{{::child.isContainer}}">
         <orc-layout-child element="child" />
     </div>
 </div>

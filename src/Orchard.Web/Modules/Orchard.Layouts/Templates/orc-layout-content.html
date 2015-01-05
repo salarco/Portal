@@ -1,6 +1,6 @@
 ﻿<div class="layout-element layout-content" ng-class="getClasses()" ng-mouseenter="setIsActive()" ng-mouseleave="clearIsActive()" ng-click="setIsFocused($event)">
     <ul class="layout-panel layout-panel-main">
-        <li class="layout-panel-item layout-panel-label">{{element.contentType}}</li>
+        <li class="layout-panel-item layout-panel-label">{{::element.contentType}}</li>
         <li class="layout-panel-item layout-panel-action" title="Edit {{element.contentType}} content" ng-click="edit($event)"><i class="fa fa-code"></i></li>
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit {{element.contentType}} properties">
             <i class="fa fa-edit"></i>
