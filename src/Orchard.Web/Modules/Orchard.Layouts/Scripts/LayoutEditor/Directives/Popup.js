@@ -7,7 +7,7 @@
                 var popup = $(element);
                 var trigger = popup.closest(".layout-popup-trigger");
                 var parentElement = popup.closest(".layout-element");
-                trigger.click(function (e) {
+                trigger.click(function () {
                     popup.toggle();
                     if (popup.is(":visible")) {
                         popup.position({
@@ -16,7 +16,6 @@
                             of: trigger
                         });
                     }
-                    e.stopPropagation();
                 });
                 popup.click(function (e) {
                     e.stopPropagation();

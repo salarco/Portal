@@ -18,16 +18,16 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete grid" ng-click="delete($event)"><i class="fa fa-remove"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move grid up" ng-click="moveUp($event)" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move grid down" ng-click="moveDown($event)" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete grid" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move grid up" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move grid down" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
     </ul>
     <ul class="layout-panel layout-panel-add">
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new row to grid">
             <i class="fa fa-plus"></i>
             <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
                 <li class="layout-popup-item layout-popup-label">Row content</li>
-                <li class="layout-popup-item layout-popup-action" ng-repeat="operation in element.availableAddOperations" ng-click="invokeAddOperation(operation, $event)">{{::operation.name}}</li>
+                <li class="layout-popup-item layout-popup-action" ng-repeat="operation in element.availableAddOperations" ng-click="operation.invoke()">{{::operation.name}}</li>
             </ul>
         </li>
     </ul>
@@ -35,7 +35,7 @@
         This grid is empty. Click the 'Add' icon to add rows to the grid.
     </div>-->
     <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="setIsActive(child)" ng-mouseleave="clearIsActive(child)" ng-click="setIsFocused(child, $event)">
+        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="child.setIsFocused();$event.stopPropagation();">
             <orc-layout-child element="child" />
         </div>
     </div>

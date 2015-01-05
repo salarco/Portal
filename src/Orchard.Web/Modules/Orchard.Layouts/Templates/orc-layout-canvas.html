@@ -1,5 +1,5 @@
 ﻿<div class="layout-editor-wrapper">
-    <div class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="setIsActive(element)" ng-mouseleave="clearIsActive(element)" ng-click="setIsFocused(element, $event)">
+    <div class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="element.setIsActive(true)" ng-mouseleave="element.setIsActive(false)" ng-click="element.setIsFocused();$event.stopPropagation();">
         <div class="layout-element-wrapper">
             <ul class="layout-panel layout-panel-main">
                 <li class="layout-panel-item layout-panel-label">Canvas</li>
@@ -28,7 +28,7 @@
                         <div class="layout-popup-flex">
                             <div class="layout-popup-column" ng-repeat="category in element.canvas.config.categories">
                                 <li class="layout-popup-item layout-popup-label">{{::category.name}}</li>
-                                <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType, $event)">{{::contentType.label}}</li>
+                                <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType)">{{::contentType.label}}</li>
                             </div>
                         </div>
                     </ul>
@@ -38,7 +38,7 @@
                 This layout canvas is empty. Click the 'Add' icon to add elements to the layout.
             </div>
             <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-                <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="setIsActive(child)" ng-mouseleave="clearIsActive(child)" ng-click="setIsFocused(child, $event)">
+                <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="child.setIsFocused();$event.stopPropagation();">
                     <orc-layout-child element="child" />
                 </div>
             </div>

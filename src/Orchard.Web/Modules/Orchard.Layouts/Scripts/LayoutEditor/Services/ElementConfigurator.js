@@ -4,28 +4,14 @@
         return {
 
             addElementFunctions: function ($scope, $element) {
-                $scope.delete = function (e) {
-                    $scope.element.delete();
+                $($element.find(".layout-panel")).click(function (e) {
                     e.stopPropagation();
-                }
-
-                $scope.moveUp = function (e) {
-                    $scope.element.moveUp();
-                    e.stopPropagation();
-                }
-
-                $scope.moveDown = function (e) {
-                    $scope.element.moveDown();
-                    e.stopPropagation();
-                }
+                    console.log("Stopping");
+                });
             },
 
             addContainerFunctions: function ($scope, $element) {
-                $scope.invokeAddOperation = function (operation, e) {
-                    operation.invoke();
-                };
-
-                $scope.invokeAddContentElement = function (contentType, e) {
+                $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType.id).then(function (args) {
                         var container = $scope.element;
                         var newElement = LayoutEditor.Content.from({
@@ -44,19 +30,6 @@
                     cursor: "move",
                     delay: 150,
                     distance: 5
-                };
-
-                $scope.setIsActive = function (child) {
-                    child.setIsActive(true);
-                };
-
-                $scope.clearIsActive = function (child) {
-                    child.setIsActive(false);
-                };
-
-                $scope.setIsFocused = function (child, e) {
-                    child.setIsFocused();
-                    e.stopPropagation();
                 };
 
                 $scope.getClasses = function (child) {

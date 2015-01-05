@@ -6,7 +6,7 @@
             scope: { element: "=" },
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
-                $scope.edit = function (e) {
+                $scope.edit = function () {
                     $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
                         $scope.element.data = decodeURIComponent(args.element.data);
                         $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));

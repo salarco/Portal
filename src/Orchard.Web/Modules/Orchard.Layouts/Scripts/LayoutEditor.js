@@ -17,28 +17,14 @@ angular
         return {
 
             addElementFunctions: function ($scope, $element) {
-                $scope.delete = function (e) {
-                    $scope.element.delete();
+                $($element.find(".layout-panel")).click(function (e) {
                     e.stopPropagation();
-                }
-
-                $scope.moveUp = function (e) {
-                    $scope.element.moveUp();
-                    e.stopPropagation();
-                }
-
-                $scope.moveDown = function (e) {
-                    $scope.element.moveDown();
-                    e.stopPropagation();
-                }
+                    console.log("Stopping");
+                });
             },
 
             addContainerFunctions: function ($scope, $element) {
-                $scope.invokeAddOperation = function (operation, e) {
-                    operation.invoke();
-                };
-
-                $scope.invokeAddContentElement = function (contentType, e) {
+                $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType.id).then(function (args) {
                         var container = $scope.element;
                         var newElement = LayoutEditor.Content.from({
@@ -57,19 +43,6 @@ angular
                     cursor: "move",
                     delay: 150,
                     distance: 5
-                };
-
-                $scope.setIsActive = function (child) {
-                    child.setIsActive(true);
-                };
-
-                $scope.clearIsActive = function (child) {
-                    child.setIsActive(false);
-                };
-
-                $scope.setIsFocused = function (child, e) {
-                    child.setIsFocused();
-                    e.stopPropagation();
                 };
 
                 $scope.getClasses = function (child) {
@@ -165,18 +138,6 @@ angular
                 elementConfigurator.addElementFunctions($scope, $element);
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
-                $scope.split = function (e) {
-                    $scope.element.split();
-                    e.stopPropagation();
-                };
-                $scope.decreaseOffset = function (e) {
-                    $scope.element.decreaseOffset();
-                    e.stopPropagation();
-                };
-                $scope.increaseOffset = function (e) {
-                    $scope.element.increaseOffset();
-                    e.stopPropagation();
-                };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-column.html",
             replace: true
@@ -191,7 +152,7 @@ angular
             scope: { element: "=" },
             controller: function ($scope, $element) {
                 elementConfigurator.addElementFunctions($scope, $element);
-                $scope.edit = function (e) {
+                $scope.edit = function () {
                     $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
                         $scope.element.data = decodeURIComponent(args.element.data);
                         $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));
@@ -229,7 +190,7 @@ angular
                 var popup = $(element);
                 var trigger = popup.closest(".layout-popup-trigger");
                 var parentElement = popup.closest(".layout-element");
-                trigger.click(function (e) {
+                trigger.click(function () {
                     popup.toggle();
                     if (popup.is(":visible")) {
                         popup.position({
@@ -238,7 +199,6 @@ angular
                             of: trigger
                         });
                     }
-                    e.stopPropagation();
                 });
                 popup.click(function (e) {
                     e.stopPropagation();
@@ -261,10 +221,6 @@ angular
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "x";
                 $scope.sortableOptions["ui-floating"] = true;
-                $scope.addColumn = function (e) {
-                    $scope.element.addColumn();
-                    e.stopPropagation();
-                };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-row.html",
             replace: true
