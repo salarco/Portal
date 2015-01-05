@@ -20,6 +20,14 @@
         {
             padding: @content-padding - 2px;
         }
+
+        &.layout-content-image, &.layout-content-vector-image {
+            > img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+        }
     }
 
     .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-content:not(.layout-element-active) {

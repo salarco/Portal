@@ -30,7 +30,8 @@
                         var container = $scope.element;
                         var newElement = LayoutEditor.Content.from({
                             contentType: args.element.typeName,
-                            label: args.element.label,
+                            contentTypeLabel: args.element.contentTypeLabel,
+                            contentTypeClass: args.element.contentTypeClass,
                             data: decodeURIComponent(args.element.data),
                             html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
                         });
@@ -73,6 +74,8 @@
                         result.push("col-xs-" + child.width);
                         result.push("col-xs-offset-" + child.offset);
                     }
+                    if (child.type == "Content")
+                        result.push(child.contentTypeClass);
 
                     if (child.getIsActive())
                         result.push("layout-element-active");
