@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
@@ -61,6 +63,7 @@ namespace Orchard.Layouts.Drivers {
             return ContentShape("Parts_Layout_Edit", () => {
                 var viewModel = new LayoutPartViewModel {
                     Data = _mapper.ToEditorModel(part.LayoutData, new DescribeElementsContext { Content = part}),
+                    ConfigurationData = GetConfigurationData(part),
                     TemplateId = part.TemplateId,
                     Content = part,
                     SessionKey = part.SessionKey,
@@ -121,6 +124,22 @@ namespace Orchard.Layouts.Drivers {
 
             var template = context.GetItemFromSession(templateIdentity);
             return template != null ? template.Id : default(int?);
+        }
+
+        private string GetConfigurationData(LayoutPart part) {
+            var describeContext = new DescribeElementsContext { Content = part };
+            var elementCategories = _elementManager.GetCategories(describeContext).ToArray();
+            var config = new {
+                categories = elementCategories.Select(category => new {
+                    name = category.DisplayName.Text,
+                    contentTypes = category.Elements.Select(element => new {
+                        label = element.DisplayText.Text,
+                        id = element.TypeName
+                    })
+                })
+            };
+
+            return JToken.FromObject(config).ToString(Formatting.None);
         }
     }
 }

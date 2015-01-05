@@ -31,15 +31,12 @@
     Script.Include("LayoutEditor.js");
     Script.Include("LayoutDesignerHost.js");
 
-    <!-- Demo config. In a real application these will be provided by server. -->
-    Script.Include("DemoConfig.js");
-
     using (Script.Foot()) {
         <script>
             (function() {
                 // Create a model from demo config and data.
                 var canvasModelData = @Html.Raw(Model.Data);
-                var canvasConfig = demoConfig;
+                var canvasConfig = @Html.Raw(Model.ConfigurationData);
 
                 window.layoutDesignerCanvas = LayoutEditor.Canvas.from(canvasConfig, canvasModelData);
             })(jQuery);

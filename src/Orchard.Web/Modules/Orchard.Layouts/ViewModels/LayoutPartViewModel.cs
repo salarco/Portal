@@ -6,6 +6,7 @@ namespace Orchard.Layouts.ViewModels {
     public class LayoutPartViewModel {
         public IContent Content { get; set; }
         public string Data { get; set; }
+        public string ConfigurationData { get; set; }
         public string Trash { get; set; }
         public int? TemplateId { get; set; }
         public string SessionKey { get; set; }
