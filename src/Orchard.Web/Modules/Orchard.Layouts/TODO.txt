@@ -4,6 +4,8 @@ Drag column resizing and indentation.
 Remove the BaseUrl service (move to config data).
 Add keyboard support.
 Add clipboard support.
+Rename ElementConfigurator to ScopeConfigurator and its methods to "configureElementScope" and "configureContainerScope" respectively.
+Refactor repeated template markup into separate templates/directives.
 Fix FOUC while canvas is binding.
 Get rid of "replace" property on directives (deprecated in Angular)!
 
