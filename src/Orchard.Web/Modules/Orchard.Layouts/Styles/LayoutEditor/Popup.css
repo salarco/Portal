@@ -18,9 +18,12 @@
 }
 .layout-editor-wrapper .layout-popup .layout-popup-flex {
   display: flex;
+  padding: 2px 5px;
 }
 .layout-editor-wrapper .layout-popup .layout-popup-flex .layout-popup-column + .layout-popup-column {
-  margin-left: 2px;
+  margin-left: 4px;
+  border-left: 1px solid rgba(128, 128, 128, 0.15);
+  padding-left: 4px;
 }
 .layout-editor-wrapper .layout-popup .layout-popup-item {
   padding: 4px 6px;
