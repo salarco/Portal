@@ -8,10 +8,10 @@
 .layout-editor-wrapper .layout-container.layout-element-focused {
   padding: 10px;
 }
-.layout-editor-wrapper .layout-container.layout-element-focused > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
+.layout-editor-wrapper .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
   border: 1px dashed rgba(128, 128, 128, 0.6);
 }
-.layout-editor-wrapper .layout-container.layout-element-focused > .layout-element-wrapper > .layout-children > .layout-element + .layout-element:not(.layout-element-active) {
+.layout-editor-wrapper .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element + .layout-element:not(.layout-element-active) {
   border-top: 0;
   padding-top: 12px;
 }

@@ -30,7 +30,21 @@
                 $scope.sortableOptions = {
                     cursor: "move",
                     delay: 150,
-                    distance: 5
+                    distance: 5,
+                    start: function (e, ui) {
+                        $scope.$apply(function () {
+                            $scope.element.canvas.isDragging = true;
+                            $scope.element.isDropTarget = true;
+                        });
+                        // Make the drop target placeholder as high as the item being dragged.
+                        ui.placeholder.height(ui.item.height());
+                    },
+                    stop: function (e, ui) {
+                        $scope.$apply(function () {
+                            $scope.element.canvas.isDragging = false;
+                            $scope.element.isDropTarget = false;
+                        });
+                    }
                 };
 
                 $scope.getClasses = function (child) {
@@ -57,6 +71,9 @@
                         result.push("layout-element-focused");
                     if (child.getIsSelected())
                         result.push("layout-element-selected");
+
+                    if (child.isDropTarget)
+                        result.push("layout-element-droptarget");
 
                     return result;
                 };

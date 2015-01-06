@@ -89,4 +89,9 @@
 .layout-editor-wrapper .layout-element-selected {
   background-color: rgba(100, 135, 33, 0.08);
 }
+.layout-editor-wrapper .layout-element-droptarget {
+  -moz-box-shadow: inset 0 0 12px 6px rgba(100, 135, 33, 0.5);
+  -webkit-box-shadow: inset 0 0 12px 6px rgba(100, 135, 33, 0.5);
+  box-shadow: inset 0 0 12px 6px rgba(100, 135, 33, 0.5);
+}
 /*# sourceMappingURL=Element.css.map */

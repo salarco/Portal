@@ -12,7 +12,7 @@
             }
         }
 
-        &.layout-element-focused > .layout-element-wrapper > .layout-children {
+        &.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children {
             > .layout-element:not(.layout-element-active) {
                 border: 1px dashed fade(@gray-border, 60%) !important;
                 padding: @container-padding - 1px !important;

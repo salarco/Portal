@@ -13,6 +13,7 @@
 
         this.canvas = null;
         this.parent = null;
+        this.isDropTarget = null;
 
         this.setCanvas = function (canvas) {
             this.canvas = canvas;
@@ -31,6 +32,8 @@
 
         this.setIsActive = function (value) {
             if (!this.canvas)
+                return;
+            if (this.canvas.isDragging)
                 return;
             if (value)
                 this.canvas.activeElement = this;

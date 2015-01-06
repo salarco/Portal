@@ -46,6 +46,7 @@ var LayoutEditor;
 
         this.canvas = null;
         this.parent = null;
+        this.isDropTarget = null;
 
         this.setCanvas = function (canvas) {
             this.canvas = canvas;
@@ -64,6 +65,8 @@ var LayoutEditor;
 
         this.setIsActive = function (value) {
             if (!this.canvas)
+                return;
+            if (this.canvas.isDragging)
                 return;
             if (value)
                 this.canvas.activeElement = this;
@@ -218,6 +221,7 @@ var LayoutEditor;
         this.config = config;
         this.activeElement = null;
         this.focusedElement = null;
+        this.isDragging = false;
         this.setCanvas(this);
 
         var self = this;

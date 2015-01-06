@@ -1,7 +1,7 @@
 ﻿
-Better styling during drag/drop reordering.
 Drag/drop between containers.
 Drag column resizing and indentation.
+Remove the BaseUrl service (move to config data).
 Add keyboard support.
 Add clipboard support.
 Fix FOUC while canvas is binding.

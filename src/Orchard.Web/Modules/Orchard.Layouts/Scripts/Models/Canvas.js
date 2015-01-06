@@ -8,6 +8,7 @@
         this.config = config;
         this.activeElement = null;
         this.focusedElement = null;
+        this.isDragging = false;
         this.setCanvas(this);
 
         var self = this;
