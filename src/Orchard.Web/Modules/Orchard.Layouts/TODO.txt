@@ -1,8 +1,8 @@
-﻿
-Drag/drop between containers, with keyboard modifiers for move vs. copy.
+﻿Drag/drop between containers, with keyboard modifiers for move vs. copy.
 Drag column resizing and offsetting.
 Remove the BaseUrl service (move to config data).
 Add keyboard support.
+Generally improve accessibility (add aria attributes etc).
 Add clipboard support. Both keyboard-driven and via cut/copy/paste actions on panel.
 Rename ElementConfigurator to ScopeConfigurator and its methods to "configureElementScope" and "configureContainerScope" respectively.
 Refactor repeated template markup into separate templates/directives.
