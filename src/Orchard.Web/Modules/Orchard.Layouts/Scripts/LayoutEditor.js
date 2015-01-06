@@ -75,8 +75,11 @@ angular
                         result.push("col-xs-" + child.width);
                         result.push("col-xs-offset-" + child.offset);
                     }
-                    if (child.type == "Content")
+                    if (child.type == "Content") {
+                        // TODO: Remove one of these when Sipke decides which one to provide.
                         result.push(child.contentTypeClass);
+                        result.push("layout-content-" + child.contentTypeClass);
+                    }
 
                     if (child.getIsActive())
                         result.push("layout-element-active");

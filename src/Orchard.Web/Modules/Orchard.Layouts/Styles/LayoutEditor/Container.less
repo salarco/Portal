@@ -19,9 +19,14 @@
                 border: 1px dashed fade(@gray-border, 60%);
             }
 
-            > .layout-element + .layout-element:not(.layout-element-active) {
+            > .layout-element + .layout-element.layout-container:not(.layout-element-active) {
                 border-top: 0;
                 padding-top: @container-padding;
+            }
+
+            > .layout-element + .layout-element.layout-content:not(.layout-element-active) {
+                border-top: 0;
+                padding-top: @content-padding;
             }
         }
     }
