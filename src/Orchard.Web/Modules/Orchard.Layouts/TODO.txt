@@ -1,8 +1,10 @@
-﻿Adding new content elements.
-Fix FOUC while canvas is binding.
-Drag/drop reordering.
+﻿
+Better styling during drag/drop reordering.
+Drag/drop between containers.
 Drag column resizing and indentation.
-Get rid of child wrapper elements!
+Add keyboard support.
+Add clipboard support.
+Fix FOUC while canvas is binding.
 Get rid of "replace" property on directives (deprecated in Angular)!
 
 STATES:

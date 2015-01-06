@@ -26,6 +26,10 @@
                     <i class="fa fa-plus"></i>
                     <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
                         <div class="layout-popup-flex">
+                            <div class="layout-popup-column">
+                                <li class="layout-popup-item layout-popup-label">Layout</li>
+                                <li class="layout-popup-item layout-popup-action" ng-repeat="operation in element.availableAddOperations" ng-click="operation.invoke()">{{::operation.name}}</li>
+                            </div>
                             <div class="layout-popup-column" ng-repeat="category in element.canvas.config.categories">
                                 <li class="layout-popup-item layout-popup-label">{{::category.name}}</li>
                                 <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType)">{{::contentType.label}}</li>

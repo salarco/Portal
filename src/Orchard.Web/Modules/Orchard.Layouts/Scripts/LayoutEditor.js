@@ -25,16 +25,18 @@ angular
             addContainerFunctions: function ($scope, $element) {
                 $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType.id).then(function (args) {
-                        var container = $scope.element;
-                        var newElement = LayoutEditor.Content.from({
-                            contentType: args.element.typeName,
-                            contentTypeLabel: args.element.typeLabel,
-                            contentTypeClass: args.element.typeClass,
-                            data: decodeURIComponent(args.element.data),
-                            html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
+                        $scope.$apply(function () {
+                            var container = $scope.element;
+                            var newElement = LayoutEditor.Content.from({
+                                contentType: args.element.typeName,
+                                contentTypeLabel: args.element.typeLabel,
+                                contentTypeClass: args.element.typeClass,
+                                data: decodeURIComponent(args.element.data),
+                                html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
+                            });
+                            container.addChild(newElement);
+                            newElement.setIsFocused();
                         });
-                        container.addChild(newElement);
-                        $scope.$apply();
                     });
                 };
 

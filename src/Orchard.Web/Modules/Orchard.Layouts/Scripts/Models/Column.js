@@ -38,6 +38,17 @@
             this.parent.increaseColumnOffset(this);
         };
 
+        var self = this;
+        function addGrid() {
+            var grid = new LayoutEditor.Grid(null, null, null, null, []);
+            self.addChild(grid);
+            grid.setIsFocused();
+        }
+
+        this.availableAddOperations = [
+            { name: "Grid", invoke: function () { addGrid(); } }
+        ]
+
         this.toObject = function () {
             var result = this.elementToObject();
             result.width = this.width;
