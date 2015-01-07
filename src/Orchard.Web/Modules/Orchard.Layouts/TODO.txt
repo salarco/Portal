@@ -1,6 +1,10 @@
 ﻿Drag/drop between containers, with keyboard modifiers for move vs. copy.
 Drag column resizing and offsetting.
 Remove the BaseUrl service (move to config data).
+Fix inline editing glitches:
+    - Add activate button on every content element, delegates to activateInlineEditing() on canvas scope.
+    - Clicking on canvas or outside canvas should not lose editor focus.
+    - Changes should be persisted... 
 Add keyboard support.
 Generally improve accessibility (add aria attributes etc).
 Add clipboard support. Both keyboard-driven and via cut/copy/paste actions on panel.
