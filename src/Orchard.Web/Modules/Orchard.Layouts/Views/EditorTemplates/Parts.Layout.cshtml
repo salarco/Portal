@@ -8,6 +8,7 @@
     Script.Require("jQueryUI_Sortable");
     Script.Require("jQueryUI_Resizable");
     Script.Require("jQueryUI_Position");
+    Script.Require("TinyMce");
     Style.Include("Lib/font-awesome.css", "Lib/font-awesome.min.css");
     Style.Include("Lib/Bootstrap/bootstrap.css", "Lib/Bootstrap/bootstrap.min.css");
     Script.Include("Lib/underscore.js");
@@ -41,11 +42,11 @@
             })(jQuery);
         </script>
     }
-}
-@{
+
     var contentId = Model.Content != null ? Model.Content.Id : default(int?);
     var contentType = Model.Content != null ? Model.Content.ContentItem.ContentType : default(string);
 }
+
 <div class="layout-designer"
      data-modelstate-valid="@ViewData.ModelState.IsValid.ToString().ToLower()"
      data-base-url="@Url.Content("~/Modules/Orchard.Layouts")"

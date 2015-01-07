@@ -1,8 +1,10 @@
 ﻿<div class="layout-editor-wrapper">
-    <div class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="element.setIsActive(true)" ng-mouseleave="element.setIsActive(false)" ng-click="element.setIsFocused();$event.stopPropagation();">
+    <div id="layout-canvas-{{$id}}" class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="element.setIsActive(true)" ng-mouseleave="element.setIsActive(false)" ng-click="element.setIsFocused();$event.stopPropagation();">
+        <div class="layout-toolbar-container"></div>
         <div class="layout-element-wrapper">
             <ul class="layout-panel layout-panel-main">
                 <li class="layout-panel-item layout-panel-label">Canvas</li>
+                <li class="layout-panel-item layout-panel-action" title="Activate inline editing" ng-click="activateInlineEditing()" ng-class="{disabled: element.canvas.inlineEditingIsActive}"><i class="fa fa-paragraph"></i></li>
                 <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit canvas properties">
                     <i class="fa fa-edit"></i>
                     <ul class="layout-popup layout-popup-edit" orc-layout-popup>

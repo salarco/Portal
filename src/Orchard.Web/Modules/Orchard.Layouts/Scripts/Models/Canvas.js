@@ -9,6 +9,7 @@
         this.activeElement = null;
         this.focusedElement = null;
         this.isDragging = false;
+        this.inlineEditingIsActive = false;
         this.setCanvas(this);
 
         var self = this;

@@ -15,6 +15,16 @@
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
-            replace: true
+            replace: true,
+            link: function (scope, element) {
+                // Mouse down events must not be intercepted by drag and drop while inline editing is active,
+                // otherwise clicks in inline editors will have no effect.
+                element.find(".layout-content-markup").mousedown(function (e) {
+                    if (scope.element.canvas.inlineEditingIsActive) {
+                        console.log("MouseDown detected on content markup. Inline edit is active, so stopping propagation.");
+                        e.stopPropagation();
+                    }
+                });
+            }
         };
     });

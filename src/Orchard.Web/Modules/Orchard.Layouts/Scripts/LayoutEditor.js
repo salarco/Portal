@@ -120,10 +120,55 @@ angular
                     var host = $scope.$root.layoutDesignerHost;
                     return host.addElement(elementType, elementLabel);
                 };
+                $scope.activateInlineEditing = function () {
+                    $scope.element.inlineEditingIsActive = true;
+                    var firstContentEditorId = $("#layout-canvas-" + $scope.$id + " .layout-content-markup").first().attr("id");
+                    tinymce.init({
+                        selector: "#layout-canvas-" + $scope.$id + " .layout-content-markup",
+                        theme: "modern",
+                        schema: "html5",
+                        plugins: [
+                            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                            "searchreplace wordcount visualblocks visualchars code fullscreen",
+                            "insertdatetime media nonbreaking table contextmenu directionality",
+                            "emoticons template paste textcolor colorpicker textpattern",
+                            "fullscreen autoresize"
+                        ],
+                        toolbar: "undo redo cut copy paste | bold italic | bullist numlist outdent indent formatselect | alignleft aligncenter alignright alignjustify ltr rtl | link unlink charmap | code fullscreen close",
+                        setup: function (editor) {
+                            editor.addButton("close", {
+                                text: "Close",
+                                tooltip: "Deactivate inline editing",
+                                icon: false,
+                                onclick: function() {
+                                    tinymce.remove("#layout-canvas-" + $scope.$id + " .layout-content-markup");
+                                    $scope.element.inlineEditingIsActive = false;
+                                }
+                            });
+                        },
+                        convert_urls: false,
+                        valid_elements: "*[*]",
+                        // Shouldn't be needed due to the valid_elements setting, but TinyMCE would strip script.src without it.
+                        extended_valid_elements: "script[type|defer|src|language]",
+                        //menubar: false,
+                        statusbar: false,
+                        skin: "orchardlightgray",
+                        inline: true,
+                        fixed_toolbar_container: "#layout-canvas-" + $scope.$id + " > .layout-toolbar-container",
+                        init_instance_callback: function (editor) {
+                            if (editor.id == firstContentEditorId)
+                                tinymce.execCommand("mceFocus", false, editor.id);
+                        }
+                    });
+                };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
             replace: true,
             link: function (scope, element) {
+                // No clicks should propagate from the TinyMCE toolbars.
+                element.find(".layout-toolbar-container").click(function (e) {
+                    e.stopPropagation();
+                });
                 // Unfocus and unselect everything on click outside of canvas.
                 $(window).click(function (e) {
                     scope.$apply(function () {
@@ -182,7 +227,17 @@ angular
                 };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
-            replace: true
+            replace: true,
+            link: function (scope, element) {
+                // Mouse down events must not be intercepted by drag and drop while inline editing is active,
+                // otherwise clicks in inline editors will have no effect.
+                element.find(".layout-content-markup").mousedown(function (e) {
+                    if (scope.element.canvas.inlineEditingIsActive) {
+                        console.log("MouseDown detected on content markup. Inline edit is active, so stopping propagation.");
+                        e.stopPropagation();
+                    }
+                });
+            }
         };
     });
 ///#source 1 1 LayoutEditor/Directives/Grid.js
