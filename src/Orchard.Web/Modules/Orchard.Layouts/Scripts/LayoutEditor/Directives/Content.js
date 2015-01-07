@@ -13,6 +13,9 @@
                         $scope.$apply();
                     });
                 };
+                $scope.updateContent = function (e) {
+                    $scope.element.html = e.target.innerHTML;
+                };
             },
             templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
             replace: true,
@@ -21,7 +24,6 @@
                 // otherwise clicks in inline editors will have no effect.
                 element.find(".layout-content-markup").mousedown(function (e) {
                     if (scope.element.canvas.inlineEditingIsActive) {
-                        console.log("MouseDown detected on content markup. Inline edit is active, so stopping propagation.");
                         e.stopPropagation();
                     }
                 });

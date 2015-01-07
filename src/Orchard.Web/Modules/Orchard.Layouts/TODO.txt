@@ -4,7 +4,7 @@ Remove the BaseUrl service (move to config data).
 Fix inline editing glitches:
     - Add activate button on every content element, delegates to activateInlineEditing() on canvas scope.
     - Clicking on canvas or outside canvas should not lose editor focus.
-    - Changes should be persisted... 
+    - SIPKE: For persistence of inline editing changes, you need to update server-side code to use the html property for persistence, rather than what's baked into the data property.
 Add keyboard support.
 Generally improve accessibility (add aria attributes etc).
 Add clipboard support. Both keyboard-driven and via cut/copy/paste actions on panel.
