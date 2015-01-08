@@ -32,18 +32,11 @@ namespace Orchard.Layouts.Services {
         }
 
         public IEnumerable<IElement> ToLayoutModel(string editorData, DescribeElementsContext describeContext) {
-            var emptyList = Enumerable.Empty<IElement>();
-
             if (String.IsNullOrWhiteSpace(editorData))
-                return emptyList;
+                yield break;
 
             var canvas = JToken.Parse(editorData);
-            var children = (JArray)canvas["children"];
-            var elements = children != null
-                ? children.Select((x, i) => ParseEditorNode(node: x, parent: null, index: i, describeContext: describeContext)).Where(x => x != null).ToArray()
-                : emptyList;
-
-            return elements;
+            yield return ParseEditorNode(node: canvas, parent: null, index: 0, describeContext: describeContext);
         }
 
         private IElement ParseEditorNode(JToken node, IContainer parent, int index, DescribeElementsContext describeContext) {
@@ -75,6 +68,10 @@ namespace Orchard.Layouts.Services {
             };
 
             switch (type) {
+                case "Canvas":
+                    descriptor = _elementManager.GetElementDescriptorByType<Canvas>(describeContext);
+                    element = _elementManager.ActivateElement<Canvas>(descriptor, activateArgs);
+                    break;
                 case "Grid":
                     descriptor = _elementManager.GetElementDescriptorByType<Grid>(describeContext);
                     element = _elementManager.ActivateElement<Grid>(descriptor, activateArgs);
@@ -111,16 +108,21 @@ namespace Orchard.Layouts.Services {
         }
 
         private object ToEditorModel(IEnumerable<IElement> elements, DescribeElementsContext describeContext) {
-            var canvas = new {
+            // Technically, a layout does not have to be part of a Canvas, but the editor requires a single root, starting with Canvas.
+            var elementsList = elements.ToArray();
+            var canvas = elementsList.Any() && elementsList.First() is Canvas ? (Canvas) elementsList.First() : default(Canvas);
+            var children = canvas != null ? canvas.Elements : elementsList;
+            var commonSettings = canvas != null ? canvas.Data.GetModel<CommonElementSettings>() : new CommonElementSettings();
+            var root = new {
                 type = "Canvas",
                 data = default(string),
-                id = default(string),
-                cssClasses = default(string),
-                cssStyles = default(string),
-                children = elements.Select(x => ToEditorModel(x, describeContext)).ToList()
+                id = commonSettings.Id,
+                cssClasses = commonSettings.CssClass,
+                cssStyles = commonSettings.InlineStyle,
+                children = children.Select(x => ToEditorModel(x, describeContext)).ToList()
             };
 
-            return canvas;
+            return root;
         }
 
         private object ToEditorModel(IElement element, DescribeElementsContext describeContext) {

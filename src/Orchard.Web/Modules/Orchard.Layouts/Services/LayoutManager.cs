@@ -117,14 +117,16 @@ namespace Orchard.Layouts.Services {
         }
 
         public IEnumerable<IElement> CreateDefaultLayout() {
+            var canvas = _elementManager.ActivateElement<Canvas>();
             var grid = _elementManager.ActivateElement<Grid>();
             var row = _elementManager.ActivateElement<Row>();
             var column = _elementManager.ActivateElement<Column>();
 
+            canvas.Elements.Add(grid);
             grid.Elements.Add(row);
             row.Elements.Add(column);
 
-            var elements = new List<IElement> { grid };
+            var elements = new List<IElement> { canvas };
             return elements;
         }
 

@@ -142,43 +142,45 @@ Aliquam vel sem nibh. Suspendisse vel condimentum tellus.</p>").Text;
 
                 layout =
                     "{\"elements\": [{" +
-                        "\"typeName\": \"Orchard.Layouts.Elements.Grid\"," +
+                        "\"typeName\": \"Orchard.Layouts.Elements.Canvas\"," +
                         "\"elements\": [{" +
-                            "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
+                            "\"typeName\": \"Orchard.Layouts.Elements.Grid\"," +
                             "\"elements\": [{" +
-                                "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"Width=12\"," +
+                                "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
                                 "\"elements\": [{" +
-                                    "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"data\": \"Content=" + Encode(text) + "\"" +
-                                "}]" +
-                            "}]" +
-                        "},{" +
-                            "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
-                            "\"elements\": [{" +
-                                "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"Width=4\"," +
-                                "\"elements\": [{" +
-                                    "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"data\": \"Content=" + Encode(asideFirstText) + "\"" +
+                                    "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
+                                    "\"data\": \"Width=12\"," +
+                                    "\"elements\": [{" +
+                                        "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
+                                        "\"data\": \"Content=" + Encode(text) + "\"" +
+                                    "}]" +
                                 "}]" +
                             "},{" +
-                                "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"Width=4\"," +
+                                "\"typeName\": \"Orchard.Layouts.Elements.Row\"," +
                                 "\"elements\": [{" +
-                                    "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"data\": \"Content=" + Encode(asideSecondText) + "\"" +
-                                "}]" +
-                            "},{" +
-                                "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
-                                "\"data\": \"Width=4\"," +
-                                "\"elements\": [{" +
-                                    "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
-                                    "\"data\": \"Content=" + Encode(asideThirdText) + "\"" +
+                                    "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
+                                    "\"data\": \"Width=4\"," +
+                                    "\"elements\": [{" +
+                                        "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
+                                        "\"data\": \"Content=" + Encode(asideFirstText) + "\"" +
+                                    "}]" +
+                                "},{" +
+                                    "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
+                                    "\"data\": \"Width=4\"," +
+                                    "\"elements\": [{" +
+                                        "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
+                                        "\"data\": \"Content=" + Encode(asideSecondText) + "\"" +
+                                    "}]" +
+                                "},{" +
+                                    "\"typeName\": \"Orchard.Layouts.Elements.Column\"," +
+                                    "\"data\": \"Width=4\"," +
+                                    "\"elements\": [{" +
+                                        "\"typeName\": \"Orchard.Layouts.Elements.Html\"," +
+                                        "\"data\": \"Content=" + Encode(asideThirdText) + "\"" +
+                                    "}]" +
                                 "}]" +
                             "}]" +
-                        "}]" +
-                    "}]}";
+                        "}]}]}";
             }
             else {
                 if (!String.IsNullOrEmpty(Text)) {

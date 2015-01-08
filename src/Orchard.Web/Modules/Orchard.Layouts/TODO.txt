@@ -1,6 +1,5 @@
 ﻿Drag/drop between containers, with keyboard modifiers for move vs. copy.
 Drag column resizing and offsetting.
-Implement server side Canvas root element (so that its settings like id, cssClasses and cssStyles are stored).
 Remove "Settings" dialog page and move these properties to the IElement level (instead of being part of an element's Data property).
 Update Dynamic Forms - add support for Form and Fieldset elements (containers).
 Add tooltip descriptions to elements popup.
