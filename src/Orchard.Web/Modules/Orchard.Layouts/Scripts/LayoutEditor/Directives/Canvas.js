@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutCanvas", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: {},
@@ -63,7 +63,7 @@
                     });
                 };
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
+            templateUrl: "Templates/orc-layout-canvas.html",
             replace: true,
             link: function (scope, element) {
                 // No clicks should propagate from the TinyMCE toolbars.

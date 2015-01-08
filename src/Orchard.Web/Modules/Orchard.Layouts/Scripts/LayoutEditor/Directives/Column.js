@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutColumn", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutColumn", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -9,7 +9,7 @@
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-column.html",
+            templateUrl: "Templates/orc-layout-column.html",
             replace: true
         };
     });

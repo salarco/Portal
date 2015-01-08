@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutPopup", function ($compile) {
+    .directive("orcLayoutPopup", function () {
         return {
             restrict: "A",
             link: function (scope, element, attrs) {

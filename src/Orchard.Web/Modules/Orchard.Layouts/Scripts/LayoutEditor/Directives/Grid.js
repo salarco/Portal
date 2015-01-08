@@ -9,7 +9,7 @@
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
+            templateUrl: "Templates/orc-layout-grid.html",
             replace: true
         };
     });
