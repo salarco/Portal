@@ -25,9 +25,6 @@
     <ul class="layout-panel layout-panel-add">
         <li class="layout-panel-item layout-panel-action" title="Add new column to row" ng-click="element.addColumn()" ng-class="{disabled: !element.canAddColumn()}"><i class="fa fa-plus"></i></li>
     </ul>
-    <!--<div class="layout-container-children-placeholder" ng-if="element.children.length === 0">
-        This row is empty. Click the 'Add' icon to add columns to the row.
-    </div>-->
     <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
         <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="child.setIsFocused();$event.stopPropagation();">
             <orc-layout-child element="child" />
