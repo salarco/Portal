@@ -217,7 +217,7 @@
     <Content Include="Templates\orc-layout-content.html" />
     <Content Include="Templates\orc-layout-grid.html" />
     <Content Include="Templates\orc-layout-row.html" />
-    <Content Include="TODO.txt" />
+    <Content Include="Notes.txt" />
     <Content Include="Views\BlueprintAdmin\Edit.cshtml">
       <SubType>Code</SubType>
     </Content>

@@ -1,26 +1,4 @@
-﻿Drag/drop between containers, with keyboard modifiers for move vs. copy.
-Drag column resizing and offsetting.
-Remove "Settings" dialog page and move these properties to the IElement level (instead of being part of an element's Data property).
-Update Dynamic Forms - add support for Form and Fieldset elements (containers).
-Add tooltip descriptions to elements popup.
-Add element icons.
-Don’t display tabs in editor if only single page with properties.
-Fix inline editing glitches:
-    - Add activate button on every content element, delegates to activateInlineEditing() on canvas scope.
-    - Clicking on canvas or outside canvas should not lose editor focus.
-    - SIPKE: For persistence of inline editing changes, you need to update server-side code to use the html property for persistence, rather than what's baked into the data property.
-Add keyboard support.
-Generally improve accessibility (add aria attributes etc).
-Add clipboard support. Both keyboard-driven and via cut/copy/paste actions on panel.
-Rename ElementConfigurator to ScopeConfigurator and its methods to "configureElementScope" and "configureContainerScope" respectively.
-Improve popup styling.
-Refactor repeated template markup into separate templates/directives.
-Add undo/redo support?
-Add "document outline" view to the left of canvas?
-Add "toolbox" view to create new elements using drag/drop?
-Fix FOUC while canvas is binding.
-Get rid of "replace" property on directives (deprecated in Angular)!
-
+﻿
 STATES:
 
     The following classes are used:
