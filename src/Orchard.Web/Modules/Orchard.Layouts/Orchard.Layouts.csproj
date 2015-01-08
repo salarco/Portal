@@ -107,7 +107,6 @@
     <Content Include="Scripts\LayoutEditor\Directives\Popup.js" />
     <Content Include="Scripts\LayoutEditor\Directives\Row.js" />
     <Content Include="Scripts\LayoutEditor\Module.js" />
-    <Content Include="Scripts\LayoutEditor\Services\BaseUrl.js" />
     <Content Include="Scripts\LayoutEditor\Services\ElementConfigurator.js" />
     <Content Include="Scripts\Lib\angular-resource.js" />
     <Content Include="Scripts\Lib\angular-sanitize.js" />
@@ -351,6 +350,7 @@
     <Content Include="Views\Element-Content-Text.Design.cshtml" />
     <Content Include="Views\Element-ContentField.Design.cshtml" />
     <Content Include="Views\Element-Media-MediaItem.Design.cshtml" />
+    <Content Include="Views\BaseHref.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">

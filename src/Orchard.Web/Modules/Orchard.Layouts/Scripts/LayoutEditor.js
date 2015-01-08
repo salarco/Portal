@@ -1,15 +1,5 @@
 ﻿///#source 1 1 LayoutEditor/Module.js
 angular.module("LayoutEditor", ["ngSanitize", "ngResource", "ui.sortable"]);
-///#source 1 1 LayoutEditor/Services/BaseUrl.js
-angular
-    .module("LayoutEditor")
-    .factory("baseUrl", function () {
-        return {
-            get: function () {
-                return $("[data-base-url]").data("base-url");
-            }
-        }
-    });
 ///#source 1 1 LayoutEditor/Services/ElementConfigurator.js
 angular
     .module("LayoutEditor")
@@ -99,7 +89,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Canvas.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutCanvas", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: {},
@@ -162,7 +152,7 @@ angular
                     });
                 };
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-canvas.html",
+            templateUrl: "Templates/orc-layout-canvas.html",
             replace: true,
             link: function (scope, element) {
                 // No clicks should propagate from the TinyMCE toolbars.
@@ -196,7 +186,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Column.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutColumn", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutColumn", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -205,14 +195,14 @@ angular
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-column.html",
+            templateUrl: "Templates/orc-layout-column.html",
             replace: true
         };
     });
 ///#source 1 1 LayoutEditor/Directives/Content.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutContent", function (elementConfigurator, baseUrl) {
+    .directive("orcLayoutContent", function (elementConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -229,7 +219,7 @@ angular
                     $scope.element.html = e.target.innerHTML;
                 };
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-content.html",
+            templateUrl: "Templates/orc-layout-content.html",
             replace: true,
             link: function (scope, element) {
                 // Mouse down events must not be intercepted by drag and drop while inline editing is active,
@@ -245,7 +235,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Grid.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutGrid", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutGrid", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -254,14 +244,14 @@ angular
                 elementConfigurator.addContainerFunctions($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-grid.html",
+            templateUrl: "Templates/orc-layout-grid.html",
             replace: true
         };
     });
 ///#source 1 1 LayoutEditor/Directives/Popup.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutPopup", function ($compile) {
+    .directive("orcLayoutPopup", function () {
         return {
             restrict: "A",
             link: function (scope, element, attrs) {
@@ -290,7 +280,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Row.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutRow", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutRow", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -300,7 +290,7 @@ angular
                 $scope.sortableOptions["axis"] = "x";
                 $scope.sortableOptions["ui-floating"] = true;
             },
-            templateUrl: baseUrl.get() + "/Templates/orc-layout-row.html",
+            templateUrl: "Templates/orc-layout-row.html",
             replace: true
         };
     });

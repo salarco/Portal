@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutGrid", function ($compile, elementConfigurator, baseUrl) {
+    .directive("orcLayoutGrid", function ($compile, elementConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
