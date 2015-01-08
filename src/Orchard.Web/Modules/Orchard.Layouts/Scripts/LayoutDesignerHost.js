@@ -63,8 +63,8 @@
             return deferred.promise();
         };
 
-        this.monitorForm = function() {
-            var layoutDesigner = this.element;
+        monitorForm = function() {
+            var layoutDesigner = self.element;
             var form = layoutDesigner.closest("form");
             
             form.on("submit", function (e) {
@@ -78,11 +78,13 @@
             var layoutDataField = self.element.find(".layout-data-field");
             var selectedTemplateId = templatePicker.val();
             var layoutData = window.layoutDesignerCanvas.toObject();
-            var layoutDataDataJson = JSON.stringify(layoutData, null, '\t');
+            var layoutDataDataJson = JSON.stringify(layoutData, null, "\t");
 
             templateField.val(selectedTemplateId);
             layoutDataField.val(layoutDataDataJson);
         };
+
+        monitorForm();
     };
 
     // Export types.
@@ -92,7 +94,5 @@
 
     $(function () {
         var host = new LayoutDesignerHost($(".layout-designer"));
-        host.monitorForm();
-
     });
 })(jQuery);
