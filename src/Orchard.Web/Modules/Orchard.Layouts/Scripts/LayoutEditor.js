@@ -1,18 +1,18 @@
 ﻿///#source 1 1 LayoutEditor/Module.js
 angular.module("LayoutEditor", ["ngSanitize", "ngResource", "ui.sortable"]);
-///#source 1 1 LayoutEditor/Services/ElementConfigurator.js
+///#source 1 1 LayoutEditor/Services/scopeConfigurator.js
 angular
     .module("LayoutEditor")
-    .factory("elementConfigurator", function () {
+    .factory("scopeConfigurator", function () {
         return {
 
-            addElementFunctions: function ($scope, $element) {
+            configureForElement: function ($scope, $element) {
                 $element.find(".layout-panel").click(function (e) {
                     e.stopPropagation();
                 });
             },
 
-            addContainerFunctions: function ($scope, $element) {
+            configureForContainer: function ($scope, $element) {
                 $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType.id).then(function (args) {
                         $scope.$apply(function () {
@@ -89,7 +89,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Canvas.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, elementConfigurator) {
+    .directive("orcLayoutCanvas", function ($compile, scopeConfigurator) {
         return {
             restrict: "E",
             scope: {},
@@ -98,8 +98,8 @@ angular
                     $scope.element = eval($attrs.model);
                 else
                     $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
-                elementConfigurator.addElementFunctions($scope, $element);
-                elementConfigurator.addContainerFunctions($scope, $element);
+                scopeConfigurator.configureForElement($scope, $element);
+                scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
                 $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
                 $scope.$root.editElement = function(elementType, elementData) {
@@ -186,13 +186,13 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Column.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutColumn", function ($compile, elementConfigurator) {
+    .directive("orcLayoutColumn", function ($compile, scopeConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
             controller: function ($scope, $element) {
-                elementConfigurator.addElementFunctions($scope, $element);
-                elementConfigurator.addContainerFunctions($scope, $element);
+                scopeConfigurator.configureForElement($scope, $element);
+                scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
             templateUrl: "Templates/orc-layout-column.html",
@@ -202,12 +202,12 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Content.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutContent", function (elementConfigurator) {
+    .directive("orcLayoutContent", function (scopeConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
             controller: function ($scope, $element) {
-                elementConfigurator.addElementFunctions($scope, $element);
+                scopeConfigurator.configureForElement($scope, $element);
                 $scope.edit = function () {
                     $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
                         $scope.element.data = decodeURIComponent(args.element.data);
@@ -235,13 +235,13 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Grid.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutGrid", function ($compile, elementConfigurator) {
+    .directive("orcLayoutGrid", function ($compile, scopeConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
             controller: function ($scope, $element) {
-                elementConfigurator.addElementFunctions($scope, $element);
-                elementConfigurator.addContainerFunctions($scope, $element);
+                scopeConfigurator.configureForElement($scope, $element);
+                scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
             templateUrl: "Templates/orc-layout-grid.html",
@@ -280,13 +280,13 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Row.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutRow", function ($compile, elementConfigurator) {
+    .directive("orcLayoutRow", function ($compile, scopeConfigurator) {
         return {
             restrict: "E",
             scope: { element: "=" },
             controller: function ($scope, $element) {
-                elementConfigurator.addElementFunctions($scope, $element);
-                elementConfigurator.addContainerFunctions($scope, $element);
+                scopeConfigurator.configureForElement($scope, $element);
+                scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "x";
                 $scope.sortableOptions["ui-floating"] = true;
             },

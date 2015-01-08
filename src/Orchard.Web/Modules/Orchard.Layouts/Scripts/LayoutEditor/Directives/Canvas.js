@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, elementConfigurator) {
+    .directive("orcLayoutCanvas", function ($compile, scopeConfigurator) {
         return {
             restrict: "E",
             scope: {},
@@ -9,8 +9,8 @@
                     $scope.element = eval($attrs.model);
                 else
                     $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
-                elementConfigurator.addElementFunctions($scope, $element);
-                elementConfigurator.addContainerFunctions($scope, $element);
+                scopeConfigurator.configureForElement($scope, $element);
+                scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
                 $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
                 $scope.$root.editElement = function(elementType, elementData) {

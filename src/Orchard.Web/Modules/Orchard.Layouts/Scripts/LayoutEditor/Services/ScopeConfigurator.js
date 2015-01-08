@@ -1,15 +1,15 @@
 ﻿angular
     .module("LayoutEditor")
-    .factory("elementConfigurator", function () {
+    .factory("scopeConfigurator", function () {
         return {
 
-            addElementFunctions: function ($scope, $element) {
+            configureForElement: function ($scope, $element) {
                 $element.find(".layout-panel").click(function (e) {
                     e.stopPropagation();
                 });
             },
 
-            addContainerFunctions: function ($scope, $element) {
+            configureForContainer: function ($scope, $element) {
                 $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType.id).then(function (args) {
                         $scope.$apply(function () {

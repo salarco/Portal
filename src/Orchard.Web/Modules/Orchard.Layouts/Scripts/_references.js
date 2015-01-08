@@ -22,4 +22,4 @@
 /// <reference path="layouteditor/directives/popup.js" />
 /// <reference path="layouteditor/directives/row.js" />
 /// <reference path="layouteditor/services/baseurl.js" />
-/// <reference path="layouteditor/services/elementconfigurator.js" />
+/// <reference path="layouteditor/services/scopeConfigurator.js" />
