@@ -13,6 +13,10 @@ namespace Orchard.Layouts.Elements {
             get { return T("Grid"); }
         }
 
+        public override bool IsSystemElement {
+            get { return true; }
+        }
+
         public override bool HasEditor {
             get { return true; }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -127,12 +128,11 @@ namespace Orchard.Layouts.Drivers {
         }
 
         private string GetConfigurationData(LayoutPart part) {
-            var describeContext = new DescribeElementsContext { Content = part };
-            var elementCategories = _elementManager.GetCategories(describeContext).ToArray();
+            var elementCategories = GetCategories(part).ToArray();
             var config = new {
                 categories = elementCategories.Select(category => new {
                     name = category.DisplayName.Text,
-                    contentTypes = category.Elements.Select(element => new {
+                    contentTypes = category.Elements.Where(x => !x.IsSystemElement).Select(element => new {
                         label = element.DisplayText.Text,
                         id = element.TypeName
                     })
@@ -140,6 +140,13 @@ namespace Orchard.Layouts.Drivers {
             };
 
             return JToken.FromObject(config).ToString(Formatting.None);
+        }
+
+        private IEnumerable<CategoryDescriptor> GetCategories(LayoutPart part) {
+            var describeContext = new DescribeElementsContext { Content = part };
+            var elementCategories = _elementManager.GetCategories(describeContext).ToArray();
+
+            return elementCategories.Where(category => category.Elements.Any(x => !x.IsSystemElement));
         }
     }
 }

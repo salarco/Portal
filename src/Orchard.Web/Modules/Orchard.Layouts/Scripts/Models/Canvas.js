@@ -31,10 +31,6 @@
     };
 
     LayoutEditor.Canvas.from = function (config, value) {
-        // TODO: Remove this when layout elements are no longer in config.
-        config.categories = _(config.categories).filter(function (item) {
-            return item.name != "Layout";
-        });
         return new LayoutEditor.Canvas(config, value.data, value.id, value.cssClasses, value.cssStyles, LayoutEditor.childrenFrom(value.children));
     };
 
