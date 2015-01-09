@@ -13,7 +13,7 @@
         })
 
         this.addChild = function (child) {
-            if (!_(this.children).contains(child))
+            if (!_(this.children).contains(child) && _(allowedChildTypes).contains(child.type))
                 this.children.push(child);
             child.setCanvas(this.canvas);
             child.parent = this;
@@ -67,6 +67,19 @@
             return _(this.children).map(function (child) {
                 return child.toObject();
             }); 
+        };
+
+        this.pasteChildFromClipboard = function () {
+            if (!!this.canvas.clipboard) {
+                var data = this.canvas.clipboard.toObject();
+                var child = LayoutEditor.elementFrom(data);
+                if (_(allowedChildTypes).contains(child.type)) {
+                    this.addChild(child);
+                    child.setIsFocused();
+                }
+                else if (!!this.parent)
+                    this.parent.pasteChildFromClipboard();
+            }
         };
     };
 

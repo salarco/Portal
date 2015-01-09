@@ -100,6 +100,15 @@
                 cssStyles: this.cssStyles
             };
         };
+
+        this.copyToClipboard = function () {
+            this.canvas.clipboard = this;
+        };
+
+        this.pasteFromClipboard = function () {
+            if (!!this.parent)
+                this.parent.pasteChildFromClipboard();
+        }
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

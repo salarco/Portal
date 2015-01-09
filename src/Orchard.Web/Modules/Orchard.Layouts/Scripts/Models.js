@@ -8,17 +8,21 @@ var LayoutEditor;
 
     LayoutEditor.childrenFrom = function (values) {
         return _(values).map(function (value) {
-            switch (value.type) {
-                case "Grid":
-                    return LayoutEditor.Grid.from(value);
-                case "Row":
-                    return LayoutEditor.Row.from(value);
-                case "Column":
-                    return LayoutEditor.Column.from(value);
-                case "Content":
-                    return LayoutEditor.Content.from(value);
-            }
+            return LayoutEditor.elementFrom(value);
         });
+    }
+
+    LayoutEditor.elementFrom = function (value) {
+        switch (value.type) {
+            case "Grid":
+                return LayoutEditor.Grid.from(value);
+            case "Row":
+                return LayoutEditor.Row.from(value);
+            case "Column":
+                return LayoutEditor.Column.from(value);
+            case "Content":
+                return LayoutEditor.Content.from(value);
+        }
     }
 
     LayoutEditor.setModel = function (elementSelector, model) {
@@ -133,6 +137,15 @@ var LayoutEditor;
                 cssStyles: this.cssStyles
             };
         };
+
+        this.copyToClipboard = function () {
+            this.canvas.clipboard = this;
+        };
+
+        this.pasteFromClipboard = function () {
+            if (!!this.parent)
+                this.parent.pasteChildFromClipboard();
+        }
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -152,7 +165,7 @@ var LayoutEditor;
         })
 
         this.addChild = function (child) {
-            if (!_(this.children).contains(child))
+            if (!_(this.children).contains(child) && _(allowedChildTypes).contains(child.type))
                 this.children.push(child);
             child.setCanvas(this.canvas);
             child.parent = this;
@@ -207,6 +220,19 @@ var LayoutEditor;
                 return child.toObject();
             }); 
         };
+
+        this.pasteChildFromClipboard = function () {
+            if (!!this.canvas.clipboard) {
+                var data = this.canvas.clipboard.toObject();
+                var child = LayoutEditor.elementFrom(data);
+                if (_(allowedChildTypes).contains(child.type)) {
+                    this.addChild(child);
+                    child.setIsFocused();
+                }
+                else if (!!this.parent)
+                    this.parent.pasteChildFromClipboard();
+            }
+        };
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -223,6 +249,7 @@ var LayoutEditor;
         this.focusedElement = null;
         this.isDragging = false;
         this.inlineEditingIsActive = false;
+        this.clipboard = null;
         this.setCanvas(this);
 
         var self = this;
@@ -235,7 +262,7 @@ var LayoutEditor;
         this.availableAddOperations = [
             { name: "Grid", invoke: function () { addGrid(); } }
         ]
-        
+
         this.toObject = function () {
             var result = this.elementToObject();
             result.children = this.childrenToObject();

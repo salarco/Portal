@@ -10,6 +10,7 @@
         this.focusedElement = null;
         this.isDragging = false;
         this.inlineEditingIsActive = false;
+        this.clipboard = null;
         this.setCanvas(this);
 
         var self = this;
@@ -22,7 +23,7 @@
         this.availableAddOperations = [
             { name: "Grid", invoke: function () { addGrid(); } }
         ]
-        
+
         this.toObject = function () {
             var result = this.elementToObject();
             result.children = this.childrenToObject();

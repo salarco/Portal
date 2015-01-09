@@ -9,18 +9,24 @@
                     $scope.element = eval($attrs.model);
                 else
                     $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
+
                 scopeConfigurator.configureForElement($scope, $element);
                 scopeConfigurator.configureForContainer($scope, $element);
+
                 $scope.sortableOptions["axis"] = "y";
+
                 $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
-                $scope.$root.editElement = function(elementType, elementData) {
+
+                $scope.$root.editElement = function (elementType, elementData) {
                     var host = $scope.$root.layoutDesignerHost;
                     return host.editElement(elementType, elementData);
                 };
+
                 $scope.$root.addElement = function (elementType, elementLabel) {
                     var host = $scope.$root.layoutDesignerHost;
                     return host.addElement(elementType, elementLabel);
                 };
+
                 $scope.activateInlineEditing = function () {
                     $scope.element.inlineEditingIsActive = true;
                     var firstContentEditorId = $("#layout-canvas-" + $scope.$id + " .layout-content-markup").first().attr("id");
