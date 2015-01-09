@@ -28,6 +28,9 @@ namespace Orchard.Layouts.Framework.Elements {
         }
         public abstract string Category { get; }
         public Localizer T { get; set; }
+        public string HtmlId { get; set; }
+        public string HtmlClass { get; set; }
+        public string HtmlStyle { get; set; }
         public ElementDataDictionary ExportableData { get; set; }
         public ElementDescriptor Descriptor { get; set; }
         public ElementDataDictionary Data { get; set; }

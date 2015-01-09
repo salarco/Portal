@@ -6,15 +6,15 @@
             <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                 <li class="layout-popup-item layout-popup-input">
                     <label>ID:</label>
-                    <input type="text" ng-model="element.id" />
+                    <input type="text" ng-model="element.htmlId" />
                 </li>
                 <li class="layout-popup-item layout-popup-input">
                     <label>CSS classes:</label>
-                    <input type="text" ng-model="element.cssClasses" />
+                    <input type="text" ng-model="element.htmlClass" />
                 </li>
                 <li class="layout-popup-item layout-popup-input">
                     <label>CSS styles:</label>
-                    <input type="text" ng-model="element.cssStyles" />
+                    <input type="text" ng-model="element.htmlStyle" />
                 </li>
             </ul>
         </li>
@@ -32,7 +32,7 @@
         </li>
     </ul>
     <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="click(child, $event)" tabindex="{{$id}}">
+        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="click(child, $event)" tabindex="{{$htmlId}}">
             <orc-layout-child element="child" />
         </div>
     </div>

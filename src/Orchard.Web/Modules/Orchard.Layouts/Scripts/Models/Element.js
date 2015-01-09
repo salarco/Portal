@@ -1,15 +1,15 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Element = function (type, data, id, cssClasses, cssStyles) {
+    LayoutEditor.Element = function (type, data, htmlId, htmlClass, htmlStyle) {
         if (!type)
             throw new Error("Parameter 'type' is required.");
 
         this.type = type;
         this.data = data;
-        this.id = id;
-        this.cssClasses = cssClasses;
-        this.cssStyles = cssStyles;
+        this.htmlId = htmlId;
+        this.htmlClass = htmlClass;
+        this.htmlStyle = htmlStyle;
 
         this.canvas = null;
         this.parent = null;
@@ -53,16 +53,18 @@
             this.canvas.focusedElement = this;
         };
 
-        this.getIsSelected = function () {
+        this.getIsSelected = function() {
             if (this.getIsFocused())
                 return true;
 
             if (!!this.children && _.isArray(this.children)) {
-                return _(this.children).any(function (child) {
+                return _(this.children).any(function(child) {
                     return child.getIsSelected();
                 });
             }
-        }
+
+            return false;
+        };
 
         this.delete = function () {
             if (!!this.parent)
@@ -79,25 +81,25 @@
                 this.parent.moveChildDown(this);
         };
 
-        this.canMoveUp = function () {
+        this.canMoveUp = function() {
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildUp(this);
-        }
+        };
 
-        this.canMoveDown = function () {
+        this.canMoveDown = function() {
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildDown(this);
-        }
+        };
 
         this.elementToObject = function () {
             return {
                 type: this.type,
                 data: this.data,
-                id: this.id,
-                cssClasses: this.cssClasses,
-                cssStyles: this.cssStyles
+                htmlId: this.htmlId,
+                htmlClass: this.htmlClass,
+                htmlStyle: this.htmlStyle
             };
         };
 
@@ -105,10 +107,10 @@
             this.canvas.clipboard = this;
         };
 
-        this.pasteFromClipboard = function () {
+        this.pasteFromClipboard = function() {
             if (!!this.parent)
                 this.parent.pasteChildFromClipboard();
-        }
+        };
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

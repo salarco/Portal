@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Orchard.Environment;
-using Orchard.Layouts.Framework.Drivers;
 using Orchard.Layouts.Framework.Elements;
 using Orchard.Layouts.Framework.Harvesters;
-using Orchard.Layouts.Helpers;
 using Orchard.Layouts.Services;
-using Orchard.Layouts.Settings;
 
 namespace Orchard.Layouts.Providers {
     public class TypedElementHarvester : IElementHarvester {
@@ -30,33 +27,10 @@ namespace Orchard.Layouts.Providers {
                 var element = _factory.Value.Activate(elementType);
                 return new ElementDescriptor(elementType, element.Type, element.DisplayText, element.Category) {
                     GetDrivers = () => _elementManager.Value.GetDrivers(element),
-                    Editor = Editor,
-                    UpdateEditor = Editor,
                     IsSystemElement = element.IsSystemElement,
                     EnableEditorDialog = element.HasEditor
                 };
             });
-        }
-
-        private void Editor(ElementEditorContext context) {
-            var viewModel = context.Element.Data.GetModel<CommonElementSettings>();
-            var commonSettingsEditor = context.ShapeFactory.EditorTemplate(
-                TemplateName: "ElementSettings.Common",
-                Model: viewModel,
-                Prefix: "CommonElementSettings");
-
-            commonSettingsEditor.Metadata.Position = "Settings:5";
-            context.EditorResult.Add(commonSettingsEditor);
-
-            if (context.Updater != null) {
-                context.Updater.TryUpdateModel(viewModel, context.Prefix.AppendPrefix("CommonElementSettings"), null, null);
-                new CommonElementSettings {
-                    Id = viewModel.Id,
-                    CssClass = viewModel.CssClass,
-                    InlineStyle = viewModel.InlineStyle
-                }
-                .Store(context.Element.Data);
-            }
         }
     }
 }

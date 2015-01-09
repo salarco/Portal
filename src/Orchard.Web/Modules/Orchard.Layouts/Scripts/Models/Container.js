@@ -8,9 +8,9 @@
         this.isContainer = true;
 
         var parent = this;
-        _(this.children).each(function (child) {
+        _(this.children).each(function(child) {
             child.parent = parent;
-        })
+        });
 
         this.addChild = function (child) {
             if (!_(this.children).contains(child) && _(allowedChildTypes).contains(child.type))

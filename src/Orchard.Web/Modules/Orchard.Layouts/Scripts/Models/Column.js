@@ -1,8 +1,8 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Column = function (data, id, cssClasses, cssStyles, width, offset, children) {
-        LayoutEditor.Element.call(this, "Column", data, id, cssClasses, cssStyles);
+    LayoutEditor.Column = function (data, htmlId, htmlClass, htmlStyle, width, offset, children) {
+        LayoutEditor.Element.call(this, "Column", data, htmlId, htmlClass, htmlStyle);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.width = width;
@@ -26,9 +26,9 @@
             return this.parent.canDecreaseColumnOffset(this);
         };
 
-        this.decreaseOffset = function () {
+        this.decreaseOffset = function() {
             this.parent.decreaseColumnOffset(this);
-        }
+        };
 
         this.canIncreaseOffset = function () {
             return this.parent.canIncreaseColumnOffset(this);
@@ -46,8 +46,8 @@
         }
 
         this.availableAddOperations = [
-            { name: "Grid", invoke: function () { addGrid(); } }
-        ]
+            { name: "Grid", invoke: function() { addGrid(); } }
+        ];
 
         this.toObject = function () {
             var result = this.elementToObject();
@@ -59,7 +59,7 @@
     };
 
     LayoutEditor.Column.from = function (value) {
-        return new LayoutEditor.Column(value.data, value.id, value.cssClasses, value.cssStyles, value.width, value.offset, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Column(value.data, value.htmlId, value.htmlClass, value.htmlStyle, value.width, value.offset, LayoutEditor.childrenFrom(value.children));
     };
 
     LayoutEditor.Column.times = function (value) {

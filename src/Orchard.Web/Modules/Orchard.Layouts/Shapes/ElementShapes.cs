@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Web.Mvc;
-using Newtonsoft.Json;
 using Orchard.ContentManagement;
 using Orchard.Core.Shapes;
 using Orchard.DisplayManagement;
@@ -9,8 +8,6 @@ using Orchard.DisplayManagement.Descriptors;
 using Orchard.DisplayManagement.Shapes;
 using Orchard.Environment;
 using Orchard.Layouts.Framework.Elements;
-using Orchard.Layouts.Helpers;
-using Orchard.Layouts.Settings;
 using Orchard.Tokens;
 
 namespace Orchard.Layouts.Shapes {
@@ -39,15 +36,13 @@ namespace Orchard.Layouts.Shapes {
 
                 // Tokenize common settings
                 var content = (ContentItem)context.Shape.ContentItem;
-                var settings = element.Data ?? new ElementDataDictionary();
-                var commonSettings = settings.GetModel<CommonElementSettings>();
-                var id = commonSettings.Id;
-                var cssClass = commonSettings.CssClass;
-                var inlineStyle = commonSettings.InlineStyle;
+                var htmlId = element.HtmlId;
+                var htmlClass = element.HtmlClass;
+                var htmlStyle = element.HtmlStyle;
 
-                context.Shape.TokenizeId = (Func<string>)(() => _tokenizer.Value.Replace(id, new { Content = content }));
-                context.Shape.TokenizeInlineStyle = (Func<string>)(() => _tokenizer.Value.Replace(inlineStyle, new { Content = content }));
-                context.Shape.TokenizeCssClass = (Func<string>)(() => _tokenizer.Value.Replace(cssClass, new { Content = content }));
+                context.Shape.TokenizeId = (Func<string>)(() => _tokenizer.Value.Replace(htmlId, new { Content = content }));
+                context.Shape.TokenizeInlineStyle = (Func<string>)(() => _tokenizer.Value.Replace(htmlStyle, new { Content = content }));
+                context.Shape.TokenizeCssClass = (Func<string>)(() => _tokenizer.Value.Replace(htmlClass, new { Content = content }));
             });
         }
 

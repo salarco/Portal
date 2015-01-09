@@ -14,5 +14,8 @@ namespace Orchard.Layouts.Framework.Elements {
         ElementDescriptor Descriptor { get; set; }
         int Index { get; set; }
         Localizer T { get; set; }
+        string HtmlId { get; set; }
+        string HtmlClass { get; set; }
+        string HtmlStyle { get; set; }
     }
 }

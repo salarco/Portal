@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Orchard.DisplayManagement.Shapes;
 using Orchard.Layouts.Framework.Elements;
-using Orchard.Layouts.Settings;
 
 namespace Orchard.Layouts.Helpers {
     public static class TagBuilderExtensions {
@@ -16,24 +15,22 @@ namespace Orchard.Layouts.Helpers {
 
         public static IDictionary<string, object> GetCommonElementAttributes(dynamic shape) {
             var element = (IElement)shape.Element;
-            var settings = element.Data ?? new ElementDataDictionary();
-            var commonSettings = settings.GetModel<CommonElementSettings>();
-            var id = commonSettings.Id;
-            var cssClass = commonSettings.CssClass;
-            var inlineStyle = commonSettings.InlineStyle;
+            var htmlId = element.HtmlId;
+            var htmlClass = element.HtmlClass;
+            var htmlStyle = element.HtmlStyle;
             var attributes = new Dictionary<string, object>();
 
-            if (!String.IsNullOrWhiteSpace(id)) {
+            if (!String.IsNullOrWhiteSpace(htmlId)) {
                 var tokenize = (Func<string>)shape.TokenizeId;
                 attributes["id"] = tokenize();
             }
 
-            if (!String.IsNullOrWhiteSpace(inlineStyle)) {
+            if (!String.IsNullOrWhiteSpace(htmlStyle)) {
                 var tokenize = (Func<string>)shape.TokenizeInlineStyle;
                 attributes["style"] = Regex.Replace(tokenize(), @"(?:\r\n|[\r\n])", "");
             }
 
-            if (!String.IsNullOrWhiteSpace(cssClass)) {
+            if (!String.IsNullOrWhiteSpace(htmlClass)) {
                 var tokenize = (Func<string>)shape.TokenizeCssClass;
                 attributes["class"] = tokenize();
             }

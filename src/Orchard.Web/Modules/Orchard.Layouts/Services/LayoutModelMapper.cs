@@ -8,7 +8,6 @@ using Orchard.Layouts.Elements;
 using Orchard.Layouts.Framework.Display;
 using Orchard.Layouts.Framework.Elements;
 using Orchard.Layouts.Helpers;
-using Orchard.Layouts.Settings;
 using Orchard.Utility.Extensions;
 
 namespace Orchard.Layouts.Services {
@@ -55,16 +54,19 @@ namespace Orchard.Layouts.Services {
         private IElement LoadElement(JToken node, IContainer parent, int index, DescribeElementsContext describeContext) {
             var type = (string)node["type"];
             var data = ElementDataHelper.Deserialize((string)node["data"]);
-            var id = (string)node["id"];
-            var cssClasses = (string)node["cssClasses"];
-            var cssStyles = (string)node["cssStyles"];
+            var htmlId = (string)node["htmlId"];
+            var htmlClass = (string)node["htmlClass"];
+            var htmlStyle = (string)node["htmlStyle"];
             ElementDescriptor descriptor;
             IElement element;
 
             var activateArgs = new ActivateElementArgs {
                 Data = data,
                 Container = parent,
-                Index = index
+                Index = index,
+                HtmlId = htmlId,
+                HtmlClass = htmlClass,
+                HtmlStyle = htmlStyle
             };
 
             switch (type) {
@@ -97,29 +99,20 @@ namespace Orchard.Layouts.Services {
                     throw new NotImplementedException();
             }
 
-            new CommonElementSettings {
-                Id = id,
-                CssClass = cssClasses,
-                InlineStyle = cssStyles
-            }
-            .Store(element.Data);
-
             return element;
         }
 
         private object ToEditorModel(IEnumerable<IElement> elements, DescribeElementsContext describeContext) {
             // Technically, a layout does not have to be part of a Canvas, but the editor requires a single root, starting with Canvas.
             var elementsList = elements.ToArray();
-            var canvas = elementsList.Any() && elementsList.First() is Canvas ? (Canvas) elementsList.First() : default(Canvas);
-            var children = canvas != null ? canvas.Elements : elementsList;
-            var commonSettings = canvas != null ? canvas.Data.GetModel<CommonElementSettings>() : new CommonElementSettings();
+            var canvas = elementsList.Any() && elementsList.First() is Canvas ? (Canvas) elementsList.First() : new Canvas {Elements = elementsList};
             var root = new {
                 type = "Canvas",
                 data = default(string),
-                id = commonSettings.Id,
-                cssClasses = commonSettings.CssClass,
-                cssStyles = commonSettings.InlineStyle,
-                children = children.Select(x => ToEditorModel(x, describeContext)).ToList()
+                htmlId = canvas.HtmlId,
+                htmlClass = canvas.HtmlClass,
+                htmlStyle = canvas.HtmlStyle,
+                children = canvas.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
             };
 
             return root;
@@ -127,16 +120,15 @@ namespace Orchard.Layouts.Services {
 
         private object ToEditorModel(IElement element, DescribeElementsContext describeContext) {
             var data = element.Data.Serialize();
-            var common = element.Data.GetModel<CommonElementSettings>();
-
             var grid = element as IGrid;
+
             if (grid != null) {
                 return new {
                     type = "Grid",
                     data = data,
-                    id = common.Id,
-                    cssClasses = common.CssClass,
-                    cssStyles = common.InlineStyle,
+                    htmlId = element.HtmlId,
+                    htmlClass = element.HtmlClass,
+                    htmlStyle = element.HtmlStyle,
                     children = grid.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
                 };
             }
@@ -146,9 +138,9 @@ namespace Orchard.Layouts.Services {
                 return new {
                     type = "Row",
                     data = data,
-                    id = common.Id,
-                    cssClasses = common.CssClass,
-                    cssStyles = common.InlineStyle,
+                    htmlId = element.HtmlId,
+                    htmlClass = element.HtmlClass,
+                    htmlStyle = element.HtmlStyle,
                     children = row.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
                 };
             }
@@ -158,9 +150,9 @@ namespace Orchard.Layouts.Services {
                 return new {
                     type = "Column",
                     data = data,
-                    id = common.Id,
-                    cssClasses = common.CssClass,
-                    cssStyles = common.InlineStyle,
+                    htmlId = element.HtmlId,
+                    htmlClass = element.HtmlClass,
+                    htmlStyle = element.HtmlStyle,
                     width = column.Width,
                     offset = column.Offset,
                     children = column.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
@@ -171,11 +163,11 @@ namespace Orchard.Layouts.Services {
                 type = "Content",
                 contentType = element.Descriptor.TypeName,
                 contentTypeLabel = element.DisplayText.Text,
-                contentTypeClass = String.Format("layout-content-{0}", element.DisplayText.Text.HtmlClassify()),
+                contentTypeClass = String.Format(element.DisplayText.Text.HtmlClassify()),
                 data = data,
-                id = common.Id,
-                cssClasses = common.CssClass,
-                cssStyles = common.InlineStyle,
+                htmlId = element.HtmlId,
+                htmlClass = element.HtmlClass,
+                htmlStyle = element.HtmlStyle,
                 html = _shapeDisplay.Display(_elementDisplay.DisplayElement(element, content: describeContext.Content, displayType: "Design"))
             };
         }

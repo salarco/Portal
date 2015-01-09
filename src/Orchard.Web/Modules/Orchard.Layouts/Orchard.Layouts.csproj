@@ -261,7 +261,6 @@
     <Content Include="Views\DefinitionTemplates\ElementWrapperPartSettings.cshtml" />
     <Content Include="Views\Parts.ZonesLayout.cshtml" />
     <Content Include="Views\Element-Layout-Grid.Zones.cshtml" />
-    <Content Include="Views\EditorTemplates\ElementSettings.Common.cshtml" />
     <Content Include="Views\ElementEditor.LocalNav.cshtml" />
     <Content Include="Views\ElementEditor.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.Markdown.cshtml" />
@@ -451,7 +450,6 @@
     <Compile Include="Elements\Html.cs" />
     <Compile Include="Elements\Markdown.cs" />
     <Compile Include="Framework\Elements\ElementDataDictionary.cs" />
-    <Compile Include="Settings\CommonElementSettings.cs" />
     <Compile Include="Helpers\ContentFieldNameHelper.cs" />
     <Compile Include="Helpers\MetaDataExtensions.cs" />
     <Compile Include="Helpers\TagBuilderExtensions.cs" />

@@ -1,8 +1,8 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Canvas = function (config, data, id, cssClasses, cssStyles, children) {
-        LayoutEditor.Element.call(this, "Canvas", data, id, cssClasses, cssStyles);
+    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, children) {
+        LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.config = config;
@@ -21,8 +21,8 @@
         }
 
         this.availableAddOperations = [
-            { name: "Grid", invoke: function () { addGrid(); } }
-        ]
+            { name: "Grid", invoke: function() { addGrid(); } }
+        ];
 
         this.toObject = function () {
             var result = this.elementToObject();
@@ -32,7 +32,7 @@
     };
 
     LayoutEditor.Canvas.from = function (config, value) {
-        return new LayoutEditor.Canvas(config, value.data, value.id, value.cssClasses, value.cssStyles, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Canvas(config, value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

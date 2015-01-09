@@ -46,7 +46,10 @@ namespace Orchard.Layouts.Services {
                 exportableData = element.ExportableData.Serialize(),
                 index = index,
                 elements = container != null ? container.Elements.Select(Serialize).ToList() : new List<object>(),
-                isTemplated = element.IsTemplated
+                isTemplated = element.IsTemplated,
+                htmlId = element.HtmlId,
+                htmlClass = element.HtmlClass,
+                htmlStyle = element.HtmlStyle
             };
             return dto;
         }
@@ -58,6 +61,9 @@ namespace Orchard.Layouts.Services {
                 return null;
 
             var data = (string) node["data"] ?? (string) node["state"]; // Falling back to "state" node for backwards compatibility.
+            var htmlId = (string) node["htmlId"];
+            var htmlClass = (string)node["htmlClass"];
+            var htmlStyle = (string)node["htmlStyle"];
             var elementData = ElementDataHelper.Deserialize(data);
             var exportableData = ElementDataHelper.Deserialize((string)node["exportableData"]);
             var childNodes = node["elements"];
@@ -71,7 +77,10 @@ namespace Orchard.Layouts.Services {
                     Container = parent, 
                     Index = index, 
                     Data = elementData,
-                    ExportableData = exportableData
+                    ExportableData = exportableData,
+                    HtmlId = htmlId,
+                    HtmlClass = htmlClass,
+                    HtmlStyle = htmlStyle
                 });
             var container = element as IContainer;
 

@@ -6,24 +6,27 @@ var LayoutEditor;
         this.splice(to, 0, this.splice(from, 1)[0]);
     };
 
-    LayoutEditor.childrenFrom = function (values) {
-        return _(values).map(function (value) {
+    LayoutEditor.childrenFrom = function(values) {
+        return _(values).map(function(value) {
             return LayoutEditor.elementFrom(value);
         });
-    }
+    };
 
-    LayoutEditor.elementFrom = function (value) {
+    LayoutEditor.elementFrom = function(value) {
         switch (value.type) {
-            case "Grid":
-                return LayoutEditor.Grid.from(value);
-            case "Row":
-                return LayoutEditor.Row.from(value);
-            case "Column":
-                return LayoutEditor.Column.from(value);
-            case "Content":
-                return LayoutEditor.Content.from(value);
+        case "Grid":
+            return LayoutEditor.Grid.from(value);
+        case "Row":
+            return LayoutEditor.Row.from(value);
+        case "Column":
+            return LayoutEditor.Column.from(value);
+        case "Content":
+            return LayoutEditor.Content.from(value);
+            default:
+                // TODO: Make this extensible so that other modules such as DynamicForms can implement their own layout/container elements.
+                throw new Error("No element with type \"" + value.type + "\" was found.");
         }
-    }
+    };
 
     LayoutEditor.setModel = function (elementSelector, model) {
         $(elementSelector).scope().element = model;
@@ -38,15 +41,15 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Element = function (type, data, id, cssClasses, cssStyles) {
+    LayoutEditor.Element = function (type, data, htmlId, htmlClass, htmlStyle) {
         if (!type)
             throw new Error("Parameter 'type' is required.");
 
         this.type = type;
         this.data = data;
-        this.id = id;
-        this.cssClasses = cssClasses;
-        this.cssStyles = cssStyles;
+        this.htmlId = htmlId;
+        this.htmlClass = htmlClass;
+        this.htmlStyle = htmlStyle;
 
         this.canvas = null;
         this.parent = null;
@@ -90,16 +93,18 @@ var LayoutEditor;
             this.canvas.focusedElement = this;
         };
 
-        this.getIsSelected = function () {
+        this.getIsSelected = function() {
             if (this.getIsFocused())
                 return true;
 
             if (!!this.children && _.isArray(this.children)) {
-                return _(this.children).any(function (child) {
+                return _(this.children).any(function(child) {
                     return child.getIsSelected();
                 });
             }
-        }
+
+            return false;
+        };
 
         this.delete = function () {
             if (!!this.parent)
@@ -116,25 +121,25 @@ var LayoutEditor;
                 this.parent.moveChildDown(this);
         };
 
-        this.canMoveUp = function () {
+        this.canMoveUp = function() {
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildUp(this);
-        }
+        };
 
-        this.canMoveDown = function () {
+        this.canMoveDown = function() {
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildDown(this);
-        }
+        };
 
         this.elementToObject = function () {
             return {
                 type: this.type,
                 data: this.data,
-                id: this.id,
-                cssClasses: this.cssClasses,
-                cssStyles: this.cssStyles
+                htmlId: this.htmlId,
+                htmlClass: this.htmlClass,
+                htmlStyle: this.htmlStyle
             };
         };
 
@@ -142,10 +147,10 @@ var LayoutEditor;
             this.canvas.clipboard = this;
         };
 
-        this.pasteFromClipboard = function () {
+        this.pasteFromClipboard = function() {
             if (!!this.parent)
                 this.parent.pasteChildFromClipboard();
-        }
+        };
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -160,9 +165,9 @@ var LayoutEditor;
         this.isContainer = true;
 
         var parent = this;
-        _(this.children).each(function (child) {
+        _(this.children).each(function(child) {
             child.parent = parent;
-        })
+        });
 
         this.addChild = function (child) {
             if (!_(this.children).contains(child) && _(allowedChildTypes).contains(child.type))
@@ -240,8 +245,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Canvas = function (config, data, id, cssClasses, cssStyles, children) {
-        LayoutEditor.Element.call(this, "Canvas", data, id, cssClasses, cssStyles);
+    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, children) {
+        LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.config = config;
@@ -260,8 +265,8 @@ var LayoutEditor;
         }
 
         this.availableAddOperations = [
-            { name: "Grid", invoke: function () { addGrid(); } }
-        ]
+            { name: "Grid", invoke: function() { addGrid(); } }
+        ];
 
         this.toObject = function () {
             var result = this.elementToObject();
@@ -271,7 +276,7 @@ var LayoutEditor;
     };
 
     LayoutEditor.Canvas.from = function (config, value) {
-        return new LayoutEditor.Canvas(config, value.data, value.id, value.cssClasses, value.cssStyles, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Canvas(config, value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -280,8 +285,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Grid = function (data, id, cssClasses, cssStyles, children) {
-        LayoutEditor.Element.call(this, "Grid", data, id, cssClasses, cssStyles);
+    LayoutEditor.Grid = function (data, htmlId, htmlClass, htmlStyle, children) {
+        LayoutEditor.Element.call(this, "Grid", data, htmlId, htmlClass, htmlStyle);
         LayoutEditor.Container.call(this, ["Row"], children);
 
         var self = this;
@@ -293,14 +298,14 @@ var LayoutEditor;
         }
 
         this.availableAddOperations = [
-            { name: "Empty row", invoke: function () { addRow(0); } },
-            { name: "1 column (of width 12)", invoke: function () { addRow(1); } },
-            { name: "2 columns (of width 6)", invoke: function () { addRow(2); } },
-            { name: "3 columns (of width 4)", invoke: function () { addRow(3); } },
-            { name: "4 columns (of width 3)", invoke: function () { addRow(4); } },
-            { name: "6 columns (of width 2)", invoke: function () { addRow(6); } },
-            { name: "12 columns (of width 1)", invoke: function () { addRow(12); } }
-        ]
+            { name: "Empty row", invoke: function() { addRow(0); } },
+            { name: "1 column (of width 12)", invoke: function() { addRow(1); } },
+            { name: "2 columns (of width 6)", invoke: function() { addRow(2); } },
+            { name: "3 columns (of width 4)", invoke: function() { addRow(3); } },
+            { name: "4 columns (of width 3)", invoke: function() { addRow(4); } },
+            { name: "6 columns (of width 2)", invoke: function() { addRow(6); } },
+            { name: "12 columns (of width 1)", invoke: function() { addRow(12); } }
+        ];
 
         this.toObject = function () {
             var result = this.elementToObject();
@@ -310,7 +315,7 @@ var LayoutEditor;
     };
 
     LayoutEditor.Grid.from = function (value) {
-        return new LayoutEditor.Grid(value.data, value.id, value.cssClasses, value.cssStyles, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Grid(value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -318,8 +323,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Row = function (data, id, cssClasses, cssStyles, children) {
-        LayoutEditor.Element.call(this, "Row", data, id, cssClasses, cssStyles);
+    LayoutEditor.Row = function (data, htmlId, htmlClass, htmlStyle, children) {
+        LayoutEditor.Element.call(this, "Row", data, htmlId, htmlClass, htmlStyle);
         LayoutEditor.Container.call(this, ["Column"], children);
 
         this.canAddColumn = function () {
@@ -416,7 +421,7 @@ var LayoutEditor;
     };
 
     LayoutEditor.Row.from = function (value) {
-        return new LayoutEditor.Row(value.data, value.id, value.cssClasses, value.cssStyles, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Row(value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -424,8 +429,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Column = function (data, id, cssClasses, cssStyles, width, offset, children) {
-        LayoutEditor.Element.call(this, "Column", data, id, cssClasses, cssStyles);
+    LayoutEditor.Column = function (data, htmlId, htmlClass, htmlStyle, width, offset, children) {
+        LayoutEditor.Element.call(this, "Column", data, htmlId, htmlClass, htmlStyle);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.width = width;
@@ -449,9 +454,9 @@ var LayoutEditor;
             return this.parent.canDecreaseColumnOffset(this);
         };
 
-        this.decreaseOffset = function () {
+        this.decreaseOffset = function() {
             this.parent.decreaseColumnOffset(this);
-        }
+        };
 
         this.canIncreaseOffset = function () {
             return this.parent.canIncreaseColumnOffset(this);
@@ -469,8 +474,8 @@ var LayoutEditor;
         }
 
         this.availableAddOperations = [
-            { name: "Grid", invoke: function () { addGrid(); } }
-        ]
+            { name: "Grid", invoke: function() { addGrid(); } }
+        ];
 
         this.toObject = function () {
             var result = this.elementToObject();
@@ -482,7 +487,7 @@ var LayoutEditor;
     };
 
     LayoutEditor.Column.from = function (value) {
-        return new LayoutEditor.Column(value.data, value.id, value.cssClasses, value.cssStyles, value.width, value.offset, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Column(value.data, value.htmlId, value.htmlClass, value.htmlStyle, value.width, value.offset, LayoutEditor.childrenFrom(value.children));
     };
 
     LayoutEditor.Column.times = function (value) {
@@ -496,8 +501,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Content = function (data, id, cssClasses, cssStyles, contentType, contentTypeLabel, contentTypeClass, html) {
-        LayoutEditor.Element.call(this, "Content", data, id, cssClasses, cssStyles);
+    LayoutEditor.Content = function (data, htmlId, htmlClass, htmlStyle, contentType, contentTypeLabel, contentTypeClass, html) {
+        LayoutEditor.Element.call(this, "Content", data, htmlId, htmlClass, htmlStyle);
 
         this.contentType = contentType;
         this.contentTypeLabel = contentTypeLabel;
@@ -521,7 +526,7 @@ var LayoutEditor;
     };
 
     LayoutEditor.Content.from = function (value) {
-        return new LayoutEditor.Content(value.data, value.id, value.cssClasses, value.cssStyles, value.contentType, value.contentTypeLabel, value.contentTypeClass, value.html);
+        return new LayoutEditor.Content(value.data, value.htmlId, value.htmlClass, value.htmlStyle, value.contentType, value.contentTypeLabel, value.contentTypeClass, value.html);
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

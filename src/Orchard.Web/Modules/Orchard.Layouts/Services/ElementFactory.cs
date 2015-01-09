@@ -35,6 +35,9 @@ namespace Orchard.Layouts.Services {
             element.Index = args.Index;
             element.Data = args.Data ?? new ElementDataDictionary();
             element.ExportableData = args.ExportableData ?? new ElementDataDictionary();
+            element.HtmlId = args.HtmlId;
+            element.HtmlClass = args.HtmlClass;
+            element.HtmlStyle = args.HtmlStyle;
 
             _elementEventHandler.Created(new ElementCreatedContext {
                 Element = element,
