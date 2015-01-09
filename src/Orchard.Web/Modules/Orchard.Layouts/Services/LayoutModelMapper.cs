@@ -103,7 +103,7 @@ namespace Orchard.Layouts.Services {
         }
 
         private object ToEditorModel(IEnumerable<IElement> elements, DescribeElementsContext describeContext) {
-            // Technically, a layout does not have to be part of a Canvas, but the editor requires a single root, starting with Canvas.
+            // Technically, a layout does not have to be part of a Canvas, but the editor requires a single root, starting with Canvas, so we make sure that it does.
             var elementsList = elements.ToArray();
             var canvas = elementsList.Any() && elementsList.First() is Canvas ? (Canvas) elementsList.First() : new Canvas {Elements = elementsList};
             var root = new {
