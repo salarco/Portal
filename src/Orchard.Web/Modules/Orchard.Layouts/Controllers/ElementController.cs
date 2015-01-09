@@ -11,14 +11,12 @@ using Orchard.Layouts.Models;
 using Orchard.Layouts.Services;
 using Orchard.Layouts.ViewModels;
 using Orchard.Localization;
-using Orchard.Mvc;
-using Orchard.Themes;
 using Orchard.UI.Admin;
+using Orchard.Utility.Extensions;
 
 namespace Orchard.Layouts.Controllers {
     public class ElementController : Controller, IUpdateModel {
         private readonly IElementDisplay _elementDisplay;
-        private readonly ILayoutSerializer _layoutSerializer;
         private readonly IElementManager _elementManager;
         private readonly IShapeFactory _shapeFactory;
         private readonly ITransactionManager _transactionManager;
@@ -29,7 +27,6 @@ namespace Orchard.Layouts.Controllers {
 
         public ElementController(
             IElementDisplay elementDisplay,
-            ILayoutSerializer layoutSerializer,
             IElementManager elementManager,
             IShapeFactory shapeFactory,
             ITransactionManager transactionManager,
@@ -39,7 +36,6 @@ namespace Orchard.Layouts.Controllers {
             IShapeDisplay shapeDisplay) {
 
             _elementDisplay = elementDisplay;
-            _layoutSerializer = layoutSerializer;
             _elementManager = elementManager;
             _shapeFactory = shapeFactory;
             _transactionManager = transactionManager;
@@ -50,26 +46,21 @@ namespace Orchard.Layouts.Controllers {
         }
 
         [Admin]
-        public ViewResult Browse(string session, int? layoutId = null, string contentType = null) {
-            var context = CreateDescribeContext(layoutId, contentType);
-            var categories = _elementManager.GetCategories(context).ToArray();
-            var viewModel = new BrowseElementsViewModel {
-                Categories = categories,
-                ContentId = layoutId,
-                ContentType = contentType,
-                Session = session
-            };
-            return View(viewModel);
-        }
-
         [HttpPost]
-        [Themed(false)]
-        [ValidateInput(false)]
-        public ShapeResult Render(string graph, string displayType, int? contentId = null, string contentType = null, string renderEventName = null, string renderEventArgs = null) {
-            var context = CreateDescribeContext(contentId, contentType);
-            var instances = _layoutSerializer.Deserialize(graph, context);
-            var shape = _elementDisplay.DisplayElements(instances, context.Content, displayType: displayType, updater: this, renderEventName: renderEventName, renderEventArgs: renderEventArgs);
-            return new ShapeResult(this, shape);
+        public JsonResult CreateDirect(string typeName, int? contentId = null, string contentType = null) {
+            var describeContext = CreateDescribeContext(contentId, contentType);
+            var descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, typeName);
+            var element = _elementManager.ActivateElement(descriptor);
+
+            var dto = new {
+                typeName = typeName,
+                typeLabel = descriptor.DisplayText.Text,
+                typeClass = descriptor.DisplayText.Text.HtmlClassify(),
+                data = element.Data.Serialize(),
+                html = RenderElement(element, describeContext)
+            };
+
+            return Json(dto);
         }
 
         [Admin]
@@ -96,6 +87,7 @@ namespace Orchard.Layouts.Controllers {
                 DisplayText = descriptor.DisplayText,
                 ElementData = element.Data.Serialize(), 
                 Submitted = !descriptor.EnableEditorDialog,
+                ElementHtml = RenderElement(element, describeContext),
                 Tabs = editorResult.CollectTabs().ToArray()
             };
 
@@ -181,7 +173,9 @@ namespace Orchard.Layouts.Controllers {
                 DisplayText = descriptor.DisplayText,
                 ElementData = element.Data.Serialize(),
                 Tabs = editorResult.CollectTabs().ToArray(),
-                SessionKey = session
+                SessionKey = session,
+                ElementHtml = RenderElement(element, describeContext),
+                Submitted = !descriptor.EnableEditorDialog,
             };
 
             return View(viewModel);
@@ -214,7 +208,7 @@ namespace Orchard.Layouts.Controllers {
                 _transactionManager.Cancel();
             }
             else {
-                viewModel.ElementHtml = _shapeDisplay.Display(_elementDisplay.DisplayElement(element, describeContext.Content, displayType: "Design"));
+                viewModel.ElementHtml = RenderElement(element, describeContext);
                 viewModel.Submitted = true;
             }
             return View("Edit", viewModel);
@@ -256,6 +250,10 @@ namespace Orchard.Layouts.Controllers {
             return new DescribeElementsContext {
                 Content = part
             };
+        }
+
+        private string RenderElement(IElement element, DescribeElementsContext describeContext, string displayType = "Design") {
+            return _shapeDisplay.Display(_elementDisplay.DisplayElement(element, describeContext.Content, displayType));
         }
 
         bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) {

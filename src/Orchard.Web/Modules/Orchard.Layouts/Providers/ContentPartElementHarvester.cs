@@ -8,6 +8,7 @@ using Orchard.Layouts.Framework.Elements;
 using Orchard.Layouts.Framework.Harvesters;
 using Orchard.Layouts.Services;
 using Orchard.Layouts.Settings;
+using Orchard.Utility.Extensions;
 
 namespace Orchard.Layouts.Providers {
     public class ContentPartElementHarvester : Component, IElementHarvester {
@@ -30,7 +31,7 @@ namespace Orchard.Layouts.Providers {
             var contentPartElement = _elementFactory.Value.Activate(elementType);
             var contentParts = GetContentParts(context);
 
-            return contentParts.Select(contentPart => new ElementDescriptor(elementType, contentPart.Name, T(contentPart.Name), contentPartElement.Category) {
+            return contentParts.Select(contentPart => new ElementDescriptor(elementType, contentPart.Name, T(contentPart.Name.CamelFriendly()), contentPartElement.Category) {
                 Display = displayContext => Displaying(displayContext),
                 StateBag = new Dictionary<string, object> {
                     {"ElementTypeName", contentPart.Name}

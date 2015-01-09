@@ -134,7 +134,8 @@ namespace Orchard.Layouts.Drivers {
                     name = category.DisplayName.Text,
                     contentTypes = category.Elements.Where(x => !x.IsSystemElement).Select(element => new {
                         label = element.DisplayText.Text,
-                        id = element.TypeName
+                        id = element.TypeName,
+                        hasEditor = element.EnableEditorDialog
                     })
                 })
             };

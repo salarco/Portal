@@ -1,7 +1,7 @@
 ﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">{{::element.contentTypeLabel}}</li>
-        <li class="layout-panel-item layout-panel-action" title="Edit {{element.contentTypeLabel}} content" ng-click="edit()"><i class="fa fa-code"></i></li>
+        <li class="layout-panel-item layout-panel-action" ng-show="{{element.hasEditor}}" title="Edit {{element.contentTypeLabel}} content" ng-click="edit()"><i class="fa fa-code"></i></li>
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit {{element.contentTypeLabel}} properties">
             <i class="fa fa-edit"></i>
             <ul class="layout-popup layout-popup-edit" orc-layout-popup>

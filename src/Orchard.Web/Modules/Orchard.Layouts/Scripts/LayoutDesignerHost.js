@@ -14,6 +14,7 @@
                 render: self.element.data("render-url"),
                 edit: self.element.data("edit-url"),
                 add: self.element.data("add-url"),
+                addDirect: self.element.data("add-direct-url"),
                 settings: self.element.data("settings-url"),
                 browse: self.element.data("element-browser-url"),
                 applyTemplate: self.element.data("apply-template-url")
@@ -45,20 +46,38 @@
             return deferred.promise();
         };
 
-        this.addElement = function (elementType, elementLabel) {
-            var dialog = new window.Orchard.Layouts.Dialog(".dialog-template." + self.settings.editorDialogName);
+        this.addElement = function (contentType) {
+            var elementType = contentType.id;
             var deferred = new $.Deferred();
-            var url = self.settings.endpoints.add + "&typeName=" + elementType;
+            var dialog = new window.Orchard.Layouts.Dialog(".dialog-template." + self.settings.editorDialogName);
 
-            dialog.show();
-            dialog.load(url);
+            if (contentType.hasEditor) {
+                var url = self.settings.endpoints.add + "&typeName=" + elementType;
 
-            dialog.element.on("command", function (e, args) {
-                if (args.command == "add" || args.command == "save") {
-                    deferred.resolve(args);
-                    dialog.close();
-                }
-            });
+                dialog.show();
+                dialog.load(url);
+
+                dialog.element.on("command", function(e, args) {
+                    if (args.command == "add" || args.command == "save") {
+                        deferred.resolve(args);
+                        dialog.close();
+                    }
+                });
+            } else {
+                var url = self.settings.endpoints.addDirect;
+
+                $.ajax(url, {
+                    data: {
+                        typeName: elementType,
+                        __RequestVerificationToken: self.settings.antiForgeryToken
+                    },
+                    type: "POST"
+                }).then(function(response) {
+                    deferred.resolve({
+                        element: response
+                    });
+                });
+            }
 
             return deferred.promise();
         };

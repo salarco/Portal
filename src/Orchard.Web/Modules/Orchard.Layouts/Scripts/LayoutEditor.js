@@ -47,7 +47,7 @@ angular
 
             configureForContainer: function ($scope, $element) {
                 $scope.invokeAddContentElement = function (contentType) {
-                    $scope.$root.addElement(contentType.id).then(function (args) {
+                    $scope.$root.addElement(contentType).then(function (args) {
                         $scope.$apply(function () {
                             var container = $scope.element;
                             var newElement = LayoutEditor.Content.from({
@@ -154,9 +154,9 @@ angular
                     return host.editElement(elementType, elementData);
                 };
 
-                $scope.$root.addElement = function (elementType, elementLabel) {
+                $scope.$root.addElement = function (contentType) {
                     var host = $scope.$root.layoutDesignerHost;
-                    return host.addElement(elementType, elementLabel);
+                    return host.addElement(contentType);
                 };
 
                 $scope.activateInlineEditing = function () {

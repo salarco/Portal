@@ -44,7 +44,7 @@
 
             configureForContainer: function ($scope, $element) {
                 $scope.invokeAddContentElement = function (contentType) {
-                    $scope.$root.addElement(contentType.id).then(function (args) {
+                    $scope.$root.addElement(contentType).then(function (args) {
                         $scope.$apply(function () {
                             var container = $scope.element;
                             var newElement = LayoutEditor.Content.from({

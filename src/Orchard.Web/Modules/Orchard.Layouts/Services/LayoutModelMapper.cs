@@ -162,9 +162,10 @@ namespace Orchard.Layouts.Services {
             return new {
                 type = "Content",
                 contentType = element.Descriptor.TypeName,
-                contentTypeLabel = element.DisplayText.Text,
+                contentTypeLabel = element.Descriptor.DisplayText.Text,
                 contentTypeClass = String.Format(element.DisplayText.Text.HtmlClassify()),
                 data = data,
+                hasEditor = element.HasEditor,
                 htmlId = element.HtmlId,
                 htmlClass = element.HtmlClass,
                 htmlStyle = element.HtmlStyle,
