@@ -33,17 +33,20 @@
 
     using (Script.Foot()) {
         <script>
+            angular
+                .module("LayoutEditor")
+                .constant("environment", {
+                    baseUrl: "@Url.Content("~/Modules/Orchard.Layouts/")"
+                });
+
             (function() {
                 var canvasModelData = @Html.Raw(Model.Data);
                 var canvasConfig = @Html.Raw(Model.ConfigurationData);
 
                 window.layoutDesignerCanvas = LayoutEditor.Canvas.from(canvasConfig, canvasModelData);
             })(jQuery);
-        </script>
+</script>
     }
-
-    // Needed for AngularJS to properly load templates using relative paths.
-    WorkContext.Layout.Head.Add(New.BaseHref(Href: Url.Content("~/Modules/Orchard.Layouts/")));
 
     var contentId = Model.Content != null ? Model.Content.Id : default(int?);
     var contentType = Model.Content != null ? Model.Content.ContentItem.ContentType : default(string);

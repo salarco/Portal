@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutRow", function ($compile, scopeConfigurator) {
+    .directive("orcLayoutRow", function ($compile, scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -10,7 +10,7 @@
                 $scope.sortableOptions["axis"] = "x";
                 $scope.sortableOptions["ui-floating"] = true;
             },
-            templateUrl: "Templates/orc-layout-row.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-row.html",
             replace: true
         };
     });

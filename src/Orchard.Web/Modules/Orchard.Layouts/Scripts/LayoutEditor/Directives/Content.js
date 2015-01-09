@@ -1,6 +1,6 @@
 ﻿angular
     .module("LayoutEditor")
-    .directive("orcLayoutContent", function (scopeConfigurator) {
+    .directive("orcLayoutContent", function (scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -17,7 +17,7 @@
                     $scope.element.html = e.target.innerHTML;
                 };
             },
-            templateUrl: "Templates/orc-layout-content.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-content.html",
             replace: true,
             link: function (scope, element) {
                 // Mouse down events must not be intercepted by drag and drop while inline editing is active,

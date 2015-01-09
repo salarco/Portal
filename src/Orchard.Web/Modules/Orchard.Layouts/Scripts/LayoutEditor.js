@@ -132,7 +132,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Canvas.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, scopeConfigurator) {
+    .directive("orcLayoutCanvas", function ($compile, scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: {},
@@ -201,7 +201,7 @@ angular
                     });
                 };
             },
-            templateUrl: "Templates/orc-layout-canvas.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-canvas.html",
             replace: true,
             link: function (scope, element) {
                 // No clicks should propagate from the TinyMCE toolbars.
@@ -235,7 +235,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Column.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutColumn", function ($compile, scopeConfigurator) {
+    .directive("orcLayoutColumn", function ($compile, scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -244,14 +244,14 @@ angular
                 scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
-            templateUrl: "Templates/orc-layout-column.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-column.html",
             replace: true
         };
     });
 ///#source 1 1 LayoutEditor/Directives/Content.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutContent", function (scopeConfigurator) {
+    .directive("orcLayoutContent", function (scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -268,7 +268,7 @@ angular
                     $scope.element.html = e.target.innerHTML;
                 };
             },
-            templateUrl: "Templates/orc-layout-content.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-content.html",
             replace: true,
             link: function (scope, element) {
                 // Mouse down events must not be intercepted by drag and drop while inline editing is active,
@@ -284,7 +284,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Grid.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutGrid", function ($compile, scopeConfigurator) {
+    .directive("orcLayoutGrid", function ($compile, scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -293,7 +293,7 @@ angular
                 scopeConfigurator.configureForContainer($scope, $element);
                 $scope.sortableOptions["axis"] = "y";
             },
-            templateUrl: "Templates/orc-layout-grid.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-grid.html",
             replace: true
         };
     });
@@ -329,7 +329,7 @@ angular
 ///#source 1 1 LayoutEditor/Directives/Row.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutRow", function ($compile, scopeConfigurator) {
+    .directive("orcLayoutRow", function ($compile, scopeConfigurator, environment) {
         return {
             restrict: "E",
             scope: { element: "=" },
@@ -339,7 +339,7 @@ angular
                 $scope.sortableOptions["axis"] = "x";
                 $scope.sortableOptions["ui-floating"] = true;
             },
-            templateUrl: "Templates/orc-layout-row.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-row.html",
             replace: true
         };
     });

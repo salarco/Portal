@@ -349,7 +349,6 @@
     <Content Include="Views\Element-Content-Text.Design.cshtml" />
     <Content Include="Views\Element-ContentField.Design.cshtml" />
     <Content Include="Views\Element-Media-MediaItem.Design.cshtml" />
-    <Content Include="Views\BaseHref.cshtml" />
     <Content Include="Views\Element-Layout-Canvas.cshtml" />
   </ItemGroup>
   <ItemGroup>
