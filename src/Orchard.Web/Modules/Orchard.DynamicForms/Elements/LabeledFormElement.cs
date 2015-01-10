@@ -3,13 +3,13 @@
 namespace Orchard.DynamicForms.Elements {
     public abstract class LabeledFormElement : FormElement {
         public string Label {
-            get { return Data.Get("Label"); }
-            set { Data["Label"] = value; }
+            get { return this.Retrieve(x => x.Label); }
+            set { this.Store(x => x.Label, value); }
         }
 
         public bool ShowLabel {
-            get { return Data.Get("ShowLabel").ToBoolean().GetValueOrDefault(); }
-            set { Data["ShowLabel"] = value.ToString(); }
+            get { return this.Retrieve(x => x.ShowLabel); }
+            set { this.Store(x => x.ShowLabel, value); }
         }
     }
 }

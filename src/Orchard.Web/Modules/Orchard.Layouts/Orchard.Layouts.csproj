@@ -412,6 +412,7 @@
     <Compile Include="Helpers\DictionaryExtensions.cs" />
     <Compile Include="Helpers\EditorResultExtensions.cs" />
     <Compile Include="Helpers\PrefixHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\ObjectStoreEntry.cs" />
     <Compile Include="Providers\BlueprintElementHarvester.cs" />
     <Compile Include="Services\CurrentControllerAccessor.cs" />
@@ -514,7 +515,6 @@
     <Compile Include="Framework\Elements\IGrid.cs" />
     <Compile Include="Elements\Grid.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
-    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Framework\Elements\ElementDescriptor.cs" />
     <Compile Include="Framework\Drivers\IElementDriver.cs" />
     <Compile Include="Framework\Harvesters\IElementHarvester.cs" />

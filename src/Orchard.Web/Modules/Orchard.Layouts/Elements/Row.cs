@@ -18,6 +18,10 @@ namespace Orchard.Layouts.Elements {
             get { return true; }
         }
 
+        public override bool HasEditor {
+            get { return false; }
+        }
+
         public IEnumerable<Column> Columns {
             get { return Elements.Cast<Column>(); }
         }

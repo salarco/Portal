@@ -7,13 +7,9 @@ namespace Orchard.Layouts.Elements {
             get { return "Media"; }
         }
 
-        public override bool HasEditor {
-            get { return true; }
-        }
-
         public int? MediaId {
-            get { return Data.Get("MediaId").ToInt32(); }
-            set { Data["MediaId"] = value.ToString(); }
+            get { return this.Retrieve(x => x.MediaId); }
+            set { this.Store(x => x.MediaId, value); }
         }
     }
 }

@@ -4,26 +4,26 @@ namespace Orchard.DynamicForms.Elements {
     public class Query : LabeledFormElement {
         
         public string InputType {
-            get { return Data.Get("InputType", "SelectList"); }
-            set { Data["InputType"] = value; }
+            get { return this.Retrieve(x => x.InputType, "SelectList"); }
+            set { this.Store(x => x.InputType, value); }
         }
 
         public int? QueryId {
-            get { return Data.Get("QueryId").ToInt32(); }
-            set { Data["QueryId"] = value.ToString(); }
+            get { return this.Retrieve(x => x.QueryId); }
+            set { this.Store(x => x.QueryId, value); }
         }
 
         public string OptionLabel {
-            get { return Data.Get("OptionLabel"); }
-            set { Data["OptionLabel"] = value; }
+            get { return this.Retrieve(x => x.OptionLabel); }
+            set { this.Store(x => x.OptionLabel, value); }
         }
 
         public string TextExpression {
-            get { return Data.Get("TextExpression", "{Content.Title}"); }
+            get { return this.Retrieve(x => x.TextExpression, "{Content.Title}"); }
         }
 
         public string ValueExpression {
-            get { return Data.Get("ValueExpression", "{Content.Id}"); }
+            get { return this.Retrieve(x => x.ValueExpression, "{Content.Id}"); }
         }
     }
 }

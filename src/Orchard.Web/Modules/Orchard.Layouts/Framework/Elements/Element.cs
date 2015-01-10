@@ -16,7 +16,7 @@ namespace Orchard.Layouts.Framework.Elements {
         }
 
         public virtual bool HasEditor {
-            get { return false; }
+            get { return true; }
         }
 
         public virtual string Type {

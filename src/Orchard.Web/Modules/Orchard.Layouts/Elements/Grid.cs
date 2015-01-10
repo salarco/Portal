@@ -18,7 +18,7 @@ namespace Orchard.Layouts.Elements {
         }
 
         public override bool HasEditor {
-            get { return true; }
+            get { return false; }
         }
     }
 }

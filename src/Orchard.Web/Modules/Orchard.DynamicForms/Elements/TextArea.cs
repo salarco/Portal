@@ -4,13 +4,13 @@ using Orchard.Layouts.Helpers;
 namespace Orchard.DynamicForms.Elements {
     public class TextArea : LabeledFormElement {
         public int? Rows {
-            get { return Data.Get("Rows").ToInt32(); }
-            set { Data["Rows"] = value.ToString(); }
+            get { return this.Retrieve(x => x.Rows); }
+            set { this.Store(x => x.Rows, value); }
         }
 
         public int? Columns {
-            get { return Data.Get("Columns").ToInt32(); }
-            set { Data["Columns"] = value.ToString(); }
+            get { return this.Retrieve(x => x.Columns); }
+            set { this.Store(x => x.Columns, value); }
         }
 
         public TextAreaValidationSettings ValidationSettings {

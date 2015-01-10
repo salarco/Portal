@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using Orchard.ContentManagement;
 using Orchard.Layouts.Framework.Elements;
+using Orchard.Utility;
 
 namespace Orchard.Layouts.Helpers {
     public static class ElementDataHelper {
@@ -108,6 +111,48 @@ namespace Orchard.Layouts.Helpers {
 
         public static IValueProvider ToValueProvider(this ElementDataDictionary dictionary, CultureInfo culture) {
             return new NameValueCollectionValueProvider(dictionary.ToNameValueCollection(), culture);
+        }
+
+        public static TProperty Retrieve<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression, Func<TProperty> defaultValue = null) where TElement : IElement {
+            var propertyInfo = ReflectionHelper<TElement>.GetPropertyInfo(targetExpression);
+            var name = propertyInfo.Name;
+            var data = element.Data;
+            var value = data.Get(name, XmlHelper.ToString(defaultValue));
+
+            return !String.IsNullOrWhiteSpace(value) ? XmlHelper.Parse<TProperty>(value) : defaultValue != null ? defaultValue() : default(TProperty);
+        }
+
+        public static TProperty Retrieve<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression, TProperty defaultValue = default(TProperty)) where TElement : IElement {
+            return Retrieve(element, targetExpression, () => defaultValue);
+        }
+
+        public static TProperty Retrieve<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression) where TElement : IElement {
+            return Retrieve(element, targetExpression, default(Func<TProperty>));
+        }
+
+        public static TProperty Retrieve<TProperty>(this IElement element, string name, Func<TProperty> defaultValue = null) {
+            var data = element.Data;
+            var value = data.Get(name);
+            return !String.IsNullOrWhiteSpace(value) ? XmlHelper.Parse<TProperty>(value) : defaultValue != null ? defaultValue() : default(TProperty);
+        }
+
+        public static TProperty Retrieve<TProperty>(this IElement element, string name, TProperty defaultValue = default(TProperty)) {
+            return Retrieve(element, name, () => defaultValue);
+        }
+
+        public static TProperty Retrieve<TProperty>(this IElement element, string name) {
+            return Retrieve(element, name, default(Func<TProperty>));
+        }
+
+        public static void Store<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression, TProperty value) where TElement : IElement {
+            var propertyInfo = ReflectionHelper<TElement>.GetPropertyInfo(targetExpression);
+            var name = propertyInfo.Name;
+
+            Store(element, name, value);
+        }
+
+        public static void Store<TProperty>(this IElement element, string name, TProperty value) {
+            element.Data[name] = XmlHelper.ToString(value);
         }
     }
 }

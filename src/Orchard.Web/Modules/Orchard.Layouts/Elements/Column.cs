@@ -1,4 +1,3 @@
-using System.Globalization;
 using Orchard.Layouts.Framework.Elements;
 using Orchard.Layouts.Helpers;
 using Orchard.Localization;
@@ -19,17 +18,17 @@ namespace Orchard.Layouts.Elements {
         }
 
         public override bool HasEditor {
-            get { return true; }
+            get { return false; }
         }
 
         public int? Width {
-            get { return  Data.Get("Width").ToInt32() ?? Data.Get("ColumnSpan").ToInt32() ?? 0; } // Falling back on "ColumnSpan" for backward compatibility.
-            set { Data["Width"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
+            get { return  this.Retrieve<int?>("Width") ?? this.Retrieve<int?>("ColumnSpan") ?? 0; } // Falling back on "ColumnSpan" for backward compatibility.
+            set { this.Store(x => x.Width, value); }
         }
 
         public int? Offset {
-            get { return Data.Get("Offset").ToInt32() ?? Data.Get("ColumnOffset").ToInt32() ?? 0; } // Falling back on "ColumnOffset" for backward compatibility.
-            set { Data["Offset"] = value != null ? value.Value.ToString(CultureInfo.InvariantCulture) : null; }
+            get { return this.Retrieve<int?>("Offset") ?? this.Retrieve<int?>("ColumnOffset") ?? 0; } // Falling back on "ColumnOffset" for backward compatibility.
+            set { this.Store(x => x.Offset, value); }
         }
 
         public int Size {

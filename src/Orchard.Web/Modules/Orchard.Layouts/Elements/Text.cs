@@ -6,14 +6,10 @@ namespace Orchard.Layouts.Elements {
         public override string Category {
             get { return "Content"; }
         }
-
-        public override bool HasEditor {
-            get { return true; }
-        }
         
         public string Content {
-            get { return Data.Get("Content"); }
-            set { Data["Content"] = value; }
+            get { return this.Retrieve(x => x.Content); }
+            set { this.Store(x => x.Content, value); }
         }
     }
 }

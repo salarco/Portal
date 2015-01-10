@@ -7,23 +7,19 @@ namespace Orchard.Layouts.Elements {
             get { return "Media"; }
         }
 
-        public override bool HasEditor {
-            get { return true; }
-        }
-
         public int? MediaId {
-            get { return Data.Get("MediaId").ToInt32(); }
-            set { Data["MediaId"] = value.ToString(); }
+            get { return this.Retrieve(x => x.MediaId); }
+            set { this.Store(x => x.MediaId, value); }
         }
 
         public int? Width {
-            get { return Data.Get("Width").ToInt32(); }
-            set { Data["Width"] = value.ToString(); }
+            get { return this.Retrieve(x => x.Width); }
+            set { this.Store(x => x.Width, value); }
         }
 
         public int? Height {
-            get { return Data.Get("Height").ToInt32(); }
-            set { Data["Height"] = value.ToString(); }
+            get { return this.Retrieve(x => x.Height); }
+            set { this.Store(x => x.Height, value); }
         }
     }
 }

@@ -18,8 +18,8 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string InputType {
-            get { return Data.Get("InputType", "SelectList"); }
-            set { Data["InputType"] = value; }
+            get { return this.Retrieve(x => x.InputType, "SelectList"); }
+            set { this.Store(x => x.InputType, value); }
         }
 
         private IEnumerable<SelectListItem> GetOptions() {
@@ -27,7 +27,7 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         private IEnumerable<SelectListItem> ParseOptionsText() {
-            var data = Data.Get("Options");
+            var data = this.Retrieve<string>("Options");
             var lines = Regex.Split(data, @"(?:\r\n|[\r\n])", RegexOptions.Multiline);
             return lines.Select(ParseLine).Where(x => x != null);
         }

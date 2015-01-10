@@ -8,12 +8,8 @@ namespace Orchard.Layouts.Elements {
         }
 
         public string ShapeType {
-            get { return Data.Get("ShapeType"); }
-            set { Data["ShapeType"] = value; }
-        }
-
-        public override bool HasEditor {
-            get { return true; }
+            get { return this.Retrieve(x => x.ShapeType); }
+            set { this.Store(x => x.ShapeType, value); }
         }
     }
 }

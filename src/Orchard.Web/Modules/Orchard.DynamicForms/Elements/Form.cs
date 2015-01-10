@@ -8,53 +8,53 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string Name {
-            get { return Data.Get("FormName", "Untitled"); }
-            set { Data["FormName"] = value; }
+            get { return this.Retrieve("FormName", "Untitled"); }
+            set { this.Store("FormName", value); }
         }
 
         public bool? EnableClientValidation {
-            get { return Data.Get("EnableClientValidation").ToBoolean(); }
-            set { Data["EnableClientValidation"] = value.ToString(); }
+            get { return this.Retrieve(x => x.EnableClientValidation); }
+            set { this.Store(x => x.EnableClientValidation, value); }
         }
 
         public string Action {
-            get { return Data.Get("FormAction"); }
-            set { Data["FormAction"] = value; }
+            get { return this.Retrieve<string>("FormAction"); }
+            set { this.Store("FormAction", value); }
         }
 
         public string Method {
-            get { return Data.Get("FormMethod"); }
-            set { Data["FormMethod"] = value; }
+            get { return this.Retrieve<string>("FormMethod"); }
+            set { this.Store("FormMethod", value); }
         }
 
         public bool? StoreSubmission {
-            get { return Data.Get("StoreSubmission").ToBoolean(); }
-            set { Data["StoreSubmission"] = value != null ? value.Value.ToString() : null; }
+            get { return this.Retrieve(x => x.StoreSubmission); }
+            set { this.Store(x => x.StoreSubmission, value); }
         }
 
         public bool? CreateContent {
-            get { return Data.Get("CreateContent").ToBoolean(); }
-            set { Data["CreateContent"] = value != null ? value.Value.ToString() : null; }
+            get { return this.Retrieve(x => x.CreateContent); }
+            set { this.Store(x => x.CreateContent, value); }
         }
 
         public string ContentType {
-            get { return Data.Get("CreateContentType"); }
-            set { Data["CreateContentType"] = value; }
+            get { return this.Retrieve<string>("CreateContentType"); }
+            set { this.Store("CreateContentType", value); }
         }
 
         public string Publication {
-            get { return Data.Get("Publication"); }
-            set { Data["Publication"] = value; }
+            get { return this.Retrieve(x => x.Publication); }
+            set { this.Store(x => x.Publication, value); }
         }
 
         public string Notification {
-            get { return Data.Get("Notification"); }
-            set { Data["Notification"] = value; }
+            get { return this.Retrieve(x => x.Notification); }
+            set { this.Store(x => x.Notification, value); }
         }
 
         public string RedirectUrl {
-            get { return Data.Get("RedirectUrl"); }
-            set { Data["RedirectUrl"] = value; }
+            get { return this.Retrieve(x => x.RedirectUrl); }
+            set { this.Store(x => x.RedirectUrl, value); }
         }
     }
 }
