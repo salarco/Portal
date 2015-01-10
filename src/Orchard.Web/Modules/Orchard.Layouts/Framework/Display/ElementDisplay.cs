@@ -35,18 +35,18 @@ namespace Orchard.Layouts.Framework.Display {
 
             element.Descriptor.CreatingDisplay(createShapeContext);
 
-            var elementShapeArguments = CreateArguments(element, content, element.Data);
-            var elementShape = (dynamic)_shapeFactory.Create("Element", elementShapeArguments, () => new ZoneHolding(() => _shapeFactory.Create("ElementZone")));
             var typeName = element.GetType().Name;
             var category = element.Category.ToSafeName();
             var drivers = element.Descriptor.GetDrivers();
+            var elementShapeArguments = CreateArguments(element, content, element.Data);
+            var elementShape = (dynamic)_shapeFactory.Create("Element", elementShapeArguments, () => new ZoneHolding(() => _shapeFactory.Create("ElementZone")));
+            
 
             elementShape.Metadata.DisplayType = displayType;
-            elementShape.Metadata.Alternates.Add(String.Format("Element_{0}", displayType));
-            elementShape.Metadata.Alternates.Add(String.Format("Element__{0}", typeName));
-            elementShape.Metadata.Alternates.Add(String.Format("Element__{0}__{1}", category, typeName));
-            elementShape.Metadata.Alternates.Add(String.Format("Element_{0}__{1}", displayType, typeName));
-            elementShape.Metadata.Alternates.Add(String.Format("Element_{0}__{1}__{2}", displayType, category, typeName));
+            elementShape.Metadata.Alternates.Add(String.Format("Elements_{0}", typeName));
+            elementShape.Metadata.Alternates.Add(String.Format("Elements_{0}_{1}", typeName, displayType));
+            elementShape.Metadata.Alternates.Add(String.Format("Elements_{0}__{1}", typeName, category));
+            elementShape.Metadata.Alternates.Add(String.Format("Elements_{0}_{1}__{2}", typeName, displayType, category));
 
             var displayContext = new ElementDisplayContext {
                 Element = element,

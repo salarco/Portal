@@ -21,17 +21,17 @@ namespace Orchard.Layouts.Helpers {
             var attributes = new Dictionary<string, object>();
 
             if (!String.IsNullOrWhiteSpace(htmlId)) {
-                var tokenize = (Func<string>)shape.TokenizeId;
+                var tokenize = (Func<string>)shape.TokenizeHtmlId;
                 attributes["id"] = tokenize();
             }
 
             if (!String.IsNullOrWhiteSpace(htmlStyle)) {
-                var tokenize = (Func<string>)shape.TokenizeInlineStyle;
+                var tokenize = (Func<string>)shape.TokenizeHtmlStyle;
                 attributes["style"] = Regex.Replace(tokenize(), @"(?:\r\n|[\r\n])", "");
             }
 
             if (!String.IsNullOrWhiteSpace(htmlClass)) {
-                var tokenize = (Func<string>)shape.TokenizeCssClass;
+                var tokenize = (Func<string>)shape.TokenizeHtmlClass;
                 attributes["class"] = tokenize();
             }
 

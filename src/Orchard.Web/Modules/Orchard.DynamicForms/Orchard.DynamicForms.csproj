@@ -286,28 +286,28 @@
     <Content Include="Views\SubmissionAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-TextField.cshtml" />
+    <Content Include="Views\Elements\TextField.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form.Design.cshtml" />
+    <Content Include="Views\Elements\Element-Form.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Button.cshtml" />
+    <Content Include="Views\Elements\Button.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form.cshtml" />
+    <Content Include="Views\Elements\Element-Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Label.cshtml" />
+    <Content Include="Views\Elements\Label.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-TextField.Design.cshtml" />
+    <Content Include="Views\Elements\TextField.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-IpAddressField.cshtml" />
+    <Content Include="Views\Elements\IpAddressField.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-IpAddressField.Design.cshtml" />
+    <Content Include="Views\Elements\IpAddressField.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Index.cshtml" />
@@ -319,58 +319,58 @@
     <Content Include="Views\EditorTemplates\FormBindings.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-UserNameField.cshtml" />
+    <Content Include="Views\Elements\UserNameField.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-UserNameField.Design.cshtml" />
+    <Content Include="Views\Elements\UserNameField.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-HiddenField.Design.cshtml" />
+    <Content Include="Views\Elements\HiddenField.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-HiddenField.cshtml" />
+    <Content Include="Views\Elements\HiddenField.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-TextArea.cshtml" />
+    <Content Include="Views\Elements\TextArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-TextArea.Design.cshtml" />
+    <Content Include="Views\Elements\TextArea.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-RadioButton.cshtml" />
+    <Content Include="Views\Elements\RadioButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-RadioButton.Design.cshtml" />
+    <Content Include="Views\Elements\RadioButton.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Checkbox.Design.cshtml" />
+    <Content Include="Views\Elements\Checkbox.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Checkbox.cshtml" />
+    <Content Include="Views\Elements\Checkbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Enumeration-SelectList.cshtml" />
+    <Content Include="Views\Elements\SelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Enumeration-MultiSelectList.cshtml" />
+    <Content Include="Views\Elements\MultiSelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Enumeration-RadioList.cshtml" />
+    <Content Include="Views\Elements\RadioList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Enumeration-CheckList.cshtml" />
+    <Content Include="Views\Elements\CheckList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Taxonomy-SelectList.cshtml" />
+    <Content Include="Views\Elements\Taxonomy-SelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Taxonomy-RadioList.cshtml" />
+    <Content Include="Views\Elements\Taxonomy-RadioList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Taxonomy-MultiSelectList.cshtml" />
+    <Content Include="Views\Elements\Taxonomy-MultiSelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Taxonomy-CheckList.cshtml" />
+    <Content Include="Views\Elements\Taxonomy-CheckList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Activity-DynamicFormSubmitted.cshtml" />
@@ -379,49 +379,49 @@
     <Content Include="Views\BlueprintAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-ValidationSummary.cshtml" />
+    <Content Include="Views\Elements\ValidationSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-ValidationSummary.Design.cshtml" />
+    <Content Include="Views\Elements\ValidationSummary.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-ValidationMessage.cshtml" />
+    <Content Include="Views\Elements\ValidationMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-ValidationMessage.Design.cshtml" />
+    <Content Include="Views\Elements\ValidationMessage.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\FormElement.Wrapper.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-PasswordField.Design.cshtml" />
+    <Content Include="Views\Elements\PasswordField.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-PasswordField.cshtml" />
+    <Content Include="Views\Elements\PasswordField.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Query-SelectList.cshtml" />
+    <Content Include="Views\Elements\Query-SelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Query-CheckList.cshtml" />
+    <Content Include="Views\Elements\Query-CheckList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Query-MultiSelectList.cshtml" />
+    <Content Include="Views\Elements\Query-MultiSelectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-Query-RadioList.cshtml" />
+    <Content Include="Views\Elements\Query-RadioList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-EmailField.Design.cshtml" />
+    <Content Include="Views\Elements\EmailField.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-EmailField.cshtml" />
+    <Content Include="Views\Elements\EmailField.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-ReCaptcha.cshtml" />
+    <Content Include="Views\Elements\ReCaptcha.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Form-ReCaptcha.Design.cshtml" />
+    <Content Include="Views\Elements\ReCaptcha.Design.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

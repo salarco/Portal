@@ -40,9 +40,9 @@ namespace Orchard.Layouts.Shapes {
                 var htmlClass = element.HtmlClass;
                 var htmlStyle = element.HtmlStyle;
 
-                context.Shape.TokenizeId = (Func<string>)(() => _tokenizer.Value.Replace(htmlId, new { Content = content }));
-                context.Shape.TokenizeInlineStyle = (Func<string>)(() => _tokenizer.Value.Replace(htmlStyle, new { Content = content }));
-                context.Shape.TokenizeCssClass = (Func<string>)(() => _tokenizer.Value.Replace(htmlClass, new { Content = content }));
+                context.Shape.TokenizeHtmlId = (Func<string>)(() => _tokenizer.Value.Replace(htmlId, new { Content = content }));
+                context.Shape.TokenizeHtmlClass = (Func<string>)(() => _tokenizer.Value.Replace(htmlClass, new { Content = content }));
+                context.Shape.TokenizeHtmlStyle = (Func<string>)(() => _tokenizer.Value.Replace(htmlStyle, new { Content = content }));
             });
         }
 

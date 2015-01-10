@@ -227,31 +227,29 @@
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
     <Content Include="Views\EditorTemplates\Parts.Layout.cshtml" />
-    <Content Include="Views\Element.Design.cshtml" />
-    <Content Include="Views\Element.cshtml" />
     <Content Include="Views\Element\Edit.cshtml" />
     <Content Include="Views\LayoutRoot.cshtml" />
     <Content Include="Views\Parts.Layout.cshtml" />
-    <Content Include="Views\Element-Layout-Grid.cshtml" />
-    <Content Include="Views\Element-Layout-Row.cshtml" />
-    <Content Include="Views\Element-Layout-Column.cshtml" />
-    <Content Include="Views\Element-Content-Text.cshtml" />
-    <Content Include="Views\Element-Media-MediaItem.cshtml" />
-    <Content Include="Views\Element-Snippets-Snippet.cshtml" />
+    <Content Include="Views\Elements\Grid.cshtml" />
+    <Content Include="Views\Elements\Row.cshtml" />
+    <Content Include="Views\Elements\Column.cshtml" />
+    <Content Include="Views\Elements\Text.cshtml" />
+    <Content Include="Views\Elements\MediaItem.cshtml" />
+    <Content Include="Views\Elements\Snippet.cshtml" />
     <Content Include="Views\Layout-Dialog.cshtml" />
     <Content Include="Views\Layout-Designer.cshtml" />
     <Content Include="Views\Layout-Designer-Wrapper.cshtml" />
     <Content Include="Views\DialogTemplate.cshtml" />
     <Content Include="Views\Element\Create.cshtml" />
-    <Content Include="Views\Element-ContentPart.cshtml" />
+    <Content Include="Views\Elements\ContentPart.cshtml" />
     <Content Include="Views\ContentPart.cshtml" />
     <Content Include="Views\DefinitionTemplates\LayoutPartSettings.cshtml" />
     <Content Include="Views\DefinitionTemplates\LayoutTypePartSettings.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.Text.cshtml" />
     <Content Include="Views\ContentField.cshtml" />
-    <Content Include="Views\Element-ContentField.cshtml" />
+    <Content Include="Views\Elements\ContentField.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.ContentItem.cshtml" />
-    <Content Include="Views\Element-Content-ContentItem.cshtml" />
+    <Content Include="Views\Elements\ContentItem.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.MediaItem.cshtml" />
     <Content Include="Views\DefinitionTemplates\ContentPartLayoutSettings.cshtml" />
     <Content Include="Views\EditorTemplates\Parts.ElementWrapper.cshtml" />
@@ -260,8 +258,8 @@
     <Content Include="Views\ElementEditor.LocalNav.cshtml" />
     <Content Include="Views\ElementEditor.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.Markdown.cshtml" />
-    <Content Include="Views\Element-Content-Markdown.cshtml" />
-    <Content Include="Views\Element-Content-Html.cshtml" />
+    <Content Include="Views\Elements\Markdown.cshtml" />
+    <Content Include="Views\Elements\Html.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.Html.cshtml" />
     <Content Include="Views\BlueprintAdmin\Index.cshtml" />
     <Content Include="Views\BlueprintAdmin\Browse.cshtml" />
@@ -270,10 +268,10 @@
     <Content Include="Views\BlueprintAdmin\Properties.cshtml" />
     <Content Include="Views\Media.Design.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.Paragraph.cshtml" />
-    <Content Include="Views\Element-Content-Paragraph.cshtml" />
+    <Content Include="Views\Elements\Paragraph.cshtml" />
     <Content Include="Views\EditorTemplates\Elements.Image.cshtml" />
-    <Content Include="Views\Element-Media-Image.cshtml" />
-    <Content Include="Views\Element-Media-Image.Design.cshtml" />
+    <Content Include="Views\Elements\Image.cshtml" />
+    <Content Include="Views\Elements\Image.Design.cshtml" />
     <Content Include="Styles\Lib\fontawesome-webfont.eot" />
     <Content Include="Styles\Lib\fontawesome-webfont.ttf" />
     <Content Include="Styles\Lib\fontawesome-webfont.woff" />
@@ -337,14 +335,16 @@
       <DependentUpon>Row.css</DependentUpon>
     </Content>
     <Content Include="Styles\LayoutEditor.css.bundle" />
-    <Content Include="Views\Element-Content-Html.Design.cshtml" />
-    <Content Include="Views\Element-Content-ContentItem.Design.cshtml" />
-    <Content Include="Views\Element-Content-Markdown.Design.cshtml" />
-    <Content Include="Views\Element-Content-Paragraph.Design.cshtml" />
-    <Content Include="Views\Element-Content-Text.Design.cshtml" />
-    <Content Include="Views\Element-ContentField.Design.cshtml" />
-    <Content Include="Views\Element-Media-MediaItem.Design.cshtml" />
-    <Content Include="Views\Element-Layout-Canvas.cshtml" />
+    <Content Include="Views\Elements\Html.Design.cshtml" />
+    <Content Include="Views\Elements\ContentItem.Design.cshtml" />
+    <Content Include="Views\Elements\Markdown.Design.cshtml" />
+    <Content Include="Views\Elements\Paragraph.Design.cshtml" />
+    <Content Include="Views\Elements\Text.Design.cshtml" />
+    <Content Include="Views\Elements\ContentField.Design.cshtml" />
+    <Content Include="Views\Elements\MediaItem.Design.cshtml" />
+    <Content Include="Views\Elements\Canvas.cshtml" />
+    <Content Include="Views\Element.cshtml" />
+    <Content Include="Views\Element.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
@@ -544,31 +544,31 @@
     <Compile Include="ViewModels\LayoutPartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Snippets-Snippet.Design.cshtml" />
+    <Content Include="Views\Elements\Snippet.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Content-Projection.cshtml" />
+    <Content Include="Views\Elements\Projection.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-ContentPart.Design.cshtml" />
+    <Content Include="Views\Elements\ContentPart.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Elements.VectorImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Media-VectorImage.cshtml" />
+    <Content Include="Views\Elements\VectorImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Media-VectorImage.Design.cshtml" />
+    <Content Include="Views\Elements\VectorImage.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Parts.Layout.Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Snippets-Shape.cshtml" />
+    <Content Include="Views\Elements\Shape.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Element-Snippets-Shape.Design.cshtml" />
+    <Content Include="Views\Elements\Shape.Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\LayoutEditor.js.bundle" />
