@@ -25,8 +25,15 @@
                 this.children.splice(index, 1);
                 if (child.getIsActive())
                     this.canvas.activeElement = null;
-                if (child.getIsFocused())
-                    this.setIsFocused();
+                if (child.getIsFocused()) {
+                    // If the deleted child was focused, try to set new focus to the most appropriate sibling or parent.
+                    if (this.children.length > index)
+                        this.children[index].setIsFocused();
+                    else if (index > 0)
+                        this.children[index - 1].setIsFocused();
+                    else
+                        this.setIsFocused();
+                }
             }
         };
 
@@ -69,16 +76,17 @@
             }); 
         };
 
-        this.pasteChildFromClipboard = function () {
-            if (!!this.canvas.clipboard) {
-                var data = this.canvas.clipboard.toObject();
+        this.paste = function (clipboardData) {
+            var json = clipboardData.getData("text/plain");
+            if (!!json) {
+                var data = JSON.parse(json);
                 var child = LayoutEditor.elementFrom(data);
                 if (_(allowedChildTypes).contains(child.type)) {
                     this.addChild(child);
                     child.setIsFocused();
                 }
                 else if (!!this.parent)
-                    this.parent.pasteChildFromClipboard();
+                    this.parent.paste(clipboardData);
             }
         };
     };

@@ -14,6 +14,7 @@
         this.canvas = null;
         this.parent = null;
         this.isDropTarget = null;
+        this.setIsFocusedEventHandlers = [];
 
         this.setCanvas = function (canvas) {
             this.canvas = canvas;
@@ -51,6 +52,14 @@
             if (!this.canvas)
                 return;
             this.canvas.focusedElement = this;
+            _(this.setIsFocusedEventHandlers).each(function (item) {
+                try {
+                    item();
+                }
+                catch (ex) {
+                    // Ignore.
+                }
+            });
         };
 
         this.getIsSelected = function() {
@@ -103,13 +112,20 @@
             };
         };
 
-        this.copyToClipboard = function () {
-            this.canvas.clipboard = this;
+        this.copy = function (clipboardData) {
+            var data = this.toObject();
+            var json = JSON.stringify(data, null, "\t");
+            clipboardData.setData("text/plain", json);
         };
 
-        this.pasteFromClipboard = function() {
+        this.cut = function (clipboardData) {
+            this.copy(clipboardData);
+            this.delete();
+        };
+
+        this.paste = function (clipboardData) {
             if (!!this.parent)
-                this.parent.pasteChildFromClipboard();
+                this.parent.paste(clipboardData);
         };
     };
 

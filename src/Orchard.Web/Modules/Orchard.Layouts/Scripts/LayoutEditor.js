@@ -14,34 +14,27 @@ angular
                 var keypressTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
                 if (!keypressTarget.hasClass("layout-element"))
                     keypressTarget = $element.parent(); // For all other cases (main element is the parent of template).
-                console.log("Configuring keypress handler on " + $scope.element.type + ".");
-                console.log(keypressTarget);
 
-                keypressTarget.keypress(function (e) {
-                    console.log("Keypress detected on " + $scope.element.type + ".");
-                    $scope.keypress(e);
+                keypressTarget.keydown(function (e) {
+                    console.log("Keydown detected on " + $scope.element.type + ".");
+                    console.log(e);
+                    var c = String.fromCharCode(e.which);
+                    $scope.$apply(function () { // Event is not triggered by Angular directive but raw event handler on element.
+                        if (e.which == 46) { // DEL
+                            $scope.element.delete();
+                            e.preventDefault();
+                        }
+                    });
                     e.stopPropagation();
                 });
 
-                $scope.click = function (element, e) {
-                    console.log("Setting focus to " + element.type + ".");
-                    element.setIsFocused();
-                    var focusTarget = $(e.target); // For the Canvas case (current scope belongs directly to main element).
-                    if (!focusTarget.hasClass("layout-element"))
-                        focusTarget = $element.find(".layout-element").first(); // For all other cases (current scope belongs to parent element).
-                    focusTarget.focus();
-                    e.stopPropagation();
-                };
+                $scope.element.setIsFocusedEventHandlers.push(function () {
+                    $element.closest(".layout-element").focus();
+                });
 
-                $scope.keypress = function (e) {
-                    var c = String.fromCharCode(e.which);
-                    console.log("Keypress " + c + " handled on element " + $scope.element.type + ".");
-                    $scope.$apply(function () { // Event is not triggered by Angular directive but raw event handler on element.
-                        if (c == "c") // CTRL+C
-                            $scope.element.copyToClipboard();
-                        else if (c == "v") // CTRL+V
-                            $scope.element.pasteFromClipboard();
-                    });
+                $scope.click = function (element, e) {
+                    element.setIsFocused();
+                    e.stopPropagation();
                 };
             },
 
@@ -113,18 +106,6 @@ angular
                         result.push("layout-element-droptarget");
 
                     return result;
-                };
-
-                // Redefine function for container behavior.
-                $scope.keypress = function (e) {
-                    var c = String.fromCharCode(e.which);
-                    console.log("Keypress " + c + " handled on container " + $scope.element.type + ".");
-                    $scope.$apply(function () { // Event is not triggered by Angular directive but raw event handler on element.
-                        if (c == "c") // CTRL+C
-                            $scope.element.copyToClipboard();
-                        else if (c == "v") // CTRL+V
-                            $scope.element.pasteChildFromClipboard();
-                    });
                 };
             }
         }
@@ -200,6 +181,24 @@ angular
                         }
                     });
                 };
+
+                $(document).on("cut copy paste", function (e) {
+                    var focusedElement = $scope.element.canvas.focusedElement;
+                    if (!!focusedElement) {
+                        switch (e.type) {
+                            case "copy":
+                                focusedElement.copy(e.originalEvent.clipboardData);
+                                break;
+                            case "cut":
+                                focusedElement.cut(e.originalEvent.clipboardData);
+                                break;
+                            case "paste":
+                                focusedElement.paste(e.originalEvent.clipboardData);
+                                break;
+                        }
+                        e.preventDefault();
+                    }
+                });
             },
             templateUrl: environment.baseUrl + "Templates/orc-layout-canvas.html",
             replace: true,

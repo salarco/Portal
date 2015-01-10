@@ -53,7 +53,7 @@
     <!--<div class="layout-column-resize-bar layout-column-resize-bar-left"></div>
     <div class="layout-column-resize-bar layout-column-resize-bar-right"></div>-->
     <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="click(child, $event)" tabindex="{{$htmlId}}">
+        <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="click(child, $event)" tabindex="{{$id}}">
             <orc-layout-child element="child" />
         </div>
     </div>

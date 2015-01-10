@@ -63,6 +63,19 @@ MANIPULATION BY BUTTONS:
     
     Move left/right (reorder).
 
+KEYBOARD SHORTCUTS:
+
+    Horizontal containers:
+        - For children in horizontal containers:
+            - Ctrl+Left/Right reorders children
+            - Left/Right moves among children; parent is focused if moved beyond boundaries
+            - Up/Down focuses parent
+    Vertical containers:
+        - For children in vertical containers:
+            - Ctrl+Up/Down reorders children
+            - Up/Down moves among children; parent is focused if moved beyond boundaries
+            - Left/Right focuses parent		
+
 OTHER THOUGHTS:
 
     Adding a new row should show dropdown for number of columns (only evenly divisible numbers).

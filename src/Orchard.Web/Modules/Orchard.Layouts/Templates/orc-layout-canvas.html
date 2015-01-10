@@ -1,5 +1,5 @@
 ﻿<div class="layout-editor-wrapper">
-    <div id="layout-canvas-{{$htmlId}}" class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="element.setIsActive(true)" ng-mouseleave="element.setIsActive(false)" ng-click="click(element, $event)" tabindex="{{$id}}">
+    <div id="layout-canvas-{{$id}}" class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="element.setIsActive(true)" ng-mouseleave="element.setIsActive(false)" ng-click="click(element, $event)" tabindex="{{$id}}">
         <div class="layout-toolbar-container"></div>
         <div class="layout-element-wrapper">
             <ul class="layout-panel layout-panel-main">
@@ -44,7 +44,7 @@
                 This layout canvas is empty. Click the 'Add' icon to add elements to the layout.
             </div>
             <div class="layout-children" ng-model="element.children" ui-sortable="sortableOptions">
-                <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="click(child, $event)" tabindex="{{$htmlId}}">
+                <div ng-repeat="child in element.children" ng-class="getClasses(child)" ng-mouseenter="child.setIsActive(true)" ng-mouseleave="child.setIsActive(false)" ng-click="click(child, $event)" tabindex="{{$id}}">
                     <orc-layout-child element="child" />
                 </div>
             </div>

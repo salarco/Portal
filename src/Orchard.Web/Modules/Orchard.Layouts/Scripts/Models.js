@@ -54,6 +54,7 @@ var LayoutEditor;
         this.canvas = null;
         this.parent = null;
         this.isDropTarget = null;
+        this.setIsFocusedEventHandlers = [];
 
         this.setCanvas = function (canvas) {
             this.canvas = canvas;
@@ -91,6 +92,14 @@ var LayoutEditor;
             if (!this.canvas)
                 return;
             this.canvas.focusedElement = this;
+            _(this.setIsFocusedEventHandlers).each(function (item) {
+                try {
+                    item();
+                }
+                catch (ex) {
+                    // Ignore.
+                }
+            });
         };
 
         this.getIsSelected = function() {
@@ -143,13 +152,20 @@ var LayoutEditor;
             };
         };
 
-        this.copyToClipboard = function () {
-            this.canvas.clipboard = this;
+        this.copy = function (clipboardData) {
+            var data = this.toObject();
+            var json = JSON.stringify(data, null, "\t");
+            clipboardData.setData("text/plain", json);
         };
 
-        this.pasteFromClipboard = function() {
+        this.cut = function (clipboardData) {
+            this.copy(clipboardData);
+            this.delete();
+        };
+
+        this.paste = function (clipboardData) {
             if (!!this.parent)
-                this.parent.pasteChildFromClipboard();
+                this.parent.paste(clipboardData);
         };
     };
 
@@ -182,8 +198,15 @@ var LayoutEditor;
                 this.children.splice(index, 1);
                 if (child.getIsActive())
                     this.canvas.activeElement = null;
-                if (child.getIsFocused())
-                    this.setIsFocused();
+                if (child.getIsFocused()) {
+                    // If the deleted child was focused, try to set new focus to the most appropriate sibling or parent.
+                    if (this.children.length > index)
+                        this.children[index].setIsFocused();
+                    else if (index > 0)
+                        this.children[index - 1].setIsFocused();
+                    else
+                        this.setIsFocused();
+                }
             }
         };
 
@@ -226,16 +249,17 @@ var LayoutEditor;
             }); 
         };
 
-        this.pasteChildFromClipboard = function () {
-            if (!!this.canvas.clipboard) {
-                var data = this.canvas.clipboard.toObject();
+        this.paste = function (clipboardData) {
+            var json = clipboardData.getData("text/plain");
+            if (!!json) {
+                var data = JSON.parse(json);
                 var child = LayoutEditor.elementFrom(data);
                 if (_(allowedChildTypes).contains(child.type)) {
                     this.addChild(child);
                     child.setIsFocused();
                 }
                 else if (!!this.parent)
-                    this.parent.pasteChildFromClipboard();
+                    this.parent.paste(clipboardData);
             }
         };
     };
