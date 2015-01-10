@@ -210,6 +210,22 @@ var LayoutEditor;
             }
         };
 
+        this.moveFocusPrevChild = function (child) {
+            if (this.children.length < 2)
+                return;
+            var index = _(this.children).indexOf(child);
+            if (index > 0)
+                this.children[index - 1].setIsFocused();
+        };
+
+        this.moveFocusNextChild = function (child) {
+            if (this.children.length < 2)
+                return;
+            var index = _(this.children).indexOf(child);
+            if (index < this.children.length - 1)
+                this.children[index + 1].setIsFocused();
+        };
+
         this.insertChild = function (child, afterChild) {
             if (!_(this.children).contains(child)) {
                 var index = Math.max(_(this.children).indexOf(afterChild), 0);
@@ -367,6 +383,55 @@ var LayoutEditor;
             }
         };
 
+        this.canDecreaseColumnWidth = function (column) {
+            return column.width > 1;
+        };
+
+        this.decreaseColumnWidth = function (column) {
+            if (!this.canDecreaseColumnWidth(column))
+                return;
+
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (column.width > 1) {
+                    column.width--;
+                    if (this.children.length > index + 1) {
+                        var nextColumn = this.children[index + 1];
+                        nextColumn.offset++;
+                    }
+                }
+            }
+        };
+
+        this.canIncreaseColumnWidth = function (column) {
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (column.width >= 12)
+                    return false;
+                if (this.children.length > index + 1) {
+                    var nextColumn = this.children[index + 1];
+                    return nextColumn.offset > 0;
+                }
+                return getTotalColumnsWidth() < 12;
+            }
+            return false;
+        };
+
+        this.increaseColumnWidth = function (column) {
+            if (!this.canIncreaseColumnWidth(column))
+                return;
+
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (this.children.length > index + 1) {
+                    var nextColumn = this.children[index + 1];
+                    if (nextColumn.offset > 0)
+                        nextColumn.offset--;
+                }
+                column.width++;
+            }
+        };
+
         this.canDecreaseColumnOffset = function (column) {
             var index = _(this.children).indexOf(column);
             if (index >= 0)
@@ -472,6 +537,22 @@ var LayoutEditor;
             this.width = this.width - newColumnWidth;
             this.parent.insertChild(newColumn, this);
             newColumn.setIsFocused();
+        };
+
+        this.canDecreaseWidth = function () {
+            return this.parent.canDecreaseColumnWidth(this);
+        };
+
+        this.decreaseWidth = function () {
+            this.parent.decreaseColumnWidth(this);
+        };
+
+        this.canIncreaseWidth = function () {
+            return this.parent.canIncreaseColumnWidth(this);
+        };
+
+        this.increaseWidth = function () {
+            this.parent.increaseColumnWidth(this);
         };
 
         this.canDecreaseOffset = function () {

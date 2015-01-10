@@ -21,6 +21,55 @@
             }
         };
 
+        this.canDecreaseColumnWidth = function (column) {
+            return column.width > 1;
+        };
+
+        this.decreaseColumnWidth = function (column) {
+            if (!this.canDecreaseColumnWidth(column))
+                return;
+
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (column.width > 1) {
+                    column.width--;
+                    if (this.children.length > index + 1) {
+                        var nextColumn = this.children[index + 1];
+                        nextColumn.offset++;
+                    }
+                }
+            }
+        };
+
+        this.canIncreaseColumnWidth = function (column) {
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (column.width >= 12)
+                    return false;
+                if (this.children.length > index + 1) {
+                    var nextColumn = this.children[index + 1];
+                    return nextColumn.offset > 0;
+                }
+                return getTotalColumnsWidth() < 12;
+            }
+            return false;
+        };
+
+        this.increaseColumnWidth = function (column) {
+            if (!this.canIncreaseColumnWidth(column))
+                return;
+
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (this.children.length > index + 1) {
+                    var nextColumn = this.children[index + 1];
+                    if (nextColumn.offset > 0)
+                        nextColumn.offset--;
+                }
+                column.width++;
+            }
+        };
+
         this.canDecreaseColumnOffset = function (column) {
             var index = _(this.children).indexOf(column);
             if (index >= 0)

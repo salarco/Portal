@@ -22,6 +22,22 @@
             newColumn.setIsFocused();
         };
 
+        this.canDecreaseWidth = function () {
+            return this.parent.canDecreaseColumnWidth(this);
+        };
+
+        this.decreaseWidth = function () {
+            this.parent.decreaseColumnWidth(this);
+        };
+
+        this.canIncreaseWidth = function () {
+            return this.parent.canIncreaseColumnWidth(this);
+        };
+
+        this.increaseWidth = function () {
+            this.parent.increaseColumnWidth(this);
+        };
+
         this.canDecreaseOffset = function () {
             return this.parent.canDecreaseColumnOffset(this);
         };

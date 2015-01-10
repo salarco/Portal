@@ -5,7 +5,7 @@
             <ul class="layout-panel layout-panel-main">
                 <li class="layout-panel-item layout-panel-label">Canvas</li>
                 <li class="layout-panel-item layout-panel-action" title="Activate inline editing" ng-click="activateInlineEditing()" ng-class="{disabled: element.canvas.inlineEditingIsActive}"><i class="fa fa-paragraph"></i></li>
-                <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit canvas properties">
+                <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit canvas properties (Space)">
                     <i class="fa fa-edit"></i>
                     <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                         <li class="layout-popup-item layout-popup-input">
@@ -24,7 +24,7 @@
                 </li>
             </ul>
             <ul class="layout-panel layout-panel-add">
-                <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to canvas">
+                <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to canvas (Ins)">
                     <i class="fa fa-plus"></i>
                     <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
                         <div class="layout-popup-flex">

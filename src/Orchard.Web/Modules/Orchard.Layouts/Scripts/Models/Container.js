@@ -37,6 +37,22 @@
             }
         };
 
+        this.moveFocusPrevChild = function (child) {
+            if (this.children.length < 2)
+                return;
+            var index = _(this.children).indexOf(child);
+            if (index > 0)
+                this.children[index - 1].setIsFocused();
+        };
+
+        this.moveFocusNextChild = function (child) {
+            if (this.children.length < 2)
+                return;
+            var index = _(this.children).indexOf(child);
+            if (index < this.children.length - 1)
+                this.children[index + 1].setIsFocused();
+        };
+
         this.insertChild = function (child, afterChild) {
             if (!_(this.children).contains(child)) {
                 var index = Math.max(_(this.children).indexOf(afterChild), 0);

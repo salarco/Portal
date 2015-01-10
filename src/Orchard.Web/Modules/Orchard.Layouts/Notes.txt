@@ -65,16 +65,21 @@ MANIPULATION BY BUTTONS:
 
 KEYBOARD SHORTCUTS:
 
-    Horizontal containers:
-        - For children in horizontal containers:
-            - Ctrl+Left/Right reorders children
-            - Left/Right moves among children; parent is focused if moved beyond boundaries
-            - Up/Down focuses parent
-    Vertical containers:
-        - For children in vertical containers:
-            - Ctrl+Up/Down reorders children
-            - Up/Down moves among children; parent is focused if moved beyond boundaries
-            - Left/Right focuses parent		
+    DEL deletes the element.
+    SPACE invokes properties popup.
+    ENTER invokes edit element button (content elements only).
+    INS invokes the add button (containers only).
+    ALT+DOWN focuses first child (containers only).
+    SHIFT+LEFT/RIGHT resizes columns (columns only).
+    ALT+LEFT/RIGHT indents/outdents columns (columns only).
+    ALT+UP focuses parent.
+    - For children in horizontal containers:
+        - LEFT/RIGHT moves focus to next/previous sibling (no wrap-around)
+        - CTRL+LEFT/RIGHT reorders the item among siblings
+    - For children in vertical containers:
+        - UP/DOWN moves focus to next/previous sibling (no wrap-around)
+        - CTRL+UP/DOWN reorders the item among siblings
+    (No keyboard shortcut for splitting columns)
 
 OTHER THOUGHTS:
 

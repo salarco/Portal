@@ -1,8 +1,8 @@
 ﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">{{::element.contentTypeLabel}}</li>
-        <li class="layout-panel-item layout-panel-action" ng-show="{{element.hasEditor}}" title="Edit {{element.contentTypeLabel}} content" ng-click="edit()"><i class="fa fa-code"></i></li>
-        <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit {{element.contentTypeLabel}} properties">
+        <li class="layout-panel-item layout-panel-action layout-panel-action-edit" ng-show="{{element.hasEditor}}" title="Edit {{element.contentTypeLabel}} content (Enter)" ng-click="edit()"><i class="fa fa-code"></i></li>
+        <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit {{element.contentTypeLabel}} properties (Space)">
             <i class="fa fa-edit"></i>
             <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                 <li class="layout-popup-item layout-popup-input">
@@ -19,9 +19,9 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete {{element.contentTypeLabel}}" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move {{element.contentTypeLabel}} up" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move {{element.contentTypeLabel}} down" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete {{element.contentTypeLabel}} (Del)" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move {{element.contentTypeLabel}} up (Ctrl+Up)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move {{element.contentTypeLabel}} down (Ctrl+Down)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
     </ul>
     <div id="layout-content-markup-{{$htmlId}}" class="layout-content-markup" ng-bind-html="element.html" ng-blur="updateContent($event)"></div>
 </div>

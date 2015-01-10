@@ -1,7 +1,7 @@
 ﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">Column ({{element.width}})</li>
-        <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Edit column properties">
+        <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit column properties (Space)">
             <i class="fa fa-edit"></i>
             <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                 <li class="layout-popup-item layout-popup-input">
@@ -26,15 +26,15 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete column" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move column left" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-left"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move column right" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-right"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete column (Del)" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move column left (Ctrl+Left)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-left"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move column right (Ctrl+Right)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-right"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Split column" ng-click="element.split()" ng-class="{disabled: !element.canSplit()}"><i class="fa fa-columns"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Decrease column offset" ng-click="element.decreaseOffset()" ng-class="{disabled: !element.canDecreaseOffset()}"><i class="fa fa-outdent"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Increase column offset" ng-click="element.increaseOffset()" ng-class="{disabled: !element.canIncreaseOffset()}"><i class="fa fa-indent"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Decrease column offset (Alt+Left)" ng-click="element.decreaseOffset()" ng-class="{disabled: !element.canDecreaseOffset()}"><i class="fa fa-outdent"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Increase column offset (Alt+Right)" ng-click="element.increaseOffset()" ng-class="{disabled: !element.canIncreaseOffset()}"><i class="fa fa-indent"></i></li>
     </ul>
     <ul class="layout-panel layout-panel-add">
-        <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to column">
+        <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to column (Ins)">
             <i class="fa fa-plus"></i>
             <ul class="layout-popup layout-popup-add" orc-layout-popup orc-layout-popup-my="left bottom" orc-layout-popup-at="left top-4px">
                 <div class="layout-popup-flex">
