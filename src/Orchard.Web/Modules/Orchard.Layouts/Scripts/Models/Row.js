@@ -77,7 +77,7 @@
             return false;
         };
 
-        this.decreaseColumnOffset = function (column) {
+        this.decreaseColumnOffset = function (column, adjustWidth) {
             if (!this.canDecreaseColumnOffset(column))
                 return;
 
@@ -85,7 +85,9 @@
             if (index >= 0) {
                 if (column.offset > 0) {
                     column.offset--;
-                    if (this.children.length > index + 1) {
+                    if (adjustWidth)
+                        column.width++;
+                    else if (this.children.length > index + 1) {
                         var nextColumn = this.children[index + 1];
                         nextColumn.offset++;
                     }
@@ -107,7 +109,7 @@
             return false;
         };
 
-        this.increaseColumnOffset = function (column) {
+        this.increaseColumnOffset = function (column, adjustWidth) {
             if (!this.canIncreaseColumnOffset(column))
                 return;
 

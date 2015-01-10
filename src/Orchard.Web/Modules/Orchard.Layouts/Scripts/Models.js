@@ -439,7 +439,7 @@ var LayoutEditor;
             return false;
         };
 
-        this.decreaseColumnOffset = function (column) {
+        this.decreaseColumnOffset = function (column, adjustWidth) {
             if (!this.canDecreaseColumnOffset(column))
                 return;
 
@@ -447,7 +447,9 @@ var LayoutEditor;
             if (index >= 0) {
                 if (column.offset > 0) {
                     column.offset--;
-                    if (this.children.length > index + 1) {
+                    if (adjustWidth)
+                        column.width++;
+                    else if (this.children.length > index + 1) {
                         var nextColumn = this.children[index + 1];
                         nextColumn.offset++;
                     }
@@ -469,7 +471,7 @@ var LayoutEditor;
             return false;
         };
 
-        this.increaseColumnOffset = function (column) {
+        this.increaseColumnOffset = function (column, adjustWidth) {
             if (!this.canIncreaseColumnOffset(column))
                 return;
 
@@ -559,16 +561,16 @@ var LayoutEditor;
             return this.parent.canDecreaseColumnOffset(this);
         };
 
-        this.decreaseOffset = function() {
-            this.parent.decreaseColumnOffset(this);
+        this.decreaseOffset = function(adjustWidth) {
+            this.parent.decreaseColumnOffset(this, adjustWidth);
         };
 
         this.canIncreaseOffset = function () {
             return this.parent.canIncreaseColumnOffset(this);
         };
 
-        this.increaseOffset = function () {
-            this.parent.increaseColumnOffset(this);
+        this.increaseOffset = function (adjustWidth) {
+            this.parent.increaseColumnOffset(this, adjustWidth);
         };
 
         var self = this;

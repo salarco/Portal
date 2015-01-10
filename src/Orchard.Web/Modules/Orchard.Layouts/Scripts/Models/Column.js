@@ -42,16 +42,16 @@
             return this.parent.canDecreaseColumnOffset(this);
         };
 
-        this.decreaseOffset = function() {
-            this.parent.decreaseColumnOffset(this);
+        this.decreaseOffset = function(adjustWidth) {
+            this.parent.decreaseColumnOffset(this, adjustWidth);
         };
 
         this.canIncreaseOffset = function () {
             return this.parent.canIncreaseColumnOffset(this);
         };
 
-        this.increaseOffset = function () {
-            this.parent.increaseColumnOffset(this);
+        this.increaseOffset = function (adjustWidth) {
+            this.parent.increaseColumnOffset(this, adjustWidth);
         };
 
         var self = this;
