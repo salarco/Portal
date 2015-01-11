@@ -72,17 +72,19 @@
                 $(document).on("cut copy paste", function (e) {
                     var focusedElement = $scope.element.canvas.focusedElement;
                     if (!!focusedElement) {
-                        switch (e.type) {
-                            case "copy":
-                                focusedElement.copy(e.originalEvent.clipboardData);
-                                break;
-                            case "cut":
-                                focusedElement.cut(e.originalEvent.clipboardData);
-                                break;
-                            case "paste":
-                                focusedElement.paste(e.originalEvent.clipboardData);
-                                break;
-                        }
+                        $scope.$apply(function () {
+                            switch (e.type) {
+                                case "copy":
+                                    focusedElement.copy(e.originalEvent.clipboardData);
+                                    break;
+                                case "cut":
+                                    focusedElement.cut(e.originalEvent.clipboardData);
+                                    break;
+                                case "paste":
+                                    focusedElement.paste(e.originalEvent.clipboardData);
+                                    break;
+                            }
+                        });
                         e.preventDefault();
                     }
                 });

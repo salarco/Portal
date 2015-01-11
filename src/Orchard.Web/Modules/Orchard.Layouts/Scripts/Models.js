@@ -270,14 +270,18 @@ var LayoutEditor;
             if (!!json) {
                 var data = JSON.parse(json);
                 var child = LayoutEditor.elementFrom(data);
-                if (_(allowedChildTypes).contains(child.type)) {
-                    this.addChild(child);
-                    child.setIsFocused();
-                }
-                else if (!!this.parent)
-                    this.parent.paste(clipboardData);
+                this.pasteChild(child);
             }
         };
+
+        this.pasteChild = function (child) {
+            if (_(this.allowedChildTypes).contains(child.type)) {
+                this.addChild(child);
+                child.setIsFocused();
+            }
+            else if (!!this.parent)
+                this.parent.pasteChild(child);
+        }
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
