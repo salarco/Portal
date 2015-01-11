@@ -1,11 +1,454 @@
 ﻿.layout-editor-wrapper .layout-content {
   padding: 2px;
 }
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup {
+  /* this color is just a suggestion and can be changed based on implementation feedback */
+  /* this also has bidi implications */
+  /* this also has bidi implications */
+  /* LTR-specific: use 'margin-right' for rtl elements */
+  /* LTR-specific: use 'padding-right' for rtl elements */
+  /*table[rules=none i], table[rules=groups i], table[rules=rows i],
+table[rules=cols i], table[rules=all i], table[frame=void i],
+table[frame=above i], table[frame=below i], table[frame=hsides i],
+table[frame=lhs i], table[frame=rhs i], table[frame=vsides i],
+table[frame=box i], table[frame=border i],
+table[rules=none i] > tr > td, table[rules=none i] > tr > th,
+table[rules=groups i] > tr > td, table[rules=groups i] > tr > th,
+table[rules=rows i] > tr > td, table[rules=rows i] > tr > th,
+table[rules=cols i] > tr > td, table[rules=cols i] > tr > th,
+table[rules=all i] > tr > td, table[rules=all i] > tr > th,
+table[rules=none i] > thead > tr > td, table[rules=none i] > thead > tr > th,
+table[rules=groups i] > thead > tr > td, table[rules=groups i] > thead > tr > th,
+table[rules=rows i] > thead > tr > td, table[rules=rows i] > thead > tr > th,
+table[rules=cols i] > thead > tr > td, table[rules=cols i] > thead > tr > th,
+table[rules=all i] > thead > tr > td, table[rules=all i] > thead > tr > th,
+table[rules=none i] > tbody > tr > td, table[rules=none i] > tbody > tr > th,
+table[rules=groups i] > tbody > tr > td, table[rules=groups i] > tbody > tr > th,
+table[rules=rows i] > tbody > tr > td, table[rules=rows i] > tbody > tr > th,
+table[rules=cols i] > tbody > tr > td, table[rules=cols i] > tbody > tr > th,
+table[rules=all i] > tbody > tr > td, table[rules=all i] > tbody > tr > th,
+table[rules=none i] > tfoot > tr > td, table[rules=none i] > tfoot > tr > th,
+table[rules=groups i] > tfoot > tr > td, table[rules=groups i] > tfoot > tr > th,
+table[rules=rows i] > tfoot > tr > td, table[rules=rows i] > tfoot > tr > th,
+table[rules=cols i] > tfoot > tr > td, table[rules=cols i] > tfoot > tr > th,
+table[rules=all i] > tfoot > tr > td, table[rules=all i] > tfoot > tr > th {
+    border-color: black;
+}*/
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup address,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup blockquote,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup center,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup div,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup figure,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup figcaption,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup footer,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup form,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup header,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup hr,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup legend,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup listing,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup p,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup plaintext,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup pre,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup xmp {
+  display: block;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup blockquote,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup figure,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup listing,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup p,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup plaintext,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup pre,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup xmp {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup blockquote,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup figure {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup address {
+  font-style: italic;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup listing,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup plaintext,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup pre,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup xmp {
+  font-family: monospace;
+  white-space: pre;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup cite,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dfn,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup em,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup i,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup var {
+  font-style: italic;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup b,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup strong {
+  font-weight: bolder;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup code,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup kbd,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup samp,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tt {
+  font-family: monospace;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup big {
+  font-size: larger;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup small {
+  font-size: smaller;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup sub {
+  vertical-align: sub;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup sup {
+  vertical-align: super;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup sub,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup sup {
+  line-height: normal;
+  font-size: smaller;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ruby {
+  display: ruby;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rb {
+  display: ruby-base;
+  white-space: nowrap;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rt {
+  display: ruby-text;
+  white-space: nowrap;
+  font-size: 50%;
+  font-variant-east-asian: ruby;
+  text-emphasis: none;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rbc {
+  display: ruby-base-container;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rtc {
+  display: ruby-text-container;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ruby,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rb,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rt,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rbc,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup rtc {
+  unicode-bidi: isolate;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup :link {
+  color: #0000EE;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup :visited {
+  color: #551A8B;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup :link,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup :visited {
+  text-decoration: underline;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup a:link[rel~=help],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup a:visited[rel~=help],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup area:link[rel~=help],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup area:visited[rel~=help] {
+  cursor: help;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup :focus {
+  outline: auto;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup mark {
+  background: yellow;
+  color: black;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup abbr[title],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup acronym[title] {
+  text-decoration: dotted underline;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ins,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup u {
+  text-decoration: underline;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup del,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup s,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup strike {
+  text-decoration: line-through;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup blink {
+  text-decoration: blink;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup q::before {
+  content: open-quote;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup q::after {
+  content: close-quote;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup br {
+  content: '\A';
+  white-space: pre;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup nobr {
+  white-space: nowrap;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup wbr {
+  content: '\200B';
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup nobr wbr {
+  white-space: normal;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup article,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup aside,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h1,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h2,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h3,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h4,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h5,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h6,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup hgroup,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup nav,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup section {
+  display: block;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h1 {
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  font-size: 2.00em;
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h2 {
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  font-size: 1.50em;
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h3 {
+  margin-top: 1.00em;
+  margin-bottom: 1.00em;
+  font-size: 1.17em;
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h4 {
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  font-size: 1.00em;
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h5 {
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+  font-size: 0.83em;
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup h6 {
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+  font-size: 0.67em;
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dd,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dl,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dt,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul {
+  display: block;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup li {
+  display: list-item;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dl,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir dl,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dl dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dl dl,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dl ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dl ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol dl,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul dl,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dd {
+  margin-left: 40px;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul {
+  padding-left: 40px;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol {
+  list-style-type: decimal;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul {
+  list-style-type: disc;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ul {
+  list-style-type: circle;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir dir dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir dir ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ol dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ol ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ul dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup dir ul ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol dir dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol dir ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ol dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ol ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ul dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ol ul ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul dir dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul dir ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ol dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ol ul,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ul dir,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup ul ul ul {
+  list-style-type: square;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup table {
+  display: table;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup caption {
+  display: table-caption;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup colgroup,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup colgroup[hidden] {
+  display: table-column-group;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup col,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup col[hidden] {
+  display: table-column;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup thead,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup thead[hidden] {
+  display: table-header-group;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tbody,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tbody[hidden] {
+  display: table-row-group;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tfoot,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tfoot[hidden] {
+  display: table-footer-group;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tr,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tr[hidden] {
+  display: table-row;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup td,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup td[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th[hidden] {
+  display: table-cell;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup colgroup[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup col[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup thead[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tbody[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tfoot[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tr[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup td[hidden],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th[hidden] {
+  visibility: collapse;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup table {
+  box-sizing: border-box;
+  border-spacing: 2px;
+  border-collapse: separate;
+  text-indent: initial;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup td,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th {
+  padding: 1px;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th {
+  font-weight: bold;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup thead,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tbody,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tfoot,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup table > tr {
+  vertical-align: middle;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tr,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup td,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th {
+  vertical-align: inherit;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup table,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup td,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup th {
+  border-color: gray;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup thead,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tbody,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tfoot,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup tr {
+  border-color: inherit;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup input,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup select,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup option,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup optgroup,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup button,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup textarea,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup keygen {
+  text-indent: initial;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup textarea {
+  white-space: pre-wrap;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup input[type="radio"],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup input[type="checkbox"],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup input[type="reset"],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup input[type="button"],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup input[type="submit"],
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup select,
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup button {
+  box-sizing: border-box;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup hr {
+  color: gray;
+  border-style: inset;
+  border-width: 1px;
+  margin: 0.5em auto;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup fieldset {
+  margin-left: 2px;
+  margin-right: 2px;
+  border: groove 2px ThreeDFace;
+  padding: 0.35em 0.625em 0.75em;
+}
+.layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup legend {
+  padding-left: 2px;
+  padding-right: 2px;
+}
 .layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup > *:first-child {
   margin-top: 0 !important;
 }
 .layout-editor-wrapper .layout-content > .layout-element-wrapper .layout-content-markup > *:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 .layout-editor-wrapper .layout-content.layout-element-active,
 .layout-editor-wrapper .layout-content.layout-element-focused {
@@ -20,3 +463,4 @@
 .layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-content:not(.layout-element-active) {
   padding: 1px;
 }
+/*# sourceMappingURL=Content.css.map */

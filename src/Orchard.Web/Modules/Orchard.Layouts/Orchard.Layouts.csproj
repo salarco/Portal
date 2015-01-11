@@ -184,6 +184,12 @@
     <Content Include="Styles\LayoutEditor\Popup.min.css">
       <DependentUpon>Popup.css</DependentUpon>
     </Content>
+    <Content Include="Styles\LayoutEditor\Reset.css">
+      <DependentUpon>Reset.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Reset.min.css">
+      <DependentUpon>Reset.css</DependentUpon>
+    </Content>
     <Content Include="Styles\LayoutEditor\Row.css">
       <DependentUpon>Row.less</DependentUpon>
     </Content>
@@ -345,6 +351,10 @@
     <Content Include="Views\Elements\Canvas.cshtml" />
     <Content Include="Views\Element.cshtml" />
     <Content Include="Views\Element.Design.cshtml" />
+    <Content Include="Styles\LayoutEditor\Reset.less" />
+    <Content Include="Styles\LayoutEditor\Reset.css.map">
+      <DependentUpon>Reset.css</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
