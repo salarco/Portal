@@ -1,7 +1,7 @@
 ﻿@using System.Globalization
 @model Orchard.Layouts.ViewModels.LayoutPartViewModel
 @{
-    <!-- Library dependencies. -->
+    // Library dependencies.
     Style.Require("jQueryUI_Orchard");
     Script.Require("jQueryUI_Draggable");
     Script.Require("jQueryUI_Droppable");
@@ -18,14 +18,14 @@
     Script.Include("Lib/sortable.js");
     Script.Include("jquery.deserialize.js");
 
-    <!-- Utilities. -->
+    // Utilities.
     Style.Include("dialog.css");
     Script.Include("dialog.js");
     Script.Include("designer.toolbar.js");
     Script.Include("frame.js");
     Script.Include("serializer.js");
 
-    <!-- The actual layout editor. -->
+    // The actual layout editor.
     Style.Include("LayoutEditor.css", "LayoutEditor.min.css");
     Script.Include("Models.js");
     Script.Include("LayoutEditor.js");
@@ -38,14 +38,13 @@
                 .constant("environment", {
                     baseUrl: "@Url.Content("~/Modules/Orchard.Layouts/")"
                 });
-
             (function() {
                 var canvasModelData = @Html.Raw(Model.Data);
                 var canvasConfig = @Html.Raw(Model.ConfigurationData);
 
                 window.layoutDesignerCanvas = LayoutEditor.Canvas.from(canvasConfig, canvasModelData);
             })(jQuery);
-</script>
+        </script>
     }
 
     var contentId = Model.Content != null ? Model.Content.Id : default(int?);
@@ -73,13 +72,12 @@
         <div class="group canvas-toolbar">
             <div class="pull-right">
                 <ol class="group">
-                    @if (Model.Templates.Any())
-                    {
+                    @if (Model.Templates.Any()) {
                         var options = Model.Templates.Select(x => new SelectListItem { Text = Html.ItemDisplayText(x).ToString(), Value = x.Id.ToString(CultureInfo.InvariantCulture), Selected = x.Id == Model.TemplateId });
                         <li>
                             <div class="template-picker">
                                 <label>
-                                    @T("Use existing Layout:")
+                                    @T("Use existing layout:")
                                     @Html.DropDownList("template-picker", options, T("(None)").Text)
                                 </label>
                             </div>
@@ -88,9 +86,7 @@
                 </ol>
             </div>
         </div>
-        <!-- Note the model attribute, initializes the canvas bound to a given model. -->
         <orc-layout-canvas model="window.layoutDesignerCanvas" ng-app="LayoutEditor" />
-
     </fieldset>
     <div class="trash"></div>
     @Display.DialogTemplate(Name: "Layout")
