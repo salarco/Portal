@@ -186,7 +186,7 @@ var LayoutEditor;
         });
 
         this.addChild = function (child) {
-            if (!_(this.children).contains(child) && _(allowedChildTypes).contains(child.type))
+            if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
                 this.children.push(child);
             child.setCanvas(this.canvas);
             child.parent = this;
@@ -379,12 +379,9 @@ var LayoutEditor;
             if (!this.canAddColumn())
                 return;
 
-            var totalColumnsWidth = getTotalColumnsWidth();
-            if (totalColumnsWidth < 12) {
-                var column = new LayoutEditor.Column(null, null, null, null, 12 - totalColumnsWidth, 0, []);
-                this.addChild(column);
-                column.setIsFocused();
-            }
+            var column = new LayoutEditor.Column(null, null, null, null, 12 - getTotalColumnsWidth(), 0, []);
+            this.addChild(column);
+            column.setIsFocused();
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
@@ -510,7 +507,17 @@ var LayoutEditor;
             }
         };
 
-
+        var basePasteChild = this.pasteChild;
+        this.pasteChild = function (child) {
+            if (child.type == "Column") {
+                if (this.canAddColumn()) {
+                    child.width = 12 - getTotalColumnsWidth();
+                    basePasteChild.call(this, child);
+                }
+            }
+            else if (!!this.parent)
+                this.parent.pasteChild(child);
+        }
 
         this.toObject = function () {
             var result = this.elementToObject();

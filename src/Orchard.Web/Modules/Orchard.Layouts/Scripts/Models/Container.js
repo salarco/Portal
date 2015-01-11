@@ -13,7 +13,7 @@
         });
 
         this.addChild = function (child) {
-            if (!_(this.children).contains(child) && _(allowedChildTypes).contains(child.type))
+            if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
                 this.children.push(child);
             child.setCanvas(this.canvas);
             child.parent = this;
