@@ -26,7 +26,7 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete column (Del)" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete column (Del)" ng-click="delete(element)"><i class="fa fa-remove"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Move column left (Ctrl+Left)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-left"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Move column right (Ctrl+Right)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-right"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Split column" ng-click="element.split()" ng-class="{disabled: !element.canSplit()}"><i class="fa fa-columns"></i></li>

@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete {{element.contentTypeLabel}} (Del)" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete {{element.contentTypeLabel}} (Del)" ng-click="delete(element)"><i class="fa fa-remove"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Move {{element.contentTypeLabel}} up (Ctrl+Up)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Move {{element.contentTypeLabel}} down (Ctrl+Down)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
     </ul>

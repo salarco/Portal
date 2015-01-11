@@ -18,7 +18,7 @@
                     var element = $scope.element;
 
                     if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
-                        element.delete();
+                        $scope.delete(element);
                         handled = true;
                     }
                     else if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 32) { // Space
@@ -140,6 +140,11 @@
                         element.setIsFocused();
                     e.stopPropagation();
                 };
+
+                $scope.delete = function (element) {
+                    if (window.confirm("Are you sure you want to delete this " + element.type + "?"))
+                        element.delete();
+                }
             },
 
             configureForContainer: function ($scope, $element) {

@@ -18,7 +18,7 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete row (Del)" ng-click="element.delete()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete row (Del)" ng-click="delete(element)"><i class="fa fa-remove"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Move row up (Ctrl+Up)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
         <li class="layout-panel-item layout-panel-action" title="Move row down (Ctrl+Down)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
     </ul>
