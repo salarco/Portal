@@ -24,29 +24,30 @@
                     drag: function (e, ui) {
                         var columnElement = element.parent();
                         var columnSize = columnElement.width() / scope.element.width;
+                        var connectAdjacent = !e.ctrlKey;
                         if ($(e.target).hasClass("layout-column-resize-bar-left")) {
                             var delta = ui.offset.left - columnElement.offset().left;
-                            if (delta < -columnSize && scope.element.canDecreaseOffset()) {
+                            if (delta < -columnSize && scope.element.canExpandLeft(connectAdjacent)) {
                                 scope.$apply(function () {
-                                    scope.element.decreaseOffset(true);
+                                    scope.element.expandLeft(connectAdjacent);
                                 });
                             }
-                            else if (delta > columnSize && scope.element.canIncreaseOffset()) {
+                            else if (delta > columnSize && scope.element.canContractLeft(connectAdjacent)) {
                                 scope.$apply(function () {
-                                    scope.element.increaseOffset(true);
+                                    scope.element.contractLeft(connectAdjacent);
                                 });
                             }
                         }
                         else if ($(e.target).hasClass("layout-column-resize-bar-right")) {
                             var delta = ui.offset.left - columnElement.width() - columnElement.offset().left;
-                            if (delta > columnSize && scope.element.canIncreaseWidth()) {
+                            if (delta > columnSize && scope.element.canExpandRight(connectAdjacent)) {
                                 scope.$apply(function () {
-                                    scope.element.increaseWidth();
+                                    scope.element.expandRight(connectAdjacent);
                                 });
                             }
-                            else if (delta < -columnSize && scope.element.canDecreaseWidth()) {
+                            else if (delta < -columnSize && scope.element.canContractRight(connectAdjacent)) {
                                 scope.$apply(function () {
-                                    scope.element.decreaseWidth();
+                                    scope.element.contractRight(connectAdjacent);
                                 });
                             }
                         }

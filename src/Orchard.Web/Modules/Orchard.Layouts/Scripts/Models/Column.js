@@ -22,36 +22,36 @@
             newColumn.setIsFocused();
         };
 
-        this.canDecreaseWidth = function () {
-            return this.parent.canDecreaseColumnWidth(this);
+        this.canContractRight = function (connectAdjacent) {
+            return this.parent.canContractColumnRight(this, connectAdjacent);
         };
 
-        this.decreaseWidth = function () {
-            this.parent.decreaseColumnWidth(this);
+        this.contractRight = function (connectAdjacent) {
+            this.parent.contractColumnRight(this, connectAdjacent);
         };
 
-        this.canIncreaseWidth = function () {
-            return this.parent.canIncreaseColumnWidth(this);
+        this.canExpandRight = function (connectAdjacent) {
+            return this.parent.canExpandColumnRight(this, connectAdjacent);
         };
 
-        this.increaseWidth = function () {
-            this.parent.increaseColumnWidth(this);
+        this.expandRight = function (connectAdjacent) {
+            this.parent.expandColumnRight(this, connectAdjacent);
         };
 
-        this.canDecreaseOffset = function () {
-            return this.parent.canDecreaseColumnOffset(this);
+        this.canExpandLeft = function (connectAdjacent) {
+            return this.parent.canExpandColumnLeft(this, connectAdjacent);
         };
 
-        this.decreaseOffset = function(adjustWidth) {
-            this.parent.decreaseColumnOffset(this, adjustWidth);
+        this.expandLeft = function (connectAdjacent) {
+            this.parent.expandColumnLeft(this, connectAdjacent);
         };
 
-        this.canIncreaseOffset = function () {
-            return this.parent.canIncreaseColumnOffset(this);
+        this.canContractLeft = function (connectAdjacent) {
+            return this.parent.canContractColumnLeft(this, connectAdjacent);
         };
 
-        this.increaseOffset = function (adjustWidth) {
-            this.parent.increaseColumnOffset(this, adjustWidth);
+        this.contractLeft = function (connectAdjacent) {
+            this.parent.contractColumnLeft(this, connectAdjacent);
         };
 
         var self = this;

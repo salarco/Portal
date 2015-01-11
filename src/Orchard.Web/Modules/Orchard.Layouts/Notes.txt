@@ -70,9 +70,13 @@ KEYBOARD SHORTCUTS:
     ENTER invokes edit element button (content elements only).
     INS invokes the add button (containers only).
     ALT+DOWN focuses first child (containers only).
-    SHIFT+LEFT/RIGHT resizes columns (columns only).
-    ALT+LEFT/RIGHT indents/outdents columns (columns only).
     ALT+UP focuses parent.
+    - For columns:
+        SHIFT+LEFT/RIGHT contracts/expands column using the right edge.
+        ALT+LEFT/RIGHT expands/contracts column using the left edge.
+            NOTE: SHIFT+ALT can be combined to simultaneously manipulate both edges (i.e. "moving" the column within the row).
+            NOTE: CTRL can be added to inversely manipulate the mirroring edge of an adjacent column.
+            NOTE: CTRL can also be added while mouse dragging a column edge for the same purpose.
     - For children in horizontal containers:
         - LEFT/RIGHT moves focus to next/previous sibling (no wrap-around)
         - CTRL+LEFT/RIGHT reorders the item among siblings

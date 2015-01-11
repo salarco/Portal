@@ -21,12 +21,15 @@
             }
         };
 
-        this.canDecreaseColumnWidth = function (column) {
-            return column.width > 1;
+        this.canContractColumnRight = function (column, connectAdjacent) {
+            var index = _(this.children).indexOf(column);
+            if (index >= 0)
+                return column.width > 1;
+            return false;
         };
 
-        this.decreaseColumnWidth = function (column) {
-            if (!this.canDecreaseColumnWidth(column))
+        this.contractColumnRight = function (column, connectAdjacent) {
+            if (!this.canContractColumnRight(column, connectAdjacent))
                 return;
 
             var index = _(this.children).indexOf(column);
@@ -35,101 +38,113 @@
                     column.width--;
                     if (this.children.length > index + 1) {
                         var nextColumn = this.children[index + 1];
-                        nextColumn.offset++;
+                        if (connectAdjacent && nextColumn.offset == 0)
+                            nextColumn.width++
+                        else
+                            nextColumn.offset++;
                     }
                 }
             }
         };
 
-        this.canIncreaseColumnWidth = function (column) {
+        this.canExpandColumnRight = function (column, connectAdjacent) {
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
                 if (column.width >= 12)
                     return false;
                 if (this.children.length > index + 1) {
                     var nextColumn = this.children[index + 1];
-                    return nextColumn.offset > 0;
+                    if (connectAdjacent && nextColumn.offset == 0)
+                        return nextColumn.width > 1;
+                    else
+                        return nextColumn.offset > 0;
                 }
                 return getTotalColumnsWidth() < 12;
             }
             return false;
         };
 
-        this.increaseColumnWidth = function (column) {
-            if (!this.canIncreaseColumnWidth(column))
+        this.expandColumnRight = function (column, connectAdjacent) {
+            if (!this.canExpandColumnRight(column, connectAdjacent))
                 return;
 
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
                 if (this.children.length > index + 1) {
                     var nextColumn = this.children[index + 1];
-                    if (nextColumn.offset > 0)
+                    if (connectAdjacent && nextColumn.offset == 0)
+                        nextColumn.width--;
+                    else
                         nextColumn.offset--;
                 }
                 column.width++;
             }
         };
 
-        this.canDecreaseColumnOffset = function (column) {
+
+
+
+        this.canExpandColumnLeft = function (column, connectAdjacent) {
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (column.width >= 12)
+                    return false;
+                if (index > 0) {
+                    var prevColumn = this.children[index - 1];
+                    if (connectAdjacent && column.offset == 0)
+                        return prevColumn.width > 1;
+                }
+                return column.offset > 0;
+            }
+            return false;
+        };
+
+        this.expandColumnLeft = function (column, connectAdjacent) {
+            if (!this.canExpandColumnLeft(column, connectAdjacent))
+                return;
+
+            var index = _(this.children).indexOf(column);
+            if (index >= 0) {
+                if (index > 0) {
+                    var prevColumn = this.children[index - 1];
+                    if (connectAdjacent && column.offset == 0)
+                        prevColumn.width--;
+                    else
+                        column.offset--;
+                }
+                else
+                    column.offset--;
+                column.width++;
+            }
+        };
+
+        this.canContractColumnLeft = function (column, connectAdjacent) {
             var index = _(this.children).indexOf(column);
             if (index >= 0)
-                return column.offset > 0;
+                return column.width > 1;
             return false;
         };
 
-        this.decreaseColumnOffset = function (column, adjustWidth) {
-            if (!this.canDecreaseColumnOffset(column))
+        this.contractColumnLeft = function (column, connectAdjacent) {
+            if (!this.canContractColumnLeft(column, connectAdjacent))
                 return;
 
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
-                if (column.offset > 0) {
-                    column.offset--;
-                    if (adjustWidth)
-                        column.width++;
-                    else if (this.children.length > index + 1) {
-                        var nextColumn = this.children[index + 1];
-                        nextColumn.offset++;
-                    }
-                }
-            }
-        };
-
-        this.canIncreaseColumnOffset = function (column) {
-            var index = _(this.children).indexOf(column);
-            if (index >= 0) {
-                if (column.width > 1)
-                    return true;
-                if (this.children.length > index + 1) {
-                    var nextColumn = this.children[index + 1];
-                    return nextColumn.offset > 0;
-                }
-                return getTotalColumnsWidth() < 12;
-            }
-            return false;
-        };
-
-        this.increaseColumnOffset = function (column, adjustWidth) {
-            if (!this.canIncreaseColumnOffset(column))
-                return;
-
-            var index = _(this.children).indexOf(column);
-            if (index >= 0) {
-                if (this.children.length > index + 1) {
-                    var nextColumn = this.children[index + 1];
-                    if (nextColumn.offset > 0)
-                        nextColumn.offset--;
+                if (index > 0) {
+                    var prevColumn = this.children[index - 1];
+                    if (connectAdjacent && column.offset == 0)
+                        prevColumn.width++;
                     else
-                        column.width--;
+                        column.offset++;
                 }
-                else {
-                    if (getTotalColumnsWidth() >= 12)
-                        column.width--;
-                }
-
-                column.offset++;
+                else
+                    column.offset++;
+                column.width--;
             }
         };
+
+
 
         this.toObject = function () {
             var result = this.elementToObject();

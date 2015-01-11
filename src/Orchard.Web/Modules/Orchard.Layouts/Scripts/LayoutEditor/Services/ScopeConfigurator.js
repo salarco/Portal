@@ -46,20 +46,19 @@
                         }
 
                         if (element.type == "Column") { // This is a column.
-                            if (!e.ctrlKey && e.shiftKey && !e.altKey && e.which == 37) { // Shift+Left
-                                element.decreaseWidth();
+                            var connectAdjacent = !e.ctrlKey;
+                            if (e.which == 37) { // Left
+                                if (e.altKey)
+                                    element.expandLeft(connectAdjacent);
+                                if (e.shiftKey)
+                                    element.contractRight(connectAdjacent);
                                 handled = true;
                             }
-                            else if (!e.ctrlKey && e.shiftKey && !e.altKey && e.which == 39) { // Shift+Right
-                                element.increaseWidth();
-                                handled = true;
-                            }
-                            else if (!e.ctrlKey && !e.shiftKey && e.altKey && e.which == 37) { // Alt+Left
-                                element.decreaseOffset();
-                                handled = true;
-                            }
-                            else if (!e.ctrlKey && !e.shiftKey && e.altKey && e.which == 39) { // Alt+Right
-                                element.increaseOffset();
+                            else if (e.which == 39) { // Right
+                                if (e.altKey)
+                                    element.contractLeft(connectAdjacent);
+                                if (e.shiftKey)
+                                    element.expandRight(connectAdjacent);
                                 handled = true;
                             }
                         }
@@ -137,7 +136,8 @@
                 });
 
                 $scope.click = function (element, e) {
-                    element.setIsFocused();
+                    if (!element.canvas.isDragging)
+                        element.setIsFocused();
                     e.stopPropagation();
                 };
             },
