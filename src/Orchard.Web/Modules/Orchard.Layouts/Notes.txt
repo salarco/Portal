@@ -74,9 +74,10 @@ KEYBOARD SHORTCUTS:
     - For columns:
         SHIFT+LEFT/RIGHT contracts/expands column using the right edge.
         ALT+LEFT/RIGHT expands/contracts column using the left edge.
-            NOTE: SHIFT+ALT can be combined to simultaneously manipulate both edges (i.e. "moving" the column within the row).
-            NOTE: CTRL can be added to inversely manipulate the mirroring edge of an adjacent column.
-            NOTE: CTRL can also be added while mouse dragging a column edge for the same purpose.
+        NOTE:
+            - SHIFT+ALT can be combined to simultaneously manipulate both edges (i.e. "moving" the column within the row).
+            - By default when resizing columns any immediately adjacent columns will follow along (and be inversely resized).
+            - CTRL can be added to NOT inversely manipulate the mirroring edge of an immediately adjacent column. CTRL can also be added while mouse dragging a column edge for the same purpose.
     - For children in horizontal containers:
         - LEFT/RIGHT moves focus to next/previous sibling (no wrap-around)
         - CTRL+LEFT/RIGHT reorders the item among siblings
