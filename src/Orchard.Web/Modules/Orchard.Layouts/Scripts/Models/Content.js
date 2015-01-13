@@ -10,6 +10,10 @@
         this.html = html;
         this.hasEditor = hasEditor;
 
+        this.getInnerText = function () {
+            return $($.parseHTML("<div>" + this.html + "</div>")).text();
+        };
+
         this.toObject = function () {
             return {
                 "type": "Content"

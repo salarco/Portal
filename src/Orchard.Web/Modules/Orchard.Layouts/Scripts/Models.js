@@ -153,9 +153,13 @@ var LayoutEditor;
         };
 
         this.copy = function (clipboardData) {
+            var text = this.getInnerText();
+            clipboardData.setData("text/plain", text);
+            console.log(text);
+
             var data = this.toObject();
             var json = JSON.stringify(data, null, "\t");
-            clipboardData.setData("text/plain", json);
+            clipboardData.setData("text/json", json);
         };
 
         this.cut = function (clipboardData) {
@@ -181,7 +185,7 @@ var LayoutEditor;
         this.isContainer = true;
 
         var parent = this;
-        _(this.children).each(function(child) {
+        _(this.children).each(function (child) {
             child.parent = parent;
         });
 
@@ -262,11 +266,17 @@ var LayoutEditor;
         this.childrenToObject = function () {
             return _(this.children).map(function (child) {
                 return child.toObject();
-            }); 
+            });
         };
 
+        this.getInnerText = function () {
+            return _(this.children).reduce(function (memo, child) {
+                return memo + "\n" + child.getInnerText();
+            }, "");
+        }
+
         this.paste = function (clipboardData) {
-            var json = clipboardData.getData("text/plain");
+            var json = clipboardData.getData("text/json");
             if (!!json) {
                 var data = JSON.parse(json);
                 var child = LayoutEditor.elementFrom(data);
@@ -642,6 +652,10 @@ var LayoutEditor;
         this.contentTypeClass = contentTypeClass;
         this.html = html;
         this.hasEditor = hasEditor;
+
+        this.getInnerText = function () {
+            return $($.parseHTML("<div>" + this.html + "</div>")).text();
+        };
 
         this.toObject = function () {
             return {

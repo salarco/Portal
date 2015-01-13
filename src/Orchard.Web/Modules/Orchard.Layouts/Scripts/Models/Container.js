@@ -8,7 +8,7 @@
         this.isContainer = true;
 
         var parent = this;
-        _(this.children).each(function(child) {
+        _(this.children).each(function (child) {
             child.parent = parent;
         });
 
@@ -89,11 +89,17 @@
         this.childrenToObject = function () {
             return _(this.children).map(function (child) {
                 return child.toObject();
-            }); 
+            });
         };
 
+        this.getInnerText = function () {
+            return _(this.children).reduce(function (memo, child) {
+                return memo + "\n" + child.getInnerText();
+            }, "");
+        }
+
         this.paste = function (clipboardData) {
-            var json = clipboardData.getData("text/plain");
+            var json = clipboardData.getData("text/json");
             if (!!json) {
                 var data = JSON.parse(json);
                 var child = LayoutEditor.elementFrom(data);
