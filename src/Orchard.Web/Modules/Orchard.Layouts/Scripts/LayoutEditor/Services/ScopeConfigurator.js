@@ -17,6 +17,9 @@
                     var resetFocus = false;
                     var element = $scope.element;
 
+                    if (element.canvas.isDragging || element.canvas.inlineEditingIsActive)
+                        return;
+
                     if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
                         $scope.delete(element);
                         handled = true;

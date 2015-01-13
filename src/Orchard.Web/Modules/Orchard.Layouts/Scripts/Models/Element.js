@@ -36,6 +36,7 @@
                 return;
             if (this.canvas.isDragging)
                 return;
+
             if (value)
                 this.canvas.activeElement = this;
             else
@@ -51,6 +52,9 @@
         this.setIsFocused = function () {
             if (!this.canvas)
                 return;
+            if (this.canvas.isDragging || this.canvas.inlineEditingIsActive)
+                return;
+
             this.canvas.focusedElement = this;
             _(this.setIsFocusedEventHandlers).each(function (item) {
                 try {

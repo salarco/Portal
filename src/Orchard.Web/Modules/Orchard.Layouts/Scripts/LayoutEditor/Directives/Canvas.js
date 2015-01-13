@@ -98,10 +98,12 @@
                 });
                 // Unfocus and unselect everything on click outside of canvas.
                 $(window).click(function (e) {
-                    scope.$apply(function () {
-                        scope.element.canvas.activeElement = null;
-                        scope.element.canvas.focusedElement = null;
-                    });
+                    if (!scope.element.canvas.inlineEditingIsActive) {
+                        scope.$apply(function () {
+                            scope.element.canvas.activeElement = null;
+                            scope.element.canvas.focusedElement = null;
+                        });
+                    }
                 });
             }
         };
