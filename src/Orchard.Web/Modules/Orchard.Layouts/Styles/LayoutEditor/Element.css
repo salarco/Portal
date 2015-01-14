@@ -86,6 +86,13 @@
 .layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled:hover {
   background-color: #648721;
 }
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.active {
+  color: #deff42;
+  background-color: #739b26;
+}
+.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.active:hover {
+  background-color: #82b02b;
+}
 .layout-editor-wrapper .layout-element-selected {
   background-color: rgba(100, 135, 33, 0.08);
 }

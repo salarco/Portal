@@ -108,6 +108,15 @@
                         background-color: @focused-highlight;
                     }
                 }
+
+                &.active {
+                    color: lighten(saturate(spin(@focused-highlight, -10), 100%), 30%);
+                    background-color: lighten(@focused-highlight, 5%);
+
+                    &:hover {
+                        background-color: lighten(@focused-highlight, 10%);
+                    }
+                }
             }
         }
     }
