@@ -285,7 +285,7 @@ angular
                         $element.find(".layout-toolbar-container").css("min-height", "83px");
                         var firstContentEditorId = $("#layout-canvas-" + $scope.$id + " .layout-content-markup").first().attr("id");
                         tinymce.init({
-                            selector: "#layout-canvas-" + $scope.$id + " .layout-content-markup",
+                            selector: "#layout-canvas-" + $scope.$id + " .layout-content-markup[data-templated=false]",
                             theme: "modern",
                             schema: "html5",
                             plugins: [
