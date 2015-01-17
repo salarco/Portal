@@ -86,6 +86,7 @@
     <Content Include="Scripts\contentpart-layouts-settings.js" />
     <Content Include="Scripts\DemoConfig.js" />
     <Content Include="Scripts\DemoData.js" />
+    <Content Include="Scripts\element-browser.js" />
     <Content Include="Scripts\LayoutDesignerHost.js" />
     <Content Include="Scripts\element-editor.js" />
     <Content Include="Scripts\frame.js" />
