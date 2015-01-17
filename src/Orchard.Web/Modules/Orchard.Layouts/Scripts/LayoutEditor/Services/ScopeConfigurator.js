@@ -175,27 +175,26 @@
                     });
                 };
 
-                $scope.sortableOptions = {};
-
-                if (!isTemplated) {
-                    $scope.sortableOptions.cursor = "move";
-                    $scope.sortableOptions.delay = 150;
-                    $scope.sortableOptions.distance = 5;
-                    $scope.sortableOptions.start = function (e, ui) {
+                $scope.sortableOptions = {
+                    cursor: "move",
+                    delay: 150,
+                    distance: 5,
+                    start: function (e, ui) {
                         $scope.$apply(function () {
                             $scope.element.canvas.isDragging = true;
                             $scope.element.isDropTarget = true;
-                        });
+                        }),
                         // Make the drop target placeholder as high as the item being dragged.
                         ui.placeholder.height(ui.item.height());
-                    };
-                    $scope.sortableOptions.stop = function (e, ui) {
+                    },
+                    stop: function (e, ui) {
                         $scope.$apply(function () {
                             $scope.element.canvas.isDragging = false;
                             $scope.element.isDropTarget = false;
                         });
-                    };
-                }
+                    },
+                    disabled: isTemplated
+                };
 
                 $scope.getClasses = function (child) {
                     var result = ["layout-element"];
