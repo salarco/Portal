@@ -1,7 +1,7 @@
 ﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">Grid</li>
-        <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit grid properties (Space)">
+        <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit grid properties (Space)" ng-if="!element.getIsTemplated()">
             <i class="fa fa-edit"></i>
             <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                 <li class="layout-popup-item layout-popup-input">
@@ -18,9 +18,9 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete grid (Del)" ng-click="delete(element)"><i class="fa fa-remove"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move grid up (Ctrl+Up)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}"><i class="fa fa-chevron-up"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move grid down (Ctrl+Down)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}"><i class="fa fa-chevron-down"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete grid (Del)" ng-click="delete(element)" ng-if="!element.getIsTemplated()"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move grid up (Ctrl+Up)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}" ng-if="!element.getIsTemplated()"><i class="fa fa-chevron-up"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move grid down (Ctrl+Down)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}" ng-if="!element.getIsTemplated()"><i class="fa fa-chevron-down"></i></li>
     </ul>
     <ul class="layout-panel layout-panel-add">
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new row to grid (Ins)">

@@ -1,8 +1,8 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Content = function (data, htmlId, htmlClass, htmlStyle, contentType, contentTypeLabel, contentTypeClass, html, hasEditor) {
-        LayoutEditor.Element.call(this, "Content", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Content = function (data, htmlId, htmlClass, htmlStyle, isTemplated, contentType, contentTypeLabel, contentTypeClass, html, hasEditor) {
+        LayoutEditor.Element.call(this, "Content", data, htmlId, htmlClass, htmlStyle, isTemplated);
 
         this.contentType = contentType;
         this.contentTypeLabel = contentTypeLabel;
@@ -31,7 +31,17 @@
     };
 
     LayoutEditor.Content.from = function (value) {
-        return new LayoutEditor.Content(value.data, value.htmlId, value.htmlClass, value.htmlStyle, value.contentType, value.contentTypeLabel, value.contentTypeClass, value.html, value.hasEditor);
+        return new LayoutEditor.Content(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            value.contentType,
+            value.contentTypeLabel,
+            value.contentTypeClass,
+            value.html,
+            value.hasEditor);
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

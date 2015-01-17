@@ -7,10 +7,16 @@
         this.children = children;
         this.isContainer = true;
 
-        var parent = this;
-        _(this.children).each(function (child) {
-            child.parent = parent;
-        });
+        var self = this;
+
+        this.setChildren = function (children) {
+            this.children = children;
+            _(this.children).each(function (child) {
+                child.parent = self;
+            });
+        };
+
+        this.setChildren(children);
 
         this.addChild = function (child) {
             if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))

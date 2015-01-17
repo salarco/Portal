@@ -21,7 +21,6 @@
     // Utilities.
     Style.Include("dialog.css");
     Script.Include("dialog.js");
-    Script.Include("designer.toolbar.js");
     Script.Include("frame.js");
     Script.Include("serializer.js");
 
@@ -64,7 +63,6 @@
      data-anti-forgery-token="@Html.AntiForgeryTokenValueOrchard()"
      data-session-key="@Model.SessionKey">
 
-    @Html.HiddenFor(m => m.TemplateId, new { @class = "template-id-field" })
     @Html.HiddenFor(m => m.SessionKey)
     @Html.HiddenFor(m => m.Data, new { @class = "layout-data-field" })
     <fieldset>
@@ -78,7 +76,7 @@
                             <div class="template-picker">
                                 <label>
                                     @T("Use existing layout:")
-                                    @Html.DropDownList("template-picker", options, T("(None)").Text)
+                                    @Html.DropDownListFor(x => x.TemplateId, options, T("(None)").Text)
                                 </label>
                             </div>
                         </li>

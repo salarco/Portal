@@ -41,7 +41,7 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Element = function (type, data, htmlId, htmlClass, htmlStyle) {
+    LayoutEditor.Element = function (type, data, htmlId, htmlClass, htmlStyle, isTemplated) {
         if (!type)
             throw new Error("Parameter 'type' is required.");
 
@@ -50,6 +50,7 @@ var LayoutEditor;
         this.htmlId = htmlId;
         this.htmlClass = htmlClass;
         this.htmlStyle = htmlStyle;
+        this.isTemplated = isTemplated;
 
         this.canvas = null;
         this.parent = null;
@@ -69,6 +70,10 @@ var LayoutEditor;
             if (!this.canvas)
                 return false;
             return this.canvas.activeElement === this && !this.getIsFocused();
+        };
+
+        this.getIsTemplated = function() {
+            return this.isTemplated;
         };
 
         this.setIsActive = function (value) {
@@ -120,27 +125,42 @@ var LayoutEditor;
         };
 
         this.delete = function () {
+            if (this.getIsTemplated())
+                return;
+
             if (!!this.parent)
                 this.parent.deleteChild(this);
         };
 
         this.moveUp = function () {
+            if (this.getIsTemplated())
+                return;
+
             if (!!this.parent)
                 this.parent.moveChildUp(this);
         };
 
         this.moveDown = function () {
+            if (this.getIsTemplated())
+                return;
+
             if (!!this.parent)
                 this.parent.moveChildDown(this);
         };
 
-        this.canMoveUp = function() {
+        this.canMoveUp = function () {
+            if (this.getIsTemplated())
+                return false;
+
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildUp(this);
         };
 
-        this.canMoveDown = function() {
+        this.canMoveDown = function () {
+            if (this.getIsTemplated())
+                return false;
+
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildDown(this);
@@ -152,7 +172,8 @@ var LayoutEditor;
                 data: this.data,
                 htmlId: this.htmlId,
                 htmlClass: this.htmlClass,
-                htmlStyle: this.htmlStyle
+                htmlStyle: this.htmlStyle,
+                isTemplated: this.isTemplated
             };
         };
 
@@ -167,6 +188,9 @@ var LayoutEditor;
         };
 
         this.cut = function (clipboardData) {
+            if (this.getIsTemplated())
+                return;
+
             this.copy(clipboardData);
             this.delete();
         };
@@ -188,10 +212,16 @@ var LayoutEditor;
         this.children = children;
         this.isContainer = true;
 
-        var parent = this;
-        _(this.children).each(function (child) {
-            child.parent = parent;
-        });
+        var self = this;
+
+        this.setChildren = function (children) {
+            this.children = children;
+            _(this.children).each(function (child) {
+                child.parent = self;
+            });
+        };
+
+        this.setChildren(children);
 
         this.addChild = function (child) {
             if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
@@ -303,8 +333,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, children) {
-        LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+        LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.config = config;
@@ -317,7 +347,14 @@ var LayoutEditor;
 
         var self = this;
         function addGrid() {
-            var grid = new LayoutEditor.Grid(null, null, null, null, []);
+            var grid = LayoutEditor.Grid.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                isTemplated: false,
+                children: []
+            });
             self.addChild(grid);
             grid.setIsFocused();
         }
@@ -334,7 +371,14 @@ var LayoutEditor;
     };
 
     LayoutEditor.Canvas.from = function (config, value) {
-        return new LayoutEditor.Canvas(config, value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Canvas(
+            config,
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -343,14 +387,21 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Grid = function (data, htmlId, htmlClass, htmlStyle, children) {
-        LayoutEditor.Element.call(this, "Grid", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Grid = function (data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+        LayoutEditor.Element.call(this, "Grid", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Row"], children);
 
         var self = this;
         function addRow(numColumns) {
             var columns = numColumns > 0 ? LayoutEditor.Column.times(numColumns) : [];
-            var row = new LayoutEditor.Row(null, null, null, null, columns);
+            var row = LayoutEditor.Row.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                isTemplated: false,
+                children: columns
+            });
             self.addChild(row);
             row.setIsFocused();
         }
@@ -373,7 +424,13 @@ var LayoutEditor;
     };
 
     LayoutEditor.Grid.from = function (value) {
-        return new LayoutEditor.Grid(value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Grid(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -381,12 +438,12 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Row = function (data, htmlId, htmlClass, htmlStyle, children) {
-        LayoutEditor.Element.call(this, "Row", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Row = function (data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+        LayoutEditor.Element.call(this, "Row", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Column"], children);
 
         this.canAddColumn = function () {
-            return getTotalColumnsWidth() < 12;
+            return !this.getIsTemplated() && getTotalColumnsWidth() < 12;
         };
 
         this.addColumn = function () {
@@ -399,6 +456,9 @@ var LayoutEditor;
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0)
                 return column.width > 1;
@@ -416,7 +476,7 @@ var LayoutEditor;
                     if (this.children.length > index + 1) {
                         var nextColumn = this.children[index + 1];
                         if (connectAdjacent && nextColumn.offset == 0)
-                            nextColumn.width++
+                            nextColumn.width++;
                         else
                             nextColumn.offset++;
                     }
@@ -425,6 +485,9 @@ var LayoutEditor;
         };
 
         this.canExpandColumnRight = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
                 if (column.width >= 12)
@@ -458,10 +521,10 @@ var LayoutEditor;
             }
         };
 
-
-
-
         this.canExpandColumnLeft = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
                 if (column.width >= 12)
@@ -496,6 +559,9 @@ var LayoutEditor;
         };
 
         this.canContractColumnLeft = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0)
                 return column.width > 1;
@@ -552,7 +618,13 @@ var LayoutEditor;
     };
 
     LayoutEditor.Row.from = function (value) {
-        return new LayoutEditor.Row(value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Row(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
@@ -560,29 +632,38 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Column = function (data, htmlId, htmlClass, htmlStyle, width, offset, children) {
-        LayoutEditor.Element.call(this, "Column", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Column = function (data, htmlId, htmlClass, htmlStyle, isTemplated, width, offset, children) {
+        LayoutEditor.Element.call(this, "Column", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.width = width;
         this.offset = offset;
 
         this.canSplit = function () {
-            return this.width > 1;
+            return !this.getIsTemplated() && this.width > 1;
         };
 
         this.split = function () {
             if (!this.canSplit())
                 return;
             var newColumnWidth = Math.floor(this.width / 2);
-            var newColumn = new LayoutEditor.Column(null, null, null, null, newColumnWidth, 0, []);
+            var newColumn = LayoutEditor.Column.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                width: newColumnWidth,
+                offset: 0,
+                children: []
+            });
+            
             this.width = this.width - newColumnWidth;
             this.parent.insertChild(newColumn, this);
             newColumn.setIsFocused();
         };
 
         this.canContractRight = function (connectAdjacent) {
-            return this.parent.canContractColumnRight(this, connectAdjacent);
+            return !this.getIsTemplated() && this.parent.canContractColumnRight(this, connectAdjacent);
         };
 
         this.contractRight = function (connectAdjacent) {
@@ -590,7 +671,7 @@ var LayoutEditor;
         };
 
         this.canExpandRight = function (connectAdjacent) {
-            return this.parent.canExpandColumnRight(this, connectAdjacent);
+            return !this.getIsTemplated() && this.parent.canExpandColumnRight(this, connectAdjacent);
         };
 
         this.expandRight = function (connectAdjacent) {
@@ -598,7 +679,7 @@ var LayoutEditor;
         };
 
         this.canExpandLeft = function (connectAdjacent) {
-            return this.parent.canExpandColumnLeft(this, connectAdjacent);
+            return !this.getIsTemplated() && this.parent.canExpandColumnLeft(this, connectAdjacent);
         };
 
         this.expandLeft = function (connectAdjacent) {
@@ -606,7 +687,7 @@ var LayoutEditor;
         };
 
         this.canContractLeft = function (connectAdjacent) {
-            return this.parent.canContractColumnLeft(this, connectAdjacent);
+            return !this.getIsTemplated() && this.parent.canContractColumnLeft(this, connectAdjacent);
         };
 
         this.contractLeft = function (connectAdjacent) {
@@ -615,7 +696,14 @@ var LayoutEditor;
 
         var self = this;
         function addGrid() {
-            var grid = new LayoutEditor.Grid(null, null, null, null, []);
+            var grid = LayoutEditor.Grid.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                isTemplated: false,
+                children: []
+            });
             self.addChild(grid);
             grid.setIsFocused();
         }
@@ -634,12 +722,28 @@ var LayoutEditor;
     };
 
     LayoutEditor.Column.from = function (value) {
-        return new LayoutEditor.Column(value.data, value.htmlId, value.htmlClass, value.htmlStyle, value.width, value.offset, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Column(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            value.width,
+            value.offset,
+            LayoutEditor.childrenFrom(value.children));
     };
 
     LayoutEditor.Column.times = function (value) {
         return _.times(value, function (n) {
-            return new LayoutEditor.Column(null, null, null, null, 12 / value, 0, []);
+            return LayoutEditor.Column.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                isTemplated: false,
+                width: 12 / value,
+                offset: 0,
+                children: []
+            });
         });
     };
 
@@ -648,8 +752,8 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Content = function (data, htmlId, htmlClass, htmlStyle, contentType, contentTypeLabel, contentTypeClass, html, hasEditor) {
-        LayoutEditor.Element.call(this, "Content", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Content = function (data, htmlId, htmlClass, htmlStyle, isTemplated, contentType, contentTypeLabel, contentTypeClass, html, hasEditor) {
+        LayoutEditor.Element.call(this, "Content", data, htmlId, htmlClass, htmlStyle, isTemplated);
 
         this.contentType = contentType;
         this.contentTypeLabel = contentTypeLabel;
@@ -678,7 +782,17 @@ var LayoutEditor;
     };
 
     LayoutEditor.Content.from = function (value) {
-        return new LayoutEditor.Content(value.data, value.htmlId, value.htmlClass, value.htmlStyle, value.contentType, value.contentTypeLabel, value.contentTypeClass, value.html, value.hasEditor);
+        return new LayoutEditor.Content(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            value.contentType,
+            value.contentTypeLabel,
+            value.contentTypeClass,
+            value.html,
+            value.hasEditor);
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

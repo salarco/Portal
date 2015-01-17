@@ -19,23 +19,22 @@ angular
                     var handled = false;
                     var resetFocus = false;
                     var element = $scope.element;
+                    var isTemplated = element.getIsTemplated();
 
-                    if (element.canvas.isDragging || element.canvas.inlineEditingIsActive)
-                        return;
-
-                    if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
-                        $scope.delete(element);
-                        handled = true;
-                    }
-                    else if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 32) { // Space
-                        $element.find(".layout-panel-action-properties").first().click();
-                        handled = true;
-                    }
-
-                    if (element.type == "Content") { // This is a content element.
-                        if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 13) { // Enter
-                            $element.find(".layout-panel-action-edit").first().click();
+                    if (!isTemplated) {
+                        if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
+                            $scope.delete(element);
                             handled = true;
+                        } else if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 32) { // Space
+                            $element.find(".layout-panel-action-properties").first().click();
+                            handled = true;
+                        }
+
+                        if (element.type == "Content") { // This is a content element.
+                            if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 13) { // Enter
+                                $element.find(".layout-panel-action-edit").first().click();
+                                handled = true;
+                            }
                         }
                     }
 
@@ -51,21 +50,22 @@ angular
                             handled = true;
                         }
 
-                        if (element.type == "Column") { // This is a column.
-                            var connectAdjacent = !e.ctrlKey;
-                            if (e.which == 37) { // Left
-                                if (e.altKey)
-                                    element.expandLeft(connectAdjacent);
-                                if (e.shiftKey)
-                                    element.contractRight(connectAdjacent);
-                                handled = true;
-                            }
-                            else if (e.which == 39) { // Right
-                                if (e.altKey)
-                                    element.contractLeft(connectAdjacent);
-                                if (e.shiftKey)
-                                    element.expandRight(connectAdjacent);
-                                handled = true;
+                        if (!isTemplated) {
+                            if (element.type == "Column") { // This is a column.
+                                var connectAdjacent = !e.ctrlKey;
+                                if (e.which == 37) { // Left
+                                    if (e.altKey)
+                                        element.expandLeft(connectAdjacent);
+                                    if (e.shiftKey)
+                                        element.contractRight(connectAdjacent);
+                                    handled = true;
+                                } else if (e.which == 39) { // Right
+                                    if (e.altKey)
+                                        element.contractLeft(connectAdjacent);
+                                    if (e.shiftKey)
+                                        element.expandRight(connectAdjacent);
+                                    handled = true;
+                                }
                             }
                         }
                     }
@@ -85,12 +85,12 @@ angular
                                 element.parent.moveFocusNextChild(element);
                                 handled = true;
                             }
-                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 37) { // Ctrl+Left
+                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 37) { // Ctrl+Left
                                 element.moveUp();
                                 resetFocus = true;
                                 handled = true;
                             }
-                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 39) { // Ctrl+Right
+                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 39) { // Ctrl+Right
                                 element.moveDown();
                                 handled = true;
                             }
@@ -104,12 +104,12 @@ angular
                                 element.parent.moveFocusNextChild(element);
                                 handled = true;
                             }
-                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 38) { // Ctrl+Up
+                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 38) { // Ctrl+Up
                                 element.moveUp();
                                 resetFocus = true;
                                 handled = true;
                             }
-                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 40) { // Ctrl+Down
+                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 40) { // Ctrl+Down
                                 element.moveDown();
                                 handled = true;
                             }
@@ -148,12 +148,18 @@ angular
                 };
 
                 $scope.delete = function (element) {
+                    if (element.getIsTemplated())
+                        return;
+
                     if (window.confirm("Are you sure you want to delete this " + element.type + "?"))
                         element.delete();
                 }
             },
 
             configureForContainer: function ($scope, $element) {
+                var element = $scope.element;
+                var isTemplated = element.getIsTemplated();
+
                 $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType).then(function (args) {
                         $scope.$apply(function () {
@@ -163,7 +169,8 @@ angular
                                 contentTypeLabel: args.element.typeLabel,
                                 contentTypeClass: args.element.typeClass,
                                 data: decodeURIComponent(args.element.data),
-                                html: decodeURIComponent(args.element.html.replace(/\+/g, "%20"))
+                                html: decodeURIComponent(args.element.html.replace(/\+/g, "%20")),
+                                isTemplated: args.element.isTemplated
                             });
                             container.addChild(newElement);
                             newElement.setIsFocused();
@@ -171,25 +178,27 @@ angular
                     });
                 };
 
-                $scope.sortableOptions = {
-                    cursor: "move",
-                    delay: 150,
-                    distance: 5,
-                    start: function (e, ui) {
+                $scope.sortableOptions = {};
+
+                if (!isTemplated) {
+                    $scope.sortableOptions.cursor = "move";
+                    $scope.sortableOptions.delay = 150;
+                    $scope.sortableOptions.distance = 5;
+                    $scope.sortableOptions.start = function (e, ui) {
                         $scope.$apply(function () {
                             $scope.element.canvas.isDragging = true;
                             $scope.element.isDropTarget = true;
                         });
                         // Make the drop target placeholder as high as the item being dragged.
                         ui.placeholder.height(ui.item.height());
-                    },
-                    stop: function (e, ui) {
+                    };
+                    $scope.sortableOptions.stop = function (e, ui) {
                         $scope.$apply(function () {
                             $scope.element.canvas.isDragging = false;
                             $scope.element.isDropTarget = false;
                         });
-                    }
-                };
+                    };
+                }
 
                 $scope.getClasses = function (child) {
                     var result = ["layout-element"];
@@ -220,6 +229,9 @@ angular
                     if (child.isDropTarget)
                         result.push("layout-element-droptarget");
 
+                    if (child.getIsTemplated())
+                        result.push("layout-element-templated");
+
                     return result;
                 };
             }
@@ -236,14 +248,26 @@ angular
                 if (!!$attrs.model)
                     $scope.element = eval($attrs.model);
                 else
-                    $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
+                    $scope.element = LayoutEditor.Canvas.from({
+                        isTemplate: false,
+                        children: []
+                    });
 
                 scopeConfigurator.configureForElement($scope, $element);
                 scopeConfigurator.configureForContainer($scope, $element);
 
                 $scope.sortableOptions["axis"] = "y";
 
-                $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
+                var layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
+                $scope.$root.layoutDesignerHost = layoutDesignerHost;
+
+                layoutDesignerHost.element.on("replacemodel", function (e, args) {
+                    var canvas = $scope.element;
+                    $scope.$apply(function() {
+                        canvas.setChildren(LayoutEditor.childrenFrom(args.canvas.children));
+                        canvas.setCanvas(canvas);
+                    });
+                });
 
                 $scope.$root.editElement = function (elementType, elementData) {
                     var host = $scope.$root.layoutDesignerHost;
@@ -447,6 +471,9 @@ angular
             controller: function ($scope, $element) {
                 scopeConfigurator.configureForElement($scope, $element);
                 $scope.edit = function () {
+                    if ($scope.element.getIsTemplated())
+                        return;
+
                     $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
                         $scope.element.data = decodeURIComponent(args.element.data);
                         $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));

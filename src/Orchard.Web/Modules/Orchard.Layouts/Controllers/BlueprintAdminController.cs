@@ -104,7 +104,7 @@ namespace Orchard.Layouts.Controllers {
             var describeContext = DescribeElementsContext.Empty;
             var descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, blueprint.BaseElementTypeName);
             var data = ElementDataHelper.Deserialize(blueprint.BaseElementState);
-            var element = _elementManager.ActivateElement(descriptor, new ActivateElementArgs { Data = data });
+            var element = _elementManager.ActivateElement(descriptor, e => e.Data = data);
             var context = CreateEditorContext(element, data);
             var editorResult = _elementManager.BuildEditor(context);
 
@@ -127,7 +127,7 @@ namespace Orchard.Layouts.Controllers {
             var describeContext = DescribeElementsContext.Empty;
             var descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, blueprint.BaseElementTypeName);
             var data = ElementDataHelper.Deserialize(model.ElementData).Combine(Request.Form.ToDictionary());
-            var element = _elementManager.ActivateElement(descriptor, new ActivateElementArgs { Data = data });
+            var element = _elementManager.ActivateElement(descriptor, e => e.Data = data);
             var context = CreateEditorContext(element, elementData: data);
             var editorResult = _elementManager.UpdateEditor(context);
             var viewModel = new EditElementBlueprintViewModel {

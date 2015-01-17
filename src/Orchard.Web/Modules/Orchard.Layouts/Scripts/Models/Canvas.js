@@ -1,8 +1,8 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, children) {
-        LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+        LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
 
         this.config = config;
@@ -15,7 +15,14 @@
 
         var self = this;
         function addGrid() {
-            var grid = new LayoutEditor.Grid(null, null, null, null, []);
+            var grid = LayoutEditor.Grid.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                isTemplated: false,
+                children: []
+            });
             self.addChild(grid);
             grid.setIsFocused();
         }
@@ -32,7 +39,14 @@
     };
 
     LayoutEditor.Canvas.from = function (config, value) {
-        return new LayoutEditor.Canvas(config, value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Canvas(
+            config,
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

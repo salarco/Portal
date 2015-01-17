@@ -72,16 +72,16 @@ namespace Orchard.Layouts.Services {
             if (elementDescriptor == null)
                 return null; // This happens if an element exists in a layout, but its type is no longer available due to its feature being disabled.
 
-            var element = _elementFactory.Activate(elementDescriptor, 
-                new ActivateElementArgs {
-                    Container = parent, 
-                    Index = index, 
-                    Data = elementData,
-                    ExportableData = exportableData,
-                    HtmlId = htmlId,
-                    HtmlClass = htmlClass,
-                    HtmlStyle = htmlStyle
-                });
+            var element = _elementFactory.Activate(elementDescriptor, e => {
+                e.Container = parent;
+                    e.Index = index; 
+                    e.Data = elementData;
+                    e.ExportableData = exportableData;
+                    e.HtmlId = htmlId;
+                    e.HtmlClass = htmlClass;
+                    e.HtmlStyle = htmlStyle;
+            });
+
             var container = element as IContainer;
 
             if (container != null)

@@ -104,7 +104,7 @@ namespace Orchard.Layouts.Controllers {
             var describeContext = CreateDescribeContext(contentId, contentType);
             var descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, model.TypeName);
             var data = ElementDataHelper.Deserialize(model.ElementData).Combine(Request.Form.ToDictionary());
-            var element = _elementManager.ActivateElement(descriptor, new ActivateElementArgs { Data = data });
+            var element = _elementManager.ActivateElement(descriptor, e => e.Data = data);
             var context = CreateEditorContext(session, describeContext.Content, element, elementData: data, updater: this);
             var editorResult = _elementManager.UpdateEditor(context);
             var viewModel = new EditElementViewModel {
@@ -162,7 +162,7 @@ namespace Orchard.Layouts.Controllers {
             var describeContext = CreateDescribeContext(contentId, contentType);
             var descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, typeName);
             var data = ElementDataHelper.Deserialize(elementData);
-            var element = _elementManager.ActivateElement(descriptor, new ActivateElementArgs { Data = data });
+            var element = _elementManager.ActivateElement(descriptor, e => e.Data = data);
             var context = CreateEditorContext(session, describeContext.Content, element, elementData: data);
             var editorResult = _elementManager.BuildEditor(context);
 
@@ -191,7 +191,7 @@ namespace Orchard.Layouts.Controllers {
             var describeContext = CreateDescribeContext(contentId, contentType);
             var descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, model.TypeName);
             var data = ElementDataHelper.Deserialize(model.ElementData).Combine(Request.Form.ToDictionary());
-            var element = _elementManager.ActivateElement(descriptor, new ActivateElementArgs { Data = data });
+            var element = _elementManager.ActivateElement(descriptor, e => e.Data = data);
             var context = CreateEditorContext(session, describeContext.Content, element, data, updater: this);
             var editorResult = _elementManager.UpdateEditor(context);
             var viewModel = new EditElementViewModel {

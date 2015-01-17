@@ -1,7 +1,7 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Element = function (type, data, htmlId, htmlClass, htmlStyle) {
+    LayoutEditor.Element = function (type, data, htmlId, htmlClass, htmlStyle, isTemplated) {
         if (!type)
             throw new Error("Parameter 'type' is required.");
 
@@ -10,6 +10,7 @@
         this.htmlId = htmlId;
         this.htmlClass = htmlClass;
         this.htmlStyle = htmlStyle;
+        this.isTemplated = isTemplated;
 
         this.canvas = null;
         this.parent = null;
@@ -29,6 +30,10 @@
             if (!this.canvas)
                 return false;
             return this.canvas.activeElement === this && !this.getIsFocused();
+        };
+
+        this.getIsTemplated = function() {
+            return this.isTemplated;
         };
 
         this.setIsActive = function (value) {
@@ -80,27 +85,42 @@
         };
 
         this.delete = function () {
+            if (this.getIsTemplated())
+                return;
+
             if (!!this.parent)
                 this.parent.deleteChild(this);
         };
 
         this.moveUp = function () {
+            if (this.getIsTemplated())
+                return;
+
             if (!!this.parent)
                 this.parent.moveChildUp(this);
         };
 
         this.moveDown = function () {
+            if (this.getIsTemplated())
+                return;
+
             if (!!this.parent)
                 this.parent.moveChildDown(this);
         };
 
-        this.canMoveUp = function() {
+        this.canMoveUp = function () {
+            if (this.getIsTemplated())
+                return false;
+
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildUp(this);
         };
 
-        this.canMoveDown = function() {
+        this.canMoveDown = function () {
+            if (this.getIsTemplated())
+                return false;
+
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildDown(this);
@@ -112,7 +132,8 @@
                 data: this.data,
                 htmlId: this.htmlId,
                 htmlClass: this.htmlClass,
-                htmlStyle: this.htmlStyle
+                htmlStyle: this.htmlStyle,
+                isTemplated: this.isTemplated
             };
         };
 
@@ -127,6 +148,9 @@
         };
 
         this.cut = function (clipboardData) {
+            if (this.getIsTemplated())
+                return;
+
             this.copy(clipboardData);
             this.delete();
         };

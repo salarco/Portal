@@ -66,25 +66,25 @@ namespace Orchard.Layouts.Services {
             return layoutRoot;
         }
 
-        public string ApplyTemplate(LayoutPart layout) {
+        public IEnumerable<IElement> ApplyTemplate(LayoutPart layout) {
             var templateLayoutPart = layout.TemplateId != null ? GetLayout(layout.TemplateId.Value) : default(LayoutPart);
 
             // Update the layout with the selected template, if any.
             return templateLayoutPart != null ? ApplyTemplate(layout, templateLayoutPart) : null;
         }
 
-        public string ApplyTemplate(LayoutPart layout, LayoutPart templateLayout) {
+        public IEnumerable<IElement> ApplyTemplate(LayoutPart layout, LayoutPart templateLayout) {
             return ApplyTemplate(LoadElements(layout), LoadElements(templateLayout));
         }
 
-        public string ApplyTemplate(IEnumerable<IElement> layout, IEnumerable<IElement> templateLayout) {
+        public IEnumerable<IElement> ApplyTemplate(IEnumerable<IElement> layout, IEnumerable<IElement> templateLayout) {
             var template = Templatify(templateLayout).ToList();
             var templateColumns = ExtractColumns(template).ToArray();
             var layoutColumns = ExtractColumns(layout).ToArray();
 
-            foreach (var element in layout.Flatten(levels: 3)) {
-                // Ignore root grids, rows, columns and templated elements, as they are considered to be part of the current layout.
-                if ((element is IGrid && element.Container == null) || element is IRow || element is IColumn || element.IsTemplated)
+            foreach (var element in layout.Flatten(levels: 4)) {
+                // Ignore canvas, root, grids, rows, columns and templated elements, as they are considered to be part of the current layout.
+                if (element is Canvas || (element is IGrid && element.Container is Canvas) || element is IRow || element is IColumn || element.IsTemplated)
                     continue;
 
                 // Move the element to the template and try to maintain its index.
@@ -93,7 +93,6 @@ namespace Orchard.Layouts.Services {
                 if (column != null) {
                     var indexInLayout = Array.IndexOf(layoutColumns, column);
                     indexInTemplate = indexInLayout < templateColumns.Count() ? indexInLayout : templateColumns.Any() ? 0 : -1;
-
                 }
 
                 if (indexInTemplate > -1) {
@@ -104,12 +103,12 @@ namespace Orchard.Layouts.Services {
                 }
             }
 
-            return _serializer.Serialize(template);
+            return template;
         }
 
-        public string DetachTemplate(IEnumerable<IElement> elements) {
+        public IEnumerable<IElement> DetachTemplate(IEnumerable<IElement> elements) {
             Templatify(elements, false);
-            return _serializer.Serialize(elements);
+            return elements;
         }
 
         public IEnumerable<LayoutPart> GetTemplateClients(int templateId, VersionOptions versionOptions) {
@@ -138,7 +137,7 @@ namespace Orchard.Layouts.Services {
         }
 
         private IEnumerable<IColumn> ExtractColumns(IEnumerable<IElement> elements) {
-            return elements.Flatten(levels: 3).Where(x => x is IColumn).Cast<IColumn>();
+            return elements.Flatten(levels: 4).Where(x => x is IColumn).Cast<IColumn>();
         }
     }
 }

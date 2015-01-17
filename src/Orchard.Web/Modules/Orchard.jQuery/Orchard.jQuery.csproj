@@ -502,6 +502,275 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-1.11.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.iframe-transport.min.js.map">
+      <DependentUpon>jquery.iframe-transport.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.plugin.min.js.map">
+      <DependentUpon>jquery.plugin.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.11.1.min.js.map">
+      <DependentUpon>jquery-1.11.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.fileupload.min.js.map">
+      <DependentUpon>jquery.fileupload.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.accordion.min.js.map">
+      <DependentUpon>jquery.ui.accordion.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.autocomplete.min.js.map">
+      <DependentUpon>jquery.ui.autocomplete.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.button.min.js.map">
+      <DependentUpon>jquery.ui.button.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.core.min.js.map">
+      <DependentUpon>jquery.ui.core.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.datepicker.min.js.map">
+      <DependentUpon>jquery.ui.datepicker.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.dialog.min.js.map">
+      <DependentUpon>jquery.ui.dialog.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.draggable.min.js.map">
+      <DependentUpon>jquery.ui.draggable.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.droppable.min.js.map">
+      <DependentUpon>jquery.ui.droppable.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.effect-blind.min.js.map">
+      <DependentUpon>jquery.ui.effect-blind.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.effect-bounce.min.js.map">
+      <DependentUpon>jquery.ui.effect-bounce.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.effect-drop.min.js.map">
+      <DependentUpon>jquery.ui.effect-drop.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.ui.effect-explode.min.js.map">
+      <DependentUpon>jquery.ui.effect-explode.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-scale.min.js.map">
+      <DependentUpon>jquery.ui.effect-scale.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-migrate-1.2.1.min.js.map">
+      <DependentUpon>jquery-migrate-1.2.1.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-highlight.min.js.map">
+      <DependentUpon>jquery.ui.effect-highlight.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-clip.min.js.map">
+      <DependentUpon>jquery.ui.effect-clip.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-fade.min.js.map">
+      <DependentUpon>jquery.ui.effect-fade.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-fold.min.js.map">
+      <DependentUpon>jquery.ui.effect-fold.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-shake.min.js.map">
+      <DependentUpon>jquery.ui.effect-shake.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-ui.min.js.map">
+      <DependentUpon>jquery-ui.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-pulsate.min.js.map">
+      <DependentUpon>jquery.ui.effect-pulsate.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.menu.min.js.map">
+      <DependentUpon>jquery.ui.menu.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-slide.min.js.map">
+      <DependentUpon>jquery.ui.effect-slide.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.selectable.min.js.map">
+      <DependentUpon>jquery.ui.selectable.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.sortable.min.js.map">
+      <DependentUpon>jquery.ui.sortable.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.position.min.js.map">
+      <DependentUpon>jquery.ui.position.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect.min.js.map">
+      <DependentUpon>jquery.ui.effect.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.resizable.min.js.map">
+      <DependentUpon>jquery.ui.resizable.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.effect-transfer.min.js.map">
+      <DependentUpon>jquery.ui.effect-transfer.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.mouse.min.js.map">
+      <DependentUpon>jquery.ui.mouse.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.spinner.min.js.map">
+      <DependentUpon>jquery.ui.spinner.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.tooltip.min.js.map">
+      <DependentUpon>jquery.ui.tooltip.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.widget.min.js.map">
+      <DependentUpon>jquery.ui.widget.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.all.min.js.map">
+      <DependentUpon>jquery.calendars.all.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.slider.min.js.map">
+      <DependentUpon>jquery.ui.slider.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.progressbar.min.js.map">
+      <DependentUpon>jquery.ui.progressbar.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.hebrew.min.js.map">
+      <DependentUpon>jquery.calendars.hebrew.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.ethiopian.min.js.map">
+      <DependentUpon>jquery.calendars.ethiopian.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.ui.tabs.min.js.map">
+      <DependentUpon>jquery.ui.tabs.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.nepali.min.js.map">
+      <DependentUpon>jquery.calendars.nepali.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.lang.min.js.map">
+      <DependentUpon>jquery.calendars.lang.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.islamic.min.js.map">
+      <DependentUpon>jquery.calendars.islamic.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.coptic.min.js.map">
+      <DependentUpon>jquery.calendars.coptic.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.mayan.min.js.map">
+      <DependentUpon>jquery.calendars.mayan.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.plus.min.js.map">
+      <DependentUpon>jquery.calendars.plus.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.persian.min.js.map">
+      <DependentUpon>jquery.calendars.persian.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.picker.ext.min.js.map">
+      <DependentUpon>jquery.calendars.picker.ext.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.validation.min.js.map">
+      <DependentUpon>jquery.calendars.validation.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\colorbox\jquery.colorbox.min.js.map">
+      <DependentUpon>jquery.colorbox.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.ummalqura.min.js.map">
+      <DependentUpon>jquery.calendars.ummalqura.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.min.js.map">
+      <DependentUpon>jquery.calendars.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\calendars\jquery.calendars.julian.min.js.map">
+      <DependentUpon>jquery.calendars.julian.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\calendars\jquery.calendars.picker.lang.min.js.map">
+      <DependentUpon>jquery.calendars.picker.lang.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\calendars\jquery.calendars.picker.min.js.map">
+      <DependentUpon>jquery.calendars.picker.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\calendars\jquery.calendars.taiwan.min.js.map">
+      <DependentUpon>jquery.calendars.taiwan.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\calendars\jquery.calendars.thai.min.js.map">
+      <DependentUpon>jquery.calendars.thai.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\timeentry\jquery.timeentry.min.js.map">
+      <DependentUpon>jquery.timeentry.min.js</DependentUpon>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

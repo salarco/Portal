@@ -11,8 +11,16 @@ namespace Orchard.Layouts.Services {
         /// </summary>
         /// <param name="layoutData">The layout serialized as a string to map to the editor JSON format.</param>
         /// <param name="describeContext">A context for the element activator when describing elements.</param>
-        /// <returns>Returns a JSON string that represents the layout model compatible with the layout editor.</returns>
-        string ToEditorModel(string layoutData, DescribeElementsContext describeContext);
+        /// <returns>Returns an object that represents the layout model compatible with the layout editor.</returns>
+        object ToEditorModel(string layoutData, DescribeElementsContext describeContext);
+
+        /// <summary>
+        /// Maps the specified layout to a JSON representation of a layout editor compatible object model.
+        /// </summary>
+        /// <param name="elements">The layout represented as an hierarchical list of elements to map to the editor JSON format.</param>
+        /// <param name="describeContext">A context for the element activator when describing elements.</param>
+        /// <returns>Returns an object that represents the layout model compatible with the layout editor.</returns>
+        object ToEditorModel(IEnumerable<IElement> elements, DescribeElementsContext describeContext);
 
         /// <summary>
         /// Maps the specified editor data to an hierarchical list of elements.

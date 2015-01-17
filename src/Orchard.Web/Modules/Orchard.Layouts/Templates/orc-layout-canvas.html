@@ -2,7 +2,7 @@
     <div id="layout-canvas-{{$id}}" class="layout-element layout-container layout-canvas" ng-class="getClasses(element)" ng-mouseenter="element.setIsActive(true)" ng-mouseleave="element.setIsActive(false)" ng-click="click(element, $event)" tabindex="{{$id}}">
         <div class="layout-toolbar-container"></div>
         <div class="layout-element-wrapper">
-            <ul class="layout-panel layout-panel-main">
+            <ul class="layout-panel layout-panel-main" ng-show="!element.getIsTemplated()">
                 <li class="layout-panel-item layout-panel-label">Canvas</li>
                 <li class="layout-panel-item layout-panel-action" title="Activate inline editing" ng-click="toggleInlineEditing()" ng-class="{active: element.canvas.inlineEditingIsActive}"><i class="fa fa-paragraph"></i></li>
                 <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit canvas properties (Space)">

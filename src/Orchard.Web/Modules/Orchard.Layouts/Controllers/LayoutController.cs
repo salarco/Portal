@@ -1,49 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Orchard.ContentManagement;
 using Orchard.Layouts.Framework.Elements;
-using Orchard.Layouts.Models;
 using Orchard.Layouts.Services;
-using Orchard.Mvc;
 
 namespace Orchard.Layouts.Controllers {
     public class LayoutController : Controller {
         private readonly IContentManager _contentManager;
         private readonly ILayoutManager _layoutManager;
-        private readonly ILayoutSerializer _serializer;
+        private readonly ILayoutModelMapper _mapper;
 
-        public LayoutController(
-            IContentManager contentManager,
-            ILayoutManager layoutManager,
-            ILayoutSerializer serializer) {
+        public LayoutController(IContentManager contentManager, ILayoutManager layoutManager, ILayoutModelMapper mapper) {
 
             _contentManager = contentManager;
             _layoutManager = layoutManager;
-            _serializer = serializer;
+            _mapper = mapper;
         }
 
-        [HttpPost]
-        public ShapeResult ApplyTemplate(int? templateId = null, string layoutData = null, int? layoutId = null, string contentType = null) {
-            var layoutPart = layoutId != null ? _layoutManager.GetLayout(layoutId.Value) ?? _contentManager.New<LayoutPart>(contentType) : _contentManager.New<LayoutPart>(contentType);
-
-            if (!String.IsNullOrWhiteSpace(layoutData)) {
-                layoutData = ApplyTemplateInternal(templateId, layoutData, layoutId, contentType);
-            }
-
-            var layoutShape = _layoutManager.RenderLayout(data: layoutData, displayType: "Design", content: layoutPart);
-            return new ShapeResult(this, layoutShape);
-        }
-
-        private string ApplyTemplateInternal(int? templateId, string layoutData, int? layoutId = null, string contentType = null) {
+        [HttpPost, ValidateInput(enableValidation: false)]
+        public JsonResult ApplyTemplate(int? templateId = null, string layoutData = null, int? contentId = null, string contentType = null) {
             var template = templateId != null ? _layoutManager.GetLayout(templateId.Value) : null;
-            var templateElements = template != null ? _layoutManager.LoadElements(template) : default(IEnumerable<IElement>);
-            var describeContext = CreateDescribeElementsContext(layoutId, contentType);
-            var elementInstances = _serializer.Deserialize(layoutData, describeContext);
+            var templateElements = template != null ? _layoutManager.LoadElements(template).ToList() : default(IEnumerable<IElement>);
+            var describeContext = CreateDescribeElementsContext(contentId, contentType);
+            var elementInstances = _mapper.ToLayoutModel(layoutData, describeContext).ToList();
+            var updatedLayout = templateElements != null
+                ? _layoutManager.ApplyTemplate(elementInstances, templateElements)
+                : _layoutManager.DetachTemplate(elementInstances);
 
-            if (templateElements == null)
-                return _layoutManager.DetachTemplate(elementInstances);
-            return _layoutManager.ApplyTemplate(elementInstances, templateElements);
+            var editorModel = _mapper.ToEditorModel(updatedLayout, describeContext);
+            return Json(editorModel);
         }
 
         private DescribeElementsContext CreateDescribeElementsContext(int? contentId, string contentType) {

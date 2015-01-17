@@ -13,31 +13,43 @@ namespace Orchard.Layouts.Services {
 
         public Localizer T { get; set; }
 
-        public IElement Activate(Type elementType) {
-            return (IElement)Activator.CreateInstance(elementType);
+        public IElement Activate(Type elementType, Action<IElement> initialize = null) {
+            var element = (IElement)Activator.CreateInstance(elementType);
+
+            if (initialize != null)
+                initialize(element);
+
+            return element;
         }
 
-        public T Activate<T>() where T : IElement {
-            return (T)Activate(typeof (T));
+        public T Activate<T>(Action<T> initialize = null) where T : IElement {
+            var element = (T)Activator.CreateInstance(typeof(T));
+
+            if (initialize != null)
+                initialize(element);
+
+            return element;
         }
 
-        public IElement Activate(ElementDescriptor descriptor, ActivateElementArgs args) {
+        public T Activate<T>(ElementDescriptor descriptor, Action<T> initialize = null) where T : IElement {
+            var initializeWrapper = initialize != null ? e => initialize((T)e) : default(Action<IElement>);
+            return (T)Activate(descriptor, initializeWrapper);
+        }
+
+        public IElement Activate(ElementDescriptor descriptor, Action<IElement> initialize = null) {
             _elementEventHandler.Creating(new ElementCreatingContext {
                 ElementDescriptor = descriptor
             });
 
             var element = Activate(descriptor.ElementType);
 
-            args = args ?? ActivateElementArgs.Empty;
-            element.Container = args.Container;
             element.Descriptor = descriptor;
             element.T = T;
-            element.Index = args.Index;
-            element.Data = args.Data ?? new ElementDataDictionary();
-            element.ExportableData = args.ExportableData ?? new ElementDataDictionary();
-            element.HtmlId = args.HtmlId;
-            element.HtmlClass = args.HtmlClass;
-            element.HtmlStyle = args.HtmlStyle;
+            element.Data = new ElementDataDictionary();
+            element.ExportableData = new ElementDataDictionary();
+
+            if (initialize != null)
+                initialize(element);
 
             _elementEventHandler.Created(new ElementCreatedContext {
                 Element = element,

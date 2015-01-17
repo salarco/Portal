@@ -1,14 +1,21 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Grid = function (data, htmlId, htmlClass, htmlStyle, children) {
-        LayoutEditor.Element.call(this, "Grid", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Grid = function (data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+        LayoutEditor.Element.call(this, "Grid", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Row"], children);
 
         var self = this;
         function addRow(numColumns) {
             var columns = numColumns > 0 ? LayoutEditor.Column.times(numColumns) : [];
-            var row = new LayoutEditor.Row(null, null, null, null, columns);
+            var row = LayoutEditor.Row.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                isTemplated: false,
+                children: columns
+            });
             self.addChild(row);
             row.setIsFocused();
         }
@@ -31,7 +38,13 @@
     };
 
     LayoutEditor.Grid.from = function (value) {
-        return new LayoutEditor.Grid(value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Grid(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));

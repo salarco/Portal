@@ -8,14 +8,26 @@
                 if (!!$attrs.model)
                     $scope.element = eval($attrs.model);
                 else
-                    $scope.element = new LayoutEditor.Canvas(null, null, null, null, null, []);
+                    $scope.element = LayoutEditor.Canvas.from({
+                        isTemplate: false,
+                        children: []
+                    });
 
                 scopeConfigurator.configureForElement($scope, $element);
                 scopeConfigurator.configureForContainer($scope, $element);
 
                 $scope.sortableOptions["axis"] = "y";
 
-                $scope.$root.layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
+                var layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
+                $scope.$root.layoutDesignerHost = layoutDesignerHost;
+
+                layoutDesignerHost.element.on("replacemodel", function (e, args) {
+                    var canvas = $scope.element;
+                    $scope.$apply(function() {
+                        canvas.setChildren(LayoutEditor.childrenFrom(args.canvas.children));
+                        canvas.setCanvas(canvas);
+                    });
+                });
 
                 $scope.$root.editElement = function (elementType, elementData) {
                     var host = $scope.$root.layoutDesignerHost;

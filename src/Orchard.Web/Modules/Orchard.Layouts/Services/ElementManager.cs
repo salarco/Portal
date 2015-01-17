@@ -92,18 +92,18 @@ namespace Orchard.Layouts.Services {
             return GetElementDescriptorByTypeName(DescribeElementsContext.Empty, typeof(T).FullName);
         }
 
-        public IElement ActivateElement(ElementDescriptor descriptor, ActivateElementArgs args = null) {
-            return _factory.Activate(descriptor, args);
+        public IElement ActivateElement(ElementDescriptor descriptor, Action<IElement> initialize = null) {
+            return _factory.Activate(descriptor, initialize);
         }
 
-        public T ActivateElement<T>(ElementDescriptor descriptor, ActivateElementArgs args = null) where T : IElement {
-            return (T)ActivateElement(descriptor, args);
+        public T ActivateElement<T>(ElementDescriptor descriptor, Action<T> initialize = null) where T : IElement {
+            return _factory.Activate(descriptor, initialize);
         }
 
-        public T ActivateElement<T>() where T : IElement {
+        public T ActivateElement<T>(Action<T> initialize = null) where T : IElement {
             var context = DescribeElementsContext.Empty;
             var descriptor = GetElementDescriptorByType<T>(context);
-            return ActivateElement<T>(descriptor);
+            return ActivateElement<T>(descriptor, initialize);
         }
 
         public IEnumerable<IElementDriver> GetDrivers<TElement>() where TElement : IElement {

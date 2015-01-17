@@ -23,24 +23,24 @@ namespace Orchard.Layouts.Services {
         /// Updates the specified layout with the specified template layout.
         /// </summary>
         /// <returns>Returns the merged layout Data.</returns>
-        string ApplyTemplate(LayoutPart layout, LayoutPart templateLayout);
+        IEnumerable<IElement> ApplyTemplate(LayoutPart layout, LayoutPart templateLayout);
 
         /// <summary>
         /// Updates the specified layout with its selected template layout.
         /// </summary>
         /// <returns>Returns the merged layout Data.</returns>
-        string ApplyTemplate(LayoutPart layout);
+        IEnumerable<IElement> ApplyTemplate(LayoutPart layout);
 
         /// <summary>
         /// Updates the specified layout with the specified template layout.
         /// </summary>
         /// <returns>Returns the merged layout Data.</returns>
-        string ApplyTemplate(IEnumerable<IElement> layout, IEnumerable<IElement> templateLayout);
+        IEnumerable<IElement> ApplyTemplate(IEnumerable<IElement> layout, IEnumerable<IElement> templateLayout);
         
         /// <summary>
         /// Updates the specified layout by unmarking all templated elements so that they become normal elements again.
         /// </summary>
-        string DetachTemplate(IEnumerable<IElement> elements);
+        IEnumerable<IElement> DetachTemplate(IEnumerable<IElement> elements);
 
         IEnumerable<LayoutPart> GetTemplateClients(int templateId, VersionOptions versionOptions);
         IEnumerable<IElement> CreateDefaultLayout();

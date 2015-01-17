@@ -10,9 +10,9 @@ namespace Orchard.Layouts.Services {
         ElementDescriptor GetElementDescriptorByTypeName(DescribeElementsContext context, string typeName);
         ElementDescriptor GetElementDescriptorByType<T>(DescribeElementsContext context) where T : IElement;
         ElementDescriptor GetElementDescriptorByType<T>() where T : IElement;
-        IElement ActivateElement(ElementDescriptor descriptor, ActivateElementArgs args = null);
-        T ActivateElement<T>(ElementDescriptor descriptor, ActivateElementArgs args = null) where T : IElement;
-        T ActivateElement<T>() where T : IElement;
+        IElement ActivateElement(ElementDescriptor descriptor, Action<IElement> initialize = null);
+        T ActivateElement<T>(ElementDescriptor descriptor, Action<T> initialize = null) where T : IElement;
+        T ActivateElement<T>(Action<T> initialize = null) where T : IElement;
         IEnumerable<IElementDriver> GetDrivers<TElement>() where TElement : IElement;
         IEnumerable<IElementDriver> GetDrivers(ElementDescriptor descriptor);
         IEnumerable<IElementDriver> GetDrivers(IElement element);

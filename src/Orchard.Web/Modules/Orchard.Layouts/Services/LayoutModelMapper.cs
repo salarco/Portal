@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Orchard.DisplayManagement;
 using Orchard.Layouts.Elements;
@@ -24,10 +23,15 @@ namespace Orchard.Layouts.Services {
             _elementManager = elementManager;
         }
 
-        public string ToEditorModel(string layoutData, DescribeElementsContext describeContext) {
+        public object ToEditorModel(string layoutData, DescribeElementsContext describeContext) {
             var elements = _serializer.Deserialize(layoutData, describeContext);
-            var canvas = ToEditorModel(elements, describeContext);
-            return JToken.FromObject(canvas).ToString(Formatting.None);
+            var canvas = ToEditorModelInternal(elements, describeContext);
+            return canvas;
+        }
+
+        public object ToEditorModel(IEnumerable<IElement> elements, DescribeElementsContext describeContext) {
+            var canvas = ToEditorModelInternal(elements, describeContext);
+            return canvas;
         }
 
         public IEnumerable<IElement> ToLayoutModel(string editorData, DescribeElementsContext describeContext) {
@@ -57,34 +61,36 @@ namespace Orchard.Layouts.Services {
             var htmlId = (string)node["htmlId"];
             var htmlClass = (string)node["htmlClass"];
             var htmlStyle = (string)node["htmlStyle"];
+            var isTemplated = (bool)(node["isTemplated"]?? false);
             ElementDescriptor descriptor;
             IElement element;
 
-            var activateArgs = new ActivateElementArgs {
-                Data = data,
-                Container = parent,
-                Index = index,
-                HtmlId = htmlId,
-                HtmlClass = htmlClass,
-                HtmlStyle = htmlStyle
+            Action<IElement> initElement = e => {
+                e.Data = data;
+                e.Container = parent;
+                e.Index = index;
+                e.HtmlId = htmlId;
+                e.HtmlClass = htmlClass;
+                e.HtmlStyle = htmlStyle;
+                e.IsTemplated = isTemplated;
             };
 
             switch (type) {
                 case "Canvas":
                     descriptor = _elementManager.GetElementDescriptorByType<Canvas>(describeContext);
-                    element = _elementManager.ActivateElement<Canvas>(descriptor, activateArgs);
+                    element = _elementManager.ActivateElement<Canvas>(descriptor, initElement);
                     break;
                 case "Grid":
                     descriptor = _elementManager.GetElementDescriptorByType<Grid>(describeContext);
-                    element = _elementManager.ActivateElement<Grid>(descriptor, activateArgs);
+                    element = _elementManager.ActivateElement<Grid>(descriptor, initElement);
                     break;
                 case "Row":
                     descriptor = _elementManager.GetElementDescriptorByType<Row>(describeContext);
-                    element = _elementManager.ActivateElement<Row>(descriptor, activateArgs);
+                    element = _elementManager.ActivateElement<Row>(descriptor, initElement);
                     break;
                 case "Column":
                     descriptor = _elementManager.GetElementDescriptorByType<Column>(describeContext);
-                    var column = _elementManager.ActivateElement<Column>(descriptor, activateArgs);
+                    var column = _elementManager.ActivateElement<Column>(descriptor, initElement);
                     column.Width = (int?)node["width"];
                     column.Offset = (int?)node["offset"];
                     element = column;
@@ -92,7 +98,7 @@ namespace Orchard.Layouts.Services {
                 case "Content":
                     var elementTypeName = (string)node["contentType"];
                     descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, elementTypeName);
-                    element = _elementManager.ActivateElement(descriptor, activateArgs);
+                    element = _elementManager.ActivateElement(descriptor, initElement);
                     break;
                 default:
                     // TODO: Make this extensible (e.g. Form and Fieldset elements).
@@ -102,23 +108,24 @@ namespace Orchard.Layouts.Services {
             return element;
         }
 
-        private object ToEditorModel(IEnumerable<IElement> elements, DescribeElementsContext describeContext) {
+        private object ToEditorModelInternal(IEnumerable<IElement> elements, DescribeElementsContext describeContext) {
             // Technically, a layout does not have to be part of a Canvas, but the editor requires a single root, starting with Canvas, so we make sure that it does.
             var elementsList = elements.ToArray();
-            var canvas = elementsList.Any() && elementsList.First() is Canvas ? (Canvas) elementsList.First() : new Canvas {Elements = elementsList};
+            var canvas = elementsList.Any() && elementsList.First() is Canvas ? (Canvas)elementsList.First() : new Canvas { Elements = elementsList };
             var root = new {
                 type = "Canvas",
                 data = default(string),
                 htmlId = canvas.HtmlId,
                 htmlClass = canvas.HtmlClass,
                 htmlStyle = canvas.HtmlStyle,
-                children = canvas.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
+                isTemplated = canvas.IsTemplated,
+                children = canvas.Elements.Select(x => ToEditorModelInternal(x, describeContext)).ToList()
             };
 
             return root;
         }
 
-        private object ToEditorModel(IElement element, DescribeElementsContext describeContext) {
+        private object ToEditorModelInternal(IElement element, DescribeElementsContext describeContext) {
             var data = element.Data.Serialize();
             var grid = element as IGrid;
 
@@ -129,7 +136,8 @@ namespace Orchard.Layouts.Services {
                     htmlId = element.HtmlId,
                     htmlClass = element.HtmlClass,
                     htmlStyle = element.HtmlStyle,
-                    children = grid.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
+                    isTemplated = element.IsTemplated,
+                    children = grid.Elements.Select(x => ToEditorModelInternal(x, describeContext)).ToList()
                 };
             }
 
@@ -141,7 +149,8 @@ namespace Orchard.Layouts.Services {
                     htmlId = element.HtmlId,
                     htmlClass = element.HtmlClass,
                     htmlStyle = element.HtmlStyle,
-                    children = row.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
+                    isTemplated = element.IsTemplated,
+                    children = row.Elements.Select(x => ToEditorModelInternal(x, describeContext)).ToList()
                 };
             }
 
@@ -153,9 +162,10 @@ namespace Orchard.Layouts.Services {
                     htmlId = element.HtmlId,
                     htmlClass = element.HtmlClass,
                     htmlStyle = element.HtmlStyle,
+                    isTemplated = element.IsTemplated,
                     width = column.Width,
                     offset = column.Offset,
-                    children = column.Elements.Select(x => ToEditorModel(x, describeContext)).ToList()
+                    children = column.Elements.Select(x => ToEditorModelInternal(x, describeContext)).ToList()
                 };
             }
 
@@ -169,6 +179,7 @@ namespace Orchard.Layouts.Services {
                 htmlId = element.HtmlId,
                 htmlClass = element.HtmlClass,
                 htmlStyle = element.HtmlStyle,
+                isTemplated = element.IsTemplated,
                 html = _shapeDisplay.Display(_elementDisplay.DisplayElement(element, content: describeContext.Content, displayType: "Design"))
             };
         }

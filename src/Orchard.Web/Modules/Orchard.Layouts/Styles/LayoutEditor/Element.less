@@ -119,11 +119,45 @@
                 }
             }
         }
+
+        &.layout-element-templated {
+            @focused-highlight: #5e5e5e;
+            @focused-text: #fefefe;
+
+            border-color: @focused-highlight;
+
+            > .layout-element-wrapper > .layout-panel {
+                display: block; // To reveal.
+                background-color: @focused-highlight;
+                color: @focused-text;
+
+                > .layout-panel-action {
+                    display: inline-block; // To reveal.
+                    &:hover {
+                        background-color: lighten(@focused-highlight, 10%);
+                    }
+
+                    &.disabled {
+                        cursor: default;
+                        color: fade(@focused-text, 40%);
+
+                        &:hover {
+                            background-color: @focused-highlight;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .layout-element-selected {
         @selected-highlight: #648721;
         background-color: fade(@selected-highlight, 8%);
+
+        &.layout-element-templated {
+            @selected-highlight: #5e5e5e;
+            background-color: fade(@selected-highlight, 8%);
+        }
     }
 
     .layout-element-droptarget {
@@ -131,5 +165,12 @@
         -moz-box-shadow: inset 0 0 12px 6px fade(@droptarget-highlight, 50%);
         -webkit-box-shadow: inset 0 0 12px 6px fade(@droptarget-highlight, 50%);
         box-shadow: inset 0 0 12px 6px fade(@droptarget-highlight, 50%);
+
+        &.layout-element-templated {
+            @droptarget-highlight: #5e5e5e;
+            -moz-box-shadow: inset 0 0 12px 6px fade(@droptarget-highlight, 50%);
+            -webkit-box-shadow: inset 0 0 12px 6px fade(@droptarget-highlight, 50%);
+            box-shadow: inset 0 0 12px 6px fade(@droptarget-highlight, 50%);
+        }
     }
 }

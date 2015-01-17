@@ -86,19 +86,40 @@
 .layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled:hover {
   background-color: #648721;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.active {
-  color: #deff42;
-  background-color: #739b26;
+.layout-editor-wrapper .layout-element-focused.layout-element-templated {
+  border-color: #5e5e5e;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-panel > .layout-panel-action.active:hover {
-  background-color: #82b02b;
+.layout-editor-wrapper .layout-element-focused.layout-element-templated > .layout-element-wrapper > .layout-panel {
+  display: block;
+  background-color: #5e5e5e;
+  color: #fefefe;
+}
+.layout-editor-wrapper .layout-element-focused.layout-element-templated > .layout-element-wrapper > .layout-panel > .layout-panel-action {
+  display: inline-block;
+}
+.layout-editor-wrapper .layout-element-focused.layout-element-templated > .layout-element-wrapper > .layout-panel > .layout-panel-action:hover {
+  background-color: #787878;
+}
+.layout-editor-wrapper .layout-element-focused.layout-element-templated > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled {
+  cursor: default;
+  color: rgba(254, 254, 254, 0.4);
+}
+.layout-editor-wrapper .layout-element-focused.layout-element-templated > .layout-element-wrapper > .layout-panel > .layout-panel-action.disabled:hover {
+  background-color: #5e5e5e;
 }
 .layout-editor-wrapper .layout-element-selected {
   background-color: rgba(100, 135, 33, 0.08);
+}
+.layout-editor-wrapper .layout-element-selected.layout-element-templated {
+  background-color: rgba(94, 94, 94, 0.08);
 }
 .layout-editor-wrapper .layout-element-droptarget {
   -moz-box-shadow: inset 0 0 12px 6px rgba(100, 135, 33, 0.5);
   -webkit-box-shadow: inset 0 0 12px 6px rgba(100, 135, 33, 0.5);
   box-shadow: inset 0 0 12px 6px rgba(100, 135, 33, 0.5);
 }
-/*# sourceMappingURL=Element.css.map */
+.layout-editor-wrapper .layout-element-droptarget.layout-element-templated {
+  -moz-box-shadow: inset 0 0 12px 6px rgba(94, 94, 94, 0.5);
+  -webkit-box-shadow: inset 0 0 12px 6px rgba(94, 94, 94, 0.5);
+  box-shadow: inset 0 0 12px 6px rgba(94, 94, 94, 0.5);
+}

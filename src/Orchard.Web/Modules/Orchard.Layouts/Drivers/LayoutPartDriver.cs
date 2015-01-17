@@ -10,6 +10,7 @@ using Orchard.DisplayManagement;
 using Orchard.Layouts.Framework.Display;
 using Orchard.Layouts.Framework.Drivers;
 using Orchard.Layouts.Framework.Elements;
+using Orchard.Layouts.Helpers;
 using Orchard.Layouts.Models;
 using Orchard.Layouts.Services;
 using Orchard.Layouts.ViewModels;
@@ -63,7 +64,7 @@ namespace Orchard.Layouts.Drivers {
         protected override DriverResult Editor(LayoutPart part, IUpdateModel updater, dynamic shapeHelper) {
             return ContentShape("Parts_Layout_Edit", () => {
                 var viewModel = new LayoutPartViewModel {
-                    Data = _mapper.ToEditorModel(part.LayoutData, new DescribeElementsContext { Content = part}),
+                    Data = _mapper.ToEditorModel(part.LayoutData, new DescribeElementsContext { Content = part}).ToJson(),
                     ConfigurationData = GetConfigurationData(part),
                     TemplateId = part.TemplateId,
                     Content = part,

@@ -87,10 +87,8 @@
     <Content Include="Scripts\DemoConfig.js" />
     <Content Include="Scripts\DemoData.js" />
     <Content Include="Scripts\LayoutDesignerHost.js" />
-    <Content Include="Scripts\designer.toolbar.js" />
     <Content Include="Scripts\element-editor.js" />
     <Content Include="Scripts\frame.js" />
-    <Content Include="Scripts\element-browser.js" />
     <Content Include="Scripts\jquery.browser.js" />
     <Content Include="Scripts\jquery.deserialize.js" />
     <Content Include="Scripts\LayoutEditor.js">
@@ -418,6 +416,7 @@
     <Compile Include="Helpers\DictionaryExtensions.cs" />
     <Compile Include="Helpers\EditorResultExtensions.cs" />
     <Compile Include="Helpers\PrefixHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\ObjectStoreEntry.cs" />
     <Compile Include="Providers\BlueprintElementHarvester.cs" />
@@ -460,7 +459,6 @@
     <Compile Include="Helpers\TagBuilderExtensions.cs" />
     <Compile Include="Models\ElementWrapperPart.cs" />
     <Compile Include="Models\ILayoutAspect.cs" />
-    <Compile Include="Services\ActivateElementArgs.cs" />
     <Compile Include="Settings\ElementWrapperPartSettingsHooks.cs" />
     <Compile Include="Settings\ElementWrapperPartSettings.cs" />
     <Compile Include="Providers\ContentFieldElementHarvester.cs" />

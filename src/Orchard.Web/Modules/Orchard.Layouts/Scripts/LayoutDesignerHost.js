@@ -4,6 +4,7 @@
         var self = this;
         this.element = element;
         this.element.data("layout-designer-host", this);
+        this.canvas = window.layoutDesignerCanvas;
         this.settings = {
             antiForgeryToken: self.element.data("anti-forgery-token"),
             editorDialogTitleFormat: self.element.data("editor-dialog-title-format"),
@@ -82,7 +83,33 @@
             return deferred.promise();
         };
 
-        monitorForm = function() {
+        var serializeCanvas = function () {
+            var layoutData = self.canvas.toObject();
+            return JSON.stringify(layoutData, null, "\t");
+        };
+
+        var applyTemplate = function (templateId) {
+            var layoutData = serializeCanvas();
+
+            $.ajax({
+                url: self.settings.endpoints.applyTemplate,
+                data: {
+                    templateId: templateId,
+                    layoutData: layoutData,
+                    __RequestVerificationToken: self.settings.antiForgeryToken
+                },
+                dataType: "json",
+                type: "post"
+            }).then(function (response) {
+
+                //self.canvas.setChildren(LayoutEditor.childrenFrom(response.children));
+                //self.canvas.setCanvas(self.canvas);
+
+                self.element.trigger("replacemodel", { canvas: response });
+            });
+        };
+
+        var monitorForm = function() {
             var layoutDesigner = self.element;
             var form = layoutDesigner.closest("form");
             
@@ -92,16 +119,17 @@
         };
 
         var serializeLayout = function () {
-            var templateField = self.element.find(".template-id-field");
-            var templatePicker = self.element.find("select[name='template-picker']");
             var layoutDataField = self.element.find(".layout-data-field");
-            var selectedTemplateId = templatePicker.val();
-            var layoutData = window.layoutDesignerCanvas.toObject();
-            var layoutDataDataJson = JSON.stringify(layoutData, null, "\t");
+            var layoutDataDataJson = serializeCanvas();
 
-            templateField.val(selectedTemplateId);
             layoutDataField.val(layoutDataDataJson);
         };
+
+        this.element.on("change", ".template-picker select", function (e) {
+            var selectList = $(this);
+            var templateId = parseInt(selectList.val());
+            applyTemplate(templateId);
+        });
 
         monitorForm();
     };

@@ -1,12 +1,12 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Row = function (data, htmlId, htmlClass, htmlStyle, children) {
-        LayoutEditor.Element.call(this, "Row", data, htmlId, htmlClass, htmlStyle);
+    LayoutEditor.Row = function (data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+        LayoutEditor.Element.call(this, "Row", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Column"], children);
 
         this.canAddColumn = function () {
-            return getTotalColumnsWidth() < 12;
+            return !this.getIsTemplated() && getTotalColumnsWidth() < 12;
         };
 
         this.addColumn = function () {
@@ -19,6 +19,9 @@
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0)
                 return column.width > 1;
@@ -36,7 +39,7 @@
                     if (this.children.length > index + 1) {
                         var nextColumn = this.children[index + 1];
                         if (connectAdjacent && nextColumn.offset == 0)
-                            nextColumn.width++
+                            nextColumn.width++;
                         else
                             nextColumn.offset++;
                     }
@@ -45,6 +48,9 @@
         };
 
         this.canExpandColumnRight = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
                 if (column.width >= 12)
@@ -78,10 +84,10 @@
             }
         };
 
-
-
-
         this.canExpandColumnLeft = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0) {
                 if (column.width >= 12)
@@ -116,6 +122,9 @@
         };
 
         this.canContractColumnLeft = function (column, connectAdjacent) {
+            if (this.getIsTemplated())
+                return false;
+
             var index = _(this.children).indexOf(column);
             if (index >= 0)
                 return column.width > 1;
@@ -172,7 +181,13 @@
     };
 
     LayoutEditor.Row.from = function (value) {
-        return new LayoutEditor.Row(value.data, value.htmlId, value.htmlClass, value.htmlStyle, LayoutEditor.childrenFrom(value.children));
+        return new LayoutEditor.Row(
+            value.data,
+            value.htmlId,
+            value.htmlClass,
+            value.htmlStyle,
+            value.isTemplated,
+            LayoutEditor.childrenFrom(value.children));
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
