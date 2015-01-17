@@ -8,7 +8,7 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string Name {
-            get { return this.Retrieve("FormName", "Untitled"); }
+            get { return this.Retrieve("FormName", () => "Untitled"); }
             set { this.Store("FormName", value); }
         }
 

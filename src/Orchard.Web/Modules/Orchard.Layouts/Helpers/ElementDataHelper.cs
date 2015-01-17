@@ -117,31 +117,15 @@ namespace Orchard.Layouts.Helpers {
             var propertyInfo = ReflectionHelper<TElement>.GetPropertyInfo(targetExpression);
             var name = propertyInfo.Name;
             var data = element.Data;
-            var value = data.Get(name, XmlHelper.ToString(defaultValue));
+            var value = data.Get(name);
 
             return !String.IsNullOrWhiteSpace(value) ? XmlHelper.Parse<TProperty>(value) : defaultValue != null ? defaultValue() : default(TProperty);
-        }
-
-        public static TProperty Retrieve<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression, TProperty defaultValue = default(TProperty)) where TElement : IElement {
-            return Retrieve(element, targetExpression, () => defaultValue);
-        }
-
-        public static TProperty Retrieve<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression) where TElement : IElement {
-            return Retrieve(element, targetExpression, default(Func<TProperty>));
         }
 
         public static TProperty Retrieve<TProperty>(this IElement element, string name, Func<TProperty> defaultValue = null) {
             var data = element.Data;
             var value = data.Get(name);
             return !String.IsNullOrWhiteSpace(value) ? XmlHelper.Parse<TProperty>(value) : defaultValue != null ? defaultValue() : default(TProperty);
-        }
-
-        public static TProperty Retrieve<TProperty>(this IElement element, string name, TProperty defaultValue = default(TProperty)) {
-            return Retrieve(element, name, () => defaultValue);
-        }
-
-        public static TProperty Retrieve<TProperty>(this IElement element, string name) {
-            return Retrieve(element, name, default(Func<TProperty>));
         }
 
         public static void Store<TElement, TProperty>(this TElement element, Expression<Func<TElement, TProperty>> targetExpression, TProperty value) where TElement : IElement {

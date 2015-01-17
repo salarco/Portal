@@ -18,7 +18,7 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string InputType {
-            get { return this.Retrieve(x => x.InputType, "SelectList"); }
+            get { return this.Retrieve(x => x.InputType, () => "SelectList"); }
             set { this.Store(x => x.InputType, value); }
         }
 

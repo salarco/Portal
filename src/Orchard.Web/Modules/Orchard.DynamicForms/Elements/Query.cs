@@ -4,7 +4,7 @@ namespace Orchard.DynamicForms.Elements {
     public class Query : LabeledFormElement {
         
         public string InputType {
-            get { return this.Retrieve(x => x.InputType, "SelectList"); }
+            get { return this.Retrieve(x => x.InputType, () => "SelectList"); }
             set { this.Store(x => x.InputType, value); }
         }
 
@@ -19,11 +19,11 @@ namespace Orchard.DynamicForms.Elements {
         }
 
         public string TextExpression {
-            get { return this.Retrieve(x => x.TextExpression, "{Content.Title}"); }
+            get { return this.Retrieve(x => x.TextExpression, () => "{Content.Title}"); }
         }
 
         public string ValueExpression {
-            get { return this.Retrieve(x => x.ValueExpression, "{Content.Id}"); }
+            get { return this.Retrieve(x => x.ValueExpression, () => "{Content.Id}"); }
         }
     }
 }
