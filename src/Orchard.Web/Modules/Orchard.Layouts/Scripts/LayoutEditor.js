@@ -21,6 +21,9 @@ angular
                     var element = $scope.element;
                     var isTemplated = element.getIsTemplated();
 
+                    if (element.canvas.isDragging || element.canvas.inlineEditingIsActive)
+                        return;
+
                     if (!isTemplated) {
                         if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
                             $scope.delete(element);
