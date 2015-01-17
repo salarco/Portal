@@ -44,9 +44,10 @@
                         $scope.element.inlineEditingIsActive = true;
                         // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
                         $element.find(".layout-toolbar-container").css("min-height", "83px");
-                        var firstContentEditorId = $("#layout-canvas-" + $scope.$id + " .layout-content-markup").first().attr("id");
+                        var selector = "#layout-canvas-" + $scope.$id + " .layout-content-html .layout-content-markup[data-templated=false]";
+                        var firstContentEditorId = $(selector).first().attr("id");
                         tinymce.init({
-                            selector: "#layout-canvas-" + $scope.$id + " .layout-content-markup[data-templated=false]",
+                            selector: selector,
                             theme: "modern",
                             schema: "html5",
                             plugins: [
