@@ -99,6 +99,13 @@ namespace Orchard.Layouts.Services {
                     var elementTypeName = (string)node["contentType"];
                     descriptor = _elementManager.GetElementDescriptorByTypeName(describeContext, elementTypeName);
                     element = _elementManager.ActivateElement(descriptor, initElement);
+
+                    // To support inline editing, we need to tell the element to update its content.
+                    var contentElement = element as IContentElement;
+                    if (contentElement != null) {
+                        var html = (string)node["html"];
+                        contentElement.Content = html;
+                    }
                     break;
                 default:
                     // TODO: Make this extensible (e.g. Form and Fieldset elements).
