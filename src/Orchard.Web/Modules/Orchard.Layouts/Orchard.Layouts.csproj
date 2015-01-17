@@ -353,6 +353,7 @@
     <Content Include="Styles\LayoutEditor\Reset.css.map">
       <DependentUpon>Reset.css</DependentUpon>
     </Content>
+    <Content Include="Views\ElementBrowser.Tabs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
