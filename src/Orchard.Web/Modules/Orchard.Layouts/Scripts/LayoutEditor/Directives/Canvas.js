@@ -23,7 +23,12 @@
 
                 layoutDesignerHost.element.on("replacemodel", function (e, args) {
                     var canvas = $scope.element;
-                    $scope.$apply(function() {
+                    $scope.$apply(function () {
+                        canvas.data = args.canvas.data;
+                        canvas.htmlId = args.canvas.htmlId;
+                        canvas.htmlClass = args.canvas.htmlClass;
+                        canvas.htmlStyle = args.canvas.htmlStyle;
+                        canvas.isTemplated = args.canvas.isTemplated;
                         canvas.setChildren(LayoutEditor.childrenFrom(args.canvas.children));
                         canvas.setCanvas(canvas);
                     });
@@ -44,7 +49,7 @@
                         $scope.element.inlineEditingIsActive = true;
                         // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
                         $element.find(".layout-toolbar-container").css("min-height", "83px");
-                        var selector = "#layout-canvas-" + $scope.$id + " .layout-content-html .layout-content-markup[data-templated=false]";
+                        var selector = "#layout-canvas-" + $scope.$id + " .layout-content-h-t-m-l .layout-content-markup[data-templated=false]";
                         var firstContentEditorId = $(selector).first().attr("id");
                         tinymce.init({
                             selector: selector,

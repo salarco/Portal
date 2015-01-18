@@ -101,10 +101,6 @@
                 dataType: "json",
                 type: "post"
             }).then(function (response) {
-
-                //self.canvas.setChildren(LayoutEditor.childrenFrom(response.children));
-                //self.canvas.setCanvas(self.canvas);
-
                 self.element.trigger("replacemodel", { canvas: response });
             });
         };

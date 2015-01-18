@@ -183,6 +183,9 @@ var LayoutEditor;
             console.log(text);
 
             var data = this.toObject();
+
+            data.isTemplated = false;
+
             var json = JSON.stringify(data, null, "\t");
             clipboardData.setData("text/json", json);
         };
