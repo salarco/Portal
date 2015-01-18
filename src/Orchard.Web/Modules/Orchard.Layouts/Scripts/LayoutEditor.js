@@ -19,25 +19,22 @@ angular
                     var handled = false;
                     var resetFocus = false;
                     var element = $scope.element;
-                    var isTemplated = element.getIsTemplated();
 
                     if (element.canvas.isDragging || element.canvas.inlineEditingIsActive)
                         return;
 
-                    if (!isTemplated) {
-                        if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
-                            $scope.delete(element);
-                            handled = true;
-                        } else if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 32) { // Space
-                            $element.find(".layout-panel-action-properties").first().click();
-                            handled = true;
-                        }
+                    if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
+                        $scope.delete(element);
+                        handled = true;
+                    } else if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 32) { // Space
+                        $element.find(".layout-panel-action-properties").first().click();
+                        handled = true;
+                    }
 
-                        if (element.type == "Content") { // This is a content element.
-                            if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 13) { // Enter
-                                $element.find(".layout-panel-action-edit").first().click();
-                                handled = true;
-                            }
+                    if (element.type == "Content") { // This is a content element.
+                        if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 13) { // Enter
+                            $element.find(".layout-panel-action-edit").first().click();
+                            handled = true;
                         }
                     }
 
@@ -53,22 +50,20 @@ angular
                             handled = true;
                         }
 
-                        if (!isTemplated) {
-                            if (element.type == "Column") { // This is a column.
-                                var connectAdjacent = !e.ctrlKey;
-                                if (e.which == 37) { // Left
-                                    if (e.altKey)
-                                        element.expandLeft(connectAdjacent);
-                                    if (e.shiftKey)
-                                        element.contractRight(connectAdjacent);
-                                    handled = true;
-                                } else if (e.which == 39) { // Right
-                                    if (e.altKey)
-                                        element.contractLeft(connectAdjacent);
-                                    if (e.shiftKey)
-                                        element.expandRight(connectAdjacent);
-                                    handled = true;
-                                }
+                        if (element.type == "Column") { // This is a column.
+                            var connectAdjacent = !e.ctrlKey;
+                            if (e.which == 37) { // Left
+                                if (e.altKey)
+                                    element.expandLeft(connectAdjacent);
+                                if (e.shiftKey)
+                                    element.contractRight(connectAdjacent);
+                                handled = true;
+                            } else if (e.which == 39) { // Right
+                                if (e.altKey)
+                                    element.contractLeft(connectAdjacent);
+                                if (e.shiftKey)
+                                    element.expandRight(connectAdjacent);
+                                handled = true;
                             }
                         }
                     }
@@ -88,12 +83,12 @@ angular
                                 element.parent.moveFocusNextChild(element);
                                 handled = true;
                             }
-                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 37) { // Ctrl+Left
+                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 37) { // Ctrl+Left
                                 element.moveUp();
                                 resetFocus = true;
                                 handled = true;
                             }
-                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 39) { // Ctrl+Right
+                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 39) { // Ctrl+Right
                                 element.moveDown();
                                 handled = true;
                             }
@@ -107,12 +102,12 @@ angular
                                 element.parent.moveFocusNextChild(element);
                                 handled = true;
                             }
-                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 38) { // Ctrl+Up
+                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 38) { // Ctrl+Up
                                 element.moveUp();
                                 resetFocus = true;
                                 handled = true;
                             }
-                            else if (!isTemplated && e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 40) { // Ctrl+Down
+                            else if (e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 40) { // Ctrl+Down
                                 element.moveDown();
                                 handled = true;
                             }
@@ -151,17 +146,13 @@ angular
                 };
 
                 $scope.delete = function (element) {
-                    if (element.getIsTemplated())
-                        return;
-
-                    if (window.confirm("Are you sure you want to delete this " + element.type + "?"))
-                        element.delete();
+                    element.delete();
                 }
             },
 
             configureForContainer: function ($scope, $element) {
                 var element = $scope.element;
-                var isTemplated = element.getIsTemplated();
+                var isTemplated = element.isTemplated;
 
                 $scope.invokeAddContentElement = function (contentType) {
                     $scope.$root.addElement(contentType).then(function (args) {
@@ -231,7 +222,7 @@ angular
                     if (child.isDropTarget)
                         result.push("layout-element-droptarget");
 
-                    if (child.getIsTemplated())
+                    if (child.isTemplated)
                         result.push("layout-element-templated");
 
                     return result;
@@ -276,9 +267,9 @@ angular
                     });
                 });
 
-                $scope.$root.editElement = function (elementType, elementData) {
+                $scope.$root.editElement = function (element) {
                     var host = $scope.$root.layoutDesignerHost;
-                    return host.editElement(elementType, elementData);
+                    return host.editElement(element);
                 };
 
                 $scope.$root.addElement = function (contentType) {
@@ -479,10 +470,7 @@ angular
             controller: function ($scope, $element) {
                 scopeConfigurator.configureForElement($scope, $element);
                 $scope.edit = function () {
-                    if ($scope.element.getIsTemplated())
-                        return;
-
-                    $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
+                    $scope.$root.editElement($scope.element).then(function (args) {
                         $scope.element.data = decodeURIComponent(args.element.data);
                         $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));
                         $scope.$apply();

@@ -6,7 +6,7 @@
         LayoutEditor.Container.call(this, ["Column"], children);
 
         this.canAddColumn = function () {
-            return !this.getIsTemplated() && getTotalColumnsWidth() < 12;
+            return !this.isTemplated && getTotalColumnsWidth() < 12;
         };
 
         this.addColumn = function () {
@@ -19,7 +19,7 @@
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -48,7 +48,7 @@
         };
 
         this.canExpandColumnRight = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -85,7 +85,7 @@
         };
 
         this.canExpandColumnLeft = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -122,7 +122,7 @@
         };
 
         this.canContractColumnLeft = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);

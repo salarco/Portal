@@ -5,7 +5,7 @@
             <ul class="layout-panel layout-panel-main">
                 <li class="layout-panel-item layout-panel-label">Canvas</li>
                 <li class="layout-panel-item layout-panel-action" title="Activate inline editing" ng-click="toggleInlineEditing()" ng-class="{active: element.canvas.inlineEditingIsActive}"><i class="fa fa-paragraph"></i></li>
-                <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit canvas properties (Space)" ng-if="!element.getIsTemplated()">
+                <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit canvas properties (Space)" ng-if="!element.isTemplated">
                     <i class="fa fa-edit"></i>
                     <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                         <li class="layout-popup-item layout-popup-input">

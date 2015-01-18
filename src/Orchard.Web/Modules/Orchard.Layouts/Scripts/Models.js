@@ -66,14 +66,19 @@ var LayoutEditor;
             }
         };
 
+        this.setIsTemplated = function (value) {
+            this.isTemplated = value;
+            if (!!this.children && _.isArray(this.children)) {
+                _(this.children).each(function (child) {
+                    child.setIsTemplated(value);
+                });
+            }
+        };
+
         this.getIsActive = function () {
             if (!this.canvas)
                 return false;
             return this.canvas.activeElement === this && !this.getIsFocused();
-        };
-
-        this.getIsTemplated = function() {
-            return this.isTemplated;
         };
 
         this.setIsActive = function (value) {
@@ -125,7 +130,7 @@ var LayoutEditor;
         };
 
         this.delete = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             if (!!this.parent)
@@ -133,7 +138,7 @@ var LayoutEditor;
         };
 
         this.moveUp = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             if (!!this.parent)
@@ -141,7 +146,7 @@ var LayoutEditor;
         };
 
         this.moveDown = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             if (!!this.parent)
@@ -149,7 +154,7 @@ var LayoutEditor;
         };
 
         this.canMoveUp = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             if (!this.parent)
@@ -158,7 +163,7 @@ var LayoutEditor;
         };
 
         this.canMoveDown = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             if (!this.parent)
@@ -183,15 +188,12 @@ var LayoutEditor;
             console.log(text);
 
             var data = this.toObject();
-
-            data.isTemplated = false;
-
             var json = JSON.stringify(data, null, "\t");
             clipboardData.setData("text/json", json);
         };
 
         this.cut = function (clipboardData) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             this.copy(clipboardData);
@@ -230,6 +232,7 @@ var LayoutEditor;
             if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
                 this.children.push(child);
             child.setCanvas(this.canvas);
+            child.setIsTemplated(false);
             child.parent = this;
         };
 
@@ -446,7 +449,7 @@ var LayoutEditor;
         LayoutEditor.Container.call(this, ["Column"], children);
 
         this.canAddColumn = function () {
-            return !this.getIsTemplated() && getTotalColumnsWidth() < 12;
+            return !this.isTemplated && getTotalColumnsWidth() < 12;
         };
 
         this.addColumn = function () {
@@ -459,7 +462,7 @@ var LayoutEditor;
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -488,7 +491,7 @@ var LayoutEditor;
         };
 
         this.canExpandColumnRight = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -525,7 +528,7 @@ var LayoutEditor;
         };
 
         this.canExpandColumnLeft = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -562,7 +565,7 @@ var LayoutEditor;
         };
 
         this.canContractColumnLeft = function (column, connectAdjacent) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -643,7 +646,7 @@ var LayoutEditor;
         this.offset = offset;
 
         this.canSplit = function () {
-            return !this.getIsTemplated() && this.width > 1;
+            return !this.isTemplated && this.width > 1;
         };
 
         this.split = function () {
@@ -666,7 +669,7 @@ var LayoutEditor;
         };
 
         this.canContractRight = function (connectAdjacent) {
-            return !this.getIsTemplated() && this.parent.canContractColumnRight(this, connectAdjacent);
+            return !this.isTemplated && this.parent.canContractColumnRight(this, connectAdjacent);
         };
 
         this.contractRight = function (connectAdjacent) {
@@ -674,7 +677,7 @@ var LayoutEditor;
         };
 
         this.canExpandRight = function (connectAdjacent) {
-            return !this.getIsTemplated() && this.parent.canExpandColumnRight(this, connectAdjacent);
+            return !this.isTemplated && this.parent.canExpandColumnRight(this, connectAdjacent);
         };
 
         this.expandRight = function (connectAdjacent) {
@@ -682,7 +685,7 @@ var LayoutEditor;
         };
 
         this.canExpandLeft = function (connectAdjacent) {
-            return !this.getIsTemplated() && this.parent.canExpandColumnLeft(this, connectAdjacent);
+            return !this.isTemplated && this.parent.canExpandColumnLeft(this, connectAdjacent);
         };
 
         this.expandLeft = function (connectAdjacent) {
@@ -690,7 +693,7 @@ var LayoutEditor;
         };
 
         this.canContractLeft = function (connectAdjacent) {
-            return !this.getIsTemplated() && this.parent.canContractColumnLeft(this, connectAdjacent);
+            return !this.isTemplated && this.parent.canContractColumnLeft(this, connectAdjacent);
         };
 
         this.contractLeft = function (connectAdjacent) {

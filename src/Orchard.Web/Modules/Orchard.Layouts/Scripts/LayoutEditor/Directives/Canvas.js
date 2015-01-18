@@ -34,9 +34,9 @@
                     });
                 });
 
-                $scope.$root.editElement = function (elementType, elementData) {
+                $scope.$root.editElement = function (element) {
                     var host = $scope.$root.layoutDesignerHost;
-                    return host.editElement(elementType, elementData);
+                    return host.editElement(element);
                 };
 
                 $scope.$root.addElement = function (contentType) {

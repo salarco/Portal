@@ -22,6 +22,7 @@
             if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
                 this.children.push(child);
             child.setCanvas(this.canvas);
+            child.setIsTemplated(false);
             child.parent = this;
         };
 

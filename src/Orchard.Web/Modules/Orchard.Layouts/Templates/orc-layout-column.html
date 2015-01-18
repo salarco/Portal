@@ -1,7 +1,7 @@
 ﻿<div class="layout-element-wrapper">
     <ul class="layout-panel layout-panel-main">
         <li class="layout-panel-item layout-panel-label">Column ({{element.width}})</li>
-        <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit column properties (Space)" ng-if="!element.getIsTemplated()">
+        <li class="layout-panel-item layout-panel-action layout-panel-action-properties layout-popup-trigger" title="Edit column properties (Space)" ng-if="!element.isTemplated">
             <i class="fa fa-edit"></i>
             <ul class="layout-popup layout-popup-edit" orc-layout-popup>
                 <li class="layout-popup-item layout-popup-input">
@@ -18,12 +18,12 @@
                 </li>
             </ul>
         </li>
-        <li class="layout-panel-item layout-panel-action" title="Delete column (Del)" ng-click="delete(element)" ng-if="!element.getIsTemplated()"><i class="fa fa-remove"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move column left (Ctrl+Left)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}" ng-if="!element.getIsTemplated()"><i class="fa fa-chevron-left"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Move column right (Ctrl+Right)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}" ng-if="!element.getIsTemplated()"><i class="fa fa-chevron-right"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Split column" ng-click="element.split()" ng-class="{disabled: !element.canSplit()}" ng-if="!element.getIsTemplated()"><i class="fa fa-columns"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Decrease column offset (Alt+Left)" ng-click="element.expandLeft(false)" ng-class="{disabled: !element.canExpandLeft(false)}" ng-if="!element.getIsTemplated()"><i class="fa fa-outdent"></i></li>
-        <li class="layout-panel-item layout-panel-action" title="Increase column offset (Alt+Right)" ng-click="element.contractLeft(false)" ng-class="{disabled: !element.canContractLeft(false)}" ng-if="!element.getIsTemplated()"><i class="fa fa-indent"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Delete column (Del)" ng-click="delete(element)" ng-if="!element.isTemplated"><i class="fa fa-remove"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move column left (Ctrl+Left)" ng-click="element.moveUp()" ng-class="{disabled: !element.canMoveUp()}" ng-if="!element.isTemplated"><i class="fa fa-chevron-left"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Move column right (Ctrl+Right)" ng-click="element.moveDown()" ng-class="{disabled: !element.canMoveDown()}" ng-if="!element.isTemplated"><i class="fa fa-chevron-right"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Split column" ng-click="element.split()" ng-class="{disabled: !element.canSplit()}" ng-if="!element.isTemplated"><i class="fa fa-columns"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Decrease column offset (Alt+Left)" ng-click="element.expandLeft(false)" ng-class="{disabled: !element.canExpandLeft(false)}" ng-if="!element.isTemplated"><i class="fa fa-outdent"></i></li>
+        <li class="layout-panel-item layout-panel-action" title="Increase column offset (Alt+Right)" ng-click="element.contractLeft(false)" ng-class="{disabled: !element.canContractLeft(false)}" ng-if="!element.isTemplated"><i class="fa fa-indent"></i></li>
     </ul>
     <ul class="layout-panel layout-panel-add">
         <li class="layout-panel-item layout-panel-action layout-popup-trigger" title="Add new element to column (Ins)">

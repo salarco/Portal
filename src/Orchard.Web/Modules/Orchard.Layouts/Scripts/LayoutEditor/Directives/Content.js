@@ -7,10 +7,7 @@
             controller: function ($scope, $element) {
                 scopeConfigurator.configureForElement($scope, $element);
                 $scope.edit = function () {
-                    if ($scope.element.getIsTemplated())
-                        return;
-
-                    $scope.$root.editElement($scope.element.contentType, $scope.element.data).then(function (args) {
+                    $scope.$root.editElement($scope.element).then(function (args) {
                         $scope.element.data = decodeURIComponent(args.element.data);
                         $scope.element.html = decodeURIComponent(args.element.html.replace(/\+/g, "%20"));
                         $scope.$apply();

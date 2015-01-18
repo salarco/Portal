@@ -26,14 +26,19 @@
             }
         };
 
+        this.setIsTemplated = function (value) {
+            this.isTemplated = value;
+            if (!!this.children && _.isArray(this.children)) {
+                _(this.children).each(function (child) {
+                    child.setIsTemplated(value);
+                });
+            }
+        };
+
         this.getIsActive = function () {
             if (!this.canvas)
                 return false;
             return this.canvas.activeElement === this && !this.getIsFocused();
-        };
-
-        this.getIsTemplated = function() {
-            return this.isTemplated;
         };
 
         this.setIsActive = function (value) {
@@ -85,7 +90,7 @@
         };
 
         this.delete = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             if (!!this.parent)
@@ -93,7 +98,7 @@
         };
 
         this.moveUp = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             if (!!this.parent)
@@ -101,7 +106,7 @@
         };
 
         this.moveDown = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             if (!!this.parent)
@@ -109,7 +114,7 @@
         };
 
         this.canMoveUp = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             if (!this.parent)
@@ -118,7 +123,7 @@
         };
 
         this.canMoveDown = function () {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return false;
 
             if (!this.parent)
@@ -143,15 +148,12 @@
             console.log(text);
 
             var data = this.toObject();
-
-            data.isTemplated = false;
-
             var json = JSON.stringify(data, null, "\t");
             clipboardData.setData("text/json", json);
         };
 
         this.cut = function (clipboardData) {
-            if (this.getIsTemplated())
+            if (this.isTemplated)
                 return;
 
             this.copy(clipboardData);

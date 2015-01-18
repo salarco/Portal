@@ -26,23 +26,28 @@
             }
         };
 
-        this.editElement = function (elementType, elementData) {
-            var dialog = new window.Orchard.Layouts.Dialog(".dialog-template." + self.settings.editorDialogName);
+        this.editElement = function (element) {
             var deferred = new $.Deferred();
 
-            dialog.show();
-            dialog.load(self.settings.endpoints.edit, {
-                typeName: elementType,
-                elementData: elementData,
-                __RequestVerificationToken: self.settings.antiForgeryToken
-            }, "post");
+            if (!element.isTemplated) {
+                var elementType = element.contentType;
+                var elementData = element.data;
+                var dialog = new window.Orchard.Layouts.Dialog(".dialog-template." + self.settings.editorDialogName);
 
-            dialog.element.on("command", function (e, args) {
-                if (args.command == "save") {
-                    deferred.resolve(args);
-                    dialog.close();
-                }
-            });
+                dialog.show();
+                dialog.load(self.settings.endpoints.edit, {
+                    typeName: elementType,
+                    elementData: elementData,
+                    __RequestVerificationToken: self.settings.antiForgeryToken
+                }, "post");
+
+                dialog.element.on("command", function(e, args) {
+                    if (args.command == "save") {
+                        deferred.resolve(args);
+                        dialog.close();
+                    }
+                });
+            }
 
             return deferred.promise();
         };
