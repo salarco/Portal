@@ -575,6 +575,7 @@ table[rules=all i] > tfoot > tr > td, table[rules=all i] > tfoot > tr > th {
   width: 28px;
   padding: 0;
   text-align: center;
+  z-index: 10;
 }
 .layout-editor-wrapper .layout-element-active,
 .layout-editor-wrapper .layout-element-focused {
