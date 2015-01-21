@@ -456,7 +456,16 @@ var LayoutEditor;
             if (!this.canAddColumn())
                 return;
 
-            var column = new LayoutEditor.Column(null, null, null, null, 12 - getTotalColumnsWidth(), 0, []);
+            var column = LayoutEditor.Column.from({
+                data: null,
+                htmlId: null,
+                htmlClass: null,
+                htmlStyle: null,
+                isTemplated: false,
+                width: 12 - getTotalColumnsWidth(),
+                offset: 0,
+                children: []
+            });
             this.addChild(column);
             column.setIsFocused();
         };
