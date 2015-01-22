@@ -1,15 +1,11 @@
 ﻿<div id="layout-editor-{{$id}}" class="layout-editor">
-    <div class="layout-toolbar-container"></div>
-    <div class="row">
-        <div class="col-xs-10">
-            <div ng-class="getClasses(element.canvas)" ng-mouseenter="element.canvas.setIsActive(true)" ng-mouseleave="element.canvas.setIsActive(false)" ng-click="click(element.canvas, $event)" tabindex="{{$id}}">
-                <orc-layout-canvas element="element.canvas" />
-            </div>
+    <div class="layout-canvas-wrapper">
+        <div class="layout-toolbar-container"></div>
+        <div ng-class="getClasses(element.canvas)" ng-mouseenter="element.canvas.setIsActive(true)" ng-mouseleave="element.canvas.setIsActive(false)" ng-click="click(element.canvas, $event)" tabindex="{{$id}}">
+            <orc-layout-canvas element="element.canvas" />
         </div>
-        <div class="col-xs-2">
-            <div class="layout-toolbox">
-                <a class="layout-panel-item layout-panel-action" title="Activate inline editing" ng-click="toggleInlineEditing()" ng-class="{active: element.canvas.inlineEditingIsActive}">Toggle inline editing</a>
-            </div>
-        </div>
+    </div>
+    <div class="layout-toolbox">
+        <a class="layout-panel-item layout-panel-action" title="Activate inline editing" ng-click="toggleInlineEditing()" ng-class="{active: element.canvas.inlineEditingIsActive}">Toggle inline editing</a>
     </div>
 </div>

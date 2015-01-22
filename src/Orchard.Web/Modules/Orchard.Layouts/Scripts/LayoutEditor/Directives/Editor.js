@@ -66,8 +66,7 @@
                 $scope.toggleInlineEditing = function () {
                     if (!$scope.element.inlineEditingIsActive) {
                         $scope.element.inlineEditingIsActive = true;
-                        // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
-                        $element.find(".layout-toolbar-container").css("min-height", "83px");
+                        $element.find(".layout-toolbar-container").show();
                         var selector = "#layout-editor-" + $scope.$id + " .layout-content-h-t-m-l .layout-content-markup[data-templated=false]";
                         var firstContentEditorId = $(selector).first().attr("id");
                         tinymce.init({
@@ -89,18 +88,16 @@
                             statusbar: false,
                             skin: "orchardlightgray",
                             inline: true,
-                            fixed_toolbar_container: "#layout-editor-" + $scope.$id + " > .layout-toolbar-container",
+                            fixed_toolbar_container: "#layout-editor-" + $scope.$id + " .layout-toolbar-container",
                             init_instance_callback: function (editor) {
                                 if (editor.id == firstContentEditorId)
                                     tinymce.execCommand("mceFocus", false, editor.id);
-
                             }
                         });
                     }
                     else {
                         tinymce.remove("#layout-editor-" + $scope.$id + " .layout-content-markup");
-                        // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
-                        $element.find(".layout-toolbar-container").css("min-height", "");
+                        $element.find(".layout-toolbar-container").hide();
                         $scope.element.inlineEditingIsActive = false;
                     }
                 };

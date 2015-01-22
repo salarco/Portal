@@ -1,8 +1,11 @@
 ﻿@import "Variables.less";
 
 .layout-editor {
-    .layout-toolbox {
+    > .layout-toolbox {
+        margin-left: @container-padding;
         border: 1px solid @gray-border;
+        width: 220px;
+        flex-shrink: 0;
         min-height: 400px;
         padding: @container-padding;
         background-color: @gray-bg;
