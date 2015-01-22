@@ -9,7 +9,7 @@
   padding: 10px;
 }
 .layout-editor .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
-  border: 1px dashed rgba(228, 229, 230, 0.6);
+  border: 1px dashed rgba(124, 124, 124, 0.6);
 }
 .layout-editor .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element + .layout-element.layout-container:not(.layout-element-active) {
   border-top: 0;
