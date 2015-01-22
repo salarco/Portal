@@ -15,6 +15,7 @@
         this.split = function () {
             if (!this.canSplit())
                 return;
+
             var newColumnWidth = Math.floor(this.width / 2);
             var newColumn = LayoutEditor.Column.from({
                 data: null,
@@ -32,7 +33,7 @@
         };
 
         this.canContractRight = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canContractColumnRight(this, connectAdjacent);
+            return this.parent.canContractColumnRight(this, connectAdjacent);
         };
 
         this.contractRight = function (connectAdjacent) {
@@ -40,7 +41,7 @@
         };
 
         this.canExpandRight = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canExpandColumnRight(this, connectAdjacent);
+            return this.parent.canExpandColumnRight(this, connectAdjacent);
         };
 
         this.expandRight = function (connectAdjacent) {
@@ -48,7 +49,7 @@
         };
 
         this.canExpandLeft = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canExpandColumnLeft(this, connectAdjacent);
+            return this.parent.canExpandColumnLeft(this, connectAdjacent);
         };
 
         this.expandLeft = function (connectAdjacent) {
@@ -56,7 +57,7 @@
         };
 
         this.canContractLeft = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canContractColumnLeft(this, connectAdjacent);
+            return this.parent.canContractColumnLeft(this, connectAdjacent);
         };
 
         this.contractLeft = function (connectAdjacent) {

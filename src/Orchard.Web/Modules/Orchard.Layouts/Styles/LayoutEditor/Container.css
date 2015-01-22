@@ -1,25 +1,25 @@
-﻿.layout-editor-wrapper .layout-container {
+﻿.layout-editor .layout-container {
   padding: 12px;
 }
-.layout-editor-wrapper .layout-container > layout-element-wrapper > .layout-children > .layout-element:not(.layout-container) + .layout-element:not(.layout-container) {
+.layout-editor .layout-container > layout-element-wrapper > .layout-children > .layout-element:not(.layout-container) + .layout-element:not(.layout-container) {
   margin-top: 12px;
 }
-.layout-editor-wrapper .layout-container.layout-element-active,
-.layout-editor-wrapper .layout-container.layout-element-focused {
+.layout-editor .layout-container.layout-element-active,
+.layout-editor .layout-container.layout-element-focused {
   padding: 10px;
 }
-.layout-editor-wrapper .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
+.layout-editor .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element:not(.layout-element-active) {
   border: 1px dashed rgba(128, 128, 128, 0.6);
 }
-.layout-editor-wrapper .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element + .layout-element.layout-container:not(.layout-element-active) {
+.layout-editor .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element + .layout-element.layout-container:not(.layout-element-active) {
   border-top: 0;
   padding-top: 12px;
 }
-.layout-editor-wrapper .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element + .layout-element.layout-content:not(.layout-element-active) {
+.layout-editor .layout-container.layout-element-focused:not(.layout-element-droptarget) > .layout-element-wrapper > .layout-children > .layout-element + .layout-element.layout-content:not(.layout-element-active) {
   border-top: 0;
   padding-top: 2px;
 }
-.layout-editor-wrapper .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-container:not(.layout-element-active) {
+.layout-editor .layout-element-focused > .layout-element-wrapper > .layout-children > .layout-container:not(.layout-element-active) {
   padding: 11px;
 }
 /*# sourceMappingURL=Container.css.map */

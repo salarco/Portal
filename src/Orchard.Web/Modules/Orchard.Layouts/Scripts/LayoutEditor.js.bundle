@@ -12,6 +12,7 @@
     <files>
         <file>LayoutEditor/Module.js</file>
         <file>LayoutEditor/Services/scopeConfigurator.js</file>
+        <file>LayoutEditor/Directives/Editor.js</file>
         <file>LayoutEditor/Directives/Canvas.js</file>
         <file>LayoutEditor/Directives/Child.js</file>
         <file>LayoutEditor/Directives/Column.js</file>

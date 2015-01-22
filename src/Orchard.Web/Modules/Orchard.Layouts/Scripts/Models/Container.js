@@ -21,7 +21,7 @@
         this.addChild = function (child) {
             if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
                 this.children.push(child);
-            child.setCanvas(this.canvas);
+            child.setEditor(this.editor);
             child.setIsTemplated(false);
             child.parent = this;
         };
@@ -31,7 +31,7 @@
             if (index >= 0) {
                 this.children.splice(index, 1);
                 if (child.getIsActive())
-                    this.canvas.activeElement = null;
+                    this.editor.activeElement = null;
                 if (child.getIsFocused()) {
                     // If the deleted child was focused, try to set new focus to the most appropriate sibling or parent.
                     if (this.children.length > index)
@@ -64,7 +64,7 @@
             if (!_(this.children).contains(child)) {
                 var index = Math.max(_(this.children).indexOf(afterChild), 0);
                 this.children.splice(index + 1, 0, child);
-                child.setCanvas(this.canvas);
+                child.setEditor(this.editor);
                 child.parent = this;
             }
         };

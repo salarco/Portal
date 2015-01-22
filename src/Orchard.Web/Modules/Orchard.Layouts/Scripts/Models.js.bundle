@@ -11,6 +11,7 @@
     <!--The order of the <file> elements determines the order of the files in the bundle.-->
     <files>
         <file>Models/Helpers.js</file>
+        <file>Models/Editor.js</file>
         <file>Models/Element.js</file>
         <file>Models/Container.js</file>
         <file>Models/Canvas.js</file>

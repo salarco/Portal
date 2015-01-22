@@ -12,16 +12,16 @@
         this.htmlStyle = htmlStyle;
         this.isTemplated = isTemplated;
 
-        this.canvas = null;
+        this.editor = null;
         this.parent = null;
         this.isDropTarget = null;
         this.setIsFocusedEventHandlers = [];
 
-        this.setCanvas = function (canvas) {
-            this.canvas = canvas;
+        this.setEditor = function (editor) {
+            this.editor = editor;
             if (!!this.children && _.isArray(this.children)) {
                 _(this.children).each(function (child) {
-                    child.setCanvas(canvas);
+                    child.setEditor(editor);
                 });
             }
         };
@@ -36,36 +36,36 @@
         };
 
         this.getIsActive = function () {
-            if (!this.canvas)
+            if (!this.editor)
                 return false;
-            return this.canvas.activeElement === this && !this.getIsFocused();
+            return this.editor.activeElement === this && !this.getIsFocused();
         };
 
         this.setIsActive = function (value) {
-            if (!this.canvas)
+            if (!this.editor)
                 return;
-            if (this.canvas.isDragging)
+            if (this.editor.isDragging || this.editor.inlineEditingIsActive)
                 return;
 
             if (value)
-                this.canvas.activeElement = this;
+                this.editor.activeElement = this;
             else
-                this.canvas.activeElement = this.parent;
+                this.editor.activeElement = this.parent;
         };
 
         this.getIsFocused = function () {
-            if (!this.canvas)
+            if (!this.editor)
                 return false;
-            return this.canvas.focusedElement === this;
+            return this.editor.focusedElement === this;
         };
 
         this.setIsFocused = function () {
-            if (!this.canvas)
+            if (!this.editor)
                 return;
-            if (this.canvas.isDragging || this.canvas.inlineEditingIsActive)
+            if (this.editor.isDragging || this.editor.inlineEditingIsActive)
                 return;
 
-            this.canvas.focusedElement = this;
+            this.editor.focusedElement = this;
             _(this.setIsFocusedEventHandlers).each(function (item) {
                 try {
                     item();
@@ -97,22 +97,6 @@
                 this.parent.deleteChild(this);
         };
 
-        this.moveUp = function () {
-            if (this.isTemplated)
-                return;
-
-            if (!!this.parent)
-                this.parent.moveChildUp(this);
-        };
-
-        this.moveDown = function () {
-            if (this.isTemplated)
-                return;
-
-            if (!!this.parent)
-                this.parent.moveChildDown(this);
-        };
-
         this.canMoveUp = function () {
             if (this.isTemplated)
                 return false;
@@ -122,6 +106,14 @@
             return this.parent.canMoveChildUp(this);
         };
 
+        this.moveUp = function () {
+            if (this.isTemplated)
+                return;
+
+            if (!!this.parent)
+                this.parent.moveChildUp(this);
+        };
+
         this.canMoveDown = function () {
             if (this.isTemplated)
                 return false;
@@ -129,6 +121,14 @@
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildDown(this);
+        };
+
+        this.moveDown = function () {
+            if (this.isTemplated)
+                return;
+
+            if (!!this.parent)
+                this.parent.moveChildDown(this);
         };
 
         this.elementToObject = function () {

@@ -1,17 +1,9 @@
 ﻿var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+    LayoutEditor.Canvas = function (data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
         LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
-
-        this.config = config;
-        this.activeElement = null;
-        this.focusedElement = null;
-        this.isDragging = false;
-        this.inlineEditingIsActive = false;
-        this.clipboard = null;
-        this.setCanvas(this);
 
         var self = this;
         function addGrid() {
@@ -38,9 +30,8 @@
         };
     };
 
-    LayoutEditor.Canvas.from = function (config, value) {
+    LayoutEditor.Canvas.from = function (value) {
         return new LayoutEditor.Canvas(
-            config,
             value.data,
             value.htmlId,
             value.htmlClass,

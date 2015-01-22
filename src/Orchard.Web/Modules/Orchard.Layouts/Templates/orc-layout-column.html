@@ -34,7 +34,7 @@
                         <li class="layout-popup-item layout-popup-label">Layout</li>
                         <li class="layout-popup-item layout-popup-action" ng-repeat="operation in element.availableAddOperations" ng-click="operation.invoke()">{{::operation.name}}</li>
                     </div>
-                    <div class="layout-popup-column" ng-repeat="category in element.canvas.config.categories">
+                    <div class="layout-popup-column" ng-repeat="category in element.editor.config.categories">
                         <li class="layout-popup-item layout-popup-label">{{::category.name}}</li>
                         <li class="layout-popup-item layout-popup-action" ng-repeat="contentType in category.contentTypes" ng-click="invokeAddContentElement(contentType, $event)">{{::contentType.label}}</li>
                     </div>

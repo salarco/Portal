@@ -11,16 +11,16 @@ angular
                     e.stopPropagation();
                 });
 
-                var keypressTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
-                if (!keypressTarget.hasClass("layout-element"))
-                    keypressTarget = $element.parent(); // For all other cases (main element is the parent of template).
+                //var keypressTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
+                //if (!keypressTarget.hasClass("layout-element"))
+                //    keypressTarget = $element.parent(); // For all other cases (main element is the parent of template).
 
-                keypressTarget.keydown(function (e) {
+                $element.parent().keydown(function (e) {
                     var handled = false;
                     var resetFocus = false;
                     var element = $scope.element;
 
-                    if (element.canvas.isDragging || element.canvas.inlineEditingIsActive)
+                    if (element.editor.isDragging || element.editor.inlineEditingIsActive)
                         return;
 
                     if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
@@ -126,24 +126,18 @@ angular
                     if (resetFocus) {
                         window.setTimeout(function () {
                             $scope.$apply(function () {
-                                element.canvas.focusedElement.setIsFocused();
+                                element.editor.focusedElement.setIsFocused();
                             });
                         }, 100);
                     }
                 });
 
                 $scope.element.setIsFocusedEventHandlers.push(function () {
-                    var focusTarget = $element.closest(".layout-element"); // For all other cases (main element is the parent of template).
-                    if (focusTarget.length == 0)
-                        focusTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
-                    focusTarget.focus();
+                    //var focusTarget = $element.closest(".layout-element"); // For all other cases (main element is the parent of template).
+                    //if (focusTarget.length == 0)
+                    //    focusTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
+                    $element.parent().focus();
                 });
-
-                $scope.click = function (element, e) {
-                    if (!element.canvas.isDragging)
-                        element.setIsFocused();
-                    e.stopPropagation();
-                };
 
                 $scope.delete = function (element) {
                     element.delete();
@@ -178,7 +172,7 @@ angular
                     distance: 5,
                     start: function (e, ui) {
                         $scope.$apply(function () {
-                            $scope.element.canvas.isDragging = true;
+                            $scope.element.editor.isDragging = true;
                             $scope.element.isDropTarget = true;
                         }),
                         // Make the drop target placeholder as high as the item being dragged.
@@ -186,11 +180,17 @@ angular
                     },
                     stop: function (e, ui) {
                         $scope.$apply(function () {
-                            $scope.element.canvas.isDragging = false;
+                            $scope.element.editor.isDragging = false;
                             $scope.element.isDropTarget = false;
                         });
                     },
                     disabled: isTemplated
+                };
+
+                $scope.click = function (child, e) {
+                    if (!child.editor.isDragging)
+                        child.setIsFocused();
+                    e.stopPropagation();
                 };
 
                 $scope.getClasses = function (child) {
@@ -218,10 +218,8 @@ angular
                         result.push("layout-element-focused");
                     if (child.getIsSelected())
                         result.push("layout-element-selected");
-
                     if (child.isDropTarget)
                         result.push("layout-element-droptarget");
-
                     if (child.isTemplated)
                         result.push("layout-element-templated");
 
@@ -230,10 +228,10 @@ angular
             }
         }
     });
-///#source 1 1 LayoutEditor/Directives/Canvas.js
+///#source 1 1 LayoutEditor/Directives/Editor.js
 angular
     .module("LayoutEditor")
-    .directive("orcLayoutCanvas", function ($compile, scopeConfigurator, environment) {
+    .directive("orcLayoutEditor", function (environment) {
         return {
             restrict: "E",
             scope: {},
@@ -241,29 +239,48 @@ angular
                 if (!!$attrs.model)
                     $scope.element = eval($attrs.model);
                 else
-                    $scope.element = LayoutEditor.Canvas.from({
-                        isTemplate: false,
-                        children: []
-                    });
+                    throw new Error("The 'config' attribute must evaluate to a LayoutEditor.Editor object.");
 
-                scopeConfigurator.configureForElement($scope, $element);
-                scopeConfigurator.configureForContainer($scope, $element);
+                $scope.click = function (canvas, e) {
+                    if (!canvas.editor.isDragging)
+                        canvas.setIsFocused();
+                    e.stopPropagation();
+                };
 
-                $scope.sortableOptions["axis"] = "y";
+                $scope.getClasses = function (canvas) {
+                    var result = ["layout-element", "layout-container", "layout-canvas"];
+
+                    if (canvas.getIsActive())
+                        result.push("layout-element-active");
+                    if (canvas.getIsFocused())
+                        result.push("layout-element-focused");
+                    if (canvas.getIsSelected())
+                        result.push("layout-element-selected");
+                    if (canvas.isDropTarget)
+                        result.push("layout-element-droptarget");
+                    if (canvas.isTemplated)
+                        result.push("layout-element-templated");
+
+                    return result;
+                };
+
 
                 var layoutDesignerHost = $element.closest(".layout-designer").data("layout-designer-host");
                 $scope.$root.layoutDesignerHost = layoutDesignerHost;
 
-                layoutDesignerHost.element.on("replacemodel", function (e, args) {
-                    var canvas = $scope.element;
+                layoutDesignerHost.element.on("replacecanvas", function (e, args) {
+                    var editor = $scope.element;
                     $scope.$apply(function () {
-                        canvas.data = args.canvas.data;
-                        canvas.htmlId = args.canvas.htmlId;
-                        canvas.htmlClass = args.canvas.htmlClass;
-                        canvas.htmlStyle = args.canvas.htmlStyle;
-                        canvas.isTemplated = args.canvas.isTemplated;
-                        canvas.setChildren(LayoutEditor.childrenFrom(args.canvas.children));
-                        canvas.setCanvas(canvas);
+                        canvas = LayoutEditor.Canvas.from({
+                            data: args.canvas.data,
+                            htmlId: args.canvas.htmlId,
+                            htmlClass: args.canvas.htmlClass,
+                            htmlStyle: args.canvas.htmlStyle,
+                            isTemplated: args.canvas.isTemplated,
+                            children: LayoutEditor.childrenFrom(args.canvas.children)
+                        });
+                        editor.canvas = canvas;
+                        canvas.setEditor(editor);
                     });
                 });
 
@@ -282,7 +299,7 @@ angular
                         $scope.element.inlineEditingIsActive = true;
                         // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
                         $element.find(".layout-toolbar-container").css("min-height", "83px");
-                        var selector = "#layout-canvas-" + $scope.$id + " .layout-content-h-t-m-l .layout-content-markup[data-templated=false]";
+                        var selector = "#layout-editor-" + $scope.$id + " .layout-content-h-t-m-l .layout-content-markup[data-templated=false]";
                         var firstContentEditorId = $(selector).first().attr("id");
                         tinymce.init({
                             selector: selector,
@@ -296,28 +313,14 @@ angular
                                 "fullscreen autoresize"
                             ],
                             toolbar: "undo redo cut copy paste | bold italic | bullist numlist outdent indent formatselect | alignleft aligncenter alignright alignjustify ltr rtl | link unlink charmap | code fullscreen close",
-                            //setup: function (editor) {
-                            //    editor.addButton("close", {
-                            //        text: "Close",
-                            //        tooltip: "Deactivate inline editing",
-                            //        icon: false,
-                            //        onclick: function() {
-                            //            tinymce.remove("#layout-canvas-" + $scope.$id + " .layout-content-markup");
-                            //            // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
-                            //            $element.find(".layout-toolbar-container").css("min-height", "");
-                            //            $scope.element.inlineEditingIsActive = false;
-                            //        }
-                            //    });
-                            //},
                             convert_urls: false,
                             valid_elements: "*[*]",
                             // Shouldn't be needed due to the valid_elements setting, but TinyMCE would strip script.src without it.
                             extended_valid_elements: "script[type|defer|src|language]",
-                            //menubar: false,
                             statusbar: false,
                             skin: "orchardlightgray",
                             inline: true,
-                            fixed_toolbar_container: "#layout-canvas-" + $scope.$id + " > .layout-toolbar-container",
+                            fixed_toolbar_container: "#layout-editor-" + $scope.$id + " > .layout-toolbar-container",
                             init_instance_callback: function (editor) {
                                 if (editor.id == firstContentEditorId)
                                     tinymce.execCommand("mceFocus", false, editor.id);
@@ -326,7 +329,7 @@ angular
                         });
                     }
                     else {
-                        tinymce.remove("#layout-canvas-" + $scope.$id + " .layout-content-markup");
+                        tinymce.remove("#layout-editor-" + $scope.$id + " .layout-content-markup");
                         // HACK: Extremely ugly and brittle hack to avoid layout from jumping around when editor loses focus.
                         $element.find(".layout-toolbar-container").css("min-height", "");
                         $scope.element.inlineEditingIsActive = false;
@@ -334,7 +337,7 @@ angular
                 };
 
                 $(document).on("cut copy paste", function (e) {
-                    var focusedElement = $scope.element.canvas.focusedElement;
+                    var focusedElement = $scope.element.focusedElement;
                     if (!!focusedElement) {
                         $scope.$apply(function () {
                             switch (e.type) {
@@ -353,17 +356,17 @@ angular
                     }
                 });
             },
-            templateUrl: environment.baseUrl + "Templates/orc-layout-canvas.html",
+            templateUrl: environment.baseUrl + "Templates/orc-layout-editor.html",
             replace: true,
             link: function (scope, element) {
                 // No clicks should propagate from the TinyMCE toolbars.
                 element.find(".layout-toolbar-container").click(function (e) {
                     e.stopPropagation();
                 });
-                // Intercept mousedown on canvas while in inline editing mode to 
+                // Intercept mousedown on editor while in inline editing mode to 
                 // prevent current editor from losing focus.
                 element.mousedown(function (e) {
-                    if (scope.element.canvas.inlineEditingIsActive) {
+                    if (scope.element.inlineEditingIsActive) {
                         e.preventDefault();
                         e.stopPropagation();
                     }
@@ -371,14 +374,30 @@ angular
                 // Unfocus and unselect everything on click outside of canvas.
                 $(window).click(function (e) {
                     // Except when in inline editing mode.
-                    if (!scope.element.canvas.inlineEditingIsActive) {
+                    if (!scope.element.inlineEditingIsActive) {
                         scope.$apply(function () {
-                            scope.element.canvas.activeElement = null;
-                            scope.element.canvas.focusedElement = null;
+                            scope.element.activeElement = null;
+                            scope.element.focusedElement = null;
                         });
                     }
                 });
             }
+        };
+    });
+///#source 1 1 LayoutEditor/Directives/Canvas.js
+angular
+    .module("LayoutEditor")
+    .directive("orcLayoutCanvas", function (scopeConfigurator, environment) {
+        return {
+            restrict: "E",
+            scope: { element: "=" },
+            controller: function ($scope, $element, $attrs) {
+                scopeConfigurator.configureForElement($scope, $element);
+                scopeConfigurator.configureForContainer($scope, $element);
+                $scope.sortableOptions["axis"] = "y";
+            },
+            templateUrl: environment.baseUrl + "Templates/orc-layout-canvas.html",
+            replace: true
         };
     });
 ///#source 1 1 LayoutEditor/Directives/Child.js
@@ -416,7 +435,7 @@ angular
                     revert: true,
                     start: function (e, ui) {
                         scope.$apply(function () {
-                            scope.element.canvas.isDragging = true;
+                            scope.element.editor.isDragging = true;
                         });
                     },
                     drag: function (e, ui) {
@@ -453,7 +472,7 @@ angular
                     },
                     stop: function (e, ui) {
                         scope.$apply(function () {
-                            scope.element.canvas.isDragging = false;
+                            scope.element.editor.isDragging = false;
                         });
                     }
                 });
@@ -486,7 +505,7 @@ angular
                 // Mouse down events must not be intercepted by drag and drop while inline editing is active,
                 // otherwise clicks in inline editors will have no effect.
                 element.find(".layout-content-markup").mousedown(function (e) {
-                    if (scope.element.canvas.inlineEditingIsActive) {
+                    if (scope.element.editor.inlineEditingIsActive) {
                         e.stopPropagation();
                     }
                 });

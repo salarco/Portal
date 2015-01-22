@@ -37,6 +37,23 @@ var LayoutEditor;
     };
 
 })(LayoutEditor || (LayoutEditor = {}));
+///#source 1 1 Models/Editor.js
+var LayoutEditor;
+(function (LayoutEditor) {
+
+    LayoutEditor.Editor = function (config, canvasData) {
+        this.config = config;
+        this.canvas = LayoutEditor.Canvas.from(canvasData);
+        this.activeElement = null;
+        this.focusedElement = null;
+        this.isDragging = false;
+        this.inlineEditingIsActive = false;
+
+        this.canvas.setEditor(this);
+    };
+
+})(LayoutEditor || (LayoutEditor = {}));
+
 ///#source 1 1 Models/Element.js
 var LayoutEditor;
 (function (LayoutEditor) {
@@ -52,16 +69,16 @@ var LayoutEditor;
         this.htmlStyle = htmlStyle;
         this.isTemplated = isTemplated;
 
-        this.canvas = null;
+        this.editor = null;
         this.parent = null;
         this.isDropTarget = null;
         this.setIsFocusedEventHandlers = [];
 
-        this.setCanvas = function (canvas) {
-            this.canvas = canvas;
+        this.setEditor = function (editor) {
+            this.editor = editor;
             if (!!this.children && _.isArray(this.children)) {
                 _(this.children).each(function (child) {
-                    child.setCanvas(canvas);
+                    child.setEditor(editor);
                 });
             }
         };
@@ -76,36 +93,36 @@ var LayoutEditor;
         };
 
         this.getIsActive = function () {
-            if (!this.canvas)
+            if (!this.editor)
                 return false;
-            return this.canvas.activeElement === this && !this.getIsFocused();
+            return this.editor.activeElement === this && !this.getIsFocused();
         };
 
         this.setIsActive = function (value) {
-            if (!this.canvas)
+            if (!this.editor)
                 return;
-            if (this.canvas.isDragging)
+            if (this.editor.isDragging || this.editor.inlineEditingIsActive)
                 return;
 
             if (value)
-                this.canvas.activeElement = this;
+                this.editor.activeElement = this;
             else
-                this.canvas.activeElement = this.parent;
+                this.editor.activeElement = this.parent;
         };
 
         this.getIsFocused = function () {
-            if (!this.canvas)
+            if (!this.editor)
                 return false;
-            return this.canvas.focusedElement === this;
+            return this.editor.focusedElement === this;
         };
 
         this.setIsFocused = function () {
-            if (!this.canvas)
+            if (!this.editor)
                 return;
-            if (this.canvas.isDragging || this.canvas.inlineEditingIsActive)
+            if (this.editor.isDragging || this.editor.inlineEditingIsActive)
                 return;
 
-            this.canvas.focusedElement = this;
+            this.editor.focusedElement = this;
             _(this.setIsFocusedEventHandlers).each(function (item) {
                 try {
                     item();
@@ -137,22 +154,6 @@ var LayoutEditor;
                 this.parent.deleteChild(this);
         };
 
-        this.moveUp = function () {
-            if (this.isTemplated)
-                return;
-
-            if (!!this.parent)
-                this.parent.moveChildUp(this);
-        };
-
-        this.moveDown = function () {
-            if (this.isTemplated)
-                return;
-
-            if (!!this.parent)
-                this.parent.moveChildDown(this);
-        };
-
         this.canMoveUp = function () {
             if (this.isTemplated)
                 return false;
@@ -162,6 +163,14 @@ var LayoutEditor;
             return this.parent.canMoveChildUp(this);
         };
 
+        this.moveUp = function () {
+            if (this.isTemplated)
+                return;
+
+            if (!!this.parent)
+                this.parent.moveChildUp(this);
+        };
+
         this.canMoveDown = function () {
             if (this.isTemplated)
                 return false;
@@ -169,6 +178,14 @@ var LayoutEditor;
             if (!this.parent)
                 return false;
             return this.parent.canMoveChildDown(this);
+        };
+
+        this.moveDown = function () {
+            if (this.isTemplated)
+                return;
+
+            if (!!this.parent)
+                this.parent.moveChildDown(this);
         };
 
         this.elementToObject = function () {
@@ -231,7 +248,7 @@ var LayoutEditor;
         this.addChild = function (child) {
             if (!_(this.children).contains(child) && _(this.allowedChildTypes).contains(child.type))
                 this.children.push(child);
-            child.setCanvas(this.canvas);
+            child.setEditor(this.editor);
             child.setIsTemplated(false);
             child.parent = this;
         };
@@ -241,7 +258,7 @@ var LayoutEditor;
             if (index >= 0) {
                 this.children.splice(index, 1);
                 if (child.getIsActive())
-                    this.canvas.activeElement = null;
+                    this.editor.activeElement = null;
                 if (child.getIsFocused()) {
                     // If the deleted child was focused, try to set new focus to the most appropriate sibling or parent.
                     if (this.children.length > index)
@@ -274,7 +291,7 @@ var LayoutEditor;
             if (!_(this.children).contains(child)) {
                 var index = Math.max(_(this.children).indexOf(afterChild), 0);
                 this.children.splice(index + 1, 0, child);
-                child.setCanvas(this.canvas);
+                child.setEditor(this.editor);
                 child.parent = this;
             }
         };
@@ -339,17 +356,9 @@ var LayoutEditor;
 var LayoutEditor;
 (function (LayoutEditor) {
 
-    LayoutEditor.Canvas = function (config, data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
+    LayoutEditor.Canvas = function (data, htmlId, htmlClass, htmlStyle, isTemplated, children) {
         LayoutEditor.Element.call(this, "Canvas", data, htmlId, htmlClass, htmlStyle, isTemplated);
         LayoutEditor.Container.call(this, ["Grid", "Content"], children);
-
-        this.config = config;
-        this.activeElement = null;
-        this.focusedElement = null;
-        this.isDragging = false;
-        this.inlineEditingIsActive = false;
-        this.clipboard = null;
-        this.setCanvas(this);
 
         var self = this;
         function addGrid() {
@@ -376,9 +385,8 @@ var LayoutEditor;
         };
     };
 
-    LayoutEditor.Canvas.from = function (config, value) {
+    LayoutEditor.Canvas.from = function (value) {
         return new LayoutEditor.Canvas(
-            config,
             value.data,
             value.htmlId,
             value.htmlClass,
@@ -471,7 +479,7 @@ var LayoutEditor;
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -500,7 +508,7 @@ var LayoutEditor;
         };
 
         this.canExpandColumnRight = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -537,7 +545,7 @@ var LayoutEditor;
         };
 
         this.canExpandColumnLeft = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -574,7 +582,7 @@ var LayoutEditor;
         };
 
         this.canContractColumnLeft = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -661,6 +669,7 @@ var LayoutEditor;
         this.split = function () {
             if (!this.canSplit())
                 return;
+
             var newColumnWidth = Math.floor(this.width / 2);
             var newColumn = LayoutEditor.Column.from({
                 data: null,
@@ -678,7 +687,7 @@ var LayoutEditor;
         };
 
         this.canContractRight = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canContractColumnRight(this, connectAdjacent);
+            return this.parent.canContractColumnRight(this, connectAdjacent);
         };
 
         this.contractRight = function (connectAdjacent) {
@@ -686,7 +695,7 @@ var LayoutEditor;
         };
 
         this.canExpandRight = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canExpandColumnRight(this, connectAdjacent);
+            return this.parent.canExpandColumnRight(this, connectAdjacent);
         };
 
         this.expandRight = function (connectAdjacent) {
@@ -694,7 +703,7 @@ var LayoutEditor;
         };
 
         this.canExpandLeft = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canExpandColumnLeft(this, connectAdjacent);
+            return this.parent.canExpandColumnLeft(this, connectAdjacent);
         };
 
         this.expandLeft = function (connectAdjacent) {
@@ -702,7 +711,7 @@ var LayoutEditor;
         };
 
         this.canContractLeft = function (connectAdjacent) {
-            return !this.isTemplated && this.parent.canContractColumnLeft(this, connectAdjacent);
+            return this.parent.canContractColumnLeft(this, connectAdjacent);
         };
 
         this.contractLeft = function (connectAdjacent) {

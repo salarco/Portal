@@ -1,11 +1,11 @@
-﻿.layout-editor-wrapper .layout-canvas {
+﻿.layout-editor .layout-canvas {
   background-color: #f0f0f0;
   font-size: 14px;
   /*> .layout-toolbar-container > .mce-panel {
             margin-bottom: @container-padding;
         }*/
 }
-.layout-editor-wrapper .layout-canvas > .layout-element-wrapper > .layout-container-children-placeholder {
+.layout-editor .layout-canvas > .layout-element-wrapper > .layout-container-children-placeholder {
   min-height: 300px;
 }
 /*# sourceMappingURL=Canvas.css.map */

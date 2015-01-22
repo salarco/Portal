@@ -38,10 +38,9 @@
                     baseUrl: "@Url.Content("~/Modules/Orchard.Layouts/")"
                 });
             (function() {
-                var canvasModelData = @Html.Raw(Model.Data);
-                var canvasConfig = @Html.Raw(Model.ConfigurationData);
-
-                window.layoutDesignerCanvas = LayoutEditor.Canvas.from(canvasConfig, canvasModelData);
+                var editorConfig = @Html.Raw(Model.ConfigurationData);
+                var editorCanvasData = @Html.Raw(Model.Data);
+                window.layoutEditor = new LayoutEditor.Editor(editorConfig, editorCanvasData);
             })(jQuery);
         </script>
     }
@@ -84,7 +83,7 @@
                 </ol>
             </div>
         </div>
-        <orc-layout-canvas model="window.layoutDesignerCanvas" ng-app="LayoutEditor" />
+        <orc-layout-editor model="window.layoutEditor" ng-app="LayoutEditor" />
     </fieldset>
     <div class="trash"></div>
     @Display.DialogTemplate(Name: "Layout")

@@ -28,7 +28,7 @@
         };
 
         this.canContractColumnRight = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -57,7 +57,7 @@
         };
 
         this.canExpandColumnRight = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -94,7 +94,7 @@
         };
 
         this.canExpandColumnLeft = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);
@@ -131,7 +131,7 @@
         };
 
         this.canContractColumnLeft = function (column, connectAdjacent) {
-            if (this.isTemplated)
+            if (column.isTemplated)
                 return false;
 
             var index = _(this.children).indexOf(column);

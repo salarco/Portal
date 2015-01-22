@@ -18,7 +18,7 @@
                     revert: true,
                     start: function (e, ui) {
                         scope.$apply(function () {
-                            scope.element.canvas.isDragging = true;
+                            scope.element.editor.isDragging = true;
                         });
                     },
                     drag: function (e, ui) {
@@ -55,7 +55,7 @@
                     },
                     stop: function (e, ui) {
                         scope.$apply(function () {
-                            scope.element.canvas.isDragging = false;
+                            scope.element.editor.isDragging = false;
                         });
                     }
                 });

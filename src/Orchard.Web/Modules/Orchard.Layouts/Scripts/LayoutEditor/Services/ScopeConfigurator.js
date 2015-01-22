@@ -8,16 +8,16 @@
                     e.stopPropagation();
                 });
 
-                var keypressTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
-                if (!keypressTarget.hasClass("layout-element"))
-                    keypressTarget = $element.parent(); // For all other cases (main element is the parent of template).
+                //var keypressTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
+                //if (!keypressTarget.hasClass("layout-element"))
+                //    keypressTarget = $element.parent(); // For all other cases (main element is the parent of template).
 
-                keypressTarget.keydown(function (e) {
+                $element.parent().keydown(function (e) {
                     var handled = false;
                     var resetFocus = false;
                     var element = $scope.element;
 
-                    if (element.canvas.isDragging || element.canvas.inlineEditingIsActive)
+                    if (element.editor.isDragging || element.editor.inlineEditingIsActive)
                         return;
 
                     if (!e.ctrlKey && !e.shiftKey && !e.altKey && e.which == 46) { // Del
@@ -123,24 +123,18 @@
                     if (resetFocus) {
                         window.setTimeout(function () {
                             $scope.$apply(function () {
-                                element.canvas.focusedElement.setIsFocused();
+                                element.editor.focusedElement.setIsFocused();
                             });
                         }, 100);
                     }
                 });
 
                 $scope.element.setIsFocusedEventHandlers.push(function () {
-                    var focusTarget = $element.closest(".layout-element"); // For all other cases (main element is the parent of template).
-                    if (focusTarget.length == 0)
-                        focusTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
-                    focusTarget.focus();
+                    //var focusTarget = $element.closest(".layout-element"); // For all other cases (main element is the parent of template).
+                    //if (focusTarget.length == 0)
+                    //    focusTarget = $element.find(".layout-element").first(); // For the Canvas case (main element is contained in template).
+                    $element.parent().focus();
                 });
-
-                $scope.click = function (element, e) {
-                    if (!element.canvas.isDragging)
-                        element.setIsFocused();
-                    e.stopPropagation();
-                };
 
                 $scope.delete = function (element) {
                     element.delete();
@@ -175,7 +169,7 @@
                     distance: 5,
                     start: function (e, ui) {
                         $scope.$apply(function () {
-                            $scope.element.canvas.isDragging = true;
+                            $scope.element.editor.isDragging = true;
                             $scope.element.isDropTarget = true;
                         }),
                         // Make the drop target placeholder as high as the item being dragged.
@@ -183,11 +177,17 @@
                     },
                     stop: function (e, ui) {
                         $scope.$apply(function () {
-                            $scope.element.canvas.isDragging = false;
+                            $scope.element.editor.isDragging = false;
                             $scope.element.isDropTarget = false;
                         });
                     },
                     disabled: isTemplated
+                };
+
+                $scope.click = function (child, e) {
+                    if (!child.editor.isDragging)
+                        child.setIsFocused();
+                    e.stopPropagation();
                 };
 
                 $scope.getClasses = function (child) {
@@ -215,10 +215,8 @@
                         result.push("layout-element-focused");
                     if (child.getIsSelected())
                         result.push("layout-element-selected");
-
                     if (child.isDropTarget)
                         result.push("layout-element-droptarget");
-
                     if (child.isTemplated)
                         result.push("layout-element-templated");
 

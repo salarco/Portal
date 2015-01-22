@@ -98,6 +98,7 @@
     <Content Include="Scripts\LayoutEditor.min.js">
       <DependentUpon>LayoutEditor.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\LayoutEditor\Directives\Editor.js" />
     <Content Include="Scripts\LayoutEditor\Directives\Canvas.js" />
     <Content Include="Scripts\LayoutEditor\Directives\Child.js" />
     <Content Include="Scripts\LayoutEditor\Directives\Column.js" />
@@ -119,6 +120,7 @@
       <DependentUpon>Models.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Models\Canvas.js" />
+    <Content Include="Scripts\Models\Editor.js" />
     <Content Include="Scripts\Models\Column.js" />
     <Content Include="Scripts\Models\Container.js" />
     <Content Include="Scripts\Models\Content.js" />
@@ -171,6 +173,12 @@
     <Content Include="Styles\LayoutEditor\Content.min.css">
       <DependentUpon>Content.css</DependentUpon>
     </Content>
+    <Content Include="Styles\LayoutEditor\Editor.css">
+      <DependentUpon>Editor.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Editor.min.css">
+      <DependentUpon>Editor.css</DependentUpon>
+    </Content>
     <Content Include="Styles\LayoutEditor\Element.css">
       <DependentUpon>Element.less</DependentUpon>
     </Content>
@@ -217,6 +225,7 @@
     <Content Include="Styles\admin-dialog.css" />
     <Content Include="Styles\split-arrow-down.png" />
     <Content Include="Styles\split-arrow-up.png" />
+    <Content Include="Templates\orc-layout-editor.html" />
     <Content Include="Templates\orc-layout-canvas.html" />
     <Content Include="Templates\orc-layout-column.html" />
     <Content Include="Templates\orc-layout-content.html" />
@@ -355,6 +364,10 @@
       <DependentUpon>Reset.css</DependentUpon>
     </Content>
     <Content Include="Views\ElementBrowser.Tabs.cshtml" />
+    <Content Include="Styles\LayoutEditor\Editor.less" />
+    <Content Include="Styles\LayoutEditor\Editor.css.map">
+      <DependentUpon>Editor.css</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
