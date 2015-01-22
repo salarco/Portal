@@ -203,6 +203,12 @@
     <Content Include="Styles\LayoutEditor\Row.min.css">
       <DependentUpon>Row.css</DependentUpon>
     </Content>
+    <Content Include="Styles\LayoutEditor\Toolbox.css">
+      <DependentUpon>Toolbox.less</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Toolbox.min.css">
+      <DependentUpon>Toolbox.css</DependentUpon>
+    </Content>
     <Content Include="Styles\Lib\Bootstrap\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
@@ -367,6 +373,10 @@
     <Content Include="Styles\LayoutEditor\Editor.less" />
     <Content Include="Styles\LayoutEditor\Editor.css.map">
       <DependentUpon>Editor.css</DependentUpon>
+    </Content>
+    <Content Include="Styles\LayoutEditor\Toolbox.less" />
+    <Content Include="Styles\LayoutEditor\Toolbox.css.map">
+      <DependentUpon>Toolbox.css</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

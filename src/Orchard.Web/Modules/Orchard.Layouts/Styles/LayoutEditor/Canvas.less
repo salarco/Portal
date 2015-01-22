@@ -3,11 +3,11 @@
 .layout-editor {
     .layout-canvas {
         background-color: @gray-bg;
-        font-size: @font-size;
 
-        /*> .layout-toolbar-container > .mce-panel {
-            margin-bottom: @container-padding;
-        }*/
+        &:not(.layout-element-active):not(.layout-element-focused) {
+            border: 1px solid @gray-border;
+            padding: @container-padding - 1px;
+        }
 
         > .layout-element-wrapper > .layout-container-children-placeholder {
             min-height: 300px;
